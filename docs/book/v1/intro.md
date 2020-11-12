@@ -1,3 +1,3 @@
-# pars-{component}
+# pars-models
 
 This component provides ...
