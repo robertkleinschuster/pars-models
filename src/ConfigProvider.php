@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pars\Model;
 
+use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Stratigility\Middleware\ErrorHandler;
 use Mezzio\Authentication\AuthenticationInterface;
 use Mezzio\Authentication\Session\PhpSession;
@@ -15,6 +16,7 @@ use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Model\Authentication\User\UserBeanFactory;
 use Pars\Model\Authentication\UserRepositoryFactory;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
+use Psr\Container\ContainerInterface;
 
 /**
  * The configuration provider for the Base module
@@ -33,7 +35,6 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'templates'    => $this->getTemplates(),
         ];
     }
 
@@ -50,24 +51,13 @@ class ConfigProvider
             'factories' => [
                 UserRepositoryInterface::class => UserRepositoryFactory::class,
                 UserInterface::class => UserBeanFactory::class,
-                LocaleFinderInterface::class => LocaleBeanFinder::class
+                LocaleFinderInterface::class => function (ContainerInterface $container) {
+                    return new LocaleBeanFinder($container->get(AdapterInterface::class));
+                }
             ],
             'delegators' => [
             ],
         ];
     }
 
-    /**
-     * Returns the templates configuration
-     */
-    public function getTemplates(): array
-    {
-        return [
-            'paths' => [
-                'error' => [__DIR__ . '/../templates/error'],
-                'layout' => [__DIR__ . '/../templates/layout'],
-                'base'    => [__DIR__ . '/../templates/'],
-            ],
-        ];
-    }
 }
