@@ -3,7 +3,7 @@
 namespace Pars\Model\Authorization\UserRole;
 
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
-use Pars\Model\Authorization\Permission\PermissionBeanList;
+use Niceshops\Bean\Type\Base\BeanListInterface;
 
 /**
  * Class UserRoleBean
@@ -15,5 +15,5 @@ class UserRoleBean extends AbstractBaseBean
     public ?int $UserRole_ID = null;
     public ?string $UserRole_Code = null;
     public ?bool $UserRole_Active = null;
-    public ?PermissionBeanList $UserPermission_BeanList = null;
+    public ?BeanListInterface $UserPermission_BeanList = null;
 }
