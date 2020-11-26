@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace Pars\Model;
 
 use Laminas\Db\Adapter\AdapterInterface;
-use Laminas\Stratigility\Middleware\ErrorHandler;
-use Mezzio\Authentication\AuthenticationInterface;
-use Mezzio\Authentication\Session\PhpSession;
+use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
-use Mezzio\Session\Cache\CacheSessionPersistence;
-use Mezzio\Session\SessionPersistenceInterface;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Model\Authentication\User\UserBeanFactory;
 use Pars\Model\Authentication\UserRepositoryFactory;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -45,6 +42,7 @@ class ConfigProvider
     {
         return [
             'aliases' => [
+                RemoteLoaderInterface::class => TranslationBeanFinder::class
             ],
             'invokables' => [
             ],
@@ -53,6 +51,9 @@ class ConfigProvider
                 UserInterface::class => UserBeanFactory::class,
                 LocaleFinderInterface::class => function (ContainerInterface $container) {
                     return new LocaleBeanFinder($container->get(AdapterInterface::class));
+                },
+                TranslationBeanFinder::class => function(ContainerInterface $container) {
+                    return new TranslationBeanFinder($container->get(AdapterInterface::class));
                 }
             ],
             'delegators' => [
