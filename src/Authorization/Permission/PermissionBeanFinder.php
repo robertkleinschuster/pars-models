@@ -4,8 +4,14 @@ namespace Pars\Model\Authorization\Permission;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Niceshops\Bean\Type\Base\BeanListInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 
+/**
+ * Class PermissionBeanFinder
+ * @package Pars\Model\Authorization\Permission
+ * @method PermissionBeanList getBeanList(bool $fetchAllData = false) : BeanListInterface
+ */
 class PermissionBeanFinder extends AbstractBeanFinder
 {
 

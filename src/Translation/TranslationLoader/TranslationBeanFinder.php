@@ -26,6 +26,11 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
         $loader->addColumn('Translation_Namespace', 'Translation_Namespace', 'Translation', 'Translation_ID');
         $loader->addColumn('Locale_Code', 'Locale_Code', 'Translation', 'Translation_ID');
         $loader->addColumn('Translation_Text', 'Translation_Text', 'Translation', 'Translation_ID');
+        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Translation', 'Translation_ID');
+        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Translation', 'Translation_ID');
+        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Translation', 'Translation_ID');
+        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Translation', 'Translation_ID');
+
         parent::__construct($loader, new TranslationBeanFactory());
     }
 

@@ -18,6 +18,10 @@ class FileBeanFinder extends AbstractBeanFinder
         $loader->addColumn('File_ID', 'File_ID', 'File', 'File_ID', true);
         $loader->addColumn('File_Name', 'File_Name', 'File', 'File_ID');
         $loader->addColumn('File_Code', 'File_Code', 'File', 'File_ID');
+        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'File', 'File_ID');
+        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'File', 'File_ID');
+        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'File', 'File_ID');
+        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'File', 'File_ID');
         $loader->addColumn('FileType_Code', 'FileType_Code', 'File', 'File_ID', false, null, ['FileType']);
         $loader->addColumn('FileDirectory_ID', 'FileDirectory_ID', 'File', 'FileDirectory_ID', false, null, ['FileDirectory']);
         $loader->addColumn('FileDirectory_Code', 'FileDirectory_Code', 'FileDirectory', 'FileDirectory_ID');

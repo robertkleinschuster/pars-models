@@ -18,7 +18,12 @@ class UserRoleBeanFinder extends AbstractBeanFinder
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('UserRole_ID', 'UserRole_ID', 'User_UserRole', 'UserRole_ID', true);
         $loader->addColumn('Person_ID', 'Person_ID', 'User_UserRole', 'UserRole_ID', true);
+        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'User_UserRole', 'UserRole_ID');
+        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'User_UserRole', 'UserRole_ID');
+        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'User_UserRole', 'UserRole_ID');
+        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User_UserRole', 'UserRole_ID');
         $loader->addColumn('UserRole_Code', 'UserRole_Code', 'UserRole', 'UserRole_ID');
+        $loader->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
         $loader->addColumn('UserRole_Active', 'UserRole_Active', 'UserRole', 'UserRole_ID');
         $factory = new UserRoleBeanFactory();
         parent::__construct($loader, $factory);

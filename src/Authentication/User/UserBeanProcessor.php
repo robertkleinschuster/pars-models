@@ -83,21 +83,21 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         }
         if ($bean->empty('User_Password')) {
             $bean->unset("User_Password");
-        }
-        if (!$bean->empty('User_Password')) {
-            if (strlen($bean->get('User_Password')) < 5) {
+            if ($bean->empty('Person_ID')) {
+                $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.empty'));
+            }
+        } else {
+            if (!isset($bean->get('User_Password')[5])) {
                 $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.min_length'));
             }
-        } elseif ($bean->empty('Person_ID')) {
-            $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.empty'));
         }
-        if (!$bean->empty('Person_ID')) {
-            if ($bean->get('UserState_Code') !== 'active'
-                && $bean->get('Person_ID') == $this->getBeanSaver()->getPersonId()) {
-                $this->getValidationHelper()->addError('UserState_Code', $this->translate('userstate.code.lock_self'));
-            }
+        if (
+            $this->getBeanSaver()->hasPersonId() &&
+            $bean->get('Person_ID') == $this->getBeanSaver()->getPersonId() &&
+            $bean->get('UserState_Code') !== 'active'
+        ) {
+            $this->getValidationHelper()->addError('UserState_Code', $this->translate('userstate.code.lock_self'));
         }
-
         return !$this->getValidationHelper()->hasError();
     }
 
@@ -111,7 +111,10 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         if ($finder->count() == 1) {
             return false;
         }
-        return !$bean->empty('Person_ID');
+        if ($bean->get('Person_ID') == $this->getBeanSaver()->getPersonId()) {
+            $this->getValidationHelper()->addError('UserState_Code', $this->translate('user.delete.self'));
+        }
+        return !$bean->empty('Person_ID') && !$this->getValidationHelper()->hasError();
     }
 
     /**

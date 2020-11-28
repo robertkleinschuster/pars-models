@@ -2,6 +2,7 @@
 
 namespace Pars\Model\Authorization\Role;
 
+use Cocur\Slugify\Slugify;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
@@ -30,10 +31,21 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
         $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('UserRole_ID', 'UserRole_ID', 'UserRole', 'UserRole_ID', true);
         $saver->addColumn('UserRole_Code', 'UserRole_Code', 'UserRole', 'UserRole_ID');
+        $saver->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
         $saver->addColumn('UserRole_Active', 'UserRole_Active', 'UserRole', 'UserRole_ID');
 
         parent::__construct($saver);
     }
+
+    protected function beforeSave(BeanInterface $bean)
+    {
+        $slugify = new Slugify();
+        if (!$bean->empty('UserRole_Code')) {
+            $bean->set('UserRole_Code', $slugify->slugify($bean->get('UserRole_Code')));
+        }
+        parent::beforeSave($bean);
+    }
+
 
     /**
      * @param string $code

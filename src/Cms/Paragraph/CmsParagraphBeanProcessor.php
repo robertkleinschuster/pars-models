@@ -21,6 +21,8 @@ class CmsParagraphBeanProcessor extends ArticleTranslationBeanProcessor
         }
     }
 
+
+
     protected function validateForSave(BeanInterface $bean): bool
     {
         if ($bean->empty('CmsParagraphState_Code')) {

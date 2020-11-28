@@ -2,10 +2,10 @@
 
 namespace Pars\Model\Cms\PageParagraph;
 
-use Pars\Model\Database\DatabaseBeanSaver;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
  * Class CmsPageParagraphBeanProcessor
@@ -26,19 +26,19 @@ class CmsPageParagraphBeanProcessor extends AbstractBeanProcessor
 
     protected function beforeSave(BeanInterface $bean)
     {
-        if (!$bean->hasData('CmsPage_CmsParagraph_Order') || $bean->getData('CmsPage_CmsParagraph_Order') === 0) {
+        if ($bean->empty('CmsPage_CmsParagraph_Order') || $bean->get('CmsPage_CmsParagraph_Order') === 0) {
             $order = 1;
             $finder = new CmsPageParagraphBeanFinder($this->adapter);
-            $finder->setCmsPage_ID($bean->getData('CmsPage_ID'));
+            $finder->setCmsPage_ID($bean->get('CmsPage_ID'));
             $finder->getBeanLoader()->addOrder('CmsPage_CmsParagraph_Order', true);
             $finder->limit(1, 0);
-            if ($finder->find() == 1) {
+            if ($finder->count()) {
                 $lastBean = $finder->getBean();
-                if ($lastBean->hasData('CmsPage_CmsParagraph_Order')) {
-                    $order = $lastBean->getData('CmsPage_CmsParagraph_Order') + 1;
+                if (!$lastBean->empty('CmsPage_CmsParagraph_Order')) {
+                    $order = $lastBean->get('CmsPage_CmsParagraph_Order') + 1;
                 }
             }
-            $bean->setData('CmsPage_CmsParagraph_Order', $order);
+            $bean->set('CmsPage_CmsParagraph_Order', $order);
         }
         parent::beforeSave($bean);
     }

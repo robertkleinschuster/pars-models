@@ -38,12 +38,14 @@ class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
     protected function beforeSave(BeanInterface $bean)
     {
         $slugify = new Slugify();
-        if (!$bean->empty('ArticleTranslation_Code')) {
-            $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Code')));
-        } elseif (!$bean->empty('ArticleTranslation_Name')) {
-            $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Name')));
-        } elseif (!$bean->empty('ArticleTranslation_Title')) {
-            $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Title')));
+        if (!$bean->empty('ArticleTranslation_Code') && $bean->get('ArticleTranslation_Code') !== '/') {
+            if (!$bean->empty('ArticleTranslation_Code')) {
+                $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Code')));
+            } elseif (!$bean->empty('ArticleTranslation_Name')) {
+                $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Name')));
+            } elseif (!$bean->empty('ArticleTranslation_Title')) {
+                $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Title')));
+            }
         }
         parent::beforeSave($bean);
     }
@@ -85,6 +87,6 @@ class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
      */
     protected function validateForDelete(BeanInterface $bean): bool
     {
-        return parent::validateForDelete($bean) && $bean->hasData('Article_ID');
+        return parent::validateForDelete($bean) && !$bean->empty('Article_ID');
     }
 }

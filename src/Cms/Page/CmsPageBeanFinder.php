@@ -23,6 +23,7 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('CmsPageType_Template', 'CmsPageType_Template', 'CmsPageType', 'CmsPageType_Code');
             $loader->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
+            $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article', 'ArticleTranslation']);
         }
         $this->addLinkedFinder(new CmsPageParagraphBeanFinder($adapter), 'CmsParagraph_BeanList', 'CmsPage_ID', 'CmsPage_ID');
@@ -37,6 +38,11 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             }
         }
         return parent::setLocale_Code($locale, $leftJoin);
+    }
+
+    public function setCmsPageState_Code(string $state) {
+        $this->getBeanLoader()->filterValue('CmsPageState_Code', $state);
+        return $this;
     }
 
 

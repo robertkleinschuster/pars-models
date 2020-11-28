@@ -5,6 +5,7 @@ namespace Pars\Model\Cms\Paragraph;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Laminas\Db\Adapter\Adapter;
+use Pars\Model\File\FileBeanFinder;
 
 
 /**
@@ -26,7 +27,10 @@ class CmsParagraphBeanFinder extends ArticleTranslationBeanFinder
         }
     }
 
-
+    public function setCmsParagraphState_Code(string $state) {
+        $this->getBeanLoader()->filterValue('CmsParagraphState_Code', $state);
+        return $this;
+    }
 
     /**
      * @param string $code

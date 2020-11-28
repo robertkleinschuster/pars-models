@@ -3,6 +3,7 @@
 namespace Pars\Model\Localization\Locale;
 
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Exception\InvalidQueryException;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleFinderInterface;
@@ -27,6 +28,11 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         $loader->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code');
         $loader->addColumn('Locale_Active', 'Locale_Active', 'Locale', 'Locale_Code');
         $loader->addColumn('Locale_Order', 'Locale_Order', 'Locale', 'Locale_Code');
+        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Locale', 'Locale_Code');
+        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Locale', 'Locale_Code');
+        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Locale', 'Locale_Code');
+        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
+
         $loader->addOrder('Locale_Order');
         parent::__construct($loader, new LocaleBeanFactory());
     }
@@ -57,27 +63,33 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
 
     public function findLocale(?string $localeCode, ?string $language, $default): LocaleInterface
     {
-        if ($localeCode !== null) {
-            $finder = new static($this->adapter);
-            $finder->setLocale_Code($localeCode);
-            $finder->setLocale_Active(true);
-            if ($finder->count() == 1) {
-                return $finder->getBean();
+        try {
+            if ($localeCode !== null) {
+                $finder = new static($this->adapter);
+                $finder->setLocale_Code($localeCode);
+                $finder->setLocale_Active(true);
+                if ($finder->count() == 1) {
+                    return $finder->getBean();
+                }
             }
-        }
-        if ($language !== null) {
+            if ($language !== null) {
+                $finder = new static($this->adapter);
+                $finder->setLanguage($language);
+                $finder->setLocale_Active(true);
+                $finder->limit(1, 0);
+                if ($finder->count() == 1) {
+                    return $finder->getBean();
+                }
+            }
             $finder = new static($this->adapter);
-            $finder->setLanguage($language);
             $finder->setLocale_Active(true);
             $finder->limit(1, 0);
-            if ($finder->count() == 1) {
-                return $finder->getBean();
-            }
+            return $finder->getBean();
+        } catch (InvalidQueryException $exception) {
+            $bean = $this->getBeanFactory()->getEmptyBean([]);
+            $bean->set('Locale_Code', $default);
+            return $bean;
         }
-        $finder = new static($this->adapter);
-        $finder->setLocale_Active(true);
-        $finder->limit(1, 0);
-        return $finder->getBean();
     }
 
 

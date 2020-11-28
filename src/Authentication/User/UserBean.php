@@ -5,6 +5,8 @@ namespace Pars\Model\Authentication\User;
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
 use Niceshops\Bean\Type\Base\BeanListInterface;
 use Mezzio\Authentication\UserInterface;
+use Pars\Core\Localization\LocaleAwareInterface;
+use Pars\Core\Localization\LocaleInterface;
 use Pars\Model\Authorization\Permission\PermissionBeanList;
 use Pars\Model\Authorization\UserRole\UserRoleBeanList;
 
@@ -12,7 +14,7 @@ use Pars\Model\Authorization\UserRole\UserRoleBeanList;
  * Class UserBean
  * @package Pars\Model\Authentication\User
  */
-class UserBean extends AbstractBaseBean implements UserInterface
+class UserBean extends AbstractBaseBean implements UserInterface, LocaleAwareInterface
 {
 
     public ?int $Person_ID = null;
@@ -22,10 +24,16 @@ class UserBean extends AbstractBaseBean implements UserInterface
     public ?string $User_Displayname = null;
     public ?string $User_Password = null;
     public ?string $Locale_Code = 'de_AT';
+    public ?string $Locale_Name = null;
     public ?string $UserState_Code = null;
     public ?BeanListInterface $UserRole_BeanList = null;
+    public ?BeanListInterface $Locale_BeanList = null;
     public ?array $roles = null;
     public ?array $permissions = null;
+    public ?\DateTime $Timestamp_Create = null;
+    public ?\DateTime $Timestamp_Edit = null;
+    public ?int $Person_ID_Create = null;
+    public ?int $Person_ID_Edit = null;
 
     /**
      * @return string
@@ -93,5 +101,15 @@ class UserBean extends AbstractBaseBean implements UserInterface
     public function getDetails(): array
     {
         return $this->toArray(true);
+    }
+
+    public function getLocale(): LocaleInterface
+    {
+        return $this->Locale_BeanList->first();
+    }
+
+    public function hasLocale(): bool
+    {
+        return null !== $this->Locale_BeanList && !$this->Locale_BeanList->isEmpty();
     }
 }

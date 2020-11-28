@@ -12,6 +12,7 @@ use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Model\Localization\Locale\LocaleBeanFinder;
 
 /**
  * Class UserBeanFinder
@@ -24,6 +25,7 @@ class UserBeanFinder extends AbstractBeanFinder implements
 {
     use ValidationHelperAwareTrait;
     use TranslatorAwareTrait;
+
 
     /**
      * @var Adapter
@@ -44,12 +46,19 @@ class UserBeanFinder extends AbstractBeanFinder implements
         $loader->addColumn('User_Username', 'User_Username', 'User', 'Person_ID');
         $loader->addColumn('User_Displayname', 'User_Displayname', 'User', 'Person_ID');
         $loader->addColumn('User_Password', 'User_Password', 'User', 'Person_ID');
+        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'User', 'Person_ID');
+        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'User', 'Person_ID');
+        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'User', 'Person_ID');
+        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User', 'Person_ID');
         $loader->addColumn('Locale_Code', 'Locale_Code', 'User', 'Person_ID');
+        $loader->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code', false, null, [], 'User');
         $loader->addColumn('UserState_Code', 'UserState_Code', 'User', 'Person_ID');
+
         parent::__construct($loader, new UserBeanFactory());
         $userRoleFinder = new UserRoleBeanFinder($adapter);
         $userRoleFinder->setUserRole_Active(true);
         $this->addLinkedFinder($userRoleFinder, 'UserRole_BeanList', 'Person_ID', 'Person_ID');
+        $this->addLinkedFinder(new LocaleBeanFinder($adapter), 'Locale_BeanList', 'Locale_Code', 'Locale_Code');
     }
 
     /**

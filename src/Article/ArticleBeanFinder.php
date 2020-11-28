@@ -2,10 +2,10 @@
 
 namespace Pars\Model\Article;
 
-use Pars\Model\Database\DatabaseBeanLoader;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Factory\BeanFactoryInterface;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
  * Class ArticleBeanFinder
@@ -18,6 +18,10 @@ class ArticleBeanFinder extends AbstractBeanFinder
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);
         $loader->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID');
+        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Article', 'Article_ID');
+        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
+        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
+        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Article', 'Article_ID');
         parent::__construct($loader, $beanFactory ?? new ArticleBeanFactory());
     }
 

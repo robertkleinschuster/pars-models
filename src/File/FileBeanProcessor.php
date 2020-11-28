@@ -9,13 +9,13 @@ use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\File\Directory\FileDirectoryBeanFinder;
 use Pars\Model\File\Type\FileTypeBeanFinder;
 use Laminas\Db\Adapter\Adapter;
-use Laminas\Diactoros\UploadedFile;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Type\Base\BeanInterface;
+use Psr\Http\Message\UploadedFileInterface;
 
 
 /**
@@ -54,9 +54,9 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
         if ($bean->empty('File_Code')) {
             $bean->set('File_Code', "{$slugify->slugify($bean->get('File_Name'))}.{$bean->get('FileType_Code')}");
         }
-        if (!$filesystem->has($bean->get('File_Code')) && !$bean->empty('Upload')) {
-            $upload = $bean->get('Upload');
-            if ($upload instanceof UploadedFile) {
+        if (!$filesystem->has($bean->get('File_Code')) && !$bean->empty('File_Upload')) {
+            $upload = $bean->get('File_Upload');
+            if ($upload instanceof UploadedFileInterface) {
                 $path = $this->getFilePath($bean);
                 $upload->moveTo($path);
                /* $mime = $filesystem->getMimetype($path);
@@ -140,7 +140,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
             if ($finder->count() === 1) {
                 $directory = $finder->getBean();
                 $path = implode(DIRECTORY_SEPARATOR, [
-                    $_SERVER["DOCUMENT_ROOT"], 'upload', $directory->get('FileDirectory_Code'), $bean->get('File_Code')
+                    $_SERVER["DOCUMENT_ROOT"], 'upload', $directory->get('FileDirectory_Code'), $bean->get('File_Code') . '.' . $bean->get('FileType_Code')
                 ]);
             }
         }
@@ -179,15 +179,17 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
             }
         }
 
-        if (!$bean->empty('Upload')) {
-            $upload = $bean->get('Upload');
-            if ($upload instanceof UploadedFile) {
+        if (!$bean->empty('File_Upload')) {
+            $upload = $bean->get('File_Upload');
+            if ($upload instanceof UploadedFileInterface) {
                 if ($upload->getError() != UPLOAD_ERR_OK) {
                     $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
                 }
+            } else {
+                $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
             }
         } elseif ($bean->empty('File_ID')) {
-            $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.empty'));
+            $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.empty'));
         }
         return !$this->getValidationHelper()->hasError();
     }

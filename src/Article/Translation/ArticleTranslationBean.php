@@ -2,6 +2,7 @@
 
 namespace Pars\Model\Article\Translation;
 
+use Niceshops\Bean\Type\Base\BeanListInterface;
 use Pars\Model\Article\ArticleBean;
 
 /**
@@ -20,4 +21,5 @@ class ArticleTranslationBean extends ArticleBean
     public ?string $ArticleTranslation_Text = null;
     public ?string $ArticleTranslation_Footer = null;
     public ?int $File_ID = null;
+    public ?BeanListInterface $File_BeanList = null;
 }

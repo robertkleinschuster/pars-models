@@ -38,8 +38,8 @@ class LocaleBeanProcessor extends AbstractBeanProcessor
             $finder = new LocaleBeanFinder($this->adapter);
             $finder->getBeanLoader()->addOrder('Locale_Order', true);
             $finder->limit(1, 0);
-            if ($finder->count() == 1) {
-                $lastBean = $finder->getBean();
+            if ($finder->count()) {
+                $lastBean = $finder->getBeanList()->first();
                 if (!$lastBean->empty('Locale_Order')) {
                     $order = $lastBean->get('Locale_Order') + 1;
                 }
