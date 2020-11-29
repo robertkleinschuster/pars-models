@@ -26,7 +26,9 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article', 'ArticleTranslation']);
         }
-        $this->addLinkedFinder(new CmsPageParagraphBeanFinder($adapter), 'CmsParagraph_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+        $pageParagraphFinder = new CmsPageParagraphBeanFinder($adapter);
+        $pageParagraphFinder->setCmsParagraphState_Code('active');
+        $this->addLinkedFinder($pageParagraphFinder, 'CmsParagraph_BeanList', 'CmsPage_ID', 'CmsPage_ID');
     }
 
 

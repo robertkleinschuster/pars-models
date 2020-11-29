@@ -15,7 +15,7 @@ class FileDirectoryBean extends AbstractBaseBean
     public ?int $FileDirectory_ID = null;
     public ?string $FileDirectory_Code = null;
     public ?string $FileDirectory_Name = null;
-    public ?bool $FileDirectory_Active = null;
+    public ?bool $FileDirectory_Active = true;
     public ?BeanListInterface $File_BeanList = null;
     public ?\DateTime $Timestamp_Create = null;
     public ?\DateTime $Timestamp_Edit = null;
