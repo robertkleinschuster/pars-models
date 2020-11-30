@@ -7,6 +7,7 @@ use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Niceshops\Bean\Finder\BeanFinderInterface;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
@@ -37,24 +38,7 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenu', 'CmsMenu_ID');
         parent::__construct($saver);
-    }
-
-    protected function beforeSave(BeanInterface $bean)
-    {
-        if ($bean->empty('CmsMenu_Order')) {
-            $order = 1;
-            $finder = new CmsMenuBeanFinder($this->adapter);
-            $finder->order(['CmsMenu_Order' => BeanFinderInterface::ORDER_MODE_ASC]);
-            $finder->limit(1, 0);
-            if ($finder->count() == 1) {
-                $lastBean = $finder->getBean();
-                if (!$lastBean->empty('CmsMenu_Order')) {
-                    $order = $lastBean->get('CmsMenu_Order') + 1;
-                }
-            }
-            $bean->set('CmsMenu_Order', $order);
-        }
-        parent::beforeSave($bean);
+        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsMenuBeanFinder($adapter), 'CmsMenu_Order'));
     }
 
 

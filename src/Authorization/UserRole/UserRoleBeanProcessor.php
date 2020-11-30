@@ -22,6 +22,11 @@ class UserRoleBeanProcessor extends AbstractBeanProcessor implements ValidationH
         $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('UserRole_ID', 'UserRole_ID', 'User_UserRole', 'UserRole_ID', true);
         $saver->addColumn('Person_ID', 'Person_ID', 'User_UserRole', 'Person_ID', true);
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'User_UserRole', 'UserRole_ID');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'User_UserRole', 'UserRole_ID');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'User_UserRole', 'UserRole_ID');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User_UserRole', 'UserRole_ID');
+
         parent::__construct($saver);
     }
 

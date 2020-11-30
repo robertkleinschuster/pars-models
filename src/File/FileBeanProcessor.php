@@ -40,6 +40,11 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('File_Code', 'File_Code', 'File', 'File_ID');
         $saver->addColumn('FileType_Code', 'FileType_Code', 'File', 'File_ID');
         $saver->addColumn('FileDirectory_ID', 'FileDirectory_ID', 'File', 'File_ID');
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'File', 'File_ID');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'File', 'File_ID');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'File', 'File_ID');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'File', 'File_ID');
+
         parent::__construct($saver);
     }
 

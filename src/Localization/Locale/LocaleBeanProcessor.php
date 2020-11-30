@@ -4,6 +4,8 @@ namespace Pars\Model\Localization\Locale;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
@@ -24,29 +26,12 @@ class LocaleBeanProcessor extends AbstractBeanProcessor
         $saver->addColumn('Locale_UrlCode', 'Locale_UrlCode', 'Locale', 'Locale_Code');
         $saver->addColumn('Locale_Active', 'Locale_Active', 'Locale', 'Locale_Code');
         $saver->addColumn('Locale_Order', 'Locale_Order', 'Locale', 'Locale_Code');
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'Locale', 'Locale_Code');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Locale', 'Locale_Code');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Locale', 'Locale_Code');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
         parent::__construct($saver);
-    }
-
-    /**
-     * @param BeanInterface $bean
-     * @throws \Niceshops\Bean\Type\Base\BeanException
-     */
-    protected function beforeSave(BeanInterface $bean)
-    {
-        if ($bean->empty('Locale_Order') || $bean->get('Locale_Order') === 0) {
-            $order = 1;
-            $finder = new LocaleBeanFinder($this->adapter);
-            $finder->getBeanLoader()->addOrder('Locale_Order', true);
-            $finder->limit(1, 0);
-            if ($finder->count()) {
-                $lastBean = $finder->getBeanList()->first();
-                if (!$lastBean->empty('Locale_Order')) {
-                    $order = $lastBean->get('Locale_Order') + 1;
-                }
-            }
-            $bean->set('Locale_Order', $order);
-        }
-        parent::beforeSave($bean);
+        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new LocaleBeanFinder($adapter), 'Locale_Order'));
     }
 
     /**

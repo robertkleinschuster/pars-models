@@ -23,6 +23,8 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
      */
     private Adapter $adapter;
 
+    private UserBean $currentUserBean;
+
     /**
      * UserBeanProcessor constructor.
      * @param Adapter $adapter
@@ -39,6 +41,11 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('User_Password', 'User_Password', 'User', 'Person_ID');
         $saver->addColumn('Locale_Code', 'Locale_Code', 'User', 'Person_ID');
         $saver->addColumn('UserState_Code', 'UserState_Code', 'User', 'Person_ID');
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'User', 'Person_ID');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'User', 'Person_ID');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'User', 'Person_ID');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User', 'Person_ID');
+
         parent::__construct($saver);
     }
 
@@ -91,9 +98,10 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
                 $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.min_length'));
             }
         }
+
         if (
-            $this->getBeanSaver()->hasPersonId() &&
-            $bean->get('Person_ID') == $this->getBeanSaver()->getPersonId() &&
+            $this->hasCurrentUserBean() &&
+            $bean->get('Person_ID') == $this->getCurrentUserBean()->Person_ID &&
             $bean->get('UserState_Code') !== 'active'
         ) {
             $this->getValidationHelper()->addError('UserState_Code', $this->translate('userstate.code.lock_self'));
@@ -111,7 +119,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         if ($finder->count() == 1) {
             return false;
         }
-        if ($bean->get('Person_ID') == $this->getBeanSaver()->getPersonId()) {
+        if ($this->hasCurrentUserBean() && $bean->get('Person_ID') == $this->getCurrentUserBean()->Person_ID) {
             $this->getValidationHelper()->addError('UserState_Code', $this->translate('user.delete.self'));
         }
         return !$bean->empty('Person_ID') && !$this->getValidationHelper()->hasError();
@@ -130,4 +138,32 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
             }
         }
     }
+
+    /**
+    * @return UserBean
+    */
+    public function getCurrentUserBean(): UserBean
+    {
+        return $this->currentUserBean;
+    }
+
+    /**
+    * @param UserBean $currentUserBean
+    *
+    * @return $this
+    */
+    public function setCurrentUserBean(UserBean $currentUserBean): self
+    {
+        $this->currentUserBean = $currentUserBean;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasCurrentUserBean(): bool
+    {
+        return isset($this->currentUserBean);
+    }
+
 }

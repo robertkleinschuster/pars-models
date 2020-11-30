@@ -33,6 +33,10 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('UserRole_Code', 'UserRole_Code', 'UserRole', 'UserRole_ID');
         $saver->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
         $saver->addColumn('UserRole_Active', 'UserRole_Active', 'UserRole', 'UserRole_ID');
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'UserRole', 'UserRole_ID');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'UserRole', 'UserRole_ID');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'UserRole', 'UserRole_ID');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'UserRole', 'UserRole_ID');
 
         parent::__construct($saver);
     }
