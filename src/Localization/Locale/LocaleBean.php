@@ -12,6 +12,7 @@ use Pars\Core\Localization\LocaleInterface;
 class LocaleBean extends AbstractBaseBean implements LocaleInterface
 {
     public ?string $Locale_Code = null;
+    public ?bool $Locale_Code_New = false;
     public ?string $Locale_Name = null;
     public ?string $Locale_UrlCode = null;
     public ?bool $Locale_Active = null;

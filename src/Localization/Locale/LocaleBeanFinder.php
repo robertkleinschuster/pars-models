@@ -50,9 +50,19 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         return $this;
     }
 
-    public function setLocale_Code(string $code): self
+    public function setLocale_Code(string $code, bool $exclude = false): self
     {
-        $this->getBeanLoader()->filterValue('Locale_Code', $code);
+        if ($exclude) {
+            $this->getBeanLoader()->excludeValue('Locale_Code', $code);
+        }else {
+            $this->getBeanLoader()->filterValue('Locale_Code', $code);
+        }
+        return $this;
+    }
+
+    public function setLocale_UrlCode(string $code): self
+    {
+        $this->getBeanLoader()->filterValue('Locale_UrlCode', $code);
         return $this;
     }
 
