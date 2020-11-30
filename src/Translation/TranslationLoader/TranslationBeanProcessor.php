@@ -29,6 +29,17 @@ class TranslationBeanProcessor extends AbstractBeanProcessor
         parent::__construct($saver);
     }
 
+    protected function beforeSave(BeanInterface $bean)
+    {
+        parent::beforeSave($bean);
+        if (!$bean->empty('Translation_Text')) {
+            $text = $bean->get('Translation_Text');
+            $text = str_replace('[', '{', $text);
+            $text = str_replace(']', '}', $text);
+            $bean->set('Translation_Text', $text);
+        }
+    }
+
 
     protected function validateForSave(BeanInterface $bean): bool
     {

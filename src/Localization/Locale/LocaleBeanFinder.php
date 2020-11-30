@@ -8,6 +8,7 @@ use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Core\Localization\LocaleInterface;
+use Pars\Model\Config\ConfigBeanFinder;
 
 /**
  * Class LocaleBeanFinder
@@ -81,15 +82,36 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
                     return $finder->getBean();
                 }
             }
+
+            $config = new ConfigBeanFinder($this->adapter);
+            $config->setConfig_Code('locale.default');
+            if ($config->count()) {
+                $bean = $config->getBean();
+                if (!$bean->empty('Config_Value')) {
+                    $localeCode = $bean->get('Config_Value');
+                    $finder = new static($this->adapter);
+                    $finder->setLocale_Code($localeCode);
+                    $finder->limit(1, 0);
+                    if ($finder->count() == 1) {
+                        return $finder->getBean();
+                    }
+                }
+            }
+
             $finder = new static($this->adapter);
             $finder->setLocale_Active(true);
             $finder->limit(1, 0);
-            return $finder->getBean();
+            if ($finder->count() == 1) {
+                return $finder->getBean();
+            }
         } catch (InvalidQueryException $exception) {
             $bean = $this->getBeanFactory()->getEmptyBean([]);
             $bean->set('Locale_Code', $default);
             return $bean;
         }
+        $bean = $this->getBeanFactory()->getEmptyBean([]);
+        $bean->set('Locale_Code', $default);
+        return $bean;
     }
 
 
