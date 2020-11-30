@@ -67,8 +67,7 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
     {
         if ($bean->empty('UserRole_Code')) {
             $this->getValidationHelper()->addError('UserRole_Code', $this->translate('userrole.code.empty'));
-        }
-        if (!$bean->empty('UserRole_Code')) {
+        } else {
             $finder = new RoleBeanFinder($this->adapter);
             $finder->setUserRole_Code($bean->get('UserRole_Code'));
             if (!$bean->empty('UserRole_ID')) {
@@ -78,7 +77,9 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
                 $this->getValidationHelper()->addError('UserRole_Code', $this->translate('userrole.code.unique'));
             }
         }
-
+        if ($bean->empty('UserRole_Name')) {
+            $this->getValidationHelper()->addError('UserRole_Name', $this->translate('userrole.name.empty'));
+        }
         return !$this->getValidationHelper()->hasError();
     }
 
