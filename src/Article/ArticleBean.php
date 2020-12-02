@@ -3,6 +3,7 @@
 namespace Pars\Model\Article;
 
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Niceshops\Bean\Type\Base\BeanInterface;
 
 /**
  * Class ArticleBean
@@ -12,7 +13,7 @@ class ArticleBean extends AbstractBaseBean
 {
     public ?int $Article_ID = null;
     public ?string $Article_Code = null;
-    public ?ArticleDataBean $Article_Data = null;
+    public ?BeanInterface $Article_Data = null;
     public ?\DateTime $Timestamp_Create = null;
     public ?\DateTime $Timestamp_Edit = null;
     public ?int $Person_ID_Create = null;
