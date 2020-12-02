@@ -21,6 +21,7 @@ class CmsPageBeanProcessor extends ArticleTranslationBeanProcessor
         if ($saver instanceof DatabaseBeanSaver) {
             $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'CmsPage_ID', true, null, ['ArticleTranslation', 'CmsPage']);
             $saver->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage', 'CmsPage_ID', true);
+            $saver->addColumn('CmsPage_ID_Redirect', 'CmsPage_ID_Redirect', 'CmsPage', 'CmsPage_ID');
             $saver->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPage', 'CmsPage_ID');
             $saver->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
         }

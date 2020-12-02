@@ -2,10 +2,10 @@
 
 namespace Pars\Model\Cms\Page;
 
+use Laminas\Db\Adapter\Adapter;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\Cms\PageParagraph\CmsPageParagraphBeanFinder;
-use Laminas\Db\Adapter\Adapter;
 
 /**
  * Class CmsPageBeanFinder
@@ -18,8 +18,9 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
     {
         parent::__construct($adapter, new CmsPageBeanFactory());
         $loader = $this->getBeanLoader();
-        if ($loader instanceof  DatabaseBeanLoader) {
+        if ($loader instanceof DatabaseBeanLoader) {
             $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage', 'CmsPage_ID', true);
+            $loader->addColumn('CmsPage_ID_Redirect', 'CmsPage_ID_Redirect', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('CmsPageType_Template', 'CmsPageType_Template', 'CmsPageType', 'CmsPageType_Code');
             $loader->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
@@ -41,7 +42,15 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
         return parent::setLocale_Code($locale, $leftJoin);
     }
 
-    public function setCmsPageState_Code(string $state) {
+    public function setCmsPage_ID(int $id)
+    {
+        $this->getBeanLoader()->filterValue('CmsPage_ID', $id);
+        return $this;
+    }
+
+
+    public function setCmsPageState_Code(string $state)
+    {
         $this->getBeanLoader()->filterValue('CmsPageState_Code', $state);
         return $this;
     }
