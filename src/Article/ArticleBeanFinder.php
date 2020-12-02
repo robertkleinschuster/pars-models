@@ -18,6 +18,7 @@ class ArticleBeanFinder extends AbstractBeanFinder
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);
         $loader->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID');
+        $loader->addColumn('Article_Data', 'Article_Data', 'Article', 'Article_ID');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Article', 'Article_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');

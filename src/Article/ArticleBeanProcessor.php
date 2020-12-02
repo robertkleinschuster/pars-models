@@ -32,6 +32,7 @@ class ArticleBeanProcessor extends AbstractBeanProcessor implements
         $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);
         $saver->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID');
+        $saver->addColumn('Article_Data', 'Article_Data', 'Article', 'Article_ID');
         $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'Article', 'Article_ID');
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
