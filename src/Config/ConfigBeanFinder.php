@@ -20,6 +20,8 @@ class ConfigBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Config', 'Config_Code');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Config', 'Config_Code');
         parent::__construct($loader, new ConfigBeanFactory());
+        $this->getBeanLoader()->order(['Config_Code' => self::ORDER_MODE_ASC]);
+
     }
 
     /**
