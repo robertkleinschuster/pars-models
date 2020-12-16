@@ -13,6 +13,7 @@ class ImportBean extends AbstractBaseBean
 {
     public ?int $Import_ID = null;
     public ?string $Import_Name = null;
+    public ?string $ImportType_Code = null;
     public ?array $Import_Data = null;
     public ?bool $Import_Active = null;
     public ?int $Import_Day = null;
