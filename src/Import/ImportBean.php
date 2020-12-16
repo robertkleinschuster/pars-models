@@ -12,6 +12,7 @@ use Niceshops\Bean\Type\Base\AbstractBaseBean;
 class ImportBean extends AbstractBaseBean
 {
     public ?int $Import_ID = null;
+    public ?int $Article_ID = null;
     public ?string $Import_Name = null;
     public ?string $ImportType_Code = null;
     public ?array $Import_Data = null;

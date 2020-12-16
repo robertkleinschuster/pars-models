@@ -18,6 +18,7 @@ class ImportBeanFinder extends AbstractBeanFinder
     {
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Import_ID', 'Import_ID', 'Import', 'Import_ID', true);
+        $loader->addColumn('Article_ID', 'Article_ID', 'Import', 'Import_ID');
         $loader->addColumn('Import_Name', 'Import_Name', 'Import', 'Import_ID');
         $loader->addColumn('ImportType_Code', 'ImportType_Code', 'Import', 'Import_ID');
         $loader->addColumn('Import_Data', 'Import_Data', 'Import', 'Import_ID');
