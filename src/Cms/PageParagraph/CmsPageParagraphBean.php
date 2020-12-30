@@ -12,6 +12,7 @@ class CmsPageParagraphBean extends ArticleTranslationBean
 {
     public ?int $CmsParagraph_ID = null;
     public ?string $CmsParagraphType_Code = null;
+    public ?string $CmsParagraphType_Template = null;
     public ?string $CmsParagraphState_Code = null;
     public ?int $CmsPage_ID = null;
     public ?int $CmsPage_CmsParagraph_Order = null;

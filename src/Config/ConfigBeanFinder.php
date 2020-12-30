@@ -25,10 +25,10 @@ class ConfigBeanFinder extends AbstractBeanFinder
     }
 
     /**
-     * @param string $config
+     * @param string|string[] $config
      * @return $this
      */
-    public function setConfig_Code(string $config)
+    public function setConfig_Code($config)
     {
         $this->getBeanLoader()->filterValue('Config_Code', $config);
         return $this;

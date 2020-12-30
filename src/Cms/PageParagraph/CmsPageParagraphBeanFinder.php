@@ -16,6 +16,7 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
         $loader->addColumn('CmsParagraph_ID', 'CmsParagraph_ID', 'CmsPage_CmsParagraph', 'CmsParagraph_ID', true);
         $loader->addColumn('CmsParagraphState_Code', 'CmsParagraphState_Code', 'CmsParagraph', 'CmsParagraph_ID');
         $loader->addColumn('CmsParagraphType_Code', 'CmsParagraphType_Code', 'CmsParagraph', 'CmsParagraph_ID');
+        $loader->addColumn('CmsParagraphType_Template', 'CmsParagraphType_Template', 'CmsParagraphType', 'CmsParagraphType_Code', false, 'CmsParagraphType_Code', [], 'CmsParagraph');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsPage_CmsParagraph', 'CmsParagraph_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'CmsPage_CmsParagraph', 'CmsParagraph_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'CmsPage_CmsParagraph', 'CmsParagraph_ID');

@@ -5,7 +5,6 @@ namespace Pars\Model\Cms\Paragraph;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Laminas\Db\Adapter\Adapter;
-use Pars\Model\File\FileBeanFinder;
 
 
 /**

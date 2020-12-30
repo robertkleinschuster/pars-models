@@ -16,5 +16,6 @@ class CmsMenuBean extends ArticleTranslationBean
     public ?int $CmsPage_ID_Parent = null;
     public ?int $CmsMenu_Order = null;
     public ?string $CmsMenuType_Code = null;
+    public ?string $CmsMenuType_Template = null;
     public ?string $CmsMenuState_Code = null;
 }
