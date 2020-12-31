@@ -4,7 +4,6 @@ namespace Pars\Model\Authorization\Role;
 
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
 use Niceshops\Bean\Type\Base\BeanListInterface;
-use Pars\Model\Authorization\Permission\PermissionBeanList;
 
 /**
  * Class RoleBean

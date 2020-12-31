@@ -5,7 +5,6 @@ namespace Pars\Model\Cms\Menu;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Niceshops\Bean\Finder\BeanFinderInterface;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Niceshops\Bean\Type\Base\BeanInterface;
@@ -26,6 +25,7 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
     use TranslatorAwareTrait;
 
     private $adapter;
+
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
@@ -37,6 +37,10 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('CmsMenu_Order', 'CmsMenu_Order', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenu', 'CmsMenu_ID');
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsMenu', 'CmsMenu_ID');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'CmsMenu', 'CmsMenu_ID');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'CmsMenu', 'CmsMenu_ID');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'CmsMenu', 'CmsMenu_ID');
         parent::__construct($saver);
         $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsMenuBeanFinder($adapter), 'CmsMenu_Order'));
     }

@@ -2,16 +2,16 @@
 
 namespace Pars\Model\Authentication\User;
 
-use Pars\Core\Database\DatabaseBeanLoader;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
-use Pars\Model\Authorization\UserRole\UserRoleBeanFinder;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Helper\Validation\ValidationHelperAwareInterface;
+use Pars\Helper\Validation\ValidationHelperAwareTrait;
+use Pars\Model\Authorization\UserRole\UserRoleBeanFinder;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
 
 /**

@@ -2,9 +2,9 @@
 
 namespace Pars\Model\Cms\Paragraph\State;
 
+use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Type\Base\BeanInterface;
-use Laminas\Db\Adapter\Adapter;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 class CmsParagraphStateBeanProcessor extends AbstractBeanProcessor

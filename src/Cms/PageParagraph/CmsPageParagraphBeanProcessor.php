@@ -3,9 +3,8 @@
 namespace Pars\Model\Cms\PageParagraph;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
-use Niceshops\Bean\Type\Base\BeanInterface;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
@@ -15,6 +14,7 @@ use Pars\Core\Database\DatabaseBeanSaver;
 class CmsPageParagraphBeanProcessor extends AbstractBeanProcessor
 {
     private $adapter;
+
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;

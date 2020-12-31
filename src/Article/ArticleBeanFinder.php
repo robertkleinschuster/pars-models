@@ -35,6 +35,7 @@ class ArticleBeanFinder extends AbstractBeanFinder
         $this->getBeanLoader()->filterValue('Article_Code', $articleCode);
         return $this;
     }
+
     /**
      * @param int $article_id
      * @param bool $exclude

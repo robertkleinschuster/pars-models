@@ -52,7 +52,7 @@ class ConfigProvider
                 LocaleFinderInterface::class => function (ContainerInterface $container) {
                     return new LocaleBeanFinder($container->get(AdapterInterface::class));
                 },
-                TranslationBeanFinder::class => function(ContainerInterface $container) {
+                TranslationBeanFinder::class => function (ContainerInterface $container) {
                     return new TranslationBeanFinder($container->get(AdapterInterface::class));
                 }
             ],

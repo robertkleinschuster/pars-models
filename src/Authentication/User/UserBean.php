@@ -2,13 +2,11 @@
 
 namespace Pars\Model\Authentication\User;
 
+use Mezzio\Authentication\UserInterface;
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
 use Niceshops\Bean\Type\Base\BeanListInterface;
-use Mezzio\Authentication\UserInterface;
 use Pars\Core\Localization\LocaleAwareInterface;
 use Pars\Core\Localization\LocaleInterface;
-use Pars\Model\Authorization\Permission\PermissionBeanList;
-use Pars\Model\Authorization\UserRole\UserRoleBeanList;
 
 /**
  * Class UserBean

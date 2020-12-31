@@ -4,7 +4,6 @@ namespace Pars\Model\Authorization\Permission;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
-use Niceshops\Bean\Type\Base\BeanListInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**

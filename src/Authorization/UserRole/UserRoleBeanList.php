@@ -2,7 +2,6 @@
 
 namespace Pars\Model\Authorization\UserRole;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
 use Pars\Model\Authorization\Role\RoleBeanList;
 
 /**

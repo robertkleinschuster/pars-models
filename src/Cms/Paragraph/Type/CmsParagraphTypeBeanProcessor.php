@@ -3,8 +3,8 @@
 namespace Pars\Model\Cms\Paragraph\Type;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Type\Base\BeanInterface;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 class CmsParagraphTypeBeanProcessor extends AbstractBeanProcessor

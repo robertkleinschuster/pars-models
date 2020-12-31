@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Page\Type;
 
-use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Laminas\Db\Adapter\Adapter;
+use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 class CmsPageTypeBeanFinder extends AbstractBeanFinder

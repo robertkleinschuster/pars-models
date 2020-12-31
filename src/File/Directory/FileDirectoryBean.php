@@ -4,7 +4,6 @@ namespace Pars\Model\File\Directory;
 
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
 use Niceshops\Bean\Type\Base\BeanListInterface;
-use Pars\Model\File\FileBeanList;
 
 /**
  * Class FileDirectoryBean

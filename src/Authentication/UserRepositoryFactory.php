@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Authentication;
 
-use Pars\Model\Authentication\User\UserBeanFinder;
 use Laminas\Db\Adapter\AdapterInterface;
+use Pars\Model\Authentication\User\UserBeanFinder;
 use Psr\Container\ContainerInterface;
 
 /**

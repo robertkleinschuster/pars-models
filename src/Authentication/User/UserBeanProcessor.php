@@ -140,18 +140,18 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
     }
 
     /**
-    * @return UserBean
-    */
+     * @return UserBean
+     */
     public function getCurrentUserBean(): UserBean
     {
         return $this->currentUserBean;
     }
 
     /**
-    * @param UserBean $currentUserBean
-    *
-    * @return $this
-    */
+     * @param UserBean $currentUserBean
+     *
+     * @return $this
+     */
     public function setCurrentUserBean(UserBean $currentUserBean): self
     {
         $this->currentUserBean = $currentUserBean;
@@ -159,8 +159,8 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasCurrentUserBean(): bool
     {
         return isset($this->currentUserBean);

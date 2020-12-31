@@ -2,10 +2,10 @@
 
 namespace Pars\Model\Cms\Page;
 
+use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
-use Laminas\Db\Adapter\Adapter;
 
 /**
  * Class CmsPageBeanProcessor

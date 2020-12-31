@@ -3,11 +3,6 @@
 namespace Pars\Model\File;
 
 use Cocur\Slugify\Slugify;
-use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
-use Pars\Model\File\Directory\FileDirectoryBeanFinder;
-use Pars\Model\File\Type\FileTypeBeanFinder;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
@@ -15,6 +10,11 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\Validation\ValidationHelperAwareInterface;
+use Pars\Helper\Validation\ValidationHelperAwareTrait;
+use Pars\Model\File\Directory\FileDirectoryBeanFinder;
+use Pars\Model\File\Type\FileTypeBeanFinder;
 use Psr\Http\Message\UploadedFileInterface;
 
 
@@ -64,17 +64,17 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
             if ($upload instanceof UploadedFileInterface) {
                 $path = $this->getFilePath($bean);
                 $upload->moveTo($path);
-               /* $mime = $filesystem->getMimetype($path);
-                $finder = new FileTypeBeanFinder($this->adapter);
-                $finder->setFileType_Code($bean->getData('FileType_Code'));
-                if ($finder->find() === 1) {
-                    $type = $finder->getBean();
-                    if ($type->getData('FileType_Mime') !== $mime) {
-                        $filesystem->delete($path);
-                        $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.invalid'));
-                        throw new \Exception('Invalid file type uploaded.');
-                    }
-                }*/
+                /* $mime = $filesystem->getMimetype($path);
+                 $finder = new FileTypeBeanFinder($this->adapter);
+                 $finder->setFileType_Code($bean->getData('FileType_Code'));
+                 if ($finder->find() === 1) {
+                     $type = $finder->getBean();
+                     if ($type->getData('FileType_Mime') !== $mime) {
+                         $filesystem->delete($path);
+                         $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.invalid'));
+                         throw new \Exception('Invalid file type uploaded.');
+                     }
+                 }*/
             }
         }
         parent::beforeSave($bean);

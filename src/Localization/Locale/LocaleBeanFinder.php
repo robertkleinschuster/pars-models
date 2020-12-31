@@ -54,7 +54,7 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
     {
         if ($exclude) {
             $this->getBeanLoader()->excludeValue('Locale_Code', $code);
-        }else {
+        } else {
             $this->getBeanLoader()->filterValue('Locale_Code', $code);
         }
         return $this;

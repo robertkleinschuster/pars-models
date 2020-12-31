@@ -2,9 +2,9 @@
 
 namespace Pars\Model\Cms\Post;
 
+use Laminas\Db\Adapter\Adapter;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
-use Laminas\Db\Adapter\Adapter;
 
 
 /**
@@ -25,7 +25,6 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPost', 'CmsPost_ID', false, null, ['Article', 'ArticleTranslation']);
         }
     }
-
 
 
     /**

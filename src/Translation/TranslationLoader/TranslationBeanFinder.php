@@ -108,7 +108,7 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
      * @param bool $exclude
      * @return $this
      */
-    public function setTranslation_Code(string $translation_Code, bool $exclude= false): self
+    public function setTranslation_Code(string $translation_Code, bool $exclude = false): self
     {
         if ($exclude) {
             $this->getBeanLoader()->excludeValue('Translation_Code', $translation_Code);

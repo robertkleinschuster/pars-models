@@ -2,10 +2,10 @@
 
 namespace Pars\Model\Authorization\UserRole;
 
-use Pars\Core\Database\DatabaseBeanLoader;
-use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 
 /**
  * Class UserRoleBeanFinder

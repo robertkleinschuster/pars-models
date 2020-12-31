@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Menu;
 
-use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Laminas\Db\Adapter\Adapter;
+use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 
 /**
  * Class CmsMenuBeanFinder

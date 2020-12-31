@@ -7,7 +7,6 @@ use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
-use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;

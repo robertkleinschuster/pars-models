@@ -3,7 +3,6 @@
 namespace Pars\Model\Cms\Paragraph\State;
 
 
-
 use Niceshops\Bean\Factory\AbstractBeanFactory;
 
 /**
