@@ -14,7 +14,9 @@ class CmsPageBean extends ArticleTranslationBean
     public ?int $CmsPage_ID = null;
     public ?int $CmsPage_ID_Redirect = null;
     public ?string $CmsPageType_Code = null;
+    public ?string $CmsPageLayout_Code = null;
     public ?string $CmsPageType_Template = null;
+    public ?string $CmsPageLayout_Template = null;
     public ?string $CmsPageState_Code = null;
 
 }

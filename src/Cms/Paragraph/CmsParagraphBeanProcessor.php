@@ -30,7 +30,7 @@ class CmsParagraphBeanProcessor extends ArticleTranslationBeanProcessor
         if ($bean->empty('CmsParagraphType_Code')) {
             $this->getValidationHelper()->addError('CmsParagraphType_Code', $this->translate('articletype.code.empty'));
         }
-        return parent::validateForSave($bean);
+        return parent::validateForSave($bean) && !$this->getValidationHelper()->hasError();
     }
 
     protected function validateForDelete(BeanInterface $bean): bool

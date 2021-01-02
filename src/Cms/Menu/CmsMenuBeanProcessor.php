@@ -42,7 +42,7 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'CmsMenu', 'CmsMenu_ID');
         parent::__construct($saver);
-        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsMenuBeanFinder($adapter), 'CmsMenu_Order'));
+        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsMenuBeanFinder($adapter), 'CmsMenu_Order', 'CmsMenu_ID_Parent'));
     }
 
 
@@ -56,9 +56,9 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
         if ($bean->empty('CmsMenuState_Code')) {
             $this->getValidationHelper()->addError('CmsMenuState_Code', $this->translate('articlestate.code.empty'));
         }
-        if ($bean->empty('CmsMenuType_Code')) {
+        if ($bean->empty('CmsMenuType_Code') && $bean->empty('CmsMenu_ID_Parent')) {
             $this->getValidationHelper()->addError('CmsMenuType_Code', $this->translate('articletype.code.empty'));
         }
-        return parent::validateForSave($bean);
+        return parent::validateForSave($bean) && !$this->getValidationHelper()->hasError();
     }
 }

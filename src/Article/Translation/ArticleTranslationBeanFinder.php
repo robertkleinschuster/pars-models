@@ -19,7 +19,7 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
 class ArticleTranslationBeanFinder extends ArticleBeanFinder
 {
 
-    private $adapter;
+    protected $adapter;
 
     /**
      * ArticleTranslationBeanFinder constructor.

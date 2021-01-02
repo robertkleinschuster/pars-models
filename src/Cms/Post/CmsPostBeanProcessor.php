@@ -33,7 +33,7 @@ class CmsPostBeanProcessor extends ArticleTranslationBeanProcessor
         if ($bean->empty('CmsPostType_Code')) {
             $this->getValidationHelper()->addError('CmsPostType_Code', $this->translate('articletype.code.empty'));
         }
-        return parent::validateForSave($bean);
+        return parent::validateForSave($bean) && !$this->getValidationHelper()->hasError();
     }
 
     protected function validateForDelete(BeanInterface $bean): bool

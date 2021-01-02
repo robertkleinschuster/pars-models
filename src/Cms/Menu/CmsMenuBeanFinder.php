@@ -3,6 +3,7 @@
 namespace Pars\Model\Cms\Menu;
 
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Sql\Join;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 
 /**
@@ -11,6 +12,7 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
  */
 class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
 {
+
     public function __construct(Adapter $adapter)
     {
         parent::__construct($adapter, new CmsMenuBeanFactory());
@@ -18,16 +20,15 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->resetDbInfo();
         $loader->addColumn('CmsMenu_ID', 'CmsMenu_ID', 'CmsMenu', 'CmsMenu_ID', true);
         $loader->addColumn('CmsMenu_ID_Parent', 'CmsMenu_ID_Parent', 'CmsMenu', 'CmsMenu_ID');
-        $loader->addColumn('CmsPage_ID_Parent', 'CmsPage_ID_Parent', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenu_Order', 'CmsMenu_Order', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenuType_Template', 'CmsMenuType_Template', 'CmsMenuType', 'CmsMenuType_Code');
+        $loader->addJoinInfo('CmsMenuType', Join::JOIN_LEFT, 'CmsMenu.CmsMenuType_Code = CmsMenuType.CmsMenuType_Code');
         $loader->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'CmsMenu', 'CmsMenu_ID');
-
         $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsMenu', 'CmsMenu_ID', false, null, ['CmsPage']);
         $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article']);
         $loader->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID', false, null, [], 'CmsPage');
@@ -44,7 +45,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         return $this;
     }
 
-    public function setCmsMenu_ID_Parent(int $parent): self
+    public function setCmsMenu_ID_Parent(?int $parent): self
     {
         $this->getBeanLoader()->filterValue('CmsMenu_ID_Parent', $parent);
         return $this;
@@ -56,7 +57,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         return $this;
     }
 
-    public function setCmsMenuType_Code(string $type): self
+    public function setCmsMenuType_Code(?string $type): self
     {
         $this->getBeanLoader()->filterValue('CmsMenuType_Code', $type);
         return $this;

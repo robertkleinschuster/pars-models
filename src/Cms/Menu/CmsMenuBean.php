@@ -2,6 +2,7 @@
 
 namespace Pars\Model\Cms\Menu;
 
+use Niceshops\Bean\Type\Base\BeanListInterface;
 use Pars\Model\Article\Translation\ArticleTranslationBean;
 
 /**
@@ -18,4 +19,5 @@ class CmsMenuBean extends ArticleTranslationBean
     public ?string $CmsMenuType_Code = null;
     public ?string $CmsMenuType_Template = null;
     public ?string $CmsMenuState_Code = null;
+    public ?BeanListInterface $Menu_BeanList = null;
 }

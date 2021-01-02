@@ -23,6 +23,7 @@ class CmsPageBeanProcessor extends ArticleTranslationBeanProcessor
             $saver->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage', 'CmsPage_ID', true);
             $saver->addColumn('CmsPage_ID_Redirect', 'CmsPage_ID_Redirect', 'CmsPage', 'CmsPage_ID');
             $saver->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPage', 'CmsPage_ID');
+            $saver->addColumn('CmsPageLayout_Code', 'CmsPageLayout_Code', 'CmsPage', 'CmsPage_ID');
             $saver->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
         }
     }
@@ -35,7 +36,10 @@ class CmsPageBeanProcessor extends ArticleTranslationBeanProcessor
         if ($bean->empty('CmsPageType_Code')) {
             $this->getValidationHelper()->addError('CmsPageType_Code', $this->translate('articletype.code.empty'));
         }
-        return parent::validateForSave($bean);
+        if ($bean->empty('CmsPageLayout_Code')) {
+            $this->getValidationHelper()->addError('CmsPageLayout_Code', $this->translate('articlelayout.code.empty'));
+        }
+        return parent::validateForSave($bean) && !$this->getValidationHelper()->hasError();
     }
 
     protected function validateForDelete(BeanInterface $bean): bool
