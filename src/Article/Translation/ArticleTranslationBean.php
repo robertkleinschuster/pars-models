@@ -15,6 +15,7 @@ class ArticleTranslationBean extends ArticleBean
     public ?string $ArticleTranslation_Code = null;
     public ?string $ArticleTranslation_Name = null;
     public ?string $ArticleTranslation_Title = null;
+    public ?string $ArticleTranslation_Keywords = null;
     public ?string $ArticleTranslation_Heading = null;
     public ?string $ArticleTranslation_SubHeading = null;
     public ?string $ArticleTranslation_Path = null;
