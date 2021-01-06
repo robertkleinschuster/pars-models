@@ -32,4 +32,25 @@ class ImportBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Import', 'Import_ID');
         parent::__construct($loader, new ImportBeanFactory());
     }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setImport_ID(int $id)
+    {
+        $this->filter(['Import_ID' => $id]);
+        return $this;
+    }
+
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setArticle_ID(int $id)
+    {
+        $this->filter(['Article_ID' => $id]);
+        return $this;
+    }
 }
