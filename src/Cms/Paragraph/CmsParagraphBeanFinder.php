@@ -21,14 +21,30 @@ class CmsParagraphBeanFinder extends ArticleTranslationBeanFinder
         if ($loader instanceof DatabaseBeanLoader) {
             $loader->addColumn('CmsParagraph_ID', 'CmsParagraph_ID', 'CmsParagraph', 'CmsParagraph_ID', true);
             $loader->addColumn('CmsParagraphType_Code', 'CmsParagraphType_Code', 'CmsParagraph', 'CmsParagraph_ID');
+            $loader->addColumn('CmsParagraphType_Template', 'CmsParagraphType_Template', 'CmsParagraphType', 'CmsParagraphType_Code', false, 'CmsParagraphType_Code', [], 'CmsParagraph');
             $loader->addColumn('CmsParagraphState_Code', 'CmsParagraphState_Code', 'CmsParagraph', 'CmsParagraph_ID');
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsParagraph', 'CmsParagraph_ID', false, null, ['Article', 'ArticleTranslation']);
         }
     }
 
+    /**
+     * @param string $state
+     * @return $this
+     * @throws \Exception
+     */
     public function setCmsParagraphState_Code(string $state)
     {
         $this->getBeanLoader()->filterValue('CmsParagraphState_Code', $state);
+        return $this;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setCmsParagraph_ID(int $id)
+    {
+        $this->filter(['CmsParagraph_ID' => $id]);
         return $this;
     }
 
