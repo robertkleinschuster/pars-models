@@ -3,8 +3,11 @@
 namespace Pars\Model\Cms\PageParagraph;
 
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Sql\Join;
+use Laminas\Db\Sql\Predicate\Expression;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 
 class CmsPageParagraphBeanFinder extends AbstractBeanFinder
@@ -52,12 +55,18 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
     }
 
     /**
-     * @param string $locale_Code
+     * @param string $locale
+     * @param bool $leftJoin
      * @return $this
      */
-    public function setLocale_Code(string $locale_Code): self
+    public function setLocale_Code(string $locale, bool $leftJoin = true): self
     {
-        $this->getBeanLoader()->filterValue('Locale_Code', $locale_Code);
+        if ($leftJoin) {
+            $expression = new Expression("Article.Article_ID = ArticleTranslation.Article_ID AND ArticleTranslation.Locale_Code = ?", $locale);
+            $this->getBeanLoader()->addJoinInfo('ArticleTranslation', Join::JOIN_LEFT, $expression);
+        } else {
+            $this->getBeanLoader()->filterValue('Locale_Code', $locale);
+        }
         return $this;
     }
 
