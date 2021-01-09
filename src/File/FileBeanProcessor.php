@@ -32,6 +32,8 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
 
     private $adapter;
 
+    protected string $folder = 'u';
+
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
@@ -82,6 +84,14 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     }
 
     /**
+     * @param string $folder
+     */
+    public function setFolder(string $folder): void
+    {
+        $this->folder = $folder;
+    }
+
+    /**
      * @return int
      * @throws \League\Flysystem\FileNotFoundException
      */
@@ -115,7 +125,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     protected function getDirectoryPath(BeanInterface $bean)
     {
         $path = implode(DIRECTORY_SEPARATOR, [
-            $_SERVER["DOCUMENT_ROOT"], 'upload'
+            $_SERVER["DOCUMENT_ROOT"], $this->folder
         ]);
         if (!$bean->empty('FileDirectory_ID')) {
             $finder = new FileDirectoryBeanFinder($this->adapter);
@@ -123,7 +133,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
             if ($finder->count() === 1) {
                 $directory = $finder->getBean();
                 $path = implode(DIRECTORY_SEPARATOR, [
-                    $_SERVER["DOCUMENT_ROOT"], 'upload', $directory->get('FileDirectory_Code')
+                    $_SERVER["DOCUMENT_ROOT"], $this->folder, $directory->get('FileDirectory_Code')
                 ]);
             }
         }
@@ -138,7 +148,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     protected function getFilePath(BeanInterface $bean)
     {
         $path = implode(DIRECTORY_SEPARATOR, [
-            $_SERVER["DOCUMENT_ROOT"], 'upload', $bean->get('File_Code')
+            $_SERVER["DOCUMENT_ROOT"], $this->folder, $bean->get('File_Code')
         ]);
         if (!$bean->empty('FileDirectory_ID')) {
             $finder = new FileDirectoryBeanFinder($this->adapter);
@@ -146,7 +156,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
             if ($finder->count() === 1) {
                 $directory = $finder->getBean();
                 $path = implode(DIRECTORY_SEPARATOR, [
-                    $_SERVER["DOCUMENT_ROOT"], 'upload', $directory->get('FileDirectory_Code'), $bean->get('File_Code') . '.' . $bean->get('FileType_Code')
+                    $_SERVER["DOCUMENT_ROOT"], $this->folder, $directory->get('FileDirectory_Code'), $bean->get('File_Code') . '.' . $bean->get('FileType_Code')
                 ]);
             }
         }

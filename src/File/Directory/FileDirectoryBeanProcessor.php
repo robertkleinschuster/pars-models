@@ -28,6 +28,8 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
 
     protected $adapter;
 
+    protected $folder = 'u';
+
     /**
      * FileDirectoryBeanProcessor constructor.
      */
@@ -53,13 +55,21 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
     }
 
     /**
-     * @param BeanInterface $bean
+     * @param string $folder
+     */
+    public function setFolder(string $folder): void
+    {
+        $this->folder = $folder;
+    }
+
+
+    /**
      * @return Filesystem
      */
     public function getFilesystem(): Filesystem
     {
         $path = implode(DIRECTORY_SEPARATOR, [
-            $_SERVER["DOCUMENT_ROOT"], 'upload'
+            $_SERVER["DOCUMENT_ROOT"], $this->folder
         ]);
         $filesystemAdapter = new Local($path);
         return new Filesystem($filesystemAdapter);
