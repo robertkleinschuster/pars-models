@@ -94,7 +94,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
                 $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.empty'));
             }
         } else {
-            if (!isset($bean->get('User_Password')[5])) {
+            if (!isset($bean->get('User_Password')[4])) {
                 $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.min_length'));
             }
         }

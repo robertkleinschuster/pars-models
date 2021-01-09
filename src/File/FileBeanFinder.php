@@ -75,4 +75,10 @@ class FileBeanFinder extends AbstractBeanFinder
         $this->getBeanLoader()->filterValue('FileDirectory_Code', $type);
         return $this;
     }
+
+    public function setFileDirectory_ID(int $id): self
+    {
+        $this->getBeanLoader()->filterValue('FileDirectory_ID', $id);
+        return $this;
+    }
 }

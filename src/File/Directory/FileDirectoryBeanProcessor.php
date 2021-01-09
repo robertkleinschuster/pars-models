@@ -125,6 +125,11 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
 
     protected function validateForDelete(BeanInterface $bean): bool
     {
+        $finder = new FileBeanFinder($this->adapter);
+        $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'));
+        if ($finder->count()) {
+            $this->getValidationHelper()->addError('General', $this->translate('filedirectory.not_empty'));
+        }
         return !$this->getValidationHelper()->hasError();
     }
 }
