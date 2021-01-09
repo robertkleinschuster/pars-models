@@ -178,8 +178,29 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
      */
     protected function validateForSave(BeanInterface $bean): bool
     {
+
+        $clientFileName = null;
+        if (!$bean->empty('File_Upload')) {
+            $upload = $bean->get('File_Upload');
+            if ($upload instanceof UploadedFileInterface) {
+                if ($upload->getError() != UPLOAD_ERR_OK) {
+                    $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
+                } else {
+                    $clientFileName = $upload->getClientFilename();
+                }
+            } else {
+                $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
+            }
+        } elseif ($bean->empty('File_ID')) {
+            $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.empty'));
+        }
+
         if ($bean->empty('File_Name')) {
-            $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.empty'));
+            if ($clientFileName) {
+                $bean->set('File_Name', $clientFileName);
+            } else {
+                $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.empty'));
+            }
         } else {
             $finder = new FileBeanFinder($this->adapter);
             if (!$bean->empty('File_ID')) {
@@ -192,7 +213,11 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
         }
 
         if ($bean->empty('File_Code')) {
-            $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.empty'));
+            if ($clientFileName) {
+                $bean->set('File_Code', $clientFileName);
+            } else {
+                $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.empty'));
+            }
         } else {
             $finder = new FileBeanFinder($this->adapter);
             if (!$bean->empty('File_ID')) {
@@ -218,18 +243,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
             }
         }
 
-        if (!$bean->empty('File_Upload')) {
-            $upload = $bean->get('File_Upload');
-            if ($upload instanceof UploadedFileInterface) {
-                if ($upload->getError() != UPLOAD_ERR_OK) {
-                    $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
-                }
-            } else {
-                $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
-            }
-        } elseif ($bean->empty('File_ID')) {
-            $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.empty'));
-        }
+
         return !$this->getValidationHelper()->hasError();
     }
 }
