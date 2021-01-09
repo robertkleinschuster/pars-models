@@ -36,9 +36,25 @@ class FileDirectoryBeanFinder extends AbstractBeanFinder
     }
 
 
-    public function setFileDirectory_ID(int $id): self
+    public function setFileDirectory_ID(int $id, bool $exclude = false): self
     {
-        $this->getBeanLoader()->filterValue('FileDirectory_ID', $id);
+        if ($exclude) {
+            $this->getBeanLoader()->excludeValue('FileDirectory_ID', $id);
+        } else {
+            $this->getBeanLoader()->filterValue('FileDirectory_ID', $id);
+        }
+        return $this;
+    }
+
+    public function setFileDirectory_Name(string $name): self
+    {
+        $this->getBeanLoader()->filterValue('FileDirectory_Name', $name);
+        return $this;
+    }
+
+    public function setFileDirectory_Code(string $code): self
+    {
+        $this->getBeanLoader()->filterValue('FileDirectory_Code', $code);
         return $this;
     }
 }

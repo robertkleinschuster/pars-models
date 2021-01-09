@@ -13,6 +13,7 @@ use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
+use Pars\Model\File\FileBeanFinder;
 
 /**
  * Class FileDirectoryBeanProcessor
@@ -25,11 +26,14 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
     use ValidationHelperAwareTrait;
     use TranslatorAwareTrait;
 
+    protected $adapter;
+
     /**
      * FileDirectoryBeanProcessor constructor.
      */
     public function __construct(Adapter $adapter)
     {
+        $this->adapter = $adapter;
         $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('FileDirectory_ID', 'FileDirectory_ID', 'FileDirectory', 'FileDirectory_ID', true);
         $saver->addColumn('FileDirectory_Code', 'FileDirectory_Code', 'FileDirectory', 'FileDirectory_ID');
@@ -90,7 +94,32 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
     {
         if ($bean->empty('FileDirectory_Name')) {
             $this->getValidationHelper()->addError('FileDirectory_Name', $this->translate('filedirectory.name.empty'));
+        } else {
+            $finder = new FileDirectoryBeanFinder($this->adapter);
+            if (!$bean->empty('FileDirectory_ID')) {
+                $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'), true);
+            }
+            $finder->setFileDirectory_Name($bean->get('FileDirectory_Name'));
+            if ($finder->count() > 0) {
+                $this->getValidationHelper()
+                    ->addError('FileDirectory_Name', $this->translate('filedirectory.name.unique'));
+            }
         }
+
+        if ($bean->empty('FileDirectory_Code')) {
+            $this->getValidationHelper()->addError('FileDirectory_Code', $this->translate('filedirectory.code.empty'));
+        } else {
+            $finder = new FileDirectoryBeanFinder($this->adapter);
+            if (!$bean->empty('FileDirectory_ID')) {
+                $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'), true);
+            }
+            $finder->setFileDirectory_Name($bean->get('FileDirectory_Code'));
+            if ($finder->count() > 0) {
+                $this->getValidationHelper()
+                    ->addError('FileDirectory_Code', $this->translate('filedirectory.code.unique'));
+            }
+        }
+
         return !$this->getValidationHelper()->hasError();
     }
 
