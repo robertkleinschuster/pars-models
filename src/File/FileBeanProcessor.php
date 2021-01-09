@@ -13,6 +13,7 @@ use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
+use Pars\Model\Article\ArticleBeanFinder;
 use Pars\Model\File\Directory\FileDirectoryBeanFinder;
 use Pars\Model\File\Type\FileTypeBeanFinder;
 use Psr\Http\Message\UploadedFileInterface;
@@ -169,7 +170,30 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     {
         if ($bean->empty('File_Name')) {
             $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.empty'));
+        } else {
+            $finder = new FileBeanFinder($this->adapter);
+            if (!$bean->empty('File_ID')) {
+                $finder->setFile_ID($bean->get('File_ID'), true);
+            }
+            $finder->setFile_Name($bean->get('File_Name'));
+            if ($finder->count() > 0) {
+                $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.unique'));
+            }
         }
+
+        if ($bean->empty('File_Code')) {
+            $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.empty'));
+        } else {
+            $finder = new FileBeanFinder($this->adapter);
+            if (!$bean->empty('File_ID')) {
+                $finder->setFile_ID($bean->get('File_ID'), true);
+            }
+            $finder->setFile_Code($bean->get('File_Code'));
+            if ($finder->count() > 0) {
+                $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.unique'));
+            }
+        }
+
         if ($bean->empty('FileDirectory_ID')) {
             $this->getValidationHelper()->addError('FileDirectory_ID', $this->translate('filedirectory.code.empty'));
         }

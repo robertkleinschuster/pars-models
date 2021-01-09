@@ -38,6 +38,38 @@ class FileBeanFinder extends AbstractBeanFinder
         return $this;
     }
 
+
+    public function setFile_ID(int $id, bool $exclude = false): self
+    {
+        if ($exclude) {
+            $this->getBeanLoader()->excludeValue('File_ID', $id);
+        } else {
+            $this->getBeanLoader()->filterValue('File_ID', $id);
+        }
+        return $this;
+    }
+
+    public function setFile_Name(string $name, bool $exclude = false): self
+    {
+        if ($exclude) {
+            $this->getBeanLoader()->excludeValue('File_Name', $name);
+        } else {
+            $this->getBeanLoader()->filterValue('File_Name', $name);
+        }
+        return $this;
+    }
+
+    public function setFile_Code(string $code, bool $exclude = false): self
+    {
+        if ($exclude) {
+            $this->getBeanLoader()->excludeValue('File_Code', $code);
+        } else {
+            $this->getBeanLoader()->filterValue('File_Code', $code);
+        }
+        return $this;
+    }
+
+
     public function setFileDirectory_Code(string $type): self
     {
         $this->getBeanLoader()->filterValue('FileDirectory_Code', $type);
