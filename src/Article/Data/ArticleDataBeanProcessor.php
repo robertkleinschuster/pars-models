@@ -26,10 +26,10 @@ class ArticleDataBeanProcessor extends AbstractBeanProcessor implements Validati
         $saver->addColumn('ArticleData_Data', 'ArticleData_Data', 'ArticleData', 'ArticleData_ID');
         $saver->addColumn('ArticleData_Active', 'ArticleData_Active', 'ArticleData', 'ArticleData_ID');
         $saver->addColumn('ArticleData_Timestamp', 'ArticleData_Timestamp', 'ArticleData', 'ArticleData_ID');
-        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'Article', 'Article_ID');
-        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
-        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
-        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Article', 'Article_ID');
+        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'ArticleData', 'Article_ID');
+        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'ArticleData', 'Article_ID');
+        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'ArticleData', 'Article_ID');
+        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'ArticleData', 'Article_ID');
         parent::__construct($saver);
     }
 
