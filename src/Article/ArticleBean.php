@@ -4,6 +4,7 @@ namespace Pars\Model\Article;
 
 use Niceshops\Bean\Type\Base\AbstractBaseBean;
 use Niceshops\Bean\Type\Base\BeanInterface;
+use Niceshops\Bean\Type\Base\BeanListInterface;
 
 /**
  * Class ArticleBean
@@ -18,14 +19,14 @@ class ArticleBean extends AbstractBaseBean
     public ?\DateTime $Timestamp_Edit = null;
     public ?int $Person_ID_Create = null;
     public ?int $Person_ID_Edit = null;
-
+    public ?BeanListInterface $ArticleData_BeanList = null;
     /**
-     * @return ArticleDataBean
+     * @return DataBean
      */
-    public function getArticle_Data(): ArticleDataBean
+    public function getArticle_Data(): DataBean
     {
         if ($this->Article_Data === null) {
-            $this->Article_Data = new ArticleDataBean();
+            $this->Article_Data = new DataBean();
         }
         return $this->Article_Data;
     }
