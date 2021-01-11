@@ -24,6 +24,8 @@ class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
             $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true, null, ['ArticleTranslation']);
             $saver->addColumn('Locale_Code', 'Locale_Code', 'ArticleTranslation', 'Article_ID', true);
             $saver->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID');
+            $saver->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID');
+            $saver->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID');
             $saver->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID');
             $saver->addColumn('ArticleTranslation_Title', 'ArticleTranslation_Title', 'ArticleTranslation', 'Article_ID');
             $saver->addColumn('ArticleTranslation_Keywords', 'ArticleTranslation_Keywords', 'ArticleTranslation', 'Article_ID');

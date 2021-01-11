@@ -5,6 +5,7 @@ namespace Pars\Model\Article\Translation;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Predicate\Predicate;
 use Niceshops\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\ArticleBeanFinder;
@@ -35,6 +36,8 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
             $loader->addColumn('Article_ID', 'Article_ID', 'ArticleTranslation', 'Article_ID', true);
             $loader->addColumn('Locale_Code', 'Locale_Code', 'ArticleTranslation', 'Article_ID', true);
             $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID');
+            $loader->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID');
+            $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID');
             $loader->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID');
             $loader->addColumn('ArticleTranslation_Title', 'ArticleTranslation_Title', 'ArticleTranslation', 'Article_ID');
             $loader->addColumn('ArticleTranslation_Keywords', 'ArticleTranslation_Keywords', 'ArticleTranslation', 'Article_ID');
@@ -72,6 +75,26 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
     public function setArticleTranslation_Code(string $articleTranslation_Code)
     {
         $this->getBeanLoader()->filterValue('ArticleTranslation_Code', $articleTranslation_Code);
+        return $this;
+    }
+
+    /**
+     * @param string $articleTranslation_Code
+     * @return $this
+     */
+    public function setArticleTranslation_Host(string $articleTranslation_Host)
+    {
+        $this->getBeanLoader()->filterValue('ArticleTranslation_Host', $articleTranslation_Host);
+        return $this;
+    }
+
+    /**
+     * @param string $articleTranslation_Code
+     * @return $this
+     */
+    public function setArticleTranslation_Active(bool $articleTranslation_Active)
+    {
+        $this->getBeanLoader()->filterValue('ArticleTranslation_Active', $articleTranslation_Active);
         return $this;
     }
 

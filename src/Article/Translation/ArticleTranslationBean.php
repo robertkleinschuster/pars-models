@@ -13,6 +13,8 @@ class ArticleTranslationBean extends ArticleBean
 {
     public ?string $Locale_Code = null;
     public ?string $ArticleTranslation_Code = null;
+    public ?string $ArticleTranslation_Host = null;
+    public ?bool $ArticleTranslation_Active = null;
     public ?string $ArticleTranslation_Name = null;
     public ?string $ArticleTranslation_Title = null;
     public ?string $ArticleTranslation_Keywords = null;

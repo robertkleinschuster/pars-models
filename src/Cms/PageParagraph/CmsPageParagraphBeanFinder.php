@@ -30,6 +30,7 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Article_Data', 'Article_Data', 'Article', 'Article_ID', false, null, [], 'CmsParagraph');
         $loader->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
+        $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Title', 'ArticleTranslation_Title', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Keywords', 'ArticleTranslation_Keywords', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Heading', 'ArticleTranslation_Heading', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');

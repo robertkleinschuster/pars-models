@@ -34,6 +34,8 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID', false, null, [], 'CmsPage');
         $loader->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
+        $loader->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
+        $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('Locale_Code', 'Locale_Code', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
         $loader->addOrder('CmsMenu_Order');
@@ -68,4 +70,5 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $this->getBeanLoader()->filterValue('CmsMenuState_Code', $type);
         return $this;
     }
+
 }

@@ -13,6 +13,7 @@ class CmsPageTypeBeanFinder extends AbstractBeanFinder
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPageType', 'CmsPageType_Code', true);
         $loader->addColumn('CmsPageType_Active', 'CmsPageType_Active', 'CmsPageType', 'CmsPageType_Code');
+        $this->order(['CmsPageType_Code' => self::ORDER_MODE_ASC]);
         parent::__construct($loader, new CmsPageTypeBeanFactory());
     }
 
