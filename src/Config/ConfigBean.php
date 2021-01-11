@@ -10,6 +10,7 @@ class ConfigBean extends AbstractBaseBean
 {
     public ?string $Config_Code = null;
     public ?string $Config_Value = null;
+    public ?bool $Config_Locked = null;
     public ?array $Config_Data = null;
     public ?\DateTime $Timestamp_Create = null;
     public ?\DateTime $Timestamp_Edit = null;
