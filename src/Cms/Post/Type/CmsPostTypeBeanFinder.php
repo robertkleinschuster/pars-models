@@ -16,6 +16,7 @@ class CmsPostTypeBeanFinder extends AbstractBeanFinder
     {
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsPostType_Code', 'CmsPostType_Code', 'CmsPostType', 'CmsPostType_Code', true);
+        $loader->addColumn('CmsPostType_Template', 'CmsPostType_Template', 'CmsPostType', 'CmsPostType_Code');
         $loader->addColumn('CmsPostType_Active', 'CmsPostType_Active', 'CmsPostType', 'CmsPostType_Code');
         parent::__construct($loader, new CmsPostTypeBeanFactory());
     }

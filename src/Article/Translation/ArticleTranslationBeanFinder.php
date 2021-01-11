@@ -65,6 +65,11 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
         } else {
             $this->getBeanLoader()->filterValue('Locale_Code', $locale);
         }
+        foreach ($this->getLinkedFinderList() as $finderLink) {
+            if (method_exists($finderLink->getBeanFinder(), 'setLocale_Code')) {
+                $finderLink->getBeanFinder()->setLocale_Code($locale, $leftJoin);
+            }
+        }
         return $this;
     }
 
@@ -85,6 +90,11 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
     public function setArticleTranslation_Host(string $articleTranslation_Host)
     {
         $this->getBeanLoader()->filterValue('ArticleTranslation_Host', $articleTranslation_Host);
+        foreach ($this->getLinkedFinderList() as $finderLink) {
+            if (method_exists($finderLink->getBeanFinder(), 'setArticleTranslation_Host')) {
+                $finderLink->getBeanFinder()->setArticleTranslation_Host($articleTranslation_Host);
+            }
+        }
         return $this;
     }
 
@@ -95,6 +105,11 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
     public function setArticleTranslation_Active(bool $articleTranslation_Active)
     {
         $this->getBeanLoader()->filterValue('ArticleTranslation_Active', $articleTranslation_Active);
+        foreach ($this->getLinkedFinderList() as $finderLink) {
+            if (method_exists($finderLink->getBeanFinder(), 'setArticleTranslation_Active')) {
+                $finderLink->getBeanFinder()->setArticleTranslation_Active($articleTranslation_Active);
+            }
+        }
         return $this;
     }
 

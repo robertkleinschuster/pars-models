@@ -21,6 +21,7 @@ class CmsPostTypeBeanProcessor extends AbstractBeanProcessor
     {
         $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('CmsPostType_Code', 'CmsPostType_Code', 'CmsPostType', 'CmsPostType_Code', true);
+        $saver->addColumn('CmsPostType_Template', 'CmsPostType_Template', 'CmsPostType', 'CmsPostType_Code', true);
         $saver->addColumn('CmsPostType_Active', 'CmsPostType_Active', 'CmsPostType', 'CmsPostType_Code');
         parent::__construct($saver);
     }

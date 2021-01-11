@@ -11,5 +11,6 @@ use Niceshops\Bean\Type\Base\AbstractBaseBean;
 class CmsPostTypeBean extends AbstractBaseBean
 {
     public ?string $CmsPostType_Code = null;
+    public ?string $CmsPostType_Template = null;
     public ?bool $CmsPostType_Active = null;
 }

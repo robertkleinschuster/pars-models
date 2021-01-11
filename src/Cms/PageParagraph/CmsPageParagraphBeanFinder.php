@@ -30,6 +30,7 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Article_Data', 'Article_Data', 'Article', 'Article_ID', false, null, [], 'CmsParagraph');
         $loader->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
+        $loader->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Title', 'ArticleTranslation_Title', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Keywords', 'ArticleTranslation_Keywords', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
@@ -52,6 +53,22 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
     public function setCmsParagraphState_Code(string $state)
     {
         $this->getBeanLoader()->filterValue('CmsParagraphState_Code', $state);
+        return $this;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setArticleTranslation_Active(bool $state)
+    {
+        $this->getBeanLoader()->filterValue('ArticleTranslation_Active', $state);
+        return $this;
+    }
+
+
+    public function setArticleTranslation_Host(string $articleTranslation_Host)
+    {
+        $this->getBeanLoader()->filterValue('ArticleTranslation_Host', $articleTranslation_Host);
         return $this;
     }
 

@@ -6,6 +6,7 @@ use Laminas\Db\Adapter\Adapter;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\Cms\PageParagraph\CmsPageParagraphBeanFinder;
+use Pars\Model\Cms\Post\CmsPostBeanFinder;
 
 /**
  * Class CmsPageBeanFinder
@@ -29,19 +30,18 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article', 'ArticleTranslation']);
         }
         $pageParagraphFinder = new CmsPageParagraphBeanFinder($adapter);
-        $pageParagraphFinder->setCmsParagraphState_Code('active');
         $this->addLinkedFinder($pageParagraphFinder, 'CmsParagraph_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+        $postFinder = new CmsPostBeanFinder($adapter);
+        $this->addLinkedFinder($postFinder, 'CmsPost_BeanList', 'CmsPage_ID', 'CmsPage_ID');
     }
 
-
-    public function setLocale_Code(string $locale, bool $leftJoin = true): ArticleTranslationBeanFinder
+    public function initPublished(string $timezone = null)
     {
         foreach ($this->getLinkedFinderList() as $finderLink) {
-            if (method_exists($finderLink->getBeanFinder(), 'setLocale_Code')) {
-                $finderLink->getBeanFinder()->setLocale_Code($locale, $leftJoin);
+            if (method_exists($finderLink->getBeanFinder(), 'initPublished')) {
+                $finderLink->getBeanFinder()->initPublished($timezone);
             }
         }
-        return parent::setLocale_Code($locale, $leftJoin);
     }
 
     public function setCmsPage_ID(int $id)
