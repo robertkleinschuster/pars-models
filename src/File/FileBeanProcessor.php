@@ -47,7 +47,6 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'File', 'File_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'File', 'File_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'File', 'File_ID');
-
         parent::__construct($saver);
     }
 
@@ -183,13 +182,27 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
         if (!$bean->empty('File_Upload')) {
             $upload = $bean->get('File_Upload');
             if ($upload instanceof UploadedFileInterface) {
+                switch ($upload->getError()) {
+                    case UPLOAD_ERR_CANT_WRITE:
+                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.cant.write'));
+                        break;
+                    case UPLOAD_ERR_FORM_SIZE:
+                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.form.size'));
+                        break;
+                    case UPLOAD_ERR_INI_SIZE:
+                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.ini.size'));
+                        break;
+                    case UPLOAD_ERR_NO_FILE:
+                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.no.file'));
+                        break;
+                }
                 if ($upload->getError() != UPLOAD_ERR_OK) {
-                    $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
+                    $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
                 } else {
                     $clientFileName = $upload->getClientFilename();
                 }
             } else {
-                $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.error'));
+                $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
             }
         } elseif ($bean->empty('File_ID')) {
             $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.empty'));
