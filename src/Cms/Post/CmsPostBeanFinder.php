@@ -3,10 +3,12 @@
 namespace Pars\Model\Cms\Post;
 
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Predicate;
 use Pars\Core\Database\DatabaseBeanConverter;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
+use Pars\Model\Authentication\User\UserBeanFinder;
 
 
 /**
