@@ -12,5 +12,4 @@ class CmsPostBean extends ArticleTranslationBean
     public ?string $CmsPostType_Code = null;
     public ?string $CmsPostType_Template = null;
     public ?string $CmsPostState_Code = null;
-    public ?string $User_Displayname = null;
 }
