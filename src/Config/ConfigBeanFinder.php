@@ -15,6 +15,8 @@ class ConfigBeanFinder extends AbstractBeanFinder
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Config_Code', 'Config_Code', 'Config', 'Config_Code', true);
         $loader->addColumn('Config_Value', 'Config_Value', 'Config', 'Config_Code');
+        $loader->addColumn('Config_Description', 'Config_Description', 'Config', 'Config_Code');
+        $loader->addColumn('Config_Options', 'Config_Options', 'Config', 'Config_Code');
         $loader->addColumn('Config_Locked', 'Config_Locked', 'Config', 'Config_Code');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Config', 'Config_Code');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Config', 'Config_Code');
