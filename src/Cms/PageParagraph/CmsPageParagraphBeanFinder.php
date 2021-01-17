@@ -7,7 +7,6 @@ use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
-use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 
 class CmsPageParagraphBeanFinder extends AbstractBeanFinder

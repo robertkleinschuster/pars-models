@@ -5,7 +5,6 @@ namespace Pars\Model\Article\Translation;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
-use Laminas\Db\Sql\Predicate\Predicate;
 use Niceshops\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\ArticleBeanFinder;
