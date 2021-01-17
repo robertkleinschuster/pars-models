@@ -36,6 +36,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
+        $loader->addColumn('Timestamp_Edit_Article', 'Timestamp_Edit', 'Article', 'Article_ID', false, null, [], 'CmsPage');
         $loader->addColumn('Locale_Code', 'Locale_Code', 'ArticleTranslation', 'Article_ID', false, null, [], 'Article');
         $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
         $loader->addOrder('CmsMenu_Order');
