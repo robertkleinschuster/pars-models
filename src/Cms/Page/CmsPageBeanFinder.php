@@ -30,8 +30,12 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article', 'ArticleTranslation']);
         }
         $pageParagraphFinder = new CmsPageParagraphBeanFinder($adapter);
+        $pageParagraphFinder->setArticleTranslation_Active(true);
+        $pageParagraphFinder->setCmsParagraphState_Code('active');
         $this->addLinkedFinder($pageParagraphFinder, 'CmsParagraph_BeanList', 'CmsPage_ID', 'CmsPage_ID');
         $postFinder = new CmsPostBeanFinder($adapter);
+        $postFinder->setArticleTranslation_Active(true);
+        $postFinder->setCmsPostState_Code('active');
         $this->addLinkedFinder($postFinder, 'CmsPost_BeanList', 'CmsPage_ID', 'CmsPage_ID');
     }
 
