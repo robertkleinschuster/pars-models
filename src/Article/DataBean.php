@@ -8,8 +8,8 @@ use Niceshops\Bean\Type\Base\AbstractBaseBean;
 
 class DataBean extends AbstractBaseBean
 {
-    public ?bool $vote_once = false;
+    public ?bool $vote_once = null;
     public ?string $contact_email = '';
-    public ?string $User_Displayname_Create = null;
-    public ?string $User_Displayname_Edit = null;
+    public ?string $author = null;
+    public ?string $editor = null;
 }
