@@ -38,6 +38,8 @@ class CmsPageBeanProcessor extends ArticleTranslationBeanProcessor
         }
         if ($bean->empty('CmsPageLayout_Code')) {
             $this->getValidationHelper()->addError('CmsPageLayout_Code', $this->translate('articlelayout.code.empty'));
+        } elseif ($bean->get('CmsPageLayout_Code') == 'big_image') {
+            $this->getValidationHelper()->addError('File_ID', $this->translate('file.id.empty'));
         }
         return parent::validateForSave($bean) && !$this->getValidationHelper()->hasError();
     }
