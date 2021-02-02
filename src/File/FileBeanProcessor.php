@@ -63,6 +63,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
         if (!$filesystem->has($bean->get('File_Code')) && !$bean->empty('File_Upload')) {
             $upload = $bean->get('File_Upload');
             if ($upload instanceof UploadedFileInterface) {
+                $bean->set('File_Code', rtrim($bean->get('File_Code'), '.' . $bean->get('FileType_Code')));
                 $path = $this->getFilePath($bean);
                 $upload->moveTo($path);
                 /* $mime = $filesystem->getMimetype($path);
