@@ -6,6 +6,7 @@ namespace Pars\Model\Config;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
@@ -25,6 +26,7 @@ class ConfigBeanProcessor extends AbstractBeanProcessor
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Config', 'Config_Code');
 
         parent::__construct($saver);
+        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
 
     protected function validateForSave(BeanInterface $bean): bool

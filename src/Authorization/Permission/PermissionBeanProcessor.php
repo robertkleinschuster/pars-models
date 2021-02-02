@@ -4,6 +4,7 @@ namespace Pars\Model\Authorization\Permission;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
@@ -24,6 +25,7 @@ class PermissionBeanProcessor extends AbstractBeanProcessor implements Validatio
         $saver->addColumn('UserPermission_Code', 'UserPermission_Code', 'UserPermission', 'UserPermission_Code', true);
         $saver->addColumn('UserPermission_Active', 'UserPermission_Active', 'UserPermission', 'UserPermission_Code');
         parent::__construct($saver);
+        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
 
 

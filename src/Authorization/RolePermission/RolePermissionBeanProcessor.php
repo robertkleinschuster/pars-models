@@ -4,6 +4,7 @@ namespace Pars\Model\Authorization\RolePermission;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;

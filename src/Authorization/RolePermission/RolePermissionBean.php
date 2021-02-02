@@ -13,6 +13,7 @@ class RolePermissionBean extends AbstractBaseBean
 {
     public ?int $UserRole_ID = null;
     public ?string $UserPermission_Code = null;
+    public ?string $UserRole_Name = null;
     public ?bool $UserPermission_Active = null;
     public ?\DateTime $Timestamp_Create = null;
     public ?\DateTime $Timestamp_Edit = null;

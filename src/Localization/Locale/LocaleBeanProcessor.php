@@ -7,6 +7,7 @@ use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
@@ -38,6 +39,7 @@ class LocaleBeanProcessor extends AbstractBeanProcessor implements ValidationHel
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
         parent::__construct($saver);
         $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new LocaleBeanFinder($adapter), 'Locale_Order'));
+        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
 
 

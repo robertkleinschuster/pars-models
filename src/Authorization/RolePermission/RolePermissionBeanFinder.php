@@ -18,6 +18,7 @@ class RolePermissionBeanFinder extends AbstractBeanFinder
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('UserPermission_Code', 'UserPermission_Code', 'UserRole_UserPermission', 'UserPermission_Code', true);
         $loader->addColumn('UserRole_ID', 'UserRole_ID', 'UserRole_UserPermission', 'UserPermission_Code', true);
+        $loader->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
         $loader->addColumn('UserPermission_Active', 'UserPermission_Active', 'UserPermission', 'UserPermission_Code');
         $factory = new RolePermissionBeanFactory();
         parent::__construct($loader, $factory);

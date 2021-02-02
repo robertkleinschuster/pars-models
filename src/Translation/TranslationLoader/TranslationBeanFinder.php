@@ -6,6 +6,7 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 
@@ -29,12 +30,17 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
         $loader->addColumn('Translation_Code', 'Translation_Code', 'Translation', 'Translation_ID');
         $loader->addColumn('Translation_Namespace', 'Translation_Namespace', 'Translation', 'Translation_ID');
         $loader->addColumn('Locale_Code', 'Locale_Code', 'Translation', 'Translation_ID');
+        $loader->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code');
         $loader->addColumn('Translation_Text', 'Translation_Text', 'Translation', 'Translation_ID');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Translation', 'Translation_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Translation', 'Translation_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Translation', 'Translation_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Translation', 'Translation_ID');
-
+        $loader->order([
+            'Translation_Namespace' => self::ORDER_MODE_DESC,
+            'Translation_Code' => self::ORDER_MODE_DESC,
+            'Locale_Code' => self::ORDER_MODE_DESC
+        ]);
         parent::__construct($loader, new TranslationBeanFactory());
     }
 

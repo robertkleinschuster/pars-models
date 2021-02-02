@@ -6,6 +6,7 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
@@ -47,6 +48,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User', 'Person_ID');
 
         parent::__construct($saver);
+        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
 
     /**
