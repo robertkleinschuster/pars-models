@@ -56,6 +56,17 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
     }
 
     /**
+     * @param string $code
+     * @return $this
+     * @throws \Exception
+     */
+    public function setCmsPage_ID(int $id): self
+    {
+        $this->getBeanLoader()->filterValue('CmsPage_ID', $id);
+        return $this;
+    }
+
+    /**
      * @throws \Exception
      */
     public function initPublished(string $timezone = null)
