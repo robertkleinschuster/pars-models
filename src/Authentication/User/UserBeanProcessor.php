@@ -12,6 +12,10 @@ use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
+/**
+ * Class UserBeanProcessor
+ * @package Pars\Model\Authentication\User
+ */
 class UserBeanProcessor extends AbstractBeanProcessor implements
     ValidationHelperAwareInterface,
     TranslatorAwareInterface
@@ -24,6 +28,9 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
      */
     private Adapter $adapter;
 
+    /**
+     * @var UserBean
+     */
     private UserBean $currentUserBean;
 
     /**

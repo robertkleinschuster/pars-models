@@ -10,6 +10,8 @@ use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 /**
  * Class UserRoleBeanFinder
  * @package Pars\Model\Authorization\UserRole
+ * @method UserRoleBean getBean(bool $fetchAllData = false)
+ * @method UserRoleBeanList getBeanList(bool $fetchAllData = false)
  */
 class UserRoleBeanFinder extends AbstractBeanFinder
 {

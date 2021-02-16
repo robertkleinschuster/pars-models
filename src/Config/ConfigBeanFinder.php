@@ -8,6 +8,12 @@ use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
+/**
+ * Class ConfigBeanFinder
+ * @package Pars\Model\Config
+ * @method ConfigBean getBean(bool $fetchAllData = false)
+ * @method ConfigBeanList getBeanList(bool $fetchAllData = false)
+ */
 class ConfigBeanFinder extends AbstractBeanFinder
 {
     public function __construct(Adapter $adapter)

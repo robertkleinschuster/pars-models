@@ -11,9 +11,15 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class ImportBeanFinder
  * @package Pars\Model\Import
+ * @method ImportBean getBean(bool $fetchAllData = false)
+ * @method ImportBeanList getBeanList(bool $fetchAllData = false)
  */
 class ImportBeanFinder extends AbstractBeanFinder
 {
+    /**
+     * ImportBeanFinder constructor.
+     * @param Adapter $adapter
+     */
     public function __construct(Adapter $adapter)
     {
         $loader = new DatabaseBeanLoader($adapter);

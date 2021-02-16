@@ -9,6 +9,8 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 /**
  * Class CmsMenuBeanFinder
  * @package Pars\Model\Cms\Menu
+ * @method CmsMenuBean getBean(bool $fetchAllData = false)
+ * @method CmsMenuBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
 {

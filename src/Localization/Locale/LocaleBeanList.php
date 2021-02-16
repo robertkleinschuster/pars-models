@@ -10,5 +10,11 @@ use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
  */
 class LocaleBeanList extends AbstractBaseBeanList
 {
-
+    /**
+     * @return array
+     */
+    public function getSelectOptions(): array
+    {
+        return $this->column('Locale_Name', 'Locale_Code');
+    }
 }

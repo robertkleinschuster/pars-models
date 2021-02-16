@@ -13,7 +13,9 @@ use Pars\Model\Config\ConfigBeanFinder;
 /**
  * Class LocaleBeanFinder
  * @package Pars\Model\Localization\Locale
- * @method LocaleBean getBean(bool $fetchAllData = false) : BeanInterface
+ * @method LocaleBean getBean(bool $fetchAllData = false)
+ * @method LocaleBeanList getBeanList(bool $fetchAllData = false)
+ *
  */
 class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterface
 {

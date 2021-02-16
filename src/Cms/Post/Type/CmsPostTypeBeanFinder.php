@@ -9,6 +9,8 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class CmsPostTypeBeanFinder
  * @package Pars\Model\Cms\Post\Type
+ * @method CmsPostTypeBean getBean(bool $fetchAllData = false)
+ * @method CmsPostTypeBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsPostTypeBeanFinder extends AbstractBeanFinder
 {

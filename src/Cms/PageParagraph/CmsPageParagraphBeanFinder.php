@@ -9,6 +9,12 @@ use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\File\FileBeanFinder;
 
+/**
+ * Class CmsPageParagraphBeanFinder
+ * @package Pars\Model\Cms\PageParagraph
+ * @method CmsPageParagraphBean getBean(bool $fetchAllData = false)
+ * @method CmsPageParagraphBeanList getBeanList(bool $fetchAllData = false)
+ */
 class CmsPageParagraphBeanFinder extends AbstractBeanFinder
 {
     public function __construct(Adapter $adapter)

@@ -5,10 +5,13 @@ namespace Pars\Model\Cms\Post\State;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Model\Cms\Post\CmsPostBeanList;
 
 /**
  * Class CmsPostStateBeanFinder
  * @package Pars\Model\Cms\Post\State
+ * @method CmsPostStateBean getBean(bool $fetchAllData = false)
+ * @method CmsPostBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsPostStateBeanFinder extends AbstractBeanFinder
 {

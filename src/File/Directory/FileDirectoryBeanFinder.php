@@ -10,6 +10,8 @@ use Pars\Model\File\FileBeanFinder;
 /**
  * Class FileDirectoryBeanFinder
  * @package Pars\Model\File\Directory
+ * @method FileDirectoryBean getBean(bool $fetchAllData = false)
+ * @method FileDirectoryBeanList getBeanList(bool $fetchAllData = false)
  */
 class FileDirectoryBeanFinder extends AbstractBeanFinder
 {

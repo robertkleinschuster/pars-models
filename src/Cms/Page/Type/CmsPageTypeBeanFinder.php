@@ -6,6 +6,12 @@ use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
+/**
+ * Class CmsPageTypeBeanFinder
+ * @package Pars\Model\Cms\Page\Type
+ * @method CmsPageTypeBean getBean(bool $fetchAllData = false)
+ * @method CmsPageTypeBeanList getBeanList(bool $fetchAllData = false)
+ */
 class CmsPageTypeBeanFinder extends AbstractBeanFinder
 {
     public function __construct(Adapter $adapter)

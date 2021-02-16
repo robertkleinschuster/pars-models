@@ -9,6 +9,8 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class CmsMenuTypeBeanFinder
  * @package Pars\Model\Cms\Menu\Type
+ * @method CmsMenuTypeBean getBean(bool $fetchAllData = false)
+ * @method CmsMenuTypeBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsMenuTypeBeanFinder extends AbstractBeanFinder
 {

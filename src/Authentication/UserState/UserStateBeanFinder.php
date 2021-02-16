@@ -9,6 +9,8 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class UserBeanFinder
  * @package Pars\Model\Authentication\User
+ * @method UserStateBean getBean(bool $fetchAllData = false)
+ * @method UserStateBeanList getBeanList(bool $fetchAllData = false)
  */
 class UserStateBeanFinder extends AbstractBeanFinder
 {

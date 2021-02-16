@@ -6,13 +6,14 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
-use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
  * Class TranslationBeanFinder
  * @package Pars\Model\Translation\TranslationLoader
+ * @method TranslationBean getBean(bool $fetchAllData = false)
+ * @method TranslationBeanList getBeanList(bool $fetchAllData = false)
  */
 class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderInterface
 {

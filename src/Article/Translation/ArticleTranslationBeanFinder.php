@@ -15,6 +15,8 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
  * Class ArticleTranslationBeanFinder
  * @package Pars\Model\Article\Translation
  * @method DatabaseBeanLoader getBeanLoader() : BeanLoaderInterface
+ * @method ArticleTranslationBean getBean(bool $fetchAllData = false)
+ * @method ArticleTranslationBeanList getBeanList(bool $fetchAllData = false)
  */
 class ArticleTranslationBeanFinder extends ArticleBeanFinder
 {

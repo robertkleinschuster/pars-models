@@ -5,7 +5,15 @@ namespace Pars\Model\Cms\Paragraph\Type;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Model\Cms\Paragraph\CmsParagraphBean;
+use Pars\Model\Cms\Paragraph\CmsParagraphBeanList;
 
+/**
+ * Class CmsParagraphTypeBeanFinder
+ * @package Pars\Model\Cms\Paragraph\Type
+ * @method CmsParagraphBean getBean(bool $fetchAllData = false)
+ * @method CmsParagraphBeanList getBeanList(bool $fetchAllData = false)
+ */
 class CmsParagraphTypeBeanFinder extends AbstractBeanFinder
 {
     public function __construct(Adapter $adapter)

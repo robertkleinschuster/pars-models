@@ -17,6 +17,8 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
 /**
  * Class UserBeanFinder
  * @package Pars\Model\Authentication\User
+ * @method UserBean getBean(bool $fetchAllData = false)
+ * @method UserBeanList getBeanList(bool $fetchAllData = false)
  */
 class UserBeanFinder extends AbstractBeanFinder implements
     UserRepositoryInterface,

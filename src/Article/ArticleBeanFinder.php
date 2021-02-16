@@ -11,6 +11,8 @@ use Pars\Model\Article\Data\ArticleDataBeanFinder;
 /**
  * Class ArticleBeanFinder
  * @package Pars\Model\Article
+ * @method ArticleBean getBean(bool $fetchAllData = false)
+ * @method ArticleBeanList getBeanList(bool $fetchAllData = false)
  */
 class ArticleBeanFinder extends AbstractBeanFinder
 {

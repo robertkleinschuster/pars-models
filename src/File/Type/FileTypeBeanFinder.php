@@ -9,6 +9,8 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class FileTypeBeanFinder
  * @package Pars\Model\File\Type
+ * @method FileTypeBean getBean(bool $fetchAllData = false)
+ * @method FileTypeBeanList getBeanList(bool $fetchAllData = false)
  */
 class FileTypeBeanFinder extends AbstractBeanFinder
 {

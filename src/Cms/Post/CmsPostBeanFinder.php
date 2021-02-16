@@ -13,6 +13,8 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
  * Class CmsPageBeanFinder
  * @package Pars\Model\Cms\Page
  * @method DatabaseBeanLoader getBeanLoader() : BeanLoaderInterface
+ * @method CmsPostBean getBean(bool $fetchAllData = false)
+ * @method CmsPostBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsPostBeanFinder extends ArticleTranslationBeanFinder
 {
@@ -27,7 +29,10 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('CmsPostType_Code', 'CmsPostType_Code', 'CmsPost', 'CmsPost_ID');
             $loader->addColumn('CmsPostType_Template', 'CmsPostType_Template', 'CmsPostType', 'CmsPostType_Code');
             $loader->addColumn('CmsPostState_Code', 'CmsPostState_Code', 'CmsPost', 'CmsPost_ID');
-            $loader->addColumn('Article_ID', 'Article_ID', 'CmsPost', 'CmsPost_ID', false, null, ['Article', 'ArticleTranslation']);
+            $loader->addColumn('Article_ID')
+                ->setTable('CmsPost')
+                ->setJoinField('CmsPost_ID')
+                ->setAdditionalTableList(['Article', 'ArticleTranslation']);
         }
         $this->order(['CmsPost_PublishTimestamp' => self::ORDER_MODE_DESC]);
     }
@@ -45,7 +50,7 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
     }
 
     /**
-     * @param string $code
+     * @param int $id
      * @return $this
      * @throws \Exception
      */
@@ -56,7 +61,7 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
     }
 
     /**
-     * @param string $code
+     * @param int $id
      * @return $this
      * @throws \Exception
      */

@@ -9,6 +9,8 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class CmsPageStateBeanFinder
  * @package Pars\Model\Cms\Page\State
+ * @method CmsPageStateBean getBean(bool $fetchAllData = false)
+ * @method CmsPageStateBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsPageStateBeanFinder extends AbstractBeanFinder
 {

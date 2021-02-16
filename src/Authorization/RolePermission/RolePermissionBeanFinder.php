@@ -9,6 +9,8 @@ use Pars\Core\Database\DatabaseBeanLoader;
 /**
  * Class RolePermissionBeanFinder
  * @package Pars\Model\Authorization\RolePermission
+ * @method RolePermissionBean getBean(bool $fetchAllData = false)
+ * @method RolePermissionBeanList getBeanList(bool $fetchAllData = false)
  */
 class RolePermissionBeanFinder extends AbstractBeanFinder
 {

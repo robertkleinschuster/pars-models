@@ -10,6 +10,9 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * Class ArticleDataBeanFinder
  * @package Pars\Model\Article\Data
  * @method DatabaseBeanLoader getBeanLoader() : BeanLoaderInterface
+ * @method ArticleDataBean getBean(bool $fetchAllData = false)
+ * @method ArticleDataBeanList getBeanList(bool $fetchAllData = false)
+ *
  */
 class ArticleDataBeanFinder extends AbstractBeanFinder
 {

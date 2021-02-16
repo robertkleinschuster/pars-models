@@ -12,6 +12,8 @@ use Pars\Model\Cms\Post\CmsPostBeanFinder;
  * Class CmsPageBeanFinder
  * @package Pars\Model\Cms\Page
  * @method DatabaseBeanLoader getBeanLoader() : BeanLoaderInterface
+ * @method CmsPageBean getBean(bool $fetchAllData = false)
+ * @method CmsPageBeanList getBeanList(bool $fetchAllData = false)
  */
 class CmsPageBeanFinder extends ArticleTranslationBeanFinder
 {
