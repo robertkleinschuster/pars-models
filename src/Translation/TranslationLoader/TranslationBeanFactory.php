@@ -7,6 +7,8 @@ use Niceshops\Bean\Factory\AbstractBeanFactory;
 /**
  * Class TranslationBeanFactory
  * @package Pars\Model\Translation\TranslationLoader
+ * @method TranslationBean getEmptyBean(array $data)
+ * @method TranslationBeanList getEmptyBeanList()(array $data)
  */
 class TranslationBeanFactory extends AbstractBeanFactory
 {

@@ -14,6 +14,7 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @package Pars\Model\Translation\TranslationLoader
  * @method TranslationBean getBean(bool $fetchAllData = false)
  * @method TranslationBeanList getBeanList(bool $fetchAllData = false)
+ * @method TranslationBeanFactory getBeanFactory()
  */
 class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderInterface
 {
