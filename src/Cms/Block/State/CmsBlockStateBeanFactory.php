@@ -1,15 +1,15 @@
 <?php
 
-namespace Pars\Model\Cms\Paragraph\State;
+namespace Pars\Model\Cms\Block\State;
 
 
 use Niceshops\Bean\Factory\AbstractBeanFactory;
 
 /**
- * Class CmsParagraphStateBeanFactory
- * @package Pars\Model\Cms\Paragraph\State
+ * Class CmsBlockStateBeanFactory
+ * @package Pars\Model\Cms\Block\State
  */
-class CmsParagraphStateBeanFactory extends AbstractBeanFactory
+class CmsBlockStateBeanFactory extends AbstractBeanFactory
 {
     /**
      * @param array $data
@@ -17,7 +17,7 @@ class CmsParagraphStateBeanFactory extends AbstractBeanFactory
      */
     protected function getBeanClass(array $data): string
     {
-        return CmsParagraphStateBean::class;
+        return CmsBlockStateBean::class;
     }
 
     /**
@@ -25,6 +25,6 @@ class CmsParagraphStateBeanFactory extends AbstractBeanFactory
      */
     protected function getBeanListClass(): string
     {
-        return CmsParagraphStateBeanList::class;
+        return CmsBlockStateBeanList::class;
     }
 }

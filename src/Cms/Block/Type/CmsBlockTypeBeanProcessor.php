@@ -1,24 +1,23 @@
 <?php
 
-namespace Pars\Model\Cms\Paragraph\State;
+namespace Pars\Model\Cms\Block\Type;
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
-class CmsParagraphStateBeanProcessor extends AbstractBeanProcessor
+class CmsBlockTypeBeanProcessor extends AbstractBeanProcessor
 {
 
-
     /**
-     * CmsParagraphStateBeanProcessor constructor.
+     * CmsBlockStateBeanProcessor constructor.
      */
     public function __construct(Adapter $adapter)
     {
         $saver = new DatabaseBeanSaver($adapter);
-        $saver->addColumn('CmsParagraphState_Code', 'CmsParagraphState_Code', 'CmsParagraphState', 'CmsParagraphState_Code', true);
-        $saver->addColumn('CmsParagraphState_Active', 'CmsParagraphState_Active', 'CmsParagraphState', 'CmsParagraphState_Code');
+        $saver->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlockType', 'CmsBlockType_Code', true);
+        $saver->addColumn('CmsBlockType_Active', 'CmsBlockType_Active', 'CmsBlockType', 'CmsBlockType_Code');
         parent::__construct($saver);
     }
 

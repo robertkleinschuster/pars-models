@@ -1,6 +1,6 @@
 <?php
 
-namespace Pars\Model\Cms\PageParagraph;
+namespace Pars\Model\Cms\PageBlock;
 
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Join;
@@ -10,51 +10,51 @@ use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\File\FileBeanFinder;
 
 /**
- * Class CmsPageParagraphBeanFinder
- * @package Pars\Model\Cms\PageParagraph
- * @method CmsPageParagraphBean getBean(bool $fetchAllData = false)
- * @method CmsPageParagraphBeanList getBeanList(bool $fetchAllData = false)
+ * Class CmsPageBlockBeanFinder
+ * @package Pars\Model\Cms\PageBlock
+ * @method CmsPageBlockBean getBean(bool $fetchAllData = false)
+ * @method CmsPageBlockBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPageParagraphBeanFinder extends AbstractBeanFinder
+class CmsPageBlockBeanFinder extends AbstractBeanFinder
 {
     public function __construct(Adapter $adapter)
     {
         $loader = new DatabaseBeanLoader($adapter);
-        $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage_CmsParagraph', 'CmsPage_ID', true);
-        $loader->addColumn('CmsParagraph_ID', 'CmsParagraph_ID', 'CmsPage_CmsParagraph', 'CmsParagraph_ID', true);
-        $loader->addColumn('CmsParagraphState_Code', 'CmsParagraphState_Code', 'CmsParagraph', 'CmsParagraph_ID');
-        $loader->addColumn('CmsParagraphType_Code', 'CmsParagraphType_Code', 'CmsParagraph', 'CmsParagraph_ID');
-        $loader->addColumn('CmsParagraphType_Template')
-            ->setTable('CmsParagraphType')
-            ->setJoinField('CmsParagraphType_Code')
-            ->setJoinTableSelf('CmsParagraph');
+        $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage_CmsBlock', 'CmsPage_ID', true);
+        $loader->addColumn('CmsBlock_ID', 'CmsBlock_ID', 'CmsPage_CmsBlock', 'CmsBlock_ID', true);
+        $loader->addColumn('CmsBlockState_Code', 'CmsBlockState_Code', 'CmsBlock', 'CmsBlock_ID');
+        $loader->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlock', 'CmsBlock_ID');
+        $loader->addColumn('CmsBlockType_Template')
+            ->setTable('CmsBlockType')
+            ->setJoinField('CmsBlockType_Code')
+            ->setJoinTableSelf('CmsBlock');
         $loader->addColumn('Person_ID_Create')
-            ->setTable('CmsPage_CmsParagraph')
-            ->setJoinField('CmsParagraph_ID');
+            ->setTable('CmsPage_CmsBlock')
+            ->setJoinField('CmsBlock_ID');
         $loader->addColumn('Person_ID_Edit')
-            ->setTable('CmsPage_CmsParagraph')
-            ->setJoinField('CmsParagraph_ID');
+            ->setTable('CmsPage_CmsBlock')
+            ->setJoinField('CmsBlock_ID');
         $loader->addColumn('Timestamp_Create')
-            ->setTable('CmsPage_CmsParagraph')
-            ->setJoinField('CmsParagraph_ID');
+            ->setTable('CmsPage_CmsBlock')
+            ->setJoinField('CmsBlock_ID');
         $loader->addColumn('Timestamp_Edit')
-            ->setTable('CmsPage_CmsParagraph')
-            ->setJoinField('CmsParagraph_ID');
-        $loader->addColumn('CmsPage_CmsParagraph_Order')
-            ->setTable('CmsPage_CmsParagraph')
-            ->setJoinField('CmsParagraph_ID');
+            ->setTable('CmsPage_CmsBlock')
+            ->setJoinField('CmsBlock_ID');
+        $loader->addColumn('CmsPage_CmsBlock_Order')
+            ->setTable('CmsPage_CmsBlock')
+            ->setJoinField('CmsBlock_ID');
         $loader->addColumn('Article_ID')
-            ->setTable('CmsParagraph')
-            ->setJoinField('CmsParagraph_ID')
+            ->setTable('CmsBlock')
+            ->setJoinField('CmsBlock_ID')
             ->setAdditionalTableList(['Article']);
         $loader->addColumn('Article_Code')
             ->setTable('Article')
             ->setJoinField('Article_ID')
-            ->setJoinTableSelf('CmsParagraph');
+            ->setJoinTableSelf('CmsBlock');
         $loader->addColumn('Article_Data')
             ->setTable('Article')
             ->setJoinField('Article_ID')
-            ->setJoinTableSelf('CmsParagraph');
+            ->setJoinTableSelf('CmsBlock');
         $loader->addColumn('ArticleTranslation_Name')
             ->setTable('ArticleTranslation')
             ->setJoinField('Article_ID')
@@ -111,17 +111,17 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
             ->setTable('ArticleTranslation')
             ->setJoinField('Article_ID')
             ->setJoinTableSelf('Article');
-        $loader->addOrder('CmsPage_CmsParagraph_Order');
+        $loader->addOrder('CmsPage_CmsBlock_Order');
         $this->addLinkedFinder(new FileBeanFinder($adapter), 'File_BeanList', 'File_ID', 'File_ID');
-        parent::__construct($loader, new CmsPageParagraphBeanFactory());
+        parent::__construct($loader, new CmsPageBlockBeanFactory());
     }
 
     /**
      * @param string $state
      */
-    public function setCmsParagraphState_Code(string $state)
+    public function setCmsBlockState_Code(string $state)
     {
-        $this->getBeanLoader()->filterValue('CmsParagraphState_Code', $state);
+        $this->getBeanLoader()->filterValue('CmsBlockState_Code', $state);
         return $this;
     }
 
@@ -160,9 +160,9 @@ class CmsPageParagraphBeanFinder extends AbstractBeanFinder
     /**
      * @param int $order
      */
-    public function setCmsPage_CmsParagraph_Order(int $order): self
+    public function setCmsPage_CmsBlock_Order(int $order): self
     {
-        $this->getBeanLoader()->filterValue('CmsPage_CmsParagraph_Order', $order);
+        $this->getBeanLoader()->filterValue('CmsPage_CmsBlock_Order', $order);
         return $this;
     }
 

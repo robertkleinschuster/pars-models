@@ -5,7 +5,7 @@ namespace Pars\Model\Cms\Page;
 use Laminas\Db\Adapter\Adapter;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
-use Pars\Model\Cms\PageParagraph\CmsPageParagraphBeanFinder;
+use Pars\Model\Cms\PageBlock\CmsPageBlockBeanFinder;
 use Pars\Model\Cms\Post\CmsPostBeanFinder;
 
 /**
@@ -31,10 +31,10 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article', 'ArticleTranslation']);
         }
-        $pageParagraphFinder = new CmsPageParagraphBeanFinder($adapter);
-        $pageParagraphFinder->setArticleTranslation_Active(true);
-        $pageParagraphFinder->setCmsParagraphState_Code('active');
-        $this->addLinkedFinder($pageParagraphFinder, 'CmsParagraph_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+        $pageBlockFinder = new CmsPageBlockBeanFinder($adapter);
+        $pageBlockFinder->setArticleTranslation_Active(true);
+        $pageBlockFinder->setCmsBlockState_Code('active');
+        $this->addLinkedFinder($pageBlockFinder, 'CmsBlock_BeanList', 'CmsPage_ID', 'CmsPage_ID');
         $postFinder = new CmsPostBeanFinder($adapter);
         $postFinder->setArticleTranslation_Active(true);
         $postFinder->setCmsPostState_Code('active');
