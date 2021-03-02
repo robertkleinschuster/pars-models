@@ -5,6 +5,7 @@ namespace Pars\Model\Article;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Factory\BeanFactoryInterface;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Niceshops\Bean\Loader\BeanLoaderInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Data\ArticleDataBeanFinder;
 
@@ -37,6 +38,16 @@ class ArticleBeanFinder extends AbstractBeanFinder
     public function setArticle_Code(string $articleCode): self
     {
         $this->getBeanLoader()->filterValue('Article_Code', $articleCode);
+        return $this;
+    }
+
+    /**
+     * @param array $articleCode_List
+     * @return $this
+     */
+    public function setArticle_Code_List(array $articleCode_List): self
+    {
+        $this->getBeanLoader()->filter(['Article_Code' => $articleCode_List], self::FILTER_MODE_AND);
         return $this;
     }
 
