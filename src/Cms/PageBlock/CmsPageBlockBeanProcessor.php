@@ -5,6 +5,8 @@ namespace Pars\Model\Cms\PageBlock;
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
 use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Niceshops\Bean\Validator\FieldNotEmptyBeanValidator;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
@@ -29,6 +31,7 @@ class CmsPageBlockBeanProcessor extends AbstractBeanProcessor
 
         parent::__construct($saver);
         $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsPageBlockBeanFinder($adapter), 'CmsPage_CmsBlock_Order', 'CmsPage_ID'));
-
+        $this->addDeleteValidator(new FieldNotEmptyBeanValidator('CmsPage_ID'));
+        $this->addDeleteValidator(new FieldNotEmptyBeanValidator('CmsBlock_ID'));
     }
 }
