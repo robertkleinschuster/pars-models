@@ -1,11 +1,15 @@
 <?php
 
-
 namespace Pars\Model\Config;
-
 
 use Niceshops\Bean\Factory\AbstractBeanFactory;
 
+/**
+ * Class ConfigBeanFactory
+ * @package Pars\Model\Config
+ * @method ConfigBean getEmptyBean(array $data)
+ * @method ConfigBeanList getEmptyBeanList()
+ */
 class ConfigBeanFactory extends AbstractBeanFactory
 {
     protected function getBeanClass(array $data): string

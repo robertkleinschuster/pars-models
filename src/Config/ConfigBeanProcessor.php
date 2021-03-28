@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Pars\Model\Config;
-
 
 use Laminas\Db\Adapter\Adapter;
 use Niceshops\Bean\Processor\AbstractBeanProcessor;
@@ -10,6 +8,10 @@ use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
 use Niceshops\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
+/**
+ * Class ConfigBeanProcessor
+ * @package Pars\Model\Config
+ */
 class ConfigBeanProcessor extends AbstractBeanProcessor
 {
     public bool $force = false;
@@ -20,11 +22,7 @@ class ConfigBeanProcessor extends AbstractBeanProcessor
         $saver->addColumn('Config_Code', 'Config_Code', 'Config', 'Config_Code', true);
         $saver->addColumn('Config_Value', 'Config_Value', 'Config', 'Config_Code');
         $saver->addColumn('Config_Locked', 'Config_Locked', 'Config', 'Config_Code');
-        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'Config', 'Config_Code');
-        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Config', 'Config_Code');
-        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Config', 'Config_Code');
-        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Config', 'Config_Code');
-
+        $saver->addDefaultFields('Config');
         parent::__construct($saver);
         $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
