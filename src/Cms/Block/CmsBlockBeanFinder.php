@@ -22,6 +22,8 @@ class CmsBlockBeanFinder extends ArticleTranslationBeanFinder
         $loader = $this->getBeanLoader();
         if ($loader instanceof DatabaseBeanLoader) {
             $loader->addColumn('CmsBlock_ID', 'CmsBlock_ID', 'CmsBlock', 'CmsBlock_ID', true);
+            $loader->addField('CmsBlock_ID_Parent')->setTable('CmsBlock');
+            $loader->addField('CmsBlock_Order')->setTable('CmsBlock');
             $loader->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlock', 'CmsBlock_ID');
             $loader->addColumn('CmsBlockType_Template', 'CmsBlockType_Template', 'CmsBlockType', 'CmsBlockType_Code', false, 'CmsBlockType_Code', [], 'CmsBlock');
             $loader->addColumn('CmsBlockState_Code', 'CmsBlockState_Code', 'CmsBlock', 'CmsBlock_ID');
@@ -47,6 +49,16 @@ class CmsBlockBeanFinder extends ArticleTranslationBeanFinder
     public function setCmsBlock_ID(int $id)
     {
         $this->filter(['CmsBlock_ID' => $id]);
+        return $this;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setCmsBlock_ID_Parent(?int $id)
+    {
+        $this->filter(['CmsBlock_ID_Parent' => $id]);
         return $this;
     }
 

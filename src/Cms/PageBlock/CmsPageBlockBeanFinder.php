@@ -7,6 +7,7 @@ use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Model\Cms\Block\CmsBlockBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 
 /**
@@ -23,6 +24,8 @@ class CmsPageBlockBeanFinder extends AbstractBeanFinder
         $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage_CmsBlock', 'CmsPage_ID', true);
         $loader->addColumn('CmsBlock_ID', 'CmsBlock_ID', 'CmsPage_CmsBlock', 'CmsBlock_ID', true);
         $loader->addColumn('CmsBlockState_Code', 'CmsBlockState_Code', 'CmsBlock', 'CmsBlock_ID');
+        $loader->addColumn('CmsBlock_Order', 'CmsBlock_Order', 'CmsBlock', 'CmsBlock_ID');
+        $loader->addColumn('CmsBlock_ID_Parent', 'CmsBlock_ID_Parent', 'CmsBlock', 'CmsBlock_ID');
         $loader->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlock', 'CmsBlock_ID');
         $loader->addColumn('CmsBlockType_Template')
             ->setTable('CmsBlockType')
@@ -113,6 +116,14 @@ class CmsPageBlockBeanFinder extends AbstractBeanFinder
             ->setJoinTableSelf('Article');
         $loader->addOrder('CmsPage_CmsBlock_Order');
         $this->addLinkedFinder(new FileBeanFinder($adapter), 'File_BeanList', 'File_ID', 'File_ID');
+        $subBlockFinder = new CmsBlockBeanFinder($adapter);
+        $subBlockFinder->order(['CmsBlock_Order']);
+        $this->addLinkedFinder(
+            $subBlockFinder,
+            'CmsBlock_BeanList',
+            'CmsBlock_ID',
+            'CmsBlock_ID_Parent'
+        );
         parent::__construct($loader, new CmsPageBlockBeanFactory());
     }
 
@@ -122,6 +133,16 @@ class CmsPageBlockBeanFinder extends AbstractBeanFinder
     public function setCmsBlockState_Code(string $state)
     {
         $this->getBeanLoader()->filterValue('CmsBlockState_Code', $state);
+        return $this;
+    }
+
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setCmsBlock_ID_Parent(?int $id)
+    {
+        $this->filter(['CmsBlock_ID_Parent' => $id]);
         return $this;
     }
 

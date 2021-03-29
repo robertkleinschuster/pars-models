@@ -16,6 +16,8 @@ class CmsBlockBeanProcessor extends ArticleTranslationBeanProcessor
         if ($saver instanceof DatabaseBeanSaver) {
             $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'CmsBlock_ID', true, null, ['ArticleTranslation', 'CmsBlock']);
             $saver->addColumn('CmsBlock_ID', 'CmsBlock_ID', 'CmsBlock', 'CmsBlock_ID', true);
+            $saver->addField('CmsBlock_ID_Parent')->setTable('CmsBlock');
+            $saver->addField('CmsBlock_Order')->setTable('CmsBlock');
             $saver->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlock', 'CmsBlock_ID');
             $saver->addColumn('CmsBlockState_Code', 'CmsBlockState_Code', 'CmsBlock', 'CmsBlock_ID');
         }
