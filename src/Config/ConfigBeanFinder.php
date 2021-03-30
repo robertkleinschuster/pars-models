@@ -27,7 +27,7 @@ class ConfigBeanFinder extends AbstractBeanFinder
         $loader->addField('ConfigType_Code_Parent')->setTable('ConfigType')->setJoinField('ConfigType_Code');
         $loader->addDefaultFields('Config');
         parent::__construct($loader, new ConfigBeanFactory());
-        $this->getBeanLoader()->order(['Config_Code' => self::ORDER_MODE_ASC]);
+        #$this->getBeanLoader()->order(['Config_Code' => self::ORDER_MODE_ASC]);
     }
 
     /**

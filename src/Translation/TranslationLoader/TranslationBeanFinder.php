@@ -38,11 +38,6 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Translation', 'Translation_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Translation', 'Translation_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Translation', 'Translation_ID');
-        $loader->order([
-            'Translation_Namespace' => self::ORDER_MODE_DESC,
-            'Translation_Code' => self::ORDER_MODE_DESC,
-            'Locale_Code' => self::ORDER_MODE_DESC
-        ]);
         parent::__construct($loader, new TranslationBeanFactory());
     }
 
