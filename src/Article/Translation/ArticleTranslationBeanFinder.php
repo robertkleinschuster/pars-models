@@ -127,7 +127,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
             $language = \Locale::getPrimaryLanguage($localeCode);
             $localeFinder = new LocaleBeanFinder($this->adapter);
             $localeFinder->setLocale_Active(true);
-            $localeFinder->setLanguage($language);
+            $localeFinder->setLocale_Language($language);
             $generator = $localeFinder->getBeanListDecorator();
             foreach ($generator as $localeBean) {
                 $this->setLocale_Code($localeBean->get('Locale_Code'), false);

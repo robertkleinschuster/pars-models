@@ -4,11 +4,13 @@ namespace Pars\Model\Localization\Locale;
 
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Adapter\Exception\InvalidQueryException;
+use Laminas\Db\Sql\Predicate\Predicate;
 use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Core\Config\ParsConfig;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Core\Localization\LocaleInterface;
-use Pars\Model\Config\ConfigBeanFinder;
 
 /**
  * Class LocaleBeanFinder
@@ -35,7 +37,7 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Locale', 'Locale_Code');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Locale', 'Locale_Code');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
-
+        $loader->addField('Locale_Domain')->setTable('Locale');
         $loader->addOrder('Locale_Order');
         parent::__construct($loader, new LocaleBeanFactory());
     }
@@ -68,15 +70,98 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         return $this;
     }
 
-    public function setLanguage(string $language): self
+    public function setLocale_Language(string $language, bool $or = false): self
     {
-        $this->getBeanLoader()->addLike("$language%", 'Locale_Code');
+        $this->getBeanLoader()->addLike("$language%", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
         return $this;
     }
 
-    public function findLocale(?string $localeCode, ?string $language, $default): LocaleInterface
+    /**
+     * @param string $region
+     * @return $this
+     */
+    public function setLocale_Region(string $region, bool $or = false): self
+    {
+        $this->getBeanLoader()->addLike("%$region", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
+        return $this;
+    }
+
+    public function initializeBeanWithAdditionlData(BeanInterface $bean): BeanInterface
+    {
+        $bean->set('Locale_Language', \Locale::getPrimaryLanguage($bean->Locale_Code));
+        $bean->set('Locale_Region', \Locale::getRegion($bean->Locale_Code));
+        return parent::initializeBeanWithAdditionlData($bean);
+    }
+
+
+    /**
+     * @param string $domain
+     * @return $this
+     */
+    public function setLocale_Domain(string $domain): self
+    {
+        $this->filter(['Locale_Domain' => $domain]);
+        return $this;
+    }
+
+    /**
+     * @param string|null $localeCode
+     * @param string|null $language
+     * @param $default
+     * @param string|null $domain
+     * @return LocaleInterface
+     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function findLocale(
+        ?string $localeCode,
+        ?string $language,
+        $default,
+        ?string $domain = null
+    ): LocaleInterface
     {
         try {
+            if ($domain !== null) {
+                $finder = new static($this->adapter);
+                $finder->setLocale_Domain($domain);
+                $finder->setLocale_Active(true);
+                if ($finder->count() > 1) {
+                    $finder = new static($this->adapter);
+                    $finder->setLocale_Domain($domain);
+                    $finder->setLocale_Region(\Locale::getRegion($localeCode));
+                    $finder->setLocale_Active(true);
+                    if ($finder->count() == 1) {
+                        return $finder->getBean();
+                    } else {
+                        $finder = new static($this->adapter);
+                        $finder->setLocale_Domain($domain);
+                        $finder->setLocale_Language(\Locale::getPrimaryLanguage($localeCode));
+                        $finder->setLocale_Active(true);
+                        if ($finder->count() == 1) {
+                            return $finder->getBean();
+                        } else {
+                            $finder = new static($this->adapter);
+                            $finder->setLocale_Domain($domain);
+                            $finder->setLocale_Active(true);
+                            $finder->limit(1, 0);
+                            $domain_Lang = $finder->getBean()->Locale_Language;
+                            $domain_Region = $finder->getBean()->Locale_Region;
+                            $finder = new static($this->adapter);
+                            $finder->setLocale_Language($domain_Lang, true);
+                            $finder->setLocale_Region($domain_Region, true);
+                            $finder->setLocale_Active(true);
+                            $finder->limit(1, 0);
+                            return $finder->getBean();
+                        }
+                    }
+                } else {
+                    $finder->limit(1, 0);
+                    if ($finder->count() == 1) {
+                        return $finder->getBean();
+                    }
+                }
+            }
+
             if ($localeCode !== null) {
                 $finder = new static($this->adapter);
                 $finder->setLocale_Code($localeCode);
@@ -85,28 +170,23 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
                     return $finder->getBean();
                 }
             }
+
             if ($language !== null) {
                 $finder = new static($this->adapter);
-                $finder->setLanguage($language);
+                $finder->setLocale_Language($language);
                 $finder->setLocale_Active(true);
+                $finder->limit(1, 0);
+                return $finder->getBean();
+            }
+
+            $config = new ParsConfig($this->adapter);
+            $configDefault = $config->get('locale.default');
+            if ($configDefault) {
+                $finder = new static($this->adapter);
+                $finder->setLocale_Code($configDefault);
                 $finder->limit(1, 0);
                 if ($finder->count() == 1) {
                     return $finder->getBean();
-                }
-            }
-
-            $config = new ConfigBeanFinder($this->adapter);
-            $config->setConfig_Code('locale.default');
-            if ($config->count()) {
-                $bean = $config->getBean();
-                if (!$bean->empty('Config_Value')) {
-                    $localeCode = $bean->get('Config_Value');
-                    $finder = new static($this->adapter);
-                    $finder->setLocale_Code($localeCode);
-                    $finder->limit(1, 0);
-                    if ($finder->count() == 1) {
-                        return $finder->getBean();
-                    }
                 }
             }
 

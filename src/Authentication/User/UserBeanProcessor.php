@@ -53,7 +53,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'User', 'Person_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'User', 'Person_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User', 'Person_ID');
-
+        $saver->addField('User_LastLogin')->setTable('User');
         parent::__construct($saver);
         $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }

@@ -37,6 +37,7 @@ class LocaleBeanProcessor extends AbstractBeanProcessor implements ValidationHel
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Locale', 'Locale_Code');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Locale', 'Locale_Code');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
+        $saver->addField('Locale_Domain')->setTable('Locale');
         parent::__construct($saver);
         $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new LocaleBeanFinder($adapter), 'Locale_Order'));
         $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));

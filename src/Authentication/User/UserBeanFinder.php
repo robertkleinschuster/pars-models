@@ -55,7 +55,7 @@ class UserBeanFinder extends AbstractBeanFinder implements
         $loader->addColumn('Locale_Code', 'Locale_Code', 'User', 'Person_ID');
         $loader->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code', false, null, [], 'User');
         $loader->addColumn('UserState_Code', 'UserState_Code', 'User', 'Person_ID');
-
+        $loader->addField('User_LastLogin')->setTable('User');
         parent::__construct($loader, new UserBeanFactory());
         $userRoleFinder = new UserRoleBeanFinder($adapter);
         $userRoleFinder->setUserRole_Active(true);
@@ -75,6 +75,12 @@ class UserBeanFinder extends AbstractBeanFinder implements
         if ($this->count() === 1) {
             $bean = $this->getBean(true);
             if (password_verify($password, $bean->get('User_Password'))) {
+                $processor = new UserBeanProcessor($this->adapter);
+                $bean->User_LastLogin = new \DateTime();
+                $list = $this->getBeanFactory()->getEmptyBeanList();
+                $list->push($bean);
+                $processor->setBeanList($list);
+                $processor->save();
                 return $bean;
             } else {
                 $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.invalid'));

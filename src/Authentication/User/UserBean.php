@@ -24,6 +24,7 @@ class UserBean extends AbstractBaseBean implements UserInterface, LocaleAwareInt
     public ?string $Locale_Code = 'de_AT';
     public ?string $Locale_Name = null;
     public ?string $UserState_Code = null;
+    public ?\DateTime $User_LastLogin = null;
     public ?BeanListInterface $UserRole_BeanList = null;
     public ?BeanListInterface $Locale_BeanList = null;
     public ?array $roles = null;
