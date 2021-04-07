@@ -196,7 +196,7 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
             if ($finder->count() == 1) {
                 return $finder->getBean();
             }
-        } catch (InvalidQueryException $exception) {
+        } catch (\Throwable $exception) {
             $bean = $this->getBeanFactory()->getEmptyBean([]);
             $bean->set('Locale_Code', $default);
             return $bean;
