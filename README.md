@@ -1,7 +1,7 @@
 # pars-models
 
-[![Build Status](https://travis-ci.com/pars/pars-models.svg?branch=master)](https://travis-ci.com/pars/pars-models)
-[![Coverage Status](https://coveralls.io/repos/github/pars/pars-models/badge.svg?branch=master)](https://coveralls.io/github/pars/pars-models?branch=master)
+[![Build Status](https://travis-ci.com/pars-framework/pars-models.svg?branch=master)](https://travis-ci.com/pars-framework/pars-models)
+[![Coverage Status](https://coveralls.io/repos/github/pars-framework/pars-models/badge.svg?branch=master)](https://coveralls.io/github/pars-framework/pars-models?branch=master)
 
 This library provides …
 
