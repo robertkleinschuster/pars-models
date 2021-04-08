@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Article\Data;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 /**
  * Class ArticleDataBeanFactory

@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Cms\Block\Type;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 
 class CmsBlockTypeBean extends AbstractBaseBean
 {

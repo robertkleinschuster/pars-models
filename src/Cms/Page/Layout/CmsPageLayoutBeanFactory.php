@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Cms\Page\Layout;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 
 class CmsPageLayoutBeanFactory extends AbstractBeanFactory

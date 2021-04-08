@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Article\Data;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
+use Pars\Bean\Type\Base\AbstractBaseBeanList;
 
 /**
  * Class ArticleDataBeanList

@@ -3,10 +3,10 @@
 namespace Pars\Model\Cms\PageBlock;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
-use Niceshops\Bean\Processor\OrderMetaFieldHandlerInterface;
-use Niceshops\Bean\Type\Base\BeanInterface;
-use Niceshops\Bean\Validator\FieldNotEmptyBeanValidator;
+use Pars\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
+use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Validator\FieldNotEmptyBeanValidator;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**

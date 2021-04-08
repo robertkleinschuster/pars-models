@@ -5,8 +5,8 @@ namespace Pars\Model\Translation\TranslationLoader;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Authorization\Permission;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 
 class PermissionBean extends AbstractBaseBean
 {

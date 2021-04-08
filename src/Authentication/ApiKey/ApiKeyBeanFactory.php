@@ -4,7 +4,7 @@
 namespace Pars\Model\Authentication\ApiKey;
 
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 class ApiKeyBeanFactory extends AbstractBeanFactory
 {

@@ -3,8 +3,8 @@
 namespace Pars\Model\Authentication\User;
 
 use Mezzio\Authentication\UserInterface;
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
-use Niceshops\Bean\Type\Base\BeanListInterface;
+use Pars\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\BeanListInterface;
 use Pars\Core\Localization\LocaleAwareInterface;
 use Pars\Core\Localization\LocaleInterface;
 
@@ -87,7 +87,7 @@ class UserBean extends AbstractBaseBean implements UserInterface, LocaleAwareInt
      * @param string $name
      * @param null $default
      * @return mixed|null
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     public function getDetail(string $name, $default = null)
     {

@@ -3,7 +3,7 @@
 namespace Pars\Model\Authorization\RolePermission;
 
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 
 /**
  * Class RolePermissionBean

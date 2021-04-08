@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Cms\PageBlock;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 /**
  * Class CmsPageBlockBeanFactory

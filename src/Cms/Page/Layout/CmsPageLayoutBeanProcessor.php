@@ -3,8 +3,8 @@
 namespace Pars\Model\Cms\Page\Layout;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Authorization\Permission;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 class PermissionBeanFactory extends AbstractBeanFactory
 {

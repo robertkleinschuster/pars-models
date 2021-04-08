@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Cms\Post\State;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
+use Pars\Bean\Type\Base\AbstractBaseBeanList;
 
 /**
  * Class CmsPostStateBeanList

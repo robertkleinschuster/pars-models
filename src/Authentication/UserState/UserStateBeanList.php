@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Authentication\UserState;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
+use Pars\Bean\Type\Base\AbstractBaseBeanList;
 
 class UserStateBeanList extends AbstractBaseBeanList
 {

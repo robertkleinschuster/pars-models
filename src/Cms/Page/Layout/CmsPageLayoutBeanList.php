@@ -3,7 +3,7 @@
 namespace Pars\Model\Cms\Page\Layout;
 
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
+use Pars\Bean\Type\Base\AbstractBaseBeanList;
 
 /**
  * Class CmsPageLayoutBeanList

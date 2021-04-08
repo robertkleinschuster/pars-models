@@ -3,7 +3,7 @@
 namespace Pars\Model\Cms\Block\State;
 
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 
 /**
  * Class CmsBlockStateBean

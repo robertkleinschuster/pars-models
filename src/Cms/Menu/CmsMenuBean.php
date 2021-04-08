@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Cms\Menu;
 
-use Niceshops\Bean\Type\Base\BeanListInterface;
+use Pars\Bean\Type\Base\BeanListInterface;
 use Pars\Model\Article\Translation\ArticleTranslationBean;
 
 /**

@@ -3,9 +3,9 @@
 namespace Pars\Model\Config;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
-use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Processor\TimestampMetaFieldHandler;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**

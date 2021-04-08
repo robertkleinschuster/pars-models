@@ -5,7 +5,7 @@ namespace Pars\Model\Import;
 
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**

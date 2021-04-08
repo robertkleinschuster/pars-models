@@ -3,7 +3,7 @@
 namespace Pars\Model\Cms\Block;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
 

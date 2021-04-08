@@ -3,7 +3,7 @@
 namespace Pars\Model\Config\Type;
 
 use Laminas\Db\Adapter\AdapterInterface;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**

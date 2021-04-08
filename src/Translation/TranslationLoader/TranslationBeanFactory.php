@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Translation\TranslationLoader;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 /**
  * Class TranslationBeanFactory

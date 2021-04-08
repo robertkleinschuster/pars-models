@@ -8,8 +8,8 @@ use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
@@ -51,7 +51,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
 
     /**
      * @param BeanInterface $bean
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     protected function beforeSave(BeanInterface $bean)
     {
@@ -119,7 +119,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     /**
      * @param BeanInterface $bean
      * @return string
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     protected function getDirectoryPath(BeanInterface $bean)
     {
@@ -142,7 +142,7 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     /**
      * @param BeanInterface $bean
      * @return string
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      */
     protected function getFilePath(BeanInterface $bean)
     {

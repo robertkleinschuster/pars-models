@@ -5,8 +5,8 @@ namespace Pars\Model\Localization\Locale;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Adapter\Exception\InvalidQueryException;
 use Laminas\Db\Sql\Predicate\Predicate;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Config\ParsConfig;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleFinderInterface;
@@ -110,7 +110,7 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
      * @param $default
      * @param string|null $domain
      * @return LocaleInterface
-     * @throws \Niceshops\Bean\Type\Base\BeanException
+     * @throws \Pars\Bean\Type\Base\BeanException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function findLocale(

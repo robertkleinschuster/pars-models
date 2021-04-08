@@ -5,7 +5,7 @@ namespace Pars\Model\Import\Type;
 
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Import\ImportBean;
 use Pars\Model\Import\ImportBeanList;

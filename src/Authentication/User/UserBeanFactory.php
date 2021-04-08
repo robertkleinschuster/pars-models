@@ -3,7 +3,7 @@
 namespace Pars\Model\Authentication\User;
 
 use Mezzio\Authentication\UserInterface;
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 use Psr\Container\ContainerInterface;
 
 /**

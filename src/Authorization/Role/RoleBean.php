@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Authorization\Role;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
-use Niceshops\Bean\Type\Base\BeanListInterface;
+use Pars\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\BeanListInterface;
 
 /**
  * Class RoleBean

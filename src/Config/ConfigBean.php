@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Config;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 
 /**
  * Class ConfigBean

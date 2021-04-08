@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Cms\Block;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 
 /**

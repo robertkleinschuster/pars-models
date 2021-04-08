@@ -2,7 +2,7 @@
 
 namespace Pars\Model\File\Directory;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 /**
  * Class FileDirectoryBeanFactory

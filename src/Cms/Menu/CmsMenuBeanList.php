@@ -3,7 +3,7 @@
 namespace Pars\Model\Cms\Menu;
 
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
+use Pars\Bean\Type\Base\AbstractBaseBeanList;
 
 /**
  * Class CmsMenuBeanList

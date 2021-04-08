@@ -5,7 +5,7 @@ namespace Pars\Model\Cms\PageBlock;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Cms\Block\CmsBlockBeanFinder;
 use Pars\Model\File\FileBeanFinder;

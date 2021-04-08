@@ -3,9 +3,9 @@
 namespace Pars\Model\Article;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Factory\BeanFactoryInterface;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
-use Niceshops\Bean\Loader\BeanLoaderInterface;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Loader\BeanLoaderInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Data\ArticleDataBeanFinder;
 

@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Config\Type;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 /**
  * Class ConfigTypeBeanFactory

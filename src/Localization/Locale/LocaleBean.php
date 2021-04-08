@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Localization\Locale;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 use Pars\Core\Localization\LocaleInterface;
 
 /**

@@ -4,7 +4,7 @@
 namespace Pars\Model\Import;
 
 
-use Niceshops\Bean\Type\Base\AbstractBaseBeanList;
+use Pars\Bean\Type\Base\AbstractBaseBeanList;
 
 class ImportBeanList extends AbstractBaseBeanList
 {

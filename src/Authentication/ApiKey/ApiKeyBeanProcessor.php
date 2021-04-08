@@ -5,8 +5,8 @@ namespace Pars\Model\Authentication\ApiKey;
 
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Processor\AbstractBeanProcessor;
-use Niceshops\Bean\Processor\TimestampMetaFieldHandler;
+use Pars\Bean\Processor\AbstractBeanProcessor;
+use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 class ApiKeyBeanProcessor extends AbstractBeanProcessor

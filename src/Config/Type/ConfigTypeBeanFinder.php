@@ -3,7 +3,7 @@
 namespace Pars\Model\Config\Type;
 
 use Laminas\Db\Adapter\AdapterInterface;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**

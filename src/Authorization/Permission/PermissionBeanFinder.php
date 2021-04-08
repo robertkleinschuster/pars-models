@@ -3,7 +3,7 @@
 namespace Pars\Model\Authorization\Permission;
 
 use Laminas\Db\Adapter\Adapter;
-use Niceshops\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**

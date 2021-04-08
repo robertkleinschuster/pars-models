@@ -2,7 +2,7 @@
 
 namespace Pars\Model\Authorization\Role;
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 /**
  * Class RoleBeanFactory

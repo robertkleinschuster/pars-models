@@ -2,7 +2,7 @@
 
 namespace Pars\Model\File;
 
-use Niceshops\Bean\Type\Base\AbstractBaseBean;
+use Pars\Bean\Type\Base\AbstractBaseBean;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**

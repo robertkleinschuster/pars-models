@@ -4,7 +4,7 @@
 namespace Pars\Model\Import\Type;
 
 
-use Niceshops\Bean\Factory\AbstractBeanFactory;
+use Pars\Bean\Factory\AbstractBeanFactory;
 
 class ImportTypeBeanFactory extends AbstractBeanFactory
 {
