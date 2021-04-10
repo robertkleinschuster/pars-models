@@ -17,9 +17,9 @@ use Pars\Model\Cms\Post\CmsPostBeanFinder;
  */
 class CmsPageBeanFinder extends ArticleTranslationBeanFinder
 {
-    public function __construct(Adapter $adapter)
+    public function __construct(Adapter $adapter, bool $initLinked = true)
     {
-        parent::__construct($adapter, new CmsPageBeanFactory());
+        parent::__construct($adapter, new CmsPageBeanFactory(), $initLinked);
         $loader = $this->getBeanLoader();
         if ($loader instanceof DatabaseBeanLoader) {
             $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage', 'CmsPage_ID', true);
@@ -31,14 +31,16 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
             $loader->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
             $loader->addColumn('Article_ID', 'Article_ID', 'CmsPage', 'CmsPage_ID', false, null, ['Article', 'ArticleTranslation']);
         }
-        $pageBlockFinder = new CmsPageBlockBeanFinder($adapter);
-        $pageBlockFinder->setArticleTranslation_Active(true);
-        $pageBlockFinder->setCmsBlockState_Code('active');
-        $this->addLinkedFinder($pageBlockFinder, 'CmsBlock_BeanList', 'CmsPage_ID', 'CmsPage_ID');
-        $postFinder = new CmsPostBeanFinder($adapter);
-        $postFinder->setArticleTranslation_Active(true);
-        $postFinder->setCmsPostState_Code('active');
-        $this->addLinkedFinder($postFinder, 'CmsPost_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+        if ($initLinked) {
+            $pageBlockFinder = new CmsPageBlockBeanFinder($adapter);
+            $pageBlockFinder->setArticleTranslation_Active(true);
+            $pageBlockFinder->setCmsBlockState_Code('active');
+            $this->addLinkedFinder($pageBlockFinder, 'CmsBlock_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+            $postFinder = new CmsPostBeanFinder($adapter);
+            $postFinder->setArticleTranslation_Active(true);
+            $postFinder->setCmsPostState_Code('active');
+            $this->addLinkedFinder($postFinder, 'CmsPost_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+        }
     }
 
     public function initPublished(string $timezone = null)

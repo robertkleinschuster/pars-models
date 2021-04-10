@@ -3,10 +3,10 @@
 namespace Pars\Model\Localization\Locale;
 
 use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Adapter\Exception\InvalidQueryException;
 use Laminas\Db\Sql\Predicate\Predicate;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Cache\ParsCache;
 use Pars\Core\Config\ParsConfig;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleFinderInterface;
@@ -113,7 +113,7 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
      * @throws \Pars\Bean\Type\Base\BeanException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function findLocale(
+    public function findLocaleFromDB(
         ?string $localeCode,
         ?string $language,
         $default,
@@ -206,5 +206,35 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         return $bean;
     }
 
+    public function findLocale(
+        ?string $localeCode,
+        ?string $language,
+        $default,
+        ?string $domain = null
+    ): LocaleInterface {
+        $cache = new ParsCache(__METHOD__);
+        $cacheCode = $localeCode . $language . $default . $domain;
+        if (!$cache->has($cacheCode)) {
+            $cache->set($cacheCode, $this->findLocaleFromDB($localeCode, $language, $default, $domain));
+        }
+        return $cache->get($cacheCode);
+    }
+
+    /**
+     * @param $language
+     * @return mixed|\Pars\Bean\Type\Base\AbstractBaseBeanList
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function getLocaleListByLanguage($language)
+    {
+        $cache = new ParsCache(__METHOD__);
+        if (!$cache->has($language)) {
+            $localeFinder = new LocaleBeanFinder($this->adapter);
+            $localeFinder->setLocale_Active(true);
+            $localeFinder->setLocale_Language($language);
+            $cache->set($language, $localeFinder->getBeanList(true)->toArray(true));
+        }
+        return LocaleBeanList::createFromArray($cache->get($language));
+    }
 
 }

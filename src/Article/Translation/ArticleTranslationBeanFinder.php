@@ -6,10 +6,12 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
 use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Core\Cache\ParsCache;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\ArticleBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
+use Pars\Model\Localization\Locale\LocaleBeanList;
 
 /**
  * Class ArticleTranslationBeanFinder
@@ -28,7 +30,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
      * @param Adapter $adapter
      * @param BeanFactoryInterface|null $beanFactory
      */
-    public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null)
+    public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
     {
         $this->adapter = $adapter;
         parent::__construct($adapter, $beanFactory ?? new ArticleTranslationBeanFactory());
@@ -49,7 +51,9 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
             $loader->addColumn('ArticleTranslation_Text', 'ArticleTranslation_Text', 'ArticleTranslation', 'Article_ID');
             $loader->addColumn('ArticleTranslation_Footer', 'ArticleTranslation_Footer', 'ArticleTranslation', 'Article_ID');
             $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
-            $this->addLinkedFinder(new FileBeanFinder($adapter), 'File_BeanList', 'File_ID', 'File_ID');
+            if ($initLinked) {
+                $this->addLinkedFinder(new FileBeanFinder($adapter), 'File_BeanList', 'File_ID', 'File_ID');
+            }
         }
     }
 
@@ -125,11 +129,8 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
         if ($count == 0) {
             // Find similar locales
             $language = \Locale::getPrimaryLanguage($localeCode);
-            $localeFinder = new LocaleBeanFinder($this->adapter);
-            $localeFinder->setLocale_Active(true);
-            $localeFinder->setLocale_Language($language);
-            $generator = $localeFinder->getBeanListDecorator();
-            foreach ($generator as $localeBean) {
+            $list = $this->getLocaleListByLanguage($language);
+            foreach ($list as $localeBean) {
                 $this->setLocale_Code($localeBean->get('Locale_Code'), false);
                 $count = $this->count();
                 if ($count > 0) {
@@ -141,5 +142,16 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
         } else {
             return $count;
         }
+    }
+
+    /**
+     * @param $language
+     * @return mixed|\Pars\Bean\Type\Base\AbstractBaseBeanList
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function getLocaleListByLanguage($language)
+    {
+        $localeFinder = new LocaleBeanFinder($this->adapter);
+        return $localeFinder->getLocaleListByLanguage($language);
     }
 }
