@@ -117,7 +117,8 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         ?string $localeCode,
         ?string $language,
         $default,
-        ?string $domain = null
+        ?string $domain = null,
+        ?string $configDefault = null
     ): LocaleInterface
     {
         try {
@@ -179,8 +180,6 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
                 return $finder->getBean();
             }
 
-            $config = new ParsConfig($this->adapter);
-            $configDefault = $config->get('locale.default');
             if ($configDefault) {
                 $finder = new static($this->adapter);
                 $finder->setLocale_Code($configDefault);
@@ -210,7 +209,8 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         ?string $localeCode,
         ?string $language,
         $default,
-        ?string $domain = null
+        ?string $domain = null,
+        ?string $configDefault = null
     ): LocaleInterface {
         $cache = new ParsCache(__METHOD__);
         $cacheCode = $localeCode . $language . $default . $domain;
@@ -219,6 +219,17 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         }
         return $cache->get($cacheCode);
     }
+
+    /**
+     * @return LocaleBeanList
+     */
+    public function getActiveLocaleCodeList(): array
+    {
+        $finder = new static($this->adapter);
+        $finder->setLocale_Active(true);
+        return $finder->getBeanList()->column('Locale_Code');
+    }
+
 
     /**
      * @param $language

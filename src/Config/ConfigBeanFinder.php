@@ -4,7 +4,9 @@ namespace Pars\Model\Config;
 
 use Laminas\Db\Adapter\Adapter;
 use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Config\ConfigFinderInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Model\Config\Type\ConfigTypeBeanFinder;
 
 /**
  * Class ConfigBeanFinder
@@ -13,10 +15,13 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method ConfigBeanList getBeanList(bool $fetchAllData = false)
  * @method ConfigBeanFactory getBeanFactory()
  */
-class ConfigBeanFinder extends AbstractBeanFinder
+class ConfigBeanFinder extends AbstractBeanFinder implements ConfigFinderInterface
 {
+    protected $adapter;
+
     public function __construct(Adapter $adapter)
     {
+        $this->adapter = $adapter;
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Config_Code', 'Config_Code', 'Config', 'Config_Code', true);
         $loader->addColumn('Config_Value', 'Config_Value', 'Config', 'Config_Code');
@@ -54,5 +59,31 @@ class ConfigBeanFinder extends AbstractBeanFinder
         }
         return $this;
     }
+
+    /**
+     * @return ConfigBeanList
+     */
+    public function getConfigBeanList()
+    {
+        try {
+            return $this->getBeanList();
+        } catch (\Throwable $exception) {
+            return $this->getBeanFactory()->getEmptyBeanList();
+        }
+    }
+
+    /**
+     * @return Type\ConfigTypeBeanList
+     */
+    public function getConfigTypeBeanList()
+    {
+        $finder = new ConfigTypeBeanFinder($this->adapter);
+        try {
+            return $finder->getBeanList();
+        } catch (\Throwable $exception) {
+            return $finder->getBeanFactory()->getEmptyBeanList();
+        }
+    }
+
 
 }

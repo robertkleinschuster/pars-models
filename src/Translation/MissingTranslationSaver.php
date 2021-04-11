@@ -1,0 +1,48 @@
+<?php
+
+
+namespace Pars\Model\Translation;
+
+
+use Laminas\Db\Adapter\AdapterAwareInterface;
+use Laminas\Db\Adapter\AdapterAwareTrait;
+use Laminas\Db\Adapter\AdapterInterface;
+use Pars\Core\Translation\MissingTranslationSaverInterface;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
+
+class MissingTranslationSaver implements MissingTranslationSaverInterface, AdapterAwareInterface
+{
+    use AdapterAwareTrait;
+
+
+    /**
+     * MissingTranslationSaver constructor.
+     */
+    public function __construct(AdapterInterface $adapter)
+    {
+        $this->setDbAdapter($adapter);
+    }
+
+    public function saveMissingTranslation(string $locale, string $code, string $namespace)
+    {
+        $translationFinder = new TranslationBeanFinder($this->adapter);
+        $translationFinder->setLocale_Code($locale);
+        $translationFinder->setTranslation_Code($code);
+        $translationFinder->setTranslation_Namespace($namespace);
+        if ($translationFinder->count() == 0) {
+            $bean = $translationFinder->getBeanFactory()->getEmptyBean([]);
+            $bean->set('Translation_Code', $code);
+            $bean->set('Locale_Code',$locale);
+            $bean->set('Translation_Namespace', $namespace);
+            $bean->set('Translation_Text', $code);
+            $beanList = $translationFinder->getBeanFactory()->getEmptyBeanList();
+            $beanList->push($bean);
+            $translationProcessor = new TranslationBeanProcessor($this->adapter);
+            $translationProcessor->setBeanList($beanList);
+            $translationProcessor->save();
+        }
+    }
+
+
+}
