@@ -7,6 +7,7 @@ use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Core\Localization\LocaleAwareFinderInterface;
 use Pars\Model\Cms\Block\CmsBlockBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 
@@ -16,7 +17,7 @@ use Pars\Model\File\FileBeanFinder;
  * @method CmsPageBlockBean getBean(bool $fetchAllData = false)
  * @method CmsPageBlockBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPageBlockBeanFinder extends AbstractBeanFinder
+class CmsPageBlockBeanFinder extends AbstractBeanFinder implements LocaleAwareFinderInterface
 {
     public function __construct(Adapter $adapter)
     {
