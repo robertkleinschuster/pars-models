@@ -27,9 +27,9 @@ class MissingTranslationSaver implements MissingTranslationSaverInterface, Adapt
     public function saveMissingTranslation(string $locale, string $code, string $namespace)
     {
         $translationFinder = new TranslationBeanFinder($this->adapter);
-        $translationFinder->setLocale_Code($locale);
-        $translationFinder->setTranslation_Code($code);
-        $translationFinder->setTranslation_Namespace($namespace);
+        $translationFinder->filterLocale_Code($locale);
+        $translationFinder->filterTranslation_Code($code);
+        $translationFinder->filterTranslation_Namespace($namespace);
         if ($translationFinder->count() == 0) {
             $bean = $translationFinder->getBeanFactory()->getEmptyBean([]);
             $bean->set('Translation_Code', $code);

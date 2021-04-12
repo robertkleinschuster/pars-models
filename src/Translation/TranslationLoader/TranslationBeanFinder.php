@@ -8,6 +8,7 @@ use Laminas\I18n\Translator\TextDomain;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Core\Localization\LocaleAwareFinderInterface;
 
 /**
  * Class TranslationBeanFinder
@@ -16,7 +17,7 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method TranslationBeanList getBeanList(bool $fetchAllData = false)
  * @method TranslationBeanFactory getBeanFactory()
  */
-class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderInterface
+class TranslationBeanFinder extends AbstractBeanFinder implements LocaleAwareFinderInterface, RemoteLoaderInterface
 {
 
     public bool $escapePlaceholder = false;
@@ -80,8 +81,8 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
     {
         $data = [];
         try {
-            $this->setLocale_Code($locale);
-            $this->setTranslation_Namespace($textDomain);
+            $this->filterLocale_Code($locale);
+            $this->filterTranslation_Namespace($textDomain);
             foreach ($this->getBeanListDecorator() as $bean) {
                 $data[$bean->get('Translation_Code')] = $bean->get('Translation_Text');
             }
@@ -95,7 +96,7 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
      * @param bool $exclude
      * @return $this
      */
-    public function setTranslation_ID(int $translation_Id, bool $exclude = false): self
+    public function filterTranslation_ID(int $translation_Id, bool $exclude = false): self
     {
         if ($exclude) {
             $this->getBeanLoader()->excludeValue('Translation_ID', $translation_Id);
@@ -111,13 +112,23 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
      * @param bool $exclude
      * @return $this
      */
-    public function setTranslation_Code(string $translation_Code, bool $exclude = false): self
+    public function filterTranslation_Code(string $translation_Code, bool $exclude = false): self
     {
         if ($exclude) {
-            $this->getBeanLoader()->excludeValue('Translation_Code', $translation_Code);
+            $this->excludeTranslation_Code($translation_Code);
         } else {
-            $this->getBeanLoader()->filterValue('Translation_Code', $translation_Code);
+            $this->filterValue('Translation_Code', $translation_Code);
         }
+        return $this;
+    }
+
+    /**
+     * @param string $translation_Code
+     * @return $this
+     */
+    public function excludeTranslation_Code(string $translation_Code): self
+    {
+        $this->excludeValue('Translation_Code', $translation_Code);
         return $this;
     }
 
@@ -125,7 +136,7 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
      * @param string $locale
      * @return $this
      */
-    public function setLocale_Code(string $locale): self
+    public function filterLocale_Code(string $locale): self
     {
         $this->getBeanLoader()->filterValue('Locale_Code', $locale);
         return $this;
@@ -135,7 +146,7 @@ class TranslationBeanFinder extends AbstractBeanFinder implements RemoteLoaderIn
      * @param string $namespace
      * @return $this
      */
-    public function setTranslation_Namespace(string $namespace): self
+    public function filterTranslation_Namespace(string $namespace): self
     {
         $this->getBeanLoader()->filterValue('Translation_Namespace', $namespace);
         return $this;

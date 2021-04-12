@@ -68,11 +68,11 @@ class TranslationBeanProcessor extends AbstractBeanProcessor implements Validati
         }
         if (!$bean->empty('Locale_Code') && !$bean->empty('Translation_Code') && !$bean->empty('Translation_Namespace')) {
             $finder = new TranslationBeanFinder($this->adapter);
-            $finder->setLocale_Code($bean->get('Locale_Code'));
-            $finder->setTranslation_Code($bean->get('Translation_Code'));
-            $finder->setTranslation_Namespace($bean->get('Translation_Namespace'));
+            $finder->filterLocale_Code($bean->get('Locale_Code'));
+            $finder->filterTranslation_Code($bean->get('Translation_Code'));
+            $finder->filterTranslation_Namespace($bean->get('Translation_Namespace'));
             if (!$bean->empty('Translation_ID')) {
-                $finder->setTranslation_ID($bean->get('Translation_ID'), true);
+                $finder->filterTranslation_ID($bean->get('Translation_ID'), true);
             }
             if ($finder->count()) {
                 $this->getValidationHelper()->addError('Translation_Code', $this->translate('translation.code.unique'));

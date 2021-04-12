@@ -2,92 +2,116 @@
 
 namespace Pars\Model\Localization\Locale;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
-use Pars\Bean\Processor\TimestampMetaFieldHandler;
-use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Validator\FieldNotEmptyBeanValidator;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
+
 
 /**
  * Class LocaleBeanProcessor
  * @package Pars\Model\Localization\Locale
  */
-class LocaleBeanProcessor extends AbstractBeanProcessor implements ValidationHelperAwareInterface, TranslatorAwareInterface
+class LocaleBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
-
-    private $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
-        $saver->addColumn('Locale_Code', 'Locale_Code', 'Locale', 'Locale_Code', true);
-        $saver->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code');
-        $saver->addColumn('Locale_UrlCode', 'Locale_UrlCode', 'Locale', 'Locale_Code');
-        $saver->addColumn('Locale_Active', 'Locale_Active', 'Locale', 'Locale_Code');
-        $saver->addColumn('Locale_Order', 'Locale_Order', 'Locale', 'Locale_Code');
-        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'Locale', 'Locale_Code');
-        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Locale', 'Locale_Code');
-        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Locale', 'Locale_Code');
-        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
-        $saver->addField('Locale_Domain')->setTable('Locale');
-        parent::__construct($saver);
-        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new LocaleBeanFinder($adapter), 'Locale_Order'));
-        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
+        $saver->addField('Locale.Locale_Code')->setKey(true);
+        $saver->addField('Locale.Locale_UrlCode');
+        $saver->addField('Locale.Locale_Domain');
+        $saver->addField('Locale.Locale_Name');
+        $saver->addField('Locale.Locale_Active');
+        $saver->addField('Locale.Locale_Order');
+        $saver->addDefaultFields('Locale');
     }
 
-
-    protected function translate(string $code)
+    protected function initMetaFieldHandler()
     {
-        if ($this->hasTranslator()) {
-            return $this->getTranslator()->translate($code, 'validation');
-        } else {
-            return $code;
-        }
+        parent::initMetaFieldHandler();
+        $this->addMetaFieldHandler(
+            new OrderMetaFieldHandlerInterface(
+                new LocaleBeanFinder($this->getDatabaseAdapter()),
+                'Locale_Order'
+            )
+        );
+    }
+
+    protected function initValidator()
+    {
+        $this->addDeleteValidator(new FieldNotEmptyBeanValidator('Locale_Code'));
+        $this->addSaveValidatorFunction('validateLocale_Code');
+        $this->addSaveValidatorFunction('validateLocale_UrlCode');
+        $this->addSaveValidatorFunction('validateLocale_Name');
     }
 
     /**
-     * @inheritDoc
+     * @param LocaleBean $bean
+     * @return bool
+     * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
      */
-    protected function validateForSave(BeanInterface $bean): bool
+    protected function validateLocale_Code(LocaleBean $bean): bool
     {
+        $result = false;
         if ($bean->empty('Locale_Code')) {
-            $this->getValidationHelper()->addError('Locale_Code', $this->translate('locale.code.empty'));
+            $this->getValidationHelper()
+                ->addError('Locale_Code', $this->translateValidation('locale.code.empty'));
         } elseif (!$bean->empty('Locale_Code_New')) {
-            $finder = new LocaleBeanFinder($this->adapter);
-            $finder->setLocale_Code($bean->get('Locale_Code'));
+            $finder = new LocaleBeanFinder($this->getDatabaseAdapter());
+            $finder->filterLocale_Code($bean->get('Locale_Code'));
             if ($finder->count()) {
-                $this->getValidationHelper()->addError('Locale_Code', $this->translate('locale.code.unique'));
+                $this->getValidationHelper()
+                    ->addError('Locale_Code', $this->translateValidation('locale.code.unique'));
+            } else {
+                $result = true;
             }
-        }
-        if ($bean->empty('Locale_Name')) {
-            $this->getValidationHelper()->addError('Locale_Name', $this->translate('locale.name.empty'));
-        }
-        if ($bean->empty('Locale_UrlCode')) {
-            $this->getValidationHelper()->addError('Locale_UrlCode', $this->translate('locale.urlcode.empty'));
         } else {
-            $finder = new LocaleBeanFinder($this->adapter);
-            $finder->setLocale_Code($bean->get('Locale_Code'), true);
-            $finder->setLocale_UrlCode($bean->get('Locale_UrlCode'));
-            if ($finder->count()) {
-                $this->getValidationHelper()->addError('Locale_UrlCode', $this->translate('locale.urlcode.unique'));
-            }
+            $result = true;
         }
-        return !$this->getValidationHelper()->hasError();
+        return $result;
     }
 
     /**
-     * @inheritDoc
+     * @param LocaleBean $bean
+     * @return bool
+     * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
      */
-    protected function validateForDelete(BeanInterface $bean): bool
+    protected function validateLocale_UrlCode(LocaleBean $bean): bool
     {
-        return !$bean->empty('Locale_Code');
+        $result = false;
+        if ($bean->empty('Locale_UrlCode')) {
+            $this->getValidationHelper()
+                ->addError('Locale_UrlCode', $this->translateValidation('locale.urlcode.empty'));
+        } else {
+            $finder = new LocaleBeanFinder($this->getDatabaseAdapter());
+            $finder->filterLocale_Code($bean->get('Locale_Code'), true);
+            $finder->filterLocale_UrlCode($bean->get('Locale_UrlCode'));
+            if ($finder->count()) {
+                $this->getValidationHelper()
+                    ->addError('Locale_UrlCode', $this->translateValidation('locale.urlcode.unique'));
+            } else {
+                $result = true;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param LocaleBean $bean
+     * @return bool
+     * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
+     */
+    protected function validateLocale_Name(LocaleBean $bean): bool
+    {
+        $result = false;
+        if ($bean->empty('Locale_Name')) {
+            $this->getValidationHelper()
+                ->addError('Locale_Name', $this->translateValidation('locale.name.empty'));
+        } else {
+            $result = true;
+        }
+        return $result;
     }
 }

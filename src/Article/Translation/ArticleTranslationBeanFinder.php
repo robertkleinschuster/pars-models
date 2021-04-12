@@ -8,6 +8,7 @@ use Laminas\Db\Sql\Predicate\Expression;
 use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Cache\ParsCache;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Core\Localization\LocaleAwareFinderInterface;
 use Pars\Model\Article\ArticleBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
@@ -20,7 +21,7 @@ use Pars\Model\Localization\Locale\LocaleBeanList;
  * @method ArticleTranslationBean getBean(bool $fetchAllData = false)
  * @method ArticleTranslationBeanList getBeanList(bool $fetchAllData = false)
  */
-class ArticleTranslationBeanFinder extends ArticleBeanFinder
+class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAwareFinderInterface
 {
 
     protected $adapter;
@@ -62,7 +63,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
      * @param bool $leftJoin
      * @return $this
      */
-    public function setLocale_Code(string $locale, bool $leftJoin = true): self
+    public function filterLocale_Code(string $locale, bool $leftJoin = true): self
     {
         if ($leftJoin) {
             $expression = new Expression("Article.Article_ID = ArticleTranslation.Article_ID AND ArticleTranslation.Locale_Code = ?", $locale);
@@ -71,8 +72,9 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
             $this->getBeanLoader()->filterValue('Locale_Code', $locale);
         }
         foreach ($this->getLinkedFinderList() as $finderLink) {
-            if (method_exists($finderLink->getBeanFinder(), 'setLocale_Code')) {
-                $finderLink->getBeanFinder()->setLocale_Code($locale, $leftJoin);
+            $linkedFinder = $finderLink->getBeanFinder();
+            if ($linkedFinder instanceof LocaleAwareFinderInterface) {
+                $linkedFinder->filterLocale_Code($locale, $leftJoin);
             }
         }
         return $this;
@@ -124,20 +126,20 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
      */
     public function findByLocaleWithFallback(string $localeCode, string $fallback)
     {
-        $this->setLocale_Code($localeCode, false);
+        $this->filterLocale_Code($localeCode, false);
         $count = $this->count();
         if ($count == 0) {
             // Find similar locales
             $language = \Locale::getPrimaryLanguage($localeCode);
-            $list = $this->getLocaleListByLanguage($language);
+            $list = $this->findLocaleListByLanguage($language);
             foreach ($list as $localeBean) {
-                $this->setLocale_Code($localeBean->get('Locale_Code'), false);
+                $this->filterLocale_Code($localeBean->get('Locale_Code'), false);
                 $count = $this->count();
                 if ($count > 0) {
                     return $count;
                 }
             }
-            $this->setLocale_Code($fallback, false);
+            $this->filterLocale_Code($fallback, false);
             return $this->count();
         } else {
             return $count;
@@ -149,9 +151,9 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder
      * @return mixed|\Pars\Bean\Type\Base\AbstractBaseBeanList
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function getLocaleListByLanguage($language)
+    public function findLocaleListByLanguage($language)
     {
         $localeFinder = new LocaleBeanFinder($this->adapter);
-        return $localeFinder->getLocaleListByLanguage($language);
+        return $localeFinder->findLocaleListByLanguage($language);
     }
 }

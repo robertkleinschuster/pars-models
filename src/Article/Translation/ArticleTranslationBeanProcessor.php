@@ -73,7 +73,7 @@ class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
             if (!$bean->empty('Article_ID')) {
                 $articleTranslationFinder->setArticle_ID($bean->get('Article_ID'), true);
             }
-            $articleTranslationFinder->setLocale_Code($bean->get('Locale_Code'));
+            $articleTranslationFinder->filterLocale_Code($bean->get('Locale_Code'));
             $articleTranslationFinder->setArticleTranslation_Code($bean->get('ArticleTranslation_Code'));
             if ($articleTranslationFinder->count() > 0) {
                 $this->getValidationHelper()->addError('ArticleTranslation_Code', $this->translate('articletranslation.code.unique'));

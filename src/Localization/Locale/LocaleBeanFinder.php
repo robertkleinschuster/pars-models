@@ -4,11 +4,15 @@ namespace Pars\Model\Localization\Locale;
 
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Predicate\Predicate;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Cache\ParsCache;
 use Pars\Core\Config\ParsConfig;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Core\Database\ParsDatabaseAdapter;
+use Pars\Core\Localization\LocaleAwareFinderInterface;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Core\Localization\LocaleInterface;
 
@@ -19,71 +23,28 @@ use Pars\Core\Localization\LocaleInterface;
  * @method LocaleBeanList getBeanList(bool $fetchAllData = false)
  *
  */
-class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterface
+class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinderInterface, LocaleAwareFinderInterface
 {
 
-    protected $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $this->adapter = $adapter;
-        $loader = new DatabaseBeanLoader($adapter);
-        $loader->addColumn('Locale_Code', 'Locale_Code', 'Locale', 'Locale_Code', true);
-        $loader->addColumn('Locale_UrlCode', 'Locale_UrlCode', 'Locale', 'Locale_Code');
-        $loader->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code');
-        $loader->addColumn('Locale_Active', 'Locale_Active', 'Locale', 'Locale_Code');
-        $loader->addColumn('Locale_Order', 'Locale_Order', 'Locale', 'Locale_Code');
-        $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Locale', 'Locale_Code');
-        $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Locale', 'Locale_Code');
-        $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Locale', 'Locale_Code');
-        $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Locale', 'Locale_Code');
-        $loader->addField('Locale_Domain')->setTable('Locale');
-        $loader->addOrder('Locale_Order');
-        parent::__construct($loader, new LocaleBeanFactory());
-    }
-
-    public function setLocale_Order(int $order)
-    {
-        $this->getBeanLoader()->filterValue('Locale_Order', $order);
-        return $this;
-    }
-
-    public function setLocale_Active(bool $active): self
-    {
-        $this->getBeanLoader()->filterValue('Locale_Active', $active);
-        return $this;
-    }
-
-    public function setLocale_Code(string $code, bool $exclude = false): self
-    {
-        if ($exclude) {
-            $this->getBeanLoader()->excludeValue('Locale_Code', $code);
-        } else {
-            $this->getBeanLoader()->filterValue('Locale_Code', $code);
-        }
-        return $this;
-    }
-
-    public function setLocale_UrlCode(string $code): self
-    {
-        $this->getBeanLoader()->filterValue('Locale_UrlCode', $code);
-        return $this;
-    }
-
-    public function setLocale_Language(string $language, bool $or = false): self
-    {
-        $this->getBeanLoader()->addLike("$language%", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
-        return $this;
+        return new LocaleBeanFactory();
     }
 
     /**
-     * @param string $region
-     * @return $this
+     * @param DatabaseBeanLoader $loader
+     * @return mixed|void
      */
-    public function setLocale_Region(string $region, bool $or = false): self
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $this->getBeanLoader()->addLike("%$region", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
-        return $this;
+        $loader->addField('Locale.Locale_Code')->setKey(true);
+        $loader->addField('Locale.Locale_UrlCode');
+        $loader->addField('Locale.Locale_Domain');
+        $loader->addField('Locale.Locale_Name');
+        $loader->addField('Locale.Locale_Active');
+        $loader->addField('Locale.Locale_Order');
+        $loader->addDefaultFields('Locale');
+        $loader->addOrder('Locale_Order');
     }
 
     public function initializeBeanWithAdditionlData(BeanInterface $bean): BeanInterface
@@ -93,14 +54,71 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
         return parent::initializeBeanWithAdditionlData($bean);
     }
 
+    /**
+     * @param int $order
+     * @return $this
+     */
+    public function filterLocale_Order(int $order): self
+    {
+        $this->filterValue('Locale_Order', $order);
+        return $this;
+    }
+
+    /**
+     * @param bool $active
+     * @return $this
+     */
+    public function filterLocale_Active(bool $active): self
+    {
+        $this->filterValue('Locale_Active', $active);
+        return $this;
+    }
+
+    public function filterLocale_Code(string $code, bool $exclude = false): self
+    {
+        if ($exclude) {
+            $this->excludeLocale_Code($code);
+        } else {
+            $this->filterValue('Locale_Code', $code);
+        }
+        return $this;
+    }
+
+    public function excludeLocale_Code(string $code): self
+    {
+        $this->excludeValue('Locale_Code', $code);
+        return $this;
+    }
+
+    public function filterLocale_UrlCode(string $code): self
+    {
+        $this->filterValue('Locale_UrlCode', $code);
+        return $this;
+    }
+
+    public function filterLocale_Language(string $language, bool $or = false): self
+    {
+        $this->getBeanLoader()->addLike("$language%", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
+        return $this;
+    }
+
+    /**
+     * @param string $region
+     * @return $this
+     */
+    public function filterLocale_Region(string $region, bool $or = false): self
+    {
+        $this->getBeanLoader()->addLike("%$region", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
+        return $this;
+    }
 
     /**
      * @param string $domain
      * @return $this
      */
-    public function setLocale_Domain(string $domain): self
+    public function filterLocale_Domain(string $domain): self
     {
-        $this->filter(['Locale_Domain' => $domain]);
+        $this->filterValue('Locale_Domain', $domain);
         return $this;
     }
 
@@ -123,34 +141,34 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
     {
         try {
             if ($domain !== null) {
-                $finder = new static($this->adapter);
-                $finder->setLocale_Domain($domain);
-                $finder->setLocale_Active(true);
+                $finder = new static($this->getDatabaseAdapter());
+                $finder->filterLocale_Domain($domain);
+                $finder->filterLocale_Active(true);
                 if ($finder->count() > 1) {
-                    $finder = new static($this->adapter);
-                    $finder->setLocale_Domain($domain);
-                    $finder->setLocale_Region(\Locale::getRegion($localeCode));
-                    $finder->setLocale_Active(true);
+                    $finder = new static($this->getDatabaseAdapter());
+                    $finder->filterLocale_Domain($domain);
+                    $finder->filterLocale_Region(\Locale::getRegion($localeCode));
+                    $finder->filterLocale_Active(true);
                     if ($finder->count() == 1) {
                         return $finder->getBean();
                     } else {
-                        $finder = new static($this->adapter);
-                        $finder->setLocale_Domain($domain);
-                        $finder->setLocale_Language(\Locale::getPrimaryLanguage($localeCode));
-                        $finder->setLocale_Active(true);
+                        $finder = new static($this->getDatabaseAdapter());
+                        $finder->filterLocale_Domain($domain);
+                        $finder->filterLocale_Language(\Locale::getPrimaryLanguage($localeCode));
+                        $finder->filterLocale_Active(true);
                         if ($finder->count() == 1) {
                             return $finder->getBean();
                         } else {
-                            $finder = new static($this->adapter);
-                            $finder->setLocale_Domain($domain);
-                            $finder->setLocale_Active(true);
+                            $finder = new static($this->getDatabaseAdapter());
+                            $finder->filterLocale_Domain($domain);
+                            $finder->filterLocale_Active(true);
                             $finder->limit(1, 0);
                             $domain_Lang = $finder->getBean()->Locale_Language;
                             $domain_Region = $finder->getBean()->Locale_Region;
-                            $finder = new static($this->adapter);
-                            $finder->setLocale_Language($domain_Lang, true);
-                            $finder->setLocale_Region($domain_Region, true);
-                            $finder->setLocale_Active(true);
+                            $finder = new static($this->getDatabaseAdapter());
+                            $finder->filterLocale_Language($domain_Lang, true);
+                            $finder->filterLocale_Region($domain_Region, true);
+                            $finder->filterLocale_Active(true);
                             $finder->limit(1, 0);
                             return $finder->getBean();
                         }
@@ -164,33 +182,33 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
             }
 
             if ($localeCode !== null) {
-                $finder = new static($this->adapter);
-                $finder->setLocale_Code($localeCode);
-                $finder->setLocale_Active(true);
+                $finder = new static($this->getDatabaseAdapter());
+                $finder->filterLocale_Code($localeCode);
+                $finder->filterLocale_Active(true);
                 if ($finder->count() == 1) {
                     return $finder->getBean();
                 }
             }
 
             if ($language !== null) {
-                $finder = new static($this->adapter);
-                $finder->setLocale_Language($language);
-                $finder->setLocale_Active(true);
+                $finder = new static($this->getDatabaseAdapter());
+                $finder->filterLocale_Language($language);
+                $finder->filterLocale_Active(true);
                 $finder->limit(1, 0);
                 return $finder->getBean();
             }
 
             if ($configDefault) {
-                $finder = new static($this->adapter);
-                $finder->setLocale_Code($configDefault);
+                $finder = new static($this->getDatabaseAdapter());
+                $finder->filterLocale_Code($configDefault);
                 $finder->limit(1, 0);
                 if ($finder->count() == 1) {
                     return $finder->getBean();
                 }
             }
 
-            $finder = new static($this->adapter);
-            $finder->setLocale_Active(true);
+            $finder = new static($this->getDatabaseAdapter());
+            $finder->filterLocale_Active(true);
             $finder->limit(1, 0);
             if ($finder->count() == 1) {
                 return $finder->getBean();
@@ -223,10 +241,10 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
     /**
      * @return LocaleBeanList
      */
-    public function getActiveLocaleCodeList(): array
+    public function findActiveLocaleCodeList(): array
     {
-        $finder = new static($this->adapter);
-        $finder->setLocale_Active(true);
+        $finder = new static($this->getDatabaseAdapter());
+        $finder->filterLocale_Active(true);
         return $finder->getBeanList()->column('Locale_Code');
     }
 
@@ -236,13 +254,13 @@ class LocaleBeanFinder extends AbstractBeanFinder implements LocaleFinderInterfa
      * @return mixed|\Pars\Bean\Type\Base\AbstractBaseBeanList
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function getLocaleListByLanguage($language)
+    public function findLocaleListByLanguage($language)
     {
         $cache = new ParsCache(__METHOD__);
         if (!$cache->has($language)) {
-            $localeFinder = new LocaleBeanFinder($this->adapter);
-            $localeFinder->setLocale_Active(true);
-            $localeFinder->setLocale_Language($language);
+            $localeFinder = new LocaleBeanFinder($this->getDatabaseAdapter());
+            $localeFinder->filterLocale_Active(true);
+            $localeFinder->filterLocale_Language($language);
             $cache->set($language, $localeFinder->getBeanList(true)->toArray(true));
         }
         return LocaleBeanList::createFromArray($cache->get($language));

@@ -167,7 +167,7 @@ class CmsPageBlockBeanFinder extends AbstractBeanFinder
      * @param bool $leftJoin
      * @return $this
      */
-    public function setLocale_Code(string $locale, bool $leftJoin = true): self
+    public function filterLocale_Code(string $locale, bool $leftJoin = true): self
     {
         if ($leftJoin) {
             $expression = new Expression("Article.Article_ID = ArticleTranslation.Article_ID AND ArticleTranslation.Locale_Code = ?", $locale);
