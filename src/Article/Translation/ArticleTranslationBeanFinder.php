@@ -34,7 +34,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAw
     public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
     {
         $this->adapter = $adapter;
-        parent::__construct($adapter, $beanFactory ?? new ArticleTranslationBeanFactory());
+        parent::__construct($adapter, $beanFactory ?? new ArticleTranslationBeanFactory(), $initLinked);
         $loader = $this->getBeanLoader();
         if ($loader instanceof DatabaseBeanLoader) {
             $loader->addColumn('Article_ID', 'Article_ID', 'ArticleTranslation', 'Article_ID', true);

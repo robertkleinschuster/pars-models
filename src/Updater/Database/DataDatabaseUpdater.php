@@ -158,6 +158,21 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'ConfigType_Code' => 'base',
         ];
         $data_Map[] = [
+            'Config_Code' => 'translation.provider.libretranslate.enabled',
+            'Config_Value' => 'true',
+            'Config_Locked' => 0,
+            'Config_Options' => ['true', 'false'],
+            'Config_Description' => 'Libretranslate translation enabled',
+            'ConfigType_Code' => 'base',
+        ];
+        $data_Map[] = [
+            'Config_Code' => 'translation.provider.libretranslate.host',
+            'Config_Value' => 'localhost:5000',
+            'Config_Locked' => 0,
+            'Config_Description' => 'Libretranslate translation server',
+            'ConfigType_Code' => 'base',
+        ];
+        $data_Map[] = [
             'Config_Code' => 'asset.key',
             'Config_Value' => $imageSignature,
             'Config_Locked' => 1,

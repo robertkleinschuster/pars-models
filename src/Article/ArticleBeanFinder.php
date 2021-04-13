@@ -17,7 +17,7 @@ use Pars\Model\Article\Data\ArticleDataBeanFinder;
  */
 class ArticleBeanFinder extends AbstractBeanFinder
 {
-    public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null)
+    public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
     {
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);
@@ -28,7 +28,9 @@ class ArticleBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Article', 'Article_ID');
         parent::__construct($loader, $beanFactory ?? new ArticleBeanFactory());
-        $this->addLinkedFinder(new ArticleDataBeanFinder($adapter), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
+        if ($initLinked) {
+            $this->addLinkedFinder(new ArticleDataBeanFinder($adapter), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
+        }
     }
 
     /**

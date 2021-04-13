@@ -24,8 +24,11 @@ class MissingTranslationSaver implements MissingTranslationSaverInterface, Adapt
         $this->setDbAdapter($adapter);
     }
 
-    public function saveMissingTranslation(string $locale, string $code, string $namespace)
+    public function saveMissingTranslation(string $locale, string $code, string $namespace, string $text = null)
     {
+        if ($text === null) {
+            $text = $code;
+        }
         $translationFinder = new TranslationBeanFinder($this->adapter);
         $translationFinder->filterLocale_Code($locale);
         $translationFinder->filterTranslation_Code($code);
@@ -35,7 +38,7 @@ class MissingTranslationSaver implements MissingTranslationSaverInterface, Adapt
             $bean->set('Translation_Code', $code);
             $bean->set('Locale_Code',$locale);
             $bean->set('Translation_Namespace', $namespace);
-            $bean->set('Translation_Text', $code);
+            $bean->set('Translation_Text', $text);
             $beanList = $translationFinder->getBeanFactory()->getEmptyBeanList();
             $beanList->push($bean);
             $translationProcessor = new TranslationBeanProcessor($this->adapter);

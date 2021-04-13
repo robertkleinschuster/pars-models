@@ -41,5 +41,15 @@ class LocaleBean extends AbstractBaseBean implements LocaleInterface
         return $this->getLocale_Code();
     }
 
+    public function getLocale_Language(): string
+    {
+        return $this->Locale_Language;
+    }
+
+    public function getLocale_Region(): string
+    {
+        return $this->Locale_Region;
+    }
+
 
 }
