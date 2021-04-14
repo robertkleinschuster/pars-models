@@ -1182,6 +1182,11 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         ];
 
         $data_Map[] = [
+            'UserPermission_Code' => 'tasklog',
+            'UserPermission_Active' => true,
+        ];
+
+        $data_Map[] = [
             'UserPermission_Code' => 'debug',
             'UserPermission_Active' => true,
         ];

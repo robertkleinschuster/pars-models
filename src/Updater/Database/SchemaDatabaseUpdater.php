@@ -3,10 +3,12 @@
 namespace Pars\Model\Updater\Database;
 
 use Laminas\Db\Sql\Ddl\Column\Boolean;
+use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Column\Integer;
 use Laminas\Db\Sql\Ddl\Column\Text;
 use Laminas\Db\Sql\Ddl\Column\Timestamp;
 use Laminas\Db\Sql\Ddl\Column\Varchar;
+use Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint;
 use Laminas\Db\Sql\Ddl\Constraint\ForeignKey;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Ddl\Constraint\UniqueKey;
@@ -52,6 +54,35 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('Person', true);
      #   $this->addConstraintToTable($table, new ForeignKey(null, 'File_ID', 'File', 'File_ID'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableTaskLog()
+    {
+        $table = $this->getTableStatement('TaskLog');
+        $id = new Integer('TaskLog_ID');
+        $id->setOption('AUTO_INCREMENT', true);
+        $this->addColumnToTable($table, $id);
+        $this->addConstraintToTable($table, new PrimaryKey('TaskLog_ID'));
+        $this->addColumnToTable($table, new Varchar('TaskLog_Message', 255, true));
+        $this->addColumnToTable($table, new Text('TaskLog_Text', 65535, true));
+        $this->addColumnToTable($table, new Text('TaskLog_Data', 65535, true));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableTaskLog_DropConstraints()
+    {
+        $table = $this->getTableStatement('TaskLog', true);
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+
+    public function updateTableTaskLog_AddConstraints()
+    {
+        $table = $this->getTableStatement('TaskLog', true);
         $this->addDefaultConstraintsToTable($table);
         return $this->query($table);
     }
