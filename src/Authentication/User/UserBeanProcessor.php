@@ -3,12 +3,12 @@
 namespace Pars\Model\Authentication\User;
 
 use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Core\Translation\ParsTranslatorAwareInterface;
+use Pars\Core\Translation\ParsTranslatorAwareTrait;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
@@ -18,10 +18,10 @@ use Pars\Helper\Validation\ValidationHelperAwareTrait;
  */
 class UserBeanProcessor extends AbstractBeanProcessor implements
     ValidationHelperAwareInterface,
-    TranslatorAwareInterface
+    ParsTranslatorAwareInterface
 {
     use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
+    use ParsTranslatorAwareTrait;
 
     /**
      * @var Adapter
@@ -56,18 +56,6 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         $saver->addField('User_LastLogin')->setTable('User');
         parent::__construct($saver);
         $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
-    }
-
-    /**
-     * @param string $code
-     * @return string
-     */
-    protected function translate(string $code)
-    {
-        if ($this->hasTranslator()) {
-            return $this->getTranslator()->translate($code, 'validation');
-        }
-        return $code;
     }
 
     /**
