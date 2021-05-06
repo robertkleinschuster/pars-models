@@ -71,28 +71,28 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
                 $finder->setPerson_ID($bean->get('Person_ID'), true);
             }
             if ($finder->count() !== 0) {
-                $this->getValidationHelper()->addError('User_Username', $this->translate('user.username.unique'));
+                $this->getValidationHelper()->addError('User_Username', $this->translateValidation('user.username.unique'));
             }
         } else {
-            $this->getValidationHelper()->addError('User_Username', $this->translate('user.username.empty'));
+            $this->getValidationHelper()->addError('User_Username', $this->translateValidation('user.username.empty'));
         }
         if ($bean->empty('User_Displayname')) {
-            $this->getValidationHelper()->addError('User_Displayname', $this->translate('user.displayname.empty'));
+            $this->getValidationHelper()->addError('User_Displayname', $this->translateValidation('user.displayname.empty'));
         }
         if ($bean->empty('Person_Firstname')) {
-            $this->getValidationHelper()->addError('Person_Firstname', $this->translate('person.firstname.empty'));
+            $this->getValidationHelper()->addError('Person_Firstname', $this->translateValidation('person.firstname.empty'));
         }
         if ($bean->empty('Person_Lastname')) {
-            $this->getValidationHelper()->addError('Person_Lastname', $this->translate('person.lastname.empty'));
+            $this->getValidationHelper()->addError('Person_Lastname', $this->translateValidation('person.lastname.empty'));
         }
         if ($bean->empty('User_Password')) {
             $bean->unset("User_Password");
             if ($bean->empty('Person_ID')) {
-                $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.empty'));
+                $this->getValidationHelper()->addError('User_Password', $this->translateValidation('user.password.empty'));
             }
         } else {
             if (!isset($bean->get('User_Password')[4])) {
-                $this->getValidationHelper()->addError('User_Password', $this->translate('user.password.min_length'));
+                $this->getValidationHelper()->addError('User_Password', $this->translateValidation('user.password.min_length'));
             }
         }
 
@@ -101,7 +101,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
             $bean->get('Person_ID') == $this->getCurrentUserBean()->Person_ID &&
             $bean->get('UserState_Code') !== 'active'
         ) {
-            $this->getValidationHelper()->addError('UserState_Code', $this->translate('userstate.code.lock_self'));
+            $this->getValidationHelper()->addError('UserState_Code', $this->translateValidation('userstate.code.lock_self'));
         }
         return !$this->getValidationHelper()->hasError();
     }
@@ -117,7 +117,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
             return false;
         }
         if ($this->hasCurrentUserBean() && $bean->get('Person_ID') == $this->getCurrentUserBean()->Person_ID) {
-            $this->getValidationHelper()->addError('UserState_Code', $this->translate('user.delete.self'));
+            $this->getValidationHelper()->addError('UserState_Code', $this->translateValidation('user.delete.self'));
         }
         return !$bean->empty('Person_ID') && !$this->getValidationHelper()->hasError();
     }
