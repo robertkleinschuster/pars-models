@@ -21,4 +21,9 @@ class CmsMenuBean extends ArticleTranslationBean
     public ?string $CmsMenuState_Code = null;
     public ?\DateTime $Timestamp_Edit_Article = null;
     public ?BeanListInterface $Menu_BeanList = null;
+
+    public function items()
+    {
+        return $this->Menu_BeanList ?? [];
+    }
 }
