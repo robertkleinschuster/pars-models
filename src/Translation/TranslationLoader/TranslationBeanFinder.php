@@ -7,6 +7,7 @@ use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Cache\ParsCache;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
 
@@ -81,10 +82,17 @@ class TranslationBeanFinder extends AbstractBeanFinder implements LocaleAwareFin
     {
         $data = [];
         try {
-            $this->filterLocale_Code($locale);
-            $this->filterTranslation_Namespace($textDomain);
-            foreach ($this->getBeanListDecorator() as $bean) {
-                $data[$bean->get('Translation_Code')] = $bean->get('Translation_Text');
+            $cacheId = $locale . $textDomain;
+            $cache = new ParsCache(__CLASS__);
+            if ($cache->has($cacheId)) {
+                $data = $cache->get($cacheId);
+            } else {
+                $this->filterLocale_Code($locale);
+                $this->filterTranslation_Namespace($textDomain);
+                foreach ($this->getBeanListDecorator() as $bean) {
+                    $data[$bean->get('Translation_Code')] = $bean->get('Translation_Text');
+                }
+                $cache->set($cacheId , $data);
             }
         } catch (\Exception $ex) {
         }
