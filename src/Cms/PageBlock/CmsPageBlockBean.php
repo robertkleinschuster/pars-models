@@ -20,4 +20,11 @@ class CmsPageBlockBean extends ArticleTranslationBean
     public ?int $CmsPage_ID = null;
     public ?int $CmsPage_CmsBlock_Order = null;
     public ?BeanListInterface $CmsBlock_BeanList = null;
+
+    public function template()
+    {
+        return $this->CmsBlockType_Template;
+    }
+
+
 }

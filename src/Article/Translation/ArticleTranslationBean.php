@@ -26,4 +26,74 @@ class ArticleTranslationBean extends ArticleBean
     public ?string $ArticleTranslation_Footer = null;
     public ?int $File_ID = null;
     public ?BeanListInterface $File_BeanList = null;
+
+    public function template()
+    {
+        return 'article::default';
+    }
+
+    public function layout()
+    {
+        return 'layout::default';
+    }
+
+    public function title()
+    {
+        return $this->ArticleTranslation_Title;
+    }
+
+    public function heading()
+    {
+        return $this->ArticleTranslation_Heading;
+    }
+
+    public function subheading()
+    {
+        return $this->ArticleTranslation_SubHeading;
+    }
+
+    public function text()
+    {
+        return $this->ArticleTranslation_Text;
+    }
+
+    public function teaser()
+    {
+        return $this->ArticleTranslation_Teaser;
+    }
+
+    public function footer()
+    {
+        return $this->ArticleTranslation_Footer;
+    }
+
+    public function pathCode()
+    {
+        return $this->ArticleTranslation_Code === '/' ? null : $this->ArticleTranslation_Code;
+    }
+
+    public function menuName()
+    {
+        return $this->ArticleTranslation_Name;
+    }
+
+    public function code()
+    {
+        return $this->Article_Code;
+    }
+
+    public function path()
+    {
+        return $this->ArticleTranslation_Path;
+    }
+
+    public function keywords()
+    {
+        return $this->ArticleTranslation_Keywords;
+    }
+
+    public function tpl()
+    {
+        return $this->template();
+    }
 }

@@ -19,4 +19,14 @@ class CmsPageBean extends ArticleTranslationBean
     public ?string $CmsPageLayout_Template = null;
     public ?string $CmsPageState_Code = null;
 
+    public function template()
+    {
+        return $this->CmsPageType_Template;
+    }
+
+    public function layout()
+    {
+        return $this->CmsPageLayout_Template;
+    }
+
 }

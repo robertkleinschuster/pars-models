@@ -6,13 +6,11 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Join;
 use Laminas\Db\Sql\Predicate\Expression;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Core\Cache\ParsCache;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
 use Pars\Model\Article\ArticleBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
-use Pars\Model\Localization\Locale\LocaleBeanList;
 
 /**
  * Class ArticleTranslationBeanFinder
@@ -31,7 +29,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAw
      * @param Adapter $adapter
      * @param BeanFactoryInterface|null $beanFactory
      */
-    public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
+    public function __construct($adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
     {
         $this->adapter = $adapter;
         parent::__construct($adapter, $beanFactory ?? new ArticleTranslationBeanFactory(), $initLinked);
@@ -124,7 +122,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAw
      * @param string $localeCode
      * @param string $fallback
      */
-    public function findByLocaleWithFallback(string $localeCode, string $fallback)
+    public function filterLocale_Code_WithFallback(string $localeCode, string $fallback)
     {
         $this->filterLocale_Code($localeCode, false);
         $count = $this->count();

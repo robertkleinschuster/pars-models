@@ -18,7 +18,7 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
  */
 class CmsPostBeanFinder extends ArticleTranslationBeanFinder
 {
-    public function __construct(Adapter $adapter)
+    public function __construct($adapter)
     {
         parent::__construct($adapter, new CmsPostBeanFactory());
         $loader = $this->getBeanLoader();

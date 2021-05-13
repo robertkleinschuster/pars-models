@@ -21,9 +21,9 @@ class ArticleDataBeanFinder extends AbstractBeanFinder
 
     /**
      * ArticleDataBeanFinder constructor.
-     * @param Adapter $adapter
+     * @param $adapter
      */
-    public function __construct(Adapter $adapter)
+    public function __construct($adapter)
     {
         $this->adapter = $adapter;
         $loader = new DatabaseBeanLoader($adapter);

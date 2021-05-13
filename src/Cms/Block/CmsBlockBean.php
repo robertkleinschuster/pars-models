@@ -15,4 +15,11 @@ class CmsBlockBean extends ArticleTranslationBean
     public ?string $CmsBlockType_Template = null;
     public ?string $CmsBlockState_Code = null;
     public ?BeanListInterface $CmsBlock_BeanList = null;
+
+    public function template()
+    {
+        return $this->CmsBlockType_Template;
+    }
+
+
 }
