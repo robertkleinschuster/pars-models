@@ -17,7 +17,7 @@ use Pars\Model\Article\Data\ArticleDataBeanFinder;
  */
 class ArticleBeanFinder extends AbstractBeanFinder
 {
-    public function __construct(Adapter $adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
+    public function __construct($adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
     {
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);

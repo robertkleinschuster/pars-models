@@ -19,7 +19,7 @@ use Pars\Model\File\FileBeanFinder;
  */
 class CmsPageBlockBeanFinder extends AbstractBeanFinder implements LocaleAwareFinderInterface
 {
-    public function __construct(Adapter $adapter)
+    public function __construct($adapter)
     {
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage_CmsBlock', 'CmsPage_ID', true);

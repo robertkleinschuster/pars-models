@@ -14,7 +14,7 @@ use Pars\Core\Database\DatabaseBeanLoader;
  */
 class FileBeanFinder extends AbstractBeanFinder
 {
-    public function __construct(Adapter $adapter)
+    public function __construct($adapter)
     {
         $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('File_ID', 'File_ID', 'File', 'File_ID', true);

@@ -27,6 +27,16 @@ class ArticleTranslationBean extends ArticleBean
     public ?int $File_ID = null;
     public ?BeanListInterface $File_BeanList = null;
 
+    public function template()
+    {
+        return 'article::default';
+    }
+
+    public function layout()
+    {
+        return 'layout::default';
+    }
+
     public function title()
     {
         return $this->ArticleTranslation_Title;
@@ -59,7 +69,7 @@ class ArticleTranslationBean extends ArticleBean
 
     public function pathCode()
     {
-        return $this->ArticleTranslation_Code;
+        return $this->ArticleTranslation_Code === '/' ? null : $this->ArticleTranslation_Code;
     }
 
     public function menuName()
@@ -70,5 +80,20 @@ class ArticleTranslationBean extends ArticleBean
     public function code()
     {
         return $this->Article_Code;
+    }
+
+    public function path()
+    {
+        return $this->ArticleTranslation_Path;
+    }
+
+    public function keywords()
+    {
+        return $this->ArticleTranslation_Keywords;
+    }
+
+    public function tpl()
+    {
+        return $this->template();
     }
 }

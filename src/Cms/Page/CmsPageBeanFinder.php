@@ -17,7 +17,7 @@ use Pars\Model\Cms\Post\CmsPostBeanFinder;
  */
 class CmsPageBeanFinder extends ArticleTranslationBeanFinder
 {
-    public function __construct(Adapter $adapter, bool $initLinked = true)
+    public function __construct($adapter, bool $initLinked = true)
     {
         parent::__construct($adapter, new CmsPageBeanFactory(), $initLinked);
         $loader = $this->getBeanLoader();

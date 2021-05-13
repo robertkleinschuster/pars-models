@@ -26,4 +26,15 @@ class CmsMenuBean extends ArticleTranslationBean
     {
         return $this->Menu_BeanList ?? [];
     }
+
+    public function menuType()
+    {
+        return $this->CmsMenuType_Code;
+    }
+
+
+    public function template()
+    {
+        return $this->CmsMenuType_Template;
+    }
 }
