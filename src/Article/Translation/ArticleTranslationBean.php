@@ -96,4 +96,9 @@ class ArticleTranslationBean extends ArticleBean
     {
         return $this->template();
     }
+
+    public function description()
+    {
+        return strip_tags($this->teaser());
+    }
 }
