@@ -104,7 +104,7 @@ class ArticleTranslationBean extends ArticleBean
 
     public function image()
     {
-        if ($this->File_BeanList && $this->File_BeanList->count()) {
+        if ($this->File_BeanList && !$this->File_BeanList->isEmpty()) {
             return $this->File_BeanList->first();
         }
         return null;
