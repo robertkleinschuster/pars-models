@@ -4,6 +4,7 @@ namespace Pars\Model\Updater\Database;
 
 use Pars\Core\Database\Updater\AbstractDatabaseUpdater;
 use Pars\Model\File\FileBeanFinder;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Class DataUpdater
@@ -44,12 +45,6 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateDataConfig()
     {
-        if (file_exists('data/image_signature')) {
-            $imageSignature = file_get_contents('data/image_signature');
-        } else {
-            $imageSignature = md5(random_bytes(5));
-            file_put_contents('data/image_signature', $imageSignature);
-        }
         $imageOptions = [];
         $fileFinder = new FileBeanFinder($this->adapter);
         foreach ($fileFinder->getBeanList() as $bean) {
@@ -88,8 +83,20 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'ConfigType_Code' => 'base',
         ];
         $data_Map[] = [
-            'Config_Code' => 'asset.key',
-            'Config_Value' => $imageSignature,
+            'Config_Code' => 'secret',
+            'Config_Value' => Uuid::v6(),
+            'Config_Locked' => 1,
+            'ConfigType_Code' => 'base',
+        ];
+        $data_Map[] = [
+            'Config_Code' => 'salt',
+            'Config_Value' => Uuid::v6(),
+            'Config_Locked' => 1,
+            'ConfigType_Code' => 'base',
+        ];
+        $data_Map[] = [
+            'Config_Code' => 'uuid',
+            'Config_Value' => Uuid::v6(),
             'Config_Locked' => 1,
             'ConfigType_Code' => 'base',
         ];

@@ -9,12 +9,14 @@ use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 use Pars\Core\Config\ConfigFinderInterface;
+use Pars\Core\Config\ConfigProcessorInterface;
 use Pars\Core\Deployment\UpdaterInterface;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Core\Translation\MissingTranslationSaverInterface;
 use Pars\Model\Authentication\User\UserBeanFactory;
 use Pars\Model\Authentication\UserRepositoryFactory;
 use Pars\Model\Config\ConfigBeanFinder;
+use Pars\Model\Config\ConfigBeanProcessor;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
 use Pars\Model\Translation\MissingTranslationSaver;
 use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
@@ -63,6 +65,9 @@ class ConfigProvider
                 },
                 ConfigFinderInterface::class => function (ContainerInterface $container) {
                     return new ConfigBeanFinder($container->get(AdapterInterface::class));
+                },
+                ConfigProcessorInterface::class => function (ContainerInterface $container) {
+                    return new ConfigBeanProcessor($container->get(AdapterInterface::class));
                 },
                 MissingTranslationSaverInterface::class => function (ContainerInterface $container) {
                     return new MissingTranslationSaver($container->get(AdapterInterface::class));

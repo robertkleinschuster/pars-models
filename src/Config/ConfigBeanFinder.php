@@ -50,7 +50,7 @@ class ConfigBeanFinder extends AbstractBeanFinder implements ConfigFinderInterfa
      * @param bool $exclude
      * @return $this
      */
-    public function setConfigType_Code(string $type, bool $exclude): self
+    public function setConfigType_Code(string $type, bool $exclude = false): self
     {
         if ($exclude) {
             $this->exclude(['ConfigType_Code' => $type]);
