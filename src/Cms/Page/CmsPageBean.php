@@ -29,4 +29,19 @@ class CmsPageBean extends ArticleTranslationBean
         return $this->CmsPageLayout_Template;
     }
 
+    public function blocks()
+    {
+        if ($this->isset('CmsBlock_BeanList')) {
+            return $this->get('CmsBlock_BeanList');
+        }
+        return [];
+    }
+
+    public function posts()
+    {
+        if ($this->isset('CmsPost_BeanList')) {
+            return $this->get('CmsPost_BeanList');
+        }
+        return [];
+    }
 }

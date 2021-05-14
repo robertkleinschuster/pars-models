@@ -21,5 +21,12 @@ class CmsBlockBean extends ArticleTranslationBean
         return $this->CmsBlockType_Template;
     }
 
+    public function blocks()
+    {
+        if ($this->isset('CmsBlock_BeanList')) {
+            return $this->get('CmsBlock_BeanList');
+        }
+        return [];
+    }
 
 }
