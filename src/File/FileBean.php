@@ -25,4 +25,14 @@ class FileBean extends AbstractBaseBean
     public ?\DateTime $Timestamp_Edit = null;
     public ?int $Person_ID_Create = null;
     public ?int $Person_ID_Edit = null;
+
+    public function src()
+    {
+        return $this->FileDirectory_Code . '/' . $this->File_Code . '.' . $this->FileType_Code;
+    }
+
+    public function alt()
+    {
+        return $this->File_Name;
+    }
 }

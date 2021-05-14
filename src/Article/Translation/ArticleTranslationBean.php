@@ -101,4 +101,17 @@ class ArticleTranslationBean extends ArticleBean
     {
         return strip_tags($this->teaser());
     }
+
+    public function image()
+    {
+        if ($this->File_BeanList) {
+            return $this->File_BeanList->first();
+        }
+        return null;
+    }
+
+    public function img()
+    {
+        return $this->image();
+    }
 }
