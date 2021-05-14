@@ -60,9 +60,9 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         $data_Map = [];
         $data_Map[] = [
             'Config_Code' => 'asset.domain',
-            'Config_Value' => isset($_SERVER['HTTP_HOST']) ? 'https://' . $_SERVER['HTTP_HOST'] . '/img' : '',
+            'Config_Value' => isset($_SERVER['HTTP_HOST']) ?  $_SERVER['HTTP_HOST'] : '',
             'Config_Locked' => 0,
-            'Config_Description' => 'https://admin.example.com/img',
+            'Config_Description' => 'cdn.example.com',
             'ConfigType_Code' => 'base',
         ];
         $data_Map[] = [
@@ -206,9 +206,9 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         ];
         $data_Map[] = [
             'Config_Code' => 'frontend.domain',
-            'Config_Value' => isset($_SERVER['HTTP_HOST']) ? 'https://' . ltrim($_SERVER['HTTP_HOST'] ?? '', 'admin.') : '',
+            'Config_Value' => isset($_SERVER['HTTP_HOST']) ?  ltrim($_SERVER['HTTP_HOST'] ?? '', 'admin.') : '',
             'Config_Locked' => 0,
-            'Config_Description' => 'https://example.com',
+            'Config_Description' => 'example.com',
             'ConfigType_Code' => 'base',
         ];
         $data_Map[] = [
