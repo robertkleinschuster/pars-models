@@ -9,6 +9,7 @@ use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\String\StringHelper;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
@@ -43,9 +44,8 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
 
     protected function beforeSave(BeanInterface $bean)
     {
-        $slugify = new Slugify();
         if (!$bean->empty('UserRole_Code')) {
-            $bean->set('UserRole_Code', $slugify->slugify($bean->get('UserRole_Code')));
+            $bean->set('UserRole_Code', StringHelper::slugify($bean->get('UserRole_Code')));
         }
         parent::beforeSave($bean);
     }

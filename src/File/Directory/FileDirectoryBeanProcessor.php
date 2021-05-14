@@ -2,7 +2,6 @@
 
 namespace Pars\Model\File\Directory;
 
-use Cocur\Slugify\Slugify;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
@@ -11,6 +10,7 @@ use League\Flysystem\Filesystem;
 use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\String\StringHelper;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\File\FileBeanFinder;
@@ -80,8 +80,7 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
         parent::beforeSave($bean);
         $filesystem = $this->getFilesystem();
         if ($bean->empty('FileDirectory_Code')) {
-            $slugify = new Slugify();
-            $bean->set('FileDirectory_Code', $slugify->slugify($bean->get('FileDirectory_Name')));
+            $bean->set('FileDirectory_Code', StringHelper::slugify($bean->get('FileDirectory_Name')));
         }
         if (!$filesystem->has($bean->get('FileDirectory_Code'))) {
             $filesystem->createDir($bean->get('FileDirectory_Code'));

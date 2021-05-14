@@ -10,6 +10,7 @@ use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\String\StringHelper;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
@@ -50,9 +51,8 @@ class ArticleBeanProcessor extends AbstractBeanProcessor implements
 
     protected function beforeSave(BeanInterface $bean)
     {
-        $slugify = new Slugify();
         if (!$bean->empty('Article_Code')) {
-            $bean->set('Article_Code', $slugify->slugify($bean->get('Article_Code')));
+            $bean->set('Article_Code', StringHelper::slugify($bean->get('Article_Code')));
         }
         parent::beforeSave($bean);
     }

@@ -219,6 +219,13 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'ConfigType_Code' => 'base',
         ];
         $data_Map[] = [
+            'Config_Code' => 'api.domain',
+            'Config_Value' => isset($_SERVER['HTTP_HOST']) ?  str_replace('admin', 'api', $_SERVER['HTTP_HOST'] ?? '', ) : '',
+            'Config_Locked' => 0,
+            'Config_Description' => 'api.example.com',
+            'ConfigType_Code' => 'base',
+        ];
+        $data_Map[] = [
             'Config_Code' => 'frontend.update',
             'Config_Value' => 'true',
             'Config_Locked' => 1,

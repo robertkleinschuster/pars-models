@@ -6,6 +6,7 @@ use Cocur\Slugify\Slugify;
 use Laminas\Db\Adapter\Adapter;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\String\StringHelper;
 use Pars\Model\Article\ArticleBeanProcessor;
 
 class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
@@ -41,14 +42,13 @@ class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
 
     protected function beforeSave(BeanInterface $bean)
     {
-        $slugify = new Slugify();
         if (!$bean->empty('ArticleTranslation_Code') && $bean->get('ArticleTranslation_Code') !== '/') {
             if (!$bean->empty('ArticleTranslation_Code')) {
-                $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Code')));
+                $bean->set('ArticleTranslation_Code', StringHelper::slugify($bean->get('ArticleTranslation_Code')));
             } elseif (!$bean->empty('ArticleTranslation_Name')) {
-                $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Name')));
+                $bean->set('ArticleTranslation_Code', StringHelper::slugify($bean->get('ArticleTranslation_Name')));
             } elseif (!$bean->empty('ArticleTranslation_Title')) {
-                $bean->set('ArticleTranslation_Code', $slugify->slugify($bean->get('ArticleTranslation_Title')));
+                $bean->set('ArticleTranslation_Code', StringHelper::slugify($bean->get('ArticleTranslation_Title')));
             }
         }
         parent::beforeSave($bean);

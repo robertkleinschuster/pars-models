@@ -11,6 +11,7 @@ use League\Flysystem\Filesystem;
 use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\String\StringHelper;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\File\Directory\FileDirectoryBeanFinder;
@@ -56,9 +57,9 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
     protected function beforeSave(BeanInterface $bean)
     {
         $filesystem = $this->getFilesystem($bean);
-        $slugify = new Slugify();
         if ($bean->empty('File_Code')) {
-            $bean->set('File_Code', "{$slugify->slugify($bean->get('File_Name'))}.{$bean->get('FileType_Code')}");
+            $slug = StringHelper::slugify($bean->get('File_Name'));
+            $bean->set('File_Code', "{$slug}.{$bean->get('FileType_Code')}");
         }
         if (!$filesystem->has($bean->get('File_Code')) && !$bean->empty('File_Upload')) {
             $upload = $bean->get('File_Upload');
