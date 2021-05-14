@@ -2,188 +2,156 @@
 
 namespace Pars\Model\File;
 
-use Cocur\Slugify\Slugify;
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
-use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\String\StringHelper;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\File\Directory\FileDirectoryBeanFinder;
 use Pars\Model\File\Type\FileTypeBeanFinder;
 use Psr\Http\Message\UploadedFileInterface;
-
 
 /**
  * Class FileBeanProcessor
  * @package Pars\Model\File
  */
-class FileBeanProcessor extends AbstractBeanProcessor implements
-    ValidationHelperAwareInterface,
-    TranslatorAwareInterface
+class FileBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
-
-    private $adapter;
-
-    protected string $folder = 'u';
-
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
-        $saver->addColumn('File_ID', 'File_ID', 'File', 'File_ID', true);
-        $saver->addColumn('File_Name', 'File_Name', 'File', 'File_ID');
-        $saver->addColumn('File_Code', 'File_Code', 'File', 'File_ID');
-        $saver->addColumn('FileType_Code', 'FileType_Code', 'File', 'File_ID');
-        $saver->addColumn('FileDirectory_ID', 'FileDirectory_ID', 'File', 'File_ID');
-        $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'File', 'File_ID');
-        $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'File', 'File_ID');
-        $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'File', 'File_ID');
-        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'File', 'File_ID');
-        parent::__construct($saver);
+        $saver->addField('File.File_ID')->setKey(true);
+        $saver->addField('File.File_Name');
+        $saver->addField('File.File_Code');
+        $saver->addField('File.FileType_Code');
+        $saver->addField('File.FileDirectory_ID');
+        $saver->addDefaultFields('File');
     }
+
+    protected function initValidator()
+    {
+        $this->addSaveValidatorFunction('validateFile_Upload');
+        $this->addSaveValidatorFunction('validateFile_Name');
+        $this->addSaveValidatorFunction('validateFileType_Code');
+        $this->addSaveValidatorFunction('validateFileDirectory_ID');
+    }
+
 
     /**
      * @param BeanInterface $bean
      * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     protected function beforeSave(BeanInterface $bean)
     {
-        $filesystem = $this->getFilesystem($bean);
+        parent::beforeSave($bean);
+        $this->loadFileDirectory_Code($bean);
+        $this->handleFile_Code($bean);
+        $this->saveFile($bean);
+    }
+
+    /**
+     * @param FileBean $bean
+     * @throws \Pars\Bean\Type\Base\BeanException
+     */
+    public function handleFile_Code(FileBean $bean)
+    {
         if ($bean->empty('File_Code')) {
-            $slug = StringHelper::slugify($bean->get('File_Name'));
-            $bean->set('File_Code', "{$slug}.{$bean->get('FileType_Code')}");
+            $code = $bean->get('File_Name');
+        } else {
+            $code = $bean->get('File_Code');
         }
-        if (!$filesystem->has($bean->get('File_Code')) && !$bean->empty('File_Upload')) {
+        $exp = explode('.', $code, 2);
+        if (count($exp) == 2) {
+            $code = array_shift($exp);
+        }
+        $bean->set('File_Code', StringHelper::slugify($code));
+    }
+
+    /**
+     * @param FileBean $bean
+     * @return string
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    protected function getFilePath(FileBean $bean)
+    {
+        $basePath = $this->getParsContainer()->getConfig()->get('image.source');
+        return "public/$basePath/" . $bean->path();
+    }
+
+    /**
+     * @param FileBean $bean
+     * @param string $path
+     */
+    protected function saveFile(FileBean $bean)
+    {
+        if ($bean->isset('File_Upload')) {
             $upload = $bean->get('File_Upload');
             if ($upload instanceof UploadedFileInterface) {
-                $bean->set('File_Code', rtrim($bean->get('File_Code'), '.' . $bean->get('FileType_Code')));
-                $path = $this->getFilePath($bean);
-                $upload->moveTo($path);
-                /* $mime = $filesystem->getMimetype($path);
-                 $finder = new FileTypeBeanFinder($this->adapter);
-                 $finder->setFileType_Code($bean->getData('FileType_Code'));
-                 if ($finder->find() === 1) {
-                     $type = $finder->getBean();
-                     if ($type->getData('FileType_Mime') !== $mime) {
-                         $filesystem->delete($path);
-                         $this->getValidationHelper()->addError('Upload', $this->translate('file.upload.invalid'));
-                         throw new \Exception('Invalid file type uploaded.');
-                     }
-                 }*/
+                if ($upload->getSize()) {
+                    $path = $this->getFilePath($bean);
+                    $dirname = dirname($path);
+                    if (!is_dir($dirname)) {
+                        mkdir($dirname);
+                    }
+                    $upload->moveTo($path);
+                }
             }
         }
-        parent::beforeSave($bean);
     }
 
     /**
-     * @param string $folder
-     */
-    public function setFolder(string $folder): void
-    {
-        $this->folder = $folder;
-    }
-
-    /**
-     * @return int
-     * @throws \League\Flysystem\FileNotFoundException
-     */
-    public function delete(): int
-    {
-        $beanList = $this->getBeanListForDelete();
-        foreach ($beanList as $bean) {
-            $filesystem = $this->getFilesystem($bean);
-            if ($filesystem->has($bean->get('File_Code'))) {
-                $filesystem->delete($bean->get('File_Code'));
-            }
-        }
-        return parent::delete();
-    }
-
-    /**
-     * @param BeanInterface $bean
-     * @return Filesystem
-     */
-    protected function getFilesystem(BeanInterface $bean): Filesystem
-    {
-        $filesystemAdapter = new Local($this->getDirectoryPath($bean));
-        return new Filesystem($filesystemAdapter);
-    }
-
-    /**
-     * @param BeanInterface $bean
-     * @return string
+     * @param FileBean $bean
      * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
      */
-    protected function getDirectoryPath(BeanInterface $bean)
+    protected function loadFileDirectory_Code(FileBean $bean)
     {
-        $path = implode(DIRECTORY_SEPARATOR, [
-            $_SERVER["DOCUMENT_ROOT"], $this->folder
-        ]);
-        if (!$bean->empty('FileDirectory_ID')) {
-            $finder = new FileDirectoryBeanFinder($this->adapter);
+        if (!$bean->empty('FileDirectory_ID') && $bean->empty('FileDirectory_Code')) {
+            $finder = new FileDirectoryBeanFinder($this->getDatabaseAdapter()->getDbAdapter());
             $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'));
             if ($finder->count() === 1) {
                 $directory = $finder->getBean();
-                $path = implode(DIRECTORY_SEPARATOR, [
-                    $_SERVER["DOCUMENT_ROOT"], $this->folder, $directory->get('FileDirectory_Code')
-                ]);
+                $bean->FileDirectory_Code = $directory->FileDirectory_Code;
             }
         }
-        return $path;
     }
 
     /**
      * @param BeanInterface $bean
-     * @return string
      * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    protected function getFilePath(BeanInterface $bean)
+    protected function beforeDelete(BeanInterface $bean)
     {
-        $path = implode(DIRECTORY_SEPARATOR, [
-            $_SERVER["DOCUMENT_ROOT"], $this->folder, $bean->get('File_Code')
-        ]);
-        if (!$bean->empty('FileDirectory_ID')) {
-            $finder = new FileDirectoryBeanFinder($this->adapter);
-            $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'));
-            if ($finder->count() === 1) {
-                $directory = $finder->getBean();
-                $path = implode(DIRECTORY_SEPARATOR, [
-                    $_SERVER["DOCUMENT_ROOT"], $this->folder, $directory->get('FileDirectory_Code'), $bean->get('File_Code') . '.' . $bean->get('FileType_Code')
-                ]);
-            }
+        parent::beforeDelete($bean);
+        $this->deleteFile($bean);
+    }
+
+    /**
+     * @param FileBean $bean
+     * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    protected function deleteFile(FileBean $bean)
+    {
+        $this->loadFileDirectory_Code($bean);
+        $filePath = $this->getFilePath($bean);
+        if (file_exists($filePath)) {
+            unlink($filePath);
         }
-        return $path;
     }
 
-    /**
-     * @param string $name
-     * @return string
-     */
-    protected function translate(string $name): string
-    {
-        return $this->getTranslator()->translate($name, 'validation');
-    }
-
-    /**
-     * @param BeanInterface $bean
-     * @return bool
-     */
-    protected function validateForSave(BeanInterface $bean): bool
-    {
-
-        $clientFileName = null;
+    protected function validateFile_Upload(FileBean $bean): bool {
+        $result = false;
         if (!$bean->empty('File_Upload')) {
             $upload = $bean->get('File_Upload');
             if ($upload instanceof UploadedFileInterface) {
                 switch ($upload->getError()) {
+                    case UPLOAD_ERR_OK:
+                        $result = true;
+                        break;
                     case UPLOAD_ERR_CANT_WRITE:
                         $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.cant.write'));
                         break;
@@ -196,68 +164,99 @@ class FileBeanProcessor extends AbstractBeanProcessor implements
                     case UPLOAD_ERR_NO_FILE:
                         $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.no.file'));
                         break;
-                }
-                if ($upload->getError() != UPLOAD_ERR_OK) {
-                    $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
-                } else {
-                    $clientFileName = $upload->getClientFilename();
+                    default:
+                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
                 }
             } else {
                 $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
             }
-        } elseif ($bean->empty('File_ID')) {
+        } else if ($bean->empty('File_ID')) {
             $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.empty'));
-        }
-
-        if ($bean->empty('File_Name')) {
-            if ($clientFileName) {
-                $bean->set('File_Name', $clientFileName);
-            } else {
-                $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.empty'));
-            }
         } else {
-            $finder = new FileBeanFinder($this->adapter);
+            $result = true;
+        }
+        return $result;
+    }
+
+    /**
+     * @param FileBean $bean
+     * @return bool
+     * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
+     */
+    protected function validateFile_Name(FileBean $bean): bool
+    {
+        $result = false;
+        if ($bean->empty('File_Name')) {
+            $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.empty'));
+        } else {
+            $finder = new FileBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('File_ID')) {
-                $finder->setFile_ID($bean->get('File_ID'), true);
+                $finder->excludeFile_ID($bean->get('File_ID'));
             }
-            $finder->setFile_Name($bean->get('File_Name'));
+            $finder->filterFile_Name($bean->get('File_Name'));
             if ($finder->count() > 0) {
                 $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.unique'));
+            } else {
+                $result = true;
             }
         }
+        return $result;
+    }
 
+    protected function validateFile_Code(FileBean $bean): bool
+    {
+        $result = false;
         if ($bean->empty('File_Code')) {
-            if ($clientFileName) {
-                $bean->set('File_Code', $clientFileName);
-            } else {
-                $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.empty'));
-            }
+            $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.empty'));
         } else {
-            $finder = new FileBeanFinder($this->adapter);
+            $finder = new FileBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('File_ID')) {
-                $finder->setFile_ID($bean->get('File_ID'), true);
+                $finder->excludeFile_ID($bean->get('File_ID'));
             }
-            $finder->setFile_Code($bean->get('File_Code'));
+            $finder->filterFile_Code($bean->get('File_Code'));
             if ($finder->count() > 0) {
                 $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.unique'));
+            } else {
+                $result = true;
             }
         }
+        return $result;
+    }
 
-        if ($bean->empty('FileDirectory_ID')) {
-            $this->getValidationHelper()->addError('FileDirectory_ID', $this->translate('filedirectory.code.empty'));
-        }
+    /**
+     * @param FileBean $bean
+     * @return bool
+     * @throws \Pars\Bean\Type\Base\BeanException
+     * @throws \Pars\Pattern\Exception\CoreException
+     */
+    public function validateFileType_Code(FileBean $bean): bool
+    {
+        $result= false;
         if ($bean->empty('FileType_Code')) {
             $this->getValidationHelper()->addError('FileType_Code', $this->translate('filetype.code.empty'));
         } else {
-            $finder = new FileTypeBeanFinder($this->adapter);
+            $finder = new FileTypeBeanFinder($this->getDatabaseAdapter()->getDbAdapter());
             $finder->setFileType_Code($bean->get('FileType_Code'));
             $finder->setFileType_Active(true);
             if ($finder->count() !== 1) {
                 $this->getValidationHelper()->addError('FileType_Code', $this->translate('filetype.code.invalid'));
+            } else {
+                $result = true;
             }
         }
-
-
-        return !$this->getValidationHelper()->hasError();
+        return $result;
     }
+
+    public function validateFileDirectory_ID(FileBean $bean): bool
+    {
+        $result= false;
+        if ($bean->empty('FileDirectory_ID')) {
+            $this->getValidationHelper()->addError('FileDirectory_ID', $this->translate('filedirectory.code.empty'));
+        } else {
+            $result = true;
+        }
+        return $result;
+    }
+
 }

@@ -35,4 +35,9 @@ class FileBean extends AbstractBaseBean
     {
         return $this->File_Name;
     }
+
+    public function path()
+    {
+        return $this->FileDirectory_Code . '/' . $this->File_Code . '.' . $this->FileType_Code;
+    }
 }
