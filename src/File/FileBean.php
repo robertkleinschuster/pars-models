@@ -28,7 +28,7 @@ class FileBean extends AbstractBaseBean
 
     public function src()
     {
-        return $this->FileDirectory_Code . '/' . $this->File_Code . '.' . $this->FileType_Code;
+        return urlencode($this->FileDirectory_Code) . '/' . urlencode($this->File_Code) . '.' . $this->FileType_Code;
     }
 
     public function alt()
