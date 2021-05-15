@@ -22,6 +22,15 @@ class CmsMenuBean extends ArticleTranslationBean
     public ?\DateTime $Timestamp_Edit_Article = null;
     public ?BeanListInterface $Menu_BeanList = null;
 
+    public function lastmod()
+    {
+        $result =  $this->Timestamp_Edit_Article;
+        if ($result) {
+            $result = $result->format(\DateTimeInterface::W3C);
+        }
+        return $result;
+    }
+
     public function items()
     {
         return $this->Menu_BeanList ?? [];
