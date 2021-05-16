@@ -50,6 +50,12 @@ class TranslationBeanProcessor extends AbstractBeanProcessor implements Validati
             $text = str_replace(']', '}', $text);
             $bean->set('Translation_Text', $text);
         }
+        if (!$bean->empty('Translation_Code')) {
+            $bean->set('Translation_Code', strtolower(trim($bean->get('Translation_Code'))));
+        }
+        if (!$bean->empty('Translation_Namespace')) {
+            $bean->set('Translation_Namespace', strtolower(trim($bean->get('Translation_Namespace'))));
+        }
     }
 
     protected function translate(string $code)
