@@ -107,7 +107,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAw
      * @param string $articleTranslation_Code
      * @return $this
      */
-    public function setArticleTranslation_Active(bool $articleTranslation_Active)
+    public function setArticleTranslation_Active($articleTranslation_Active)
     {
         $this->getBeanLoader()->filterValue('ArticleTranslation_Active', $articleTranslation_Active);
         foreach ($this->getLinkedFinderList() as $finderLink) {

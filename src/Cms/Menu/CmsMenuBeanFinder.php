@@ -29,6 +29,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->addJoinInfo('CmsMenuType', Join::JOIN_LEFT, 'CmsMenu.CmsMenuType_Code = CmsMenuType.CmsMenuType_Code');
         $loader->addJoinInfo('CmsPage', Join::JOIN_LEFT, 'CmsMenu.CmsPage_ID = CmsPage.CmsPage_ID');
         $loader->addJoinInfo('Article', Join::JOIN_LEFT, 'CmsPage.Article_ID = Article.Article_ID');
+        $loader->addJoinInfo('ArticleTranslation', Join::JOIN_LEFT, 'ArticleTranslation.Article_ID = Article.Article_ID');
         $loader->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'CmsMenu', 'CmsMenu_ID');
@@ -71,7 +72,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         return $this;
     }
 
-    public function setCmsMenuState_Code(string $type): self
+    public function setCmsMenuState_Code($type): self
     {
         $this->getBeanLoader()->filterValue('CmsMenuState_Code', $type);
         return $this;
