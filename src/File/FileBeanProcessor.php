@@ -5,6 +5,7 @@ namespace Pars\Model\File;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\Filesystem\FilesystemHelper;
 use Pars\Helper\String\StringHelper;
 use Pars\Model\File\Directory\FileDirectoryBeanFinder;
 use Pars\Model\File\Type\FileTypeBeanFinder;
@@ -89,10 +90,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
             if ($upload instanceof UploadedFileInterface) {
                 if ($upload->getSize()) {
                     $path = $this->getFilePath($bean);
-                    $dirname = dirname($path);
-                    if (!is_dir($dirname)) {
-                        mkdir($dirname);
-                    }
+                    FilesystemHelper::getDir($path);
                     $upload->moveTo($path);
                 }
             }
