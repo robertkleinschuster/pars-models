@@ -7,6 +7,8 @@ use Pars\Bean\Factory\AbstractBeanFactory;
 /**
  * Class CmsPageBeanFactory
  * @package Pars\Model\Cms\Page
+ * @method CmsPageBean getEmptyBean(array $data)
+ * @method CmsPageBeanList getEmptyBeanList()
  */
 class CmsPageBeanFactory extends AbstractBeanFactory
 {

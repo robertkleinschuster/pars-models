@@ -2,7 +2,6 @@
 
 namespace Pars\Model\Article;
 
-use Cocur\Slugify\Slugify;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
@@ -46,7 +45,10 @@ class ArticleBeanProcessor extends AbstractBeanProcessor implements
 
     protected function translate(string $name): string
     {
-        return $this->getTranslator()->translate($name, 'validation');
+        if ($this->hasTranslator()) {
+            return $this->getTranslator()->translate($name, 'validation');
+        }
+        return $name;
     }
 
     protected function beforeSave(BeanInterface $bean)

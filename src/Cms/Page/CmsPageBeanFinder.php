@@ -3,6 +3,7 @@
 namespace Pars\Model\Cms\Page;
 
 use Laminas\Db\Adapter\Adapter;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\Cms\PageBlock\CmsPageBlockBeanFinder;
@@ -11,6 +12,7 @@ use Pars\Model\Cms\Post\CmsPostBeanFinder;
 /**
  * Class CmsPageBeanFinder
  * @package Pars\Model\Cms\Page
+ * @method CmsPageBeanFactory getBeanFactory()
  * @method DatabaseBeanLoader getBeanLoader() : BeanLoaderInterface
  * @method CmsPageBean getBean(bool $fetchAllData = false)
  * @method CmsPageBeanList getBeanList(bool $fetchAllData = false)
