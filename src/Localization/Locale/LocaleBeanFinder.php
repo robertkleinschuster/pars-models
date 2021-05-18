@@ -26,6 +26,8 @@ use Pars\Core\Localization\LocaleInterface;
 class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinderInterface, LocaleAwareFinderInterface
 {
 
+    protected ParsCache $cache;
+
     protected function createBeanFactory(): BeanFactoryInterface
     {
         return new LocaleBeanFactory();
@@ -45,6 +47,8 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
         $loader->addField('Locale.Locale_Order');
         $loader->addDefaultFields('Locale');
         $loader->addOrder('Locale_Order');
+        $this->cache = new ParsCache(__METHOD__);
+
     }
 
     public function initializeBeanWithAdditionlData(BeanInterface $bean): BeanInterface
@@ -230,12 +234,11 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
         ?string $domain = null,
         ?string $configDefault = null
     ): LocaleInterface {
-        $cache = new ParsCache(__METHOD__);
         $cacheCode = $localeCode . $language . $default . $domain;
-        if (!$cache->has($cacheCode)) {
-            $cache->set($cacheCode, $this->findLocaleFromDB($localeCode, $language, $default, $domain));
+        if (!$this->cache->has($cacheCode)) {
+            $this->cache->set($cacheCode, $this->findLocaleFromDB($localeCode, $language, $default, $domain));
         }
-        return $cache->get($cacheCode);
+        return $this->cache->get($cacheCode);
     }
 
     /**
@@ -256,14 +259,13 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
      */
     public function findLocaleListByLanguage($language)
     {
-        $cache = new ParsCache(__METHOD__);
-        if (!$cache->has($language)) {
+        if (!$this->cache->has($language)) {
             $localeFinder = new LocaleBeanFinder($this->getDatabaseAdapter());
             $localeFinder->filterLocale_Active(true);
             $localeFinder->filterLocale_Language($language);
-            $cache->set($language, $localeFinder->getBeanList(true)->toArray(true));
+            $this->cache->set($language, $localeFinder->getBeanList(true)->toArray(true));
         }
-        return LocaleBeanList::createFromArray($cache->get($language));
+        return LocaleBeanList::createFromArray($this->cache->get($language));
     }
 
 }
