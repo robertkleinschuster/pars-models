@@ -238,11 +238,7 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
         if (!$this->cache->has($cacheCode)) {
             $this->cache->setBean($cacheCode, $this->findLocaleFromDB($localeCode, $language, $default, $domain));
         }
-        $data = $this->cache->get($cacheCode);
-        if ($data instanceof BeanInterface) {
-            $data = $data->toArray(true);
-        }
-        return LocaleBean::createFromArray($data);
+        return $this->cache->getBean($cacheCode);
     }
 
     /**
@@ -267,9 +263,9 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
             $localeFinder = new LocaleBeanFinder($this->getDatabaseAdapter());
             $localeFinder->filterLocale_Active(true);
             $localeFinder->filterLocale_Language($language);
-            $this->cache->set($language, $localeFinder->getBeanList(true)->toArray(true));
+            $this->cache->setBeanFinderResult($language, $localeFinder);
         }
-        return LocaleBeanList::createFromArray($this->cache->get($language));
+        return $this->cache->getBeanList($language);
     }
 
 }
