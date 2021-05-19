@@ -90,7 +90,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
             if ($upload instanceof UploadedFileInterface) {
                 if ($upload->getSize()) {
                     $path = $this->getFilePath($bean);
-                    FilesystemHelper::getDir($path);
+                    FilesystemHelper::createDirectory($path);
                     $upload->moveTo($path);
                 }
             }
