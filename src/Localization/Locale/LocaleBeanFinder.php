@@ -47,7 +47,7 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
         $loader->addField('Locale.Locale_Order');
         $loader->addDefaultFields('Locale');
         $loader->addOrder('Locale_Order');
-        $this->cache = new ParsCache(__METHOD__);
+        $this->cache = new ParsCache('locale-finder');
 
     }
 
