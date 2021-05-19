@@ -83,7 +83,10 @@ class TranslationBeanFinder extends AbstractBeanFinder implements LocaleAwareFin
         $data = [];
         try {
             $cacheId = $locale . $textDomain;
-            $cache = new ParsCache(__CLASS__);
+            static $cache = null;
+            if (null == $cache) {
+                $cache = new ParsCache('translation');
+            }
             if ($cache->has($cacheId)) {
                 $data = $cache->get($cacheId);
             } else {
@@ -92,7 +95,7 @@ class TranslationBeanFinder extends AbstractBeanFinder implements LocaleAwareFin
                 foreach ($this->getBeanListDecorator() as $bean) {
                     $data[$bean->get('Translation_Code')] = $bean->get('Translation_Text');
                 }
-                $cache->set($cacheId , $data);
+                $cache->set($cacheId, $data);
             }
         } catch (\Exception $ex) {
         }
