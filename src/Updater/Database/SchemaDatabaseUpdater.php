@@ -3,12 +3,10 @@
 namespace Pars\Model\Updater\Database;
 
 use Laminas\Db\Sql\Ddl\Column\Boolean;
-use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Column\Integer;
 use Laminas\Db\Sql\Ddl\Column\Text;
 use Laminas\Db\Sql\Ddl\Column\Timestamp;
 use Laminas\Db\Sql\Ddl\Column\Varchar;
-use Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint;
 use Laminas\Db\Sql\Ddl\Constraint\ForeignKey;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Ddl\Constraint\UniqueKey;
@@ -93,6 +91,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, new Varchar('ConfigType_Code', 255));
         $this->addColumnToTable($table, new Varchar('ConfigType_Code_Parent', 255, true));
         $this->addColumnToTable($table, new Boolean('ConfigType_Active', false, 0));
+        $this->addColumnToTable($table, new Integer('ConfigType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('ConfigType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -153,6 +152,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, new Varchar('FileType_Mime', 255));
         $this->addColumnToTable($table, new Varchar('FileType_Name', 255));
         $this->addColumnToTable($table, new Boolean('FileType_Active'));
+        $this->addColumnToTable($table, new Integer('FileType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('FileType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -340,8 +340,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             ->setOption('AUTO_INCREMENT', true);
         $this->addColumnToTable($table, new Varchar('UserRole_Code', 255));
         $this->addColumnToTable($table, new Varchar('UserRole_Name', 255));
-        $this->addColumnToTable($table, new Boolean('UserRole_Active'))
-            ->setDefault(true);
+        $this->addColumnToTable($table, new Boolean('UserRole_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('UserRole_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('UserRole_ID'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -397,7 +397,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('UserPermission');
         $this->addColumnToTable($table, new Varchar('UserPermission_Code', 255));
-        $this->addColumnToTable($table, new Boolean('UserPermission_Active'));
+        $this->addColumnToTable($table, new Boolean('UserPermission_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('UserPermission_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('UserPermission_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -506,6 +507,62 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         return $this->query($table);
     }
 
+    public function updateTableArticleOption()
+    {
+        $table = $this->getTableStatement('ArticleOption');
+        $this->addColumnToTable($table, new Varchar('ArticleOption_Code', 255));
+        $this->addColumnToTable($table, new Boolean('ArticleOption_Active', false, 1));
+        $this->addColumnToTable($table, new Boolean('ArticleOption_Visible', false, 1));
+        $this->addColumnToTable($table, new Text('ArticleOption_Data', 65535, true));
+        $this->addConstraintToTable($table, new PrimaryKey('ArticleOption_Code'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticleOption_DropConstraints()
+    {
+        $table = $this->getTableStatement('ArticleOption', true);
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticleOption_AddConstraints()
+    {
+        $table = $this->getTableStatement('ArticleOption', true);
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+
+    public function updateTableArticle_ArticleOption()
+    {
+        $table = $this->getTableStatement('Article_ArticleOption');
+        $this->addColumnToTable($table, new Integer('Article_ID'));
+        $this->addColumnToTable($table, new Varchar('ArticleOption_Code', 255));
+        $this->addColumnToTable($table, new Text('Article_ArticleOption_Data', 65535, true));
+        $this->addConstraintToTable($table, new PrimaryKey(['Article_ID', 'ArticleOption_Code']));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticle_ArticleOption_DropConstraints()
+    {
+        $table = $this->getTableStatement('Article_ArticleOption', true);
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID', 'CASCADE'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'ArticleOption_Code', 'ArticleOption', 'ArticleOption_Code'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticle_ArticleOption_AddConstraints()
+    {
+        $table = $this->getTableStatement('Article_ArticleOption', true);
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID', 'CASCADE'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'ArticleOption_Code', 'ArticleOption', 'ArticleOption_Code'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
     public function updateTableArticleData()
     {
         $table = $this->getTableStatement('ArticleData');
@@ -587,7 +644,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsMenuState');
         $this->addColumnToTable($table, new Varchar('CmsMenuState_Code', 255));
-        $this->addColumnToTable($table, new Boolean('CmsMenuState_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsMenuState_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsMenuState_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsMenuState_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -612,7 +670,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('CmsMenuType');
         $this->addColumnToTable($table, new Varchar('CmsMenuType_Code', 255));
         $this->addColumnToTable($table, new Varchar('CmsMenuType_Template', 255));
-        $this->addColumnToTable($table, new Boolean('CmsMenuType_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsMenuType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsMenuType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsMenuType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -636,7 +695,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsPageState');
         $this->addColumnToTable($table, new Varchar('CmsPageState_Code', 255));
-        $this->addColumnToTable($table, new Boolean('CmsPageState_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsPageState_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsPageState_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsPageState_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -661,7 +721,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('CmsPageType');
         $this->addColumnToTable($table, new Varchar('CmsPageType_Code', 255));
         $this->addColumnToTable($table, new Varchar('CmsPageType_Template', 255));
-        $this->addColumnToTable($table, new Boolean('CmsPageType_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsPageType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsPageType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsPageType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -686,7 +747,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('CmsPageLayout');
         $this->addColumnToTable($table, new Varchar('CmsPageLayout_Code', 255));
         $this->addColumnToTable($table, new Varchar('CmsPageLayout_Template', 255));
-        $this->addColumnToTable($table, new Boolean('CmsPageLayout_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsPageLayout_Active', false, 1));
+        $this->addColumnToTable($table, new Boolean('CmsPageLayout_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsPageLayout_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -710,7 +772,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsBlockState');
         $this->addColumnToTable($table, new Varchar('CmsBlockState_Code', 255));
-        $this->addColumnToTable($table, new Boolean('CmsBlockState_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsBlockState_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsBlockState_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsBlockState_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -736,7 +799,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('CmsBlockType');
         $this->addColumnToTable($table, new Varchar('CmsBlockType_Code', 255));
         $this->addColumnToTable($table, new Varchar('CmsBlockType_Template', 255));
-        $this->addColumnToTable($table, new Boolean('CmsBlockType_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsBlockType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsBlockType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsBlockType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -760,7 +824,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsPostState');
         $this->addColumnToTable($table, new Varchar('CmsPostState_Code', 255));
-        $this->addColumnToTable($table, new Boolean('CmsPostState_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsPostState_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsPostState_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsPostState_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -785,7 +850,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('CmsPostType');
         $this->addColumnToTable($table, new Varchar('CmsPostType_Code', 255));
         $this->addColumnToTable($table, new Varchar('CmsPostType_Template', 255));
-        $this->addColumnToTable($table, new Boolean('CmsPostType_Active'));
+        $this->addColumnToTable($table, new Boolean('CmsPostType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsPostType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('CmsPostType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -995,7 +1061,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('ImportType');
         $this->addColumnToTable($table, new Varchar('ImportType_Code', 255));
-        $this->addColumnToTable($table, new Boolean('ImportType_Active'));
+        $this->addColumnToTable($table, new Boolean('ImportType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('ImportType_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('ImportType_Code'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);

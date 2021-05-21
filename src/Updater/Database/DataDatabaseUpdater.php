@@ -1113,10 +1113,16 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
      */
     public function updateDataImportType()
     {
-        $data_Mao[] = [
+        $data_Map[] = [
             'ImportType_Code' => 'tesla',
             'ImportType_Active' => 1
         ];
-        return $this->saveDataMap('ImportType', 'ImportType_Code', $data_Mao);
+        return $this->saveDataMap('ImportType', 'ImportType_Code', $data_Map);
+    }
+
+    public function updateDataArticleOption()
+    {
+        $data_Map = [];
+        return $this->saveDataMap('ArticleOption', 'ArticleOption_Code', $data_Map);
     }
 }
