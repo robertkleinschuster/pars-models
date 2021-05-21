@@ -627,22 +627,7 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         ];
         $data_Map[] = [
             'CmsPageLayout_Code' => 'narrow',
-            'CmsPageLayout_Template' => 'layout::small_image',
-            'CmsPageLayout_Active' => 0,
-        ];
-        $data_Map[] = [
-            'CmsPageLayout_Code' => 'small_image',
-            'CmsPageLayout_Template' => 'layout::small_image',
-            'CmsPageLayout_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageLayout_Code' => 'fluid',
-            'CmsPageLayout_Template' => 'layout::big_image',
-            'CmsPageLayout_Active' => 0,
-        ];
-        $data_Map[] = [
-            'CmsPageLayout_Code' => 'big_image',
-            'CmsPageLayout_Template' => 'layout::big_image',
+            'CmsPageLayout_Template' => 'layout::narrow',
             'CmsPageLayout_Active' => 1,
         ];
         return $this->saveDataMap('CmsPageLayout', 'CmsPageLayout_Code', $data_Map);

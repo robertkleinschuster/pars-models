@@ -8,6 +8,7 @@ use Laminas\Db\Sql\Predicate\Expression;
 use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
+use Pars\Helper\Debug\DebugHelper;
 use Pars\Model\Article\ArticleBeanFinder;
 use Pars\Model\File\FileBeanFinder;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
