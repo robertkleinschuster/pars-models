@@ -33,9 +33,20 @@ class CmsMenuBean extends ArticleTranslationBean
         return $result;
     }
 
+    /**
+     * @return CmsMenuBean[]|BeanListInterface
+     */
     public function items()
     {
-        return $this->Menu_BeanList ?? [];
+        if (!isset($this->Menu_BeanList)) {
+            $this->Menu_BeanList = new CmsMenuBeanList();
+        }
+        return $this->Menu_BeanList;
+    }
+
+    public function level()
+    {
+        return $this->CmsMenu_Level;
     }
 
     public function menuType()
