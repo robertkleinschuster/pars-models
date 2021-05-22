@@ -588,31 +588,6 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'CmsPageType_Template' => 'cmspage::columns',
             'CmsPageType_Active' => 1,
         ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'custom_1',
-            'CmsPageType_Template' => 'cmspage::custom_1',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'custom_2',
-            'CmsPageType_Template' => 'cmspage::custom_2',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'custom_3',
-            'CmsPageType_Template' => 'cmspage::custom_3',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'custom_4',
-            'CmsPageType_Template' => 'cmspage::custom_4',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'custom_5',
-            'CmsPageType_Template' => 'cmspage::custom_5',
-            'CmsPageType_Active' => 1,
-        ];
         return $this->saveDataMap('CmsPageType', 'CmsPageType_Code', $data_Map);
     }
 
