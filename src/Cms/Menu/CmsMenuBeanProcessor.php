@@ -36,6 +36,7 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('CmsPage_ID_Parent', 'CmsPage_ID_Parent', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenu_Name', 'CmsMenu_Name', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenu_Order', 'CmsMenu_Order', 'CmsMenu', 'CmsMenu_ID');
+        $saver->addColumn('CmsMenu_Level', 'CmsMenu_Level', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsMenu', 'CmsMenu_ID');

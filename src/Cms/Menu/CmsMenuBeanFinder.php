@@ -23,6 +23,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->addColumn('CmsMenu_ID', 'CmsMenu_ID', 'CmsMenu', 'CmsMenu_ID', true);
         $loader->addColumn('CmsMenu_ID_Parent', 'CmsMenu_ID_Parent', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenu_Order', 'CmsMenu_Order', 'CmsMenu', 'CmsMenu_ID');
+        $loader->addColumn('CmsMenu_Level', 'CmsMenu_Level', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenu_Name', 'CmsMenu_Name', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenuType_Template', 'CmsMenuType_Template', 'CmsMenuType', 'CmsMenuType_Code');
