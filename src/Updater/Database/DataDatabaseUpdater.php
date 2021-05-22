@@ -532,61 +532,73 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateDataCmsPageType()
     {
+        $i = 1;
         $data_Map = [];
+
         $data_Map[] = [
-            'CmsPageType_Code' => 'home',
-            'CmsPageType_Template' => 'cmspage::home',
+            'CmsPageType_Code' => 'default',
+            'CmsPageType_Template' => 'cmspage::default',
             'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
         ];
+
         $data_Map[] = [
-            'CmsPageType_Code' => 'poll',
-            'CmsPageType_Template' => 'cmspage::poll',
+            'CmsPageType_Code' => 'blog',
+            'CmsPageType_Template' => 'cmspage::blog',
             'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'about',
-            'CmsPageType_Template' => 'cmspage::about',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
         ];
         $data_Map[] = [
             'CmsPageType_Code' => 'redirect',
             'CmsPageType_Template' => 'cmspage::redirect',
             'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
         ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'contact',
-            'CmsPageType_Template' => 'cmspage::contact',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'blog',
-            'CmsPageType_Template' => 'cmspage::blog',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'faq',
-            'CmsPageType_Template' => 'cmspage::faq',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'gallery',
-            'CmsPageType_Template' => 'cmspage::gallery',
-            'CmsPageType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsPageType_Code' => 'tesla',
-            'CmsPageType_Template' => 'cmspage::tesla',
-            'CmsPageType_Active' => 1,
-        ];
+
         $data_Map[] = [
             'CmsPageType_Code' => 'tiles',
             'CmsPageType_Template' => 'cmspage::tiles',
             'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
         ];
         $data_Map[] = [
             'CmsPageType_Code' => 'columns',
             'CmsPageType_Template' => 'cmspage::columns',
             'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsPageType_Code' => 'about',
+            'CmsPageType_Template' => 'cmspage::about',
+            'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsPageType_Code' => 'faq',
+            'CmsPageType_Template' => 'cmspage::faq',
+            'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
+        ];
+        $data_Map[] = [
+            'CmsPageType_Code' => 'gallery',
+            'CmsPageType_Template' => 'cmspage::gallery',
+            'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
+        ];
+        $data_Map[] = [
+            'CmsPageType_Code' => 'tesla',
+            'CmsPageType_Template' => 'cmspage::tesla',
+            'CmsPageType_Active' => 1,
+            'CmsPageType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsPageType_Code' => 'home',
+            'CmsPageType_Template' => 'cmspage::home',
+            'CmsPageType_Active' => 0,
+            'CmsPageType_Order' => $i++,
         ];
         return $this->saveDataMap('CmsPageType', 'CmsPageType_Code', $data_Map);
     }
@@ -643,52 +655,73 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateDataCmsBlockType()
     {
+        $i = 1;
         $data_Map = [];
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'default',
+            'CmsBlockType_Template' => 'cmsblock::default',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'banner',
+            'CmsBlockType_Template' => 'cmsblock::banner',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'tiles',
+            'CmsBlockType_Template' => 'cmsblock::tiles',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'picture',
+            'CmsBlockType_Template' => 'cmsblock::picture',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'video',
+            'CmsBlockType_Template' => 'cmsblock::video',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'link',
+            'CmsBlockType_Template' => 'cmsblock::link',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'text',
+            'CmsBlockType_Template' => 'cmsblock::text',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
         $data_Map[] = [
             'CmsBlockType_Code' => 'contact',
             'CmsBlockType_Template' => 'cmsblock::contact',
-            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Active' => 0,
+            'CmsBlockType_Order' => $i++,
         ];
         $data_Map[] = [
             'CmsBlockType_Code' => 'poll',
             'CmsBlockType_Template' => 'cmsblock::poll',
             'CmsBlockType_Active' => 0,
+            'CmsBlockType_Order' => $i++,
         ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'text',
-            'CmsBlockType_Template' => 'cmsblock::text',
-            'CmsBlockType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'banner',
-            'CmsBlockType_Template' => 'cmsblock::banner',
-            'CmsBlockType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'video',
-            'CmsBlockType_Template' => 'cmsblock::video',
-            'CmsBlockType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'picture',
-            'CmsBlockType_Template' => 'cmsblock::picture',
-            'CmsBlockType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'link',
-            'CmsBlockType_Template' => 'cmsblock::link',
-            'CmsBlockType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'default',
-            'CmsBlockType_Template' => 'cmsblock::default',
-            'CmsBlockType_Active' => 1,
-        ];
-        $data_Map[] = [
-            'CmsBlockType_Code' => 'tiles',
-            'CmsBlockType_Template' => 'cmsblock::tiles',
-            'CmsBlockType_Active' => 1,
-        ];
+
+
+
+
         return $this->saveDataMap('CmsBlockType', 'CmsBlockType_Code', $data_Map);
     }
 
