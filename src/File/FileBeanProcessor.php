@@ -151,25 +151,25 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
                         $result = true;
                         break;
                     case UPLOAD_ERR_CANT_WRITE:
-                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.cant.write'));
+                        $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.error.cant.write'));
                         break;
                     case UPLOAD_ERR_FORM_SIZE:
-                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.form.size'));
+                        $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.error.form.size'));
                         break;
                     case UPLOAD_ERR_INI_SIZE:
-                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.ini.size'));
+                        $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.error.ini.size'));
                         break;
                     case UPLOAD_ERR_NO_FILE:
-                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error.no.file'));
+                        $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.error.no.file'));
                         break;
                     default:
-                        $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
+                        $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.error'));
                 }
             } else {
-                $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.error'));
+                $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.error'));
             }
         } else if ($bean->empty('File_ID')) {
-            $this->getValidationHelper()->addError('File_Upload', $this->translate('file.upload.empty'));
+            $this->getValidationHelper()->addError('File_Upload', $this->translateValidation('file.upload.empty'));
         } else {
             $result = true;
         }
@@ -186,7 +186,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
     {
         $result = false;
         if ($bean->empty('File_Name')) {
-            $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.empty'));
+            $this->getValidationHelper()->addError('File_Name', $this->translateValidation('file.name.empty'));
         } else {
             $finder = new FileBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('File_ID')) {
@@ -194,7 +194,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
             }
             $finder->filterFile_Name($bean->get('File_Name'));
             if ($finder->count() > 0) {
-                $this->getValidationHelper()->addError('File_Name', $this->translate('file.name.unique'));
+                $this->getValidationHelper()->addError('File_Name', $this->translateValidation('file.name.unique'));
             } else {
                 $result = true;
             }
@@ -206,7 +206,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
     {
         $result = false;
         if ($bean->empty('File_Code')) {
-            $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.empty'));
+            $this->getValidationHelper()->addError('File_Code', $this->translateValidation('file.code.empty'));
         } else {
             $finder = new FileBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('File_ID')) {
@@ -214,7 +214,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
             }
             $finder->filterFile_Code($bean->get('File_Code'));
             if ($finder->count() > 0) {
-                $this->getValidationHelper()->addError('File_Code', $this->translate('file.code.unique'));
+                $this->getValidationHelper()->addError('File_Code', $this->translateValidation('file.code.unique'));
             } else {
                 $result = true;
             }
@@ -232,13 +232,13 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
     {
         $result= false;
         if ($bean->empty('FileType_Code')) {
-            $this->getValidationHelper()->addError('FileType_Code', $this->translate('filetype.code.empty'));
+            $this->getValidationHelper()->addError('FileType_Code', $this->translateValidation('filetype.code.empty'));
         } else {
             $finder = new FileTypeBeanFinder($this->getDatabaseAdapter()->getDbAdapter());
             $finder->setFileType_Code($bean->get('FileType_Code'));
             $finder->setFileType_Active(true);
             if ($finder->count() !== 1) {
-                $this->getValidationHelper()->addError('FileType_Code', $this->translate('filetype.code.invalid'));
+                $this->getValidationHelper()->addError('FileType_Code', $this->translateValidation('filetype.code.invalid'));
             } else {
                 $result = true;
             }
@@ -250,7 +250,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
     {
         $result= false;
         if ($bean->empty('FileDirectory_ID')) {
-            $this->getValidationHelper()->addError('FileDirectory_ID', $this->translate('filedirectory.code.empty'));
+            $this->getValidationHelper()->addError('FileDirectory_ID', $this->translateValidation('filedirectory.code.empty'));
         } else {
             $result = true;
         }
