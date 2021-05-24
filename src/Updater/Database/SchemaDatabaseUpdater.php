@@ -3,10 +3,12 @@
 namespace Pars\Model\Updater\Database;
 
 use Laminas\Db\Sql\Ddl\Column\Boolean;
+use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Column\Integer;
 use Laminas\Db\Sql\Ddl\Column\Text;
 use Laminas\Db\Sql\Ddl\Column\Timestamp;
 use Laminas\Db\Sql\Ddl\Column\Varchar;
+use Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint;
 use Laminas\Db\Sql\Ddl\Constraint\ForeignKey;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Ddl\Constraint\UniqueKey;
@@ -231,6 +233,33 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addConstraintToTable($table, new ForeignKey(null, 'FileType_Code', 'FileType', 'FileType_Code'));
         $this->addConstraintToTable($table, new ForeignKey(null, 'FileDirectory_ID', 'FileDirectory', 'FileDirectory_ID', 'CASCADE'));
         $this->addConstraintToTable($table, new UniqueKey(['File_Code', 'FileDirectory_ID']));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTablePicture()
+    {
+        $table = $this->getTableStatement('Picture');
+        $this->addColumnToTable($table, new Integer('Picture_ID'))
+            ->setOption('AUTO_INCREMENT', true);
+        $this->addColumnToTable($table, new Integer('File_ID'));
+        $this->addConstraintToTable($table, new PrimaryKey('Picture_ID'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTablePicture_DropConstraints()
+    {
+        $table = $this->getTableStatement('Picture', true);
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'File_ID', 'File', 'File_ID'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTablePicture_AddConstraints()
+    {
+        $table = $this->getTableStatement('Picture', true);
+        $this->addConstraintToTable($table, new ForeignKey(null, 'File_ID', 'File', 'File_ID'));
         $this->addDefaultConstraintsToTable($table);
         return $this->query($table);
     }
@@ -636,6 +665,34 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addConstraintToTable($table, new ForeignKey(null, 'File_ID', 'File', 'File_ID'));
         $this->addConstraintToTable($table, new UniqueKey(['Locale_Code', 'ArticleTranslation_Code']));
         $this->addConstraintToTable($table, new Index('ArticleTranslation_Host'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticle_Picture()
+    {
+        $table = $this->getTableStatement('Article_Picture');
+        $this->addColumnToTable($table, new Integer('Article_ID'));
+        $this->addColumnToTable($table, new Integer('Picture_ID'));
+        $this->addConstraintToTable($table, new PrimaryKey(['Article_ID', 'Picture_ID']));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticle_Picture_DropConstraints()
+    {
+        $table = $this->getTableStatement('Article_Picture', true);
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Picture_ID', 'Picture', 'Picture_ID'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableArticle_Picture_AddConstraints()
+    {
+        $table = $this->getTableStatement('Article_Picture', true);
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Picture_ID', 'Picture', 'Picture_ID'));
         $this->addDefaultConstraintsToTable($table);
         return $this->query($table);
     }
