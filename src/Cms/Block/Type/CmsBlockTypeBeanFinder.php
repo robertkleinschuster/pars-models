@@ -22,13 +22,18 @@ class CmsBlockTypeBeanFinder extends AbstractBeanFinder
         $loader->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlockType', 'CmsBlockType_Code', true);
         $loader->addColumn('CmsBlockType_Active', 'CmsBlockType_Active', 'CmsBlockType', 'CmsBlockType_Code');
         $loader->addColumn('CmsBlockType_Order', 'CmsBlockType_Order', 'CmsBlockType', 'CmsBlockType_Code');
-        $this->order(['CmsBlockType_Order' => self::ORDER_MODE_DESC]);
         parent::__construct($loader, new CmsBlockTypeBeanFactory());
     }
 
     public function setCmsBlockType_Active(bool $active): self
     {
         $this->getBeanLoader()->filterValue('CmsBlockType_Active', $active);
+        return $this;
+    }
+
+    public function orderByOrderField()
+    {
+        $this->order(['CmsBlockType_Order' => self::ORDER_MODE_ASC]);
         return $this;
     }
 }
