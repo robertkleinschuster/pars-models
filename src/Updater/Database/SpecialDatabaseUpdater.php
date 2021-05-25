@@ -9,11 +9,14 @@ use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
 use Pars\Core\Database\Updater\AbstractDatabaseUpdater;
+use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
+use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
 use Pars\Model\Authorization\Permission\PermissionBeanFinder;
 use Pars\Model\Authorization\Role\RoleBeanFinder;
 use Pars\Model\Authorization\Role\RoleBeanProcessor;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanProcessor;
+use Pars\Pattern\Exception\CoreException;
 
 /**
  * Class SpecialUpdater
@@ -113,36 +116,36 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             'media',
             'article',
             'article.create',
-          #  'article.edit',
-          #  'article.delete',
-          #  'cmsmenu',
-          #  'cmsmenu.create',
-          #  'cmsmenu.edit',
-          #  'cmsmenu.delete',
+            #  'article.edit',
+            #  'article.delete',
+            #  'cmsmenu',
+            #  'cmsmenu.create',
+            #  'cmsmenu.edit',
+            #  'cmsmenu.delete',
             'cmspage',
             'cmspage.create',
-          #  'cmspage.edit',
-          #  'cmspage.delete',
+            #  'cmspage.edit',
+            #  'cmspage.delete',
             'cmspageblock',
             'cmspageblock.create',
-          #  'cmspageblock.edit',
-          #  'cmspageblock.delete',
+            #  'cmspageblock.edit',
+            #  'cmspageblock.delete',
             'cmsblock',
             'cmsblock.create',
-          #  'cmsblock.edit',
-          #  'cmsblock.delete',
+            #  'cmsblock.edit',
+            #  'cmsblock.delete',
             'cmspost',
             'cmspost.create',
-          #  'cmspost.edit',
-          #  'cmspost.delete',
+            #  'cmspost.edit',
+            #  'cmspost.delete',
             'file',
             'file.create',
-          #  'file.edit',
-          #  'file.delete',
+            #  'file.edit',
+            #  'file.delete',
             'filedirectory',
             'filedirectory.create',
-          #  'filedirectory.edit',
-          #  'filedirectory.delete',
+            #  'filedirectory.edit',
+            #  'filedirectory.delete',
         ];
         return $this->rolePermissions('author', $authorPermissions);
     }
@@ -384,28 +387,49 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
         return false;
     }
 
-  /*  public function updateBenchmarkBackend()
+    public function updateDeleteArticleTranslationFile()
     {
-        ini_set('max_execution_time', 300);
-        $finder = new TranslationBeanFinder($this->adapter);
-        $beanList = $finder->getBeanFactory()->getEmptyBeanList();
-        for ($i  = 0; $i < 10000; $i++) {
-            $bean = $finder->getBeanFactory()->getEmptyBean([]);
-            $bean->Locale_Code = 'de_AT';
-            $bean->Translation_Code = 'Benchmark ' . $i;
-            $bean->Translation_Text = 'Benchmark ' . $i;
-            $bean->Translation_Namespace = 'benchmark';
-            $finder->setTranslation_Code($bean->Translation_Code);
-            if ($finder->count() === 0) {
-                $beanList->push($bean);
+        $finder = new ArticleTranslationBeanFinder($this->adapter, null, false);
+        $beanListToSave = $finder->getBeanFactory()->getEmptyBeanList();
+        foreach ($finder->getBeanListDecorator() as $bean) {
+            if ($bean->isset('File_ID')) {
+                $bean->set('File_ID', null);
+                $beanListToSave->push($bean);
             }
         }
-
-        $processor = new TranslationBeanProcessor($this->adapter);
-        $processor->setBeanList($beanList);
+        $processor = new ArticleTranslationBeanProcessor($this->adapter);
+        $processor->setBeanList($beanListToSave);
         if ($this->getMode() == self::MODE_EXECUTE) {
             $processor->save();
         }
-        return $beanList->count();
-    }*/
+        if ($processor->getValidationHelper()->hasError()) {
+            throw new CoreException($processor->getValidationHelper()->getSummary());
+        }
+        return $beanListToSave->count();
+    }
+
+    /*  public function updateBenchmarkBackend()
+      {
+          ini_set('max_execution_time', 300);
+          $finder = new TranslationBeanFinder($this->adapter);
+          $beanList = $finder->getBeanFactory()->getEmptyBeanList();
+          for ($i  = 0; $i < 10000; $i++) {
+              $bean = $finder->getBeanFactory()->getEmptyBean([]);
+              $bean->Locale_Code = 'de_AT';
+              $bean->Translation_Code = 'Benchmark ' . $i;
+              $bean->Translation_Text = 'Benchmark ' . $i;
+              $bean->Translation_Namespace = 'benchmark';
+              $finder->setTranslation_Code($bean->Translation_Code);
+              if ($finder->count() === 0) {
+                  $beanList->push($bean);
+              }
+          }
+
+          $processor = new TranslationBeanProcessor($this->adapter);
+          $processor->setBeanList($beanList);
+          if ($this->getMode() == self::MODE_EXECUTE) {
+              $processor->save();
+          }
+          return $beanList->count();
+      }*/
 }

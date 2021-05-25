@@ -3,6 +3,7 @@
 
 namespace Pars\Model\Updater;
 
+use Pars\Core\Container\ParsContainer;
 use Pars\Model\Updater\Database\DataDatabaseUpdater;
 use Pars\Model\Updater\Database\SchemaDatabaseUpdater;
 use Pars\Model\Updater\Database\SpecialDatabaseUpdater;
@@ -18,11 +19,11 @@ class ParsUpdater extends \Pars\Core\Deployment\ParsUpdater
      */
     public function getDbUpdaterList(): array
     {
-        $adapter = $this->container->get(\Laminas\Db\Adapter\AdapterInterface::class);
+        $parsContainer = $this->container->get(ParsContainer::class);
         return parent::getDbUpdaterList() + [
-            new SchemaDatabaseUpdater($adapter),
-            new DataDatabaseUpdater($adapter),
-            new SpecialDatabaseUpdater($adapter),
+            new SchemaDatabaseUpdater($parsContainer),
+            new DataDatabaseUpdater($parsContainer),
+            new SpecialDatabaseUpdater($parsContainer),
         ];
     }
 }
