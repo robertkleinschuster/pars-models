@@ -8,6 +8,7 @@ use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Loader\BeanLoaderInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Data\ArticleDataBeanFinder;
+use Pars\Model\Article\Picture\ArticlePictureBeanFinder;
 
 /**
  * Class ArticleBeanFinder
@@ -30,6 +31,7 @@ class ArticleBeanFinder extends AbstractBeanFinder
         parent::__construct($loader, $beanFactory ?? new ArticleBeanFactory());
         if ($initLinked) {
             $this->addLinkedFinder(new ArticleDataBeanFinder($adapter), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
+            $this->addLinkedFinder(new ArticlePictureBeanFinder($adapter), 'ArticlePicture_BeanList', 'Article_ID', 'Article_ID');
         }
     }
 
