@@ -674,6 +674,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('Article_Picture');
         $this->addColumnToTable($table, new Integer('Article_ID'));
         $this->addColumnToTable($table, new Integer('Picture_ID'));
+        $this->addColumnToTable($table, new Integer('Article_Picture_Order', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey(['Article_ID', 'Picture_ID']));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);

@@ -27,6 +27,8 @@ class ArticlePictureBeanFinder extends PictureBeanFinder
             ->setKey(true)
             ->setJoinTableSelf('File')
             ->setJoinField('File_ID');
+        $loader->addField('Article_Picture.Article_Picture_Order');
+        $loader->order(['Article_Picture_Order']);
     }
 
 

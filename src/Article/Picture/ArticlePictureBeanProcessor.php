@@ -4,9 +4,11 @@
 namespace Pars\Model\Article\Picture;
 
 
+use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Pars\Bean\Validator\FieldNotEmptyBeanValidator;
 use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Model\Cms\PageBlock\CmsPageBlockBeanFinder;
 
 class ArticlePictureBeanProcessor extends AbstractDatabaseBeanProcessor
 {
@@ -22,6 +24,14 @@ class ArticlePictureBeanProcessor extends AbstractDatabaseBeanProcessor
     {
        $saver->addField('Article_Picture.Article_ID')->setKey(true);
        $saver->addField('Article_Picture.Picture_ID')->setKey(true);
+       $saver->addField('Article_Picture.Article_Picture_Order');
     }
+
+    protected function initMetaFieldHandler()
+    {
+        parent::initMetaFieldHandler();
+        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new ArticlePictureBeanFinder($this->getDatabaseAdapter()), 'Article_Picture_Order', 'Article_ID'));
+    }
+
 
 }
