@@ -2,6 +2,7 @@
 
 namespace Pars\Model\Updater\Database;
 
+use Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn;
 use Laminas\Db\Sql\Ddl\Column\Boolean;
 use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Column\Integer;
@@ -1204,4 +1205,149 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addDefaultConstraintsToTable($table);
         return $this->query($table);
     }
+
+    public function updateTableFormType()
+    {
+        $table = $this->getTableStatement('FormType');
+        $this->addColumnToTable($table, new Varchar('FormType_Code', 255));
+        $this->addColumnToTable($table, new Boolean('FormType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('FormType_Order', false, 0));
+        $this->addConstraintToTable($table, new PrimaryKey('FormType_Code'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormType_DropConstaints()
+    {
+        $table = $this->getTableStatement('FormType', true);
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormType_AddConstraints()
+    {
+        $table = $this->getTableStatement('FormType', true);
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableForm()
+    {
+        $table = $this->getTableStatement('Form');
+        $this->addColumnToTable($table, new Integer('Form_ID'))
+            ->setOption('AUTO_INCREMENT', true);
+        $this->addColumnToTable($table, new Varchar('FormType_Code', 255));
+        $this->addColumnToTable($table, new Varchar('Form_Code', 255));
+        $this->addConstraintToTable($table, new PrimaryKey('Form_ID'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableForm_DropConstaints()
+    {
+        $table = $this->getTableStatement('Form', true);
+        $this->dropConstraintFromTable($table, new UniqueKey('Form_Code'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'FormType_Code', 'FormType', 'FormType_Code'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableForm_AddConstraints()
+    {
+        $table = $this->getTableStatement('Form', true);
+        $this->addConstraintToTable($table, new UniqueKey('Form_Code'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'FormType_Code', 'FormType', 'FormType_Code'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormData()
+    {
+        $table = $this->getTableStatement('FormData');
+        $this->addColumnToTable($table, new Integer('FormData_ID'))
+            ->setOption('AUTO_INCREMENT', true);
+        $this->addColumnToTable($table, new Integer('Form_ID'));
+        $this->addColumnToTable($table, new Text('FormData_Data', 65535));
+        $this->addConstraintToTable($table, new PrimaryKey('FormData_ID'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormData_DropConstaints()
+    {
+        $table = $this->getTableStatement('FormData', true);
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Form_ID', 'Form', 'Form_ID', 'CASCADE'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormData_AddConstraints()
+    {
+        $table = $this->getTableStatement('FormData', true);
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Form_ID', 'Form', 'Form_ID', 'CASCADE'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormFieldType()
+    {
+        $table = $this->getTableStatement('FormFieldType');
+        $this->addColumnToTable($table, new Varchar('FormFieldType_Code', 255));
+        $this->addColumnToTable($table, new Boolean('FormFieldType_Active', false, 1));
+        $this->addColumnToTable($table, new Integer('FormFieldType_Order', false, 0));
+        $this->addConstraintToTable($table, new PrimaryKey('FormFieldType_Code'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormFieldType_DropConstaints()
+    {
+        $table = $this->getTableStatement('FormFieldType', true);
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormFieldType_AddConstraints()
+    {
+        $table = $this->getTableStatement('FormFieldType', true);
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormField()
+    {
+        $table = $this->getTableStatement('FormField');
+        $this->addColumnToTable($table, new Integer('FormField_ID'))
+            ->setOption('AUTO_INCREMENT', true);
+        $this->addColumnToTable($table, new Integer('Form_ID'));
+        $this->addColumnToTable($table, new Varchar('FormFieldType_Code', 255));
+        $this->addColumnToTable($table, new Boolean('FormField_Required', false, 0));
+        $this->addColumnToTable($table, new Varchar('FormField_Code', 255));
+        $this->addColumnToTable($table, new Integer('FormField_Order', false, 0));
+        $this->addConstraintToTable($table, new PrimaryKey('FormField_ID'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormField_DropConstaints()
+    {
+        $table = $this->getTableStatement('FormField', true);
+        $this->dropConstraintFromTable($table, new UniqueKey('FormField_Code'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Form_ID', 'Form', 'Form_ID', 'CASCADE'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'FormFieldType_Code', 'FormFieldType', 'FormFieldType_Code'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFormField_AddConstraints()
+    {
+        $table = $this->getTableStatement('FormField', true);
+        $this->addConstraintToTable($table, new UniqueKey('FormField_Code'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Form_ID', 'Form', 'Form_ID', 'CASCADE'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'FormFieldType_Code', 'FormFieldType', 'FormFieldType_Code'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+
 }

@@ -1089,6 +1089,23 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         ];
 
         $data_Map[] = [
+            'UserPermission_Code' => 'form',
+            'UserPermission_Active' => true,
+        ];
+        $data_Map[] = [
+            'UserPermission_Code' => 'form.delete',
+            'UserPermission_Active' => true,
+        ];
+        $data_Map[] = [
+            'UserPermission_Code' => 'form.create',
+            'UserPermission_Active' => true,
+        ];
+        $data_Map[] = [
+            'UserPermission_Code' => 'form.edit',
+            'UserPermission_Active' => true,
+        ];
+
+        $data_Map[] = [
             'UserPermission_Code' => 'import',
             'UserPermission_Active' => true,
         ];
@@ -1151,5 +1168,34 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $data_Map = [];
         return $this->saveDataMap('ArticleOption', 'ArticleOption_Code', $data_Map);
+    }
+
+    public function updateFormType()
+    {
+        $data_Map = [];
+        $i = 0;
+        $data_Map[] = [
+            'FormType_Code' => 'default',
+            'FormType_Active' => 1,
+            'FormType_Order' => ++$i,
+        ];
+        return $this->saveDataMap('FormType', 'FormType_Code', $data_Map);
+    }
+
+    public function updateFormFieldType()
+    {
+        $data_Map = [];
+        $i = 0;
+        $data_Map[] = [
+            'FormFieldType_Code' => 'text',
+            'FormFieldType_Active' => 1,
+            'FormFieldType_Order' => ++$i,
+        ];
+        $data_Map[] = [
+            'FormFieldType_Code' => 'checkbox',
+            'FormFieldType_Active' => 1,
+            'FormFieldType_Order' => ++$i,
+        ];
+        return $this->saveDataMap('FormFieldType', 'FormFieldType_Code', $data_Map);
     }
 }
