@@ -45,6 +45,17 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
         }
     }
 
+
+    public function filterCmsPageType_Code(string $type)
+    {
+        return $this->filterValue('CmsPageType_Code', $type);
+    }
+
+    public function filterBlogPage()
+    {
+        return $this->filterCmsPageType_Code('blog');
+    }
+
     public function initPublished(string $timezone = null)
     {
         foreach ($this->getLinkedFinderList() as $finderLink) {

@@ -16,6 +16,8 @@ use Pars\Model\Authorization\Role\RoleBeanFinder;
 use Pars\Model\Authorization\Role\RoleBeanProcessor;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanProcessor;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
 use Pars\Pattern\Exception\CoreException;
 
 /**
@@ -419,7 +421,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
               $bean->Translation_Code = 'Benchmark ' . $i;
               $bean->Translation_Text = 'Benchmark ' . $i;
               $bean->Translation_Namespace = 'benchmark';
-              $finder->setTranslation_Code($bean->Translation_Code);
+              $finder->filterTranslation_Code($bean->Translation_Code);
               if ($finder->count() === 0) {
                   $beanList->push($bean);
               }

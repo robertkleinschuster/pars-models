@@ -8,6 +8,7 @@ use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Helper\String\StringHelper;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\File\FileBeanFinder;
@@ -47,6 +48,14 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
     protected function translate(string $name): string
     {
         return $this->getTranslator()->translate($name, 'validation');
+    }
+
+    protected function beforeSave(BeanInterface $bean)
+    {
+        if ($bean->isset('FileDirectory_Code')) {
+            $bean->set('FileDirectory_Code', StringHelper::slugify($bean->get('FileDirectory_Code')));
+        }
+        parent::beforeSave($bean);
     }
 
     protected function validateForSave(BeanInterface $bean): bool

@@ -684,7 +684,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('Article_Picture', true);
         $this->dropConstraintFromTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID'));
-        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Picture_ID', 'Picture', 'Picture_ID'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Picture_ID', 'Picture', 'Picture_ID', 'CASCADE'));
         $this->dropDefaultConstraintsFromTable($table);
         return $this->query($table);
     }
@@ -693,7 +693,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('Article_Picture', true);
         $this->addConstraintToTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID'));
-        $this->addConstraintToTable($table, new ForeignKey(null, 'Picture_ID', 'Picture', 'Picture_ID'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Picture_ID', 'Picture', 'Picture_ID', 'CASCADE'));
         $this->addDefaultConstraintsToTable($table);
         return $this->query($table);
     }
