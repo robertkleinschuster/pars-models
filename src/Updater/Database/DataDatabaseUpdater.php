@@ -158,6 +158,25 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'ConfigType_Code' => 'base',
         ];
         $data_Map[] = [
+            'Config_Code' => 'theme',
+            'Config_Value' => 'dark',
+            'Config_Description' => '',
+            'Config_Options' => json_encode([
+                'dark',
+                'light',
+                'darkblue',
+                'lightblue',
+                'darkgreen',
+                'lightgreen',
+                'darkred',
+                'lightred',
+                'darkorange',
+                'lightorange',
+            ]),
+            'Config_Locked' => 0,
+            'ConfigType_Code' => 'frontend',
+        ];
+        $data_Map[] = [
             'Config_Code' => 'mail.smtp.name',
             'Config_Value' => '',
             'Config_Locked' => 0,
