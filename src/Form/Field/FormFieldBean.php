@@ -15,4 +15,19 @@ class FormFieldBean extends AbstractBaseBean
     public ?string $FormField_Code = null;
     public ?bool $FormField_Required = null;
 
+    public function code()
+    {
+        return $this->FormField_Code;
+    }
+
+    public function fieldType()
+    {
+        return $this->FormFieldType_Code;
+    }
+
+    public function required()
+    {
+        return $this->FormField_Required;
+    }
+
 }
