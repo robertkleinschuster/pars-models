@@ -1084,7 +1084,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, new Integer('CmsPage_ID', true, null));
         $this->addColumnToTable($table, new Integer('CmsPage_ID_Parent', true));
         $this->addColumnToTable($table, new Integer('CmsMenu_Order', false, 0));
-        $this->addColumnToTable($table, new Integer('CmsMenu_Level', false, 1));
+        $this->addColumnToTable($table, new Integer('CmsMenu_Level', true, 1));
         $this->addColumnToTable($table, new Varchar('CmsMenu_Name', 255, true));
         $this->addColumnToTable($table, new Varchar('CmsMenuState_Code', 255));
         $this->addColumnToTable($table, new Varchar('CmsMenuType_Code', 255, true));
