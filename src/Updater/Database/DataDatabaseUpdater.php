@@ -1192,6 +1192,11 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'FormFieldType_Order' => ++$i,
         ];
         $data_Map[] = [
+            'FormFieldType_Code' => 'email',
+            'FormFieldType_Active' => 1,
+            'FormFieldType_Order' => ++$i,
+        ];
+        $data_Map[] = [
             'FormFieldType_Code' => 'textarea',
             'FormFieldType_Active' => 1,
             'FormFieldType_Order' => ++$i,
