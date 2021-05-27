@@ -13,6 +13,8 @@ class FormBean extends AbstractBaseBean
     public ?int $Form_ID = null;
     public ?string $FormType_Code = null;
     public ?string $Form_Code = null;
+    public ?bool $Form_SendEmail = null;
+    public ?bool $Form_IndexInfo = null;
     public ?BeanListInterface $FormField_BeanList = null;
 
     public function template()

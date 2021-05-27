@@ -1238,6 +1238,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             ->setOption('AUTO_INCREMENT', true);
         $this->addColumnToTable($table, new Varchar('FormType_Code', 255));
         $this->addColumnToTable($table, new Varchar('Form_Code', 255));
+        $this->addColumnToTable($table, new Boolean('Form_SendEmail', false, 0));
+        $this->addColumnToTable($table, new Boolean('Form_IndexInfo', false, 0));
         $this->addConstraintToTable($table, new PrimaryKey('Form_ID'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -1267,6 +1269,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, new Integer('FormData_ID'))
             ->setOption('AUTO_INCREMENT', true);
         $this->addColumnToTable($table, new Integer('Form_ID'));
+        $this->addColumnToTable($table, new Boolean('FormData_Read', false, 0));
         $this->addColumnToTable($table, new Text('FormData_Data', 65535));
         $this->addConstraintToTable($table, new PrimaryKey('FormData_ID'));
         $this->addDefaultColumnsToTable($table);

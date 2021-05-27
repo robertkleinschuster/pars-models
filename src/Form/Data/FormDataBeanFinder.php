@@ -24,8 +24,10 @@ class FormDataBeanFinder extends AbstractDatabaseBeanFinder
     {
         $loader->addField('FormData.FormData_ID')->setKey(true);
         $loader->addField('FormData.Form_ID');
+        $loader->addField('FormData.FormData_Read');
         $loader->addField('FormData.FormData_Data');
         $loader->addDefaultFields('FormData');
+        $loader->addOrder('Timestamp_Create', self::ORDER_MODE_DESC);
     }
 
 }

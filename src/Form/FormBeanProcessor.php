@@ -17,8 +17,10 @@ class FormBeanProcessor extends AbstractDatabaseBeanProcessor
     protected function initSaver(DatabaseBeanSaver $saver)
     {
         $saver->addField('Form.Form_ID')->setKey(true);
-        $saver->addField('Form.Form_Code');
         $saver->addField('Form.FormType_Code');
+        $saver->addField('Form.Form_Code');
+        $saver->addField('Form.Form_SendEmail');
+        $saver->addField('Form.Form_IndexInfo');
         $saver->addDefaultFields('Form');
     }
 

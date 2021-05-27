@@ -13,6 +13,7 @@ class FormDataBeanProcessor extends AbstractDatabaseBeanProcessor
     {
         $saver->addField('FormData.FormData_ID')->setKey(true);
         $saver->addField('FormData.Form_ID');
+        $saver->addField('FormData.FormData_Read');
         $saver->addField('FormData.FormData_Data');
         $saver->addDefaultFields('FormData');
     }
