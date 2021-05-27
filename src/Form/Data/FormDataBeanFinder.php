@@ -9,11 +9,16 @@ use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Form\FormBeanFactory;
 
+/**
+ * Class FormDataBeanFinder
+ * @package Pars\Model\Form\Data
+ * @method FormDataBeanFactory getBeanFactory()
+ */
 class FormDataBeanFinder extends AbstractDatabaseBeanFinder
 {
     protected function createBeanFactory(): BeanFactoryInterface
     {
-        return new FormBeanFactory();
+        return new FormDataBeanFactory();
     }
 
     protected function initLoader(DatabaseBeanLoader $loader)
