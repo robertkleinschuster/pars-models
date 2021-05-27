@@ -992,7 +992,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->dropConstraintFromTable($table, new ForeignKey(null, 'CmsBlockState_Code', 'CmsBlockState', 'CmsBlockState_Code'));
         $this->dropConstraintFromTable($table, new ForeignKey(null, 'CmsBlockType_Code', 'CmsBlockType', 'CmsBlockType_Code'));
         $this->dropConstraintFromTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID'));
-        $this->dropConstraintFromTable($table, new ForeignKey(null, 'CmsBlock_ID_Parent', 'CmsBlock', 'CmsBlock_ID'));
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'CmsBlock_ID_Parent', 'CmsBlock', 'CmsBlock_ID', 'CASCADE'));
         $this->dropDefaultConstraintsFromTable($table);
         return $this->query($table);
     }
@@ -1003,7 +1003,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addConstraintToTable($table, new ForeignKey(null, 'CmsBlockState_Code', 'CmsBlockState', 'CmsBlockState_Code'));
         $this->addConstraintToTable($table, new ForeignKey(null, 'CmsBlockType_Code', 'CmsBlockType', 'CmsBlockType_Code'));
         $this->addConstraintToTable($table, new ForeignKey(null, 'Article_ID', 'Article', 'Article_ID'));
-        $this->addConstraintToTable($table, new ForeignKey(null, 'CmsBlock_ID_Parent', 'CmsBlock', 'CmsBlock_ID'));
+        $this->addConstraintToTable($table, new ForeignKey(null, 'CmsBlock_ID_Parent', 'CmsBlock', 'CmsBlock_ID', 'CASCADE'));
         $this->addDefaultConstraintsToTable($table);
         return $this->query($table);
     }

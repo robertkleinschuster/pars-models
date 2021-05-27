@@ -5,6 +5,7 @@ namespace Pars\Model\Updater\Database;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Ddl\DropTable;
+use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
@@ -408,6 +409,13 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             throw new CoreException($processor->getValidationHelper()->getSummary());
         }
         return $beanListToSave->count();
+    }
+
+    public function updatePageBlock()
+    {
+        $delete = new Delete('CmsPage_CmsBlock');
+        $delete->where('1 = 1');
+        return $this->query($delete);
     }
 
     /*  public function updateBenchmarkBackend()
