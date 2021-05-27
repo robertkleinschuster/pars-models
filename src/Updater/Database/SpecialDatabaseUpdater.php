@@ -17,6 +17,10 @@ use Pars\Model\Authorization\Role\RoleBeanFinder;
 use Pars\Model\Authorization\Role\RoleBeanProcessor;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanProcessor;
+use Pars\Model\Form\Field\FormFieldBeanFinder;
+use Pars\Model\Form\Field\FormFieldBeanProcessor;
+use Pars\Model\Form\FormBeanFinder;
+use Pars\Model\Form\FormBeanProcessor;
 use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
 use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
 use Pars\Pattern\Exception\CoreException;
@@ -416,6 +420,63 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
         $delete = new Delete('CmsPage_CmsBlock');
         $delete->where('1 = 1');
         return $this->query($delete);
+    }
+
+    public function updateContactForm()
+    {
+        $formFinder = new FormBeanFinder($this->adapter);
+        $formFinder->filterValue('Form_Code', 'contact');
+        if ($formFinder->count() == 0 && $this->getMode() == self::MODE_EXECUTE) {
+            $bean = $formFinder->getBeanFactory()->getEmptyBean([]);
+            $beanList = $formFinder->getBeanFactory()->getEmptyBeanList();
+            $bean->Form_Code = 'contact';
+            $bean->FormType_Code = 'default';
+            $bean->Form_IndexInfo = true;
+            $beanList->push($bean);
+            $processor = new FormBeanProcessor($this->getParsContainer());
+            $processor->setBeanList($beanList);
+            $processor->save();
+
+            $formFieldFinder = new FormFieldBeanFinder($this->adapter);
+            $fieldBeanList = $formFieldFinder->getBeanFactory()->getEmptyBeanList();
+            $fieldBean = $formFieldFinder->getBeanFactory()->getEmptyBean([]);
+            $fieldBean->Form_ID = $bean->Form_ID;
+            $fieldBean->FormField_Code = 'name';
+            $fieldBean->FormField_Required = true;
+            $fieldBean->FormField_Order = 1;
+            $fieldBean->FormFieldType_Code = 'text';
+            $fieldBeanList->push($fieldBean);
+
+            $fieldBean = $formFieldFinder->getBeanFactory()->getEmptyBean([]);
+            $fieldBean->Form_ID = $bean->Form_ID;
+            $fieldBean->FormField_Code = 'email';
+            $fieldBean->FormField_Required = true;
+            $fieldBean->FormField_Order = 2;
+            $fieldBean->FormFieldType_Code = 'text';
+            $fieldBeanList->push($fieldBean);
+
+
+            $fieldBean = $formFieldFinder->getBeanFactory()->getEmptyBean([]);
+            $fieldBean->Form_ID = $bean->Form_ID;
+            $fieldBean->FormField_Code = 'message';
+            $fieldBean->FormField_Required = false;
+            $fieldBean->FormField_Order = 3;
+            $fieldBean->FormFieldType_Code = 'textarea';
+            $fieldBeanList->push($fieldBean);
+
+            $fieldBean = $formFieldFinder->getBeanFactory()->getEmptyBean([]);
+            $fieldBean->Form_ID = $bean->Form_ID;
+            $fieldBean->FormField_Code = 'data-privacy';
+            $fieldBean->FormField_Required = true;
+            $fieldBean->FormField_Order = 4;
+            $fieldBean->FormFieldType_Code = 'checkbox';
+            $fieldBeanList->push($fieldBean);
+
+            $fieldProcessor = new FormFieldBeanProcessor($this->getParsContainer());
+            $fieldProcessor->setBeanList($fieldBeanList);
+            return $fieldProcessor->save();
+        }
+        return 0;
     }
 
     /*  public function updateBenchmarkBackend()

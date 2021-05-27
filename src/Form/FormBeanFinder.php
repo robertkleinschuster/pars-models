@@ -13,6 +13,7 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * Class FormBeanFinder
  * @package Pars\Model\Form
  * @method FormBean getBean(bool $fetchAllData = false)
+ * @method FormBeanFactory getBeanFactory()
  */
 class FormBeanFinder extends AbstractDatabaseBeanFinder
 {

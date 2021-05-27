@@ -8,6 +8,11 @@ use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
+/**
+ * Class FormFieldBeanFinder
+ * @package Pars\Model\Form\Field
+ * @method FormFieldBeanFactory getBeanFactory()
+ */
 class FormFieldBeanFinder extends AbstractDatabaseBeanFinder
 {
     protected function createBeanFactory(): BeanFactoryInterface
