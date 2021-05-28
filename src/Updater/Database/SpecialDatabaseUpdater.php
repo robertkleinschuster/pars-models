@@ -17,10 +17,13 @@ use Pars\Model\Authorization\Role\RoleBeanFinder;
 use Pars\Model\Authorization\Role\RoleBeanProcessor;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanProcessor;
+use Pars\Model\Cms\Page\CmsPageBeanFinder;
+use Pars\Model\Cms\Page\CmsPageBeanProcessor;
 use Pars\Model\Form\Field\FormFieldBeanFinder;
 use Pars\Model\Form\Field\FormFieldBeanProcessor;
 use Pars\Model\Form\FormBeanFinder;
 use Pars\Model\Form\FormBeanProcessor;
+use Pars\Model\Picture\PictureBeanFinder;
 use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
 use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
 use Pars\Pattern\Exception\CoreException;
@@ -58,7 +61,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
         }
         $rolePermissionProcessor = new RolePermissionBeanProcessor($this->adapter);
         $rolePermissionProcessor->setBeanList($rolePermissionBeanList);
-        if ($this->getMode() == self::MODE_EXECUTE) {
+        if ($this->isExecute()) {
             $rolePermissionProcessor->save();
         }
         return 'New: ' . implode(', ', $rolePermissionBeanList->column('UserPermission_Code'));
@@ -424,7 +427,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateContactForm()
     {
-        $formFinder = new FormBeanFinder($this->adapter);
+        $formFinder = new FormBeanFinder($this->getParsContainer()->getDatabaseAdapter());
         $formFinder->filterValue('Form_Code', 'contact');
         if ($formFinder->count() == 0 && $this->getMode() == self::MODE_EXECUTE) {
             $bean = $formFinder->getBeanFactory()->getEmptyBean([]);
@@ -477,6 +480,31 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             return $fieldProcessor->save();
         }
         return 0;
+    }
+
+    public function updateStartpage()
+    {
+        $finder = new CmsPageBeanFinder($this->getParsContainer()->getDatabaseAdapter());
+        $finder->filterValue('Article_Code', 'startpage');
+        if ($finder->count() == 0 && $this->isExecute()) {
+            $factory = $finder->getBeanFactory();
+            $bean = $factory->getEmptyBean([]);
+            $bean->CmsPageType_Code = 'default';
+            $bean->CmsPageLayout_Code = 'default';
+            $bean->CmsPageState_Code = 'active';
+            $bean->Article_Code = 'startpage';
+            $bean->ArticleTranslation_Code = '/';
+            $bean->ArticleTranslation_Name = 'Home';
+            $bean->ArticleTranslation_Title = 'Home';
+            $bean->ArticleTranslation_Heading = 'Home';
+            $bean->Locale_Code = $this->getParsContainer()->getConfig()->get('locale.default');
+            $beanList = $factory->getEmptyBeanList();
+            $beanList->push($bean);
+            $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+            $processor->setBeanList($beanList);
+            return $processor->save();
+        }
+        return null;
     }
 
     /*  public function updateBenchmarkBackend()
