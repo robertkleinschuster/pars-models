@@ -19,13 +19,14 @@ use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanProcessor;
 use Pars\Model\Cms\Page\CmsPageBeanFinder;
 use Pars\Model\Cms\Page\CmsPageBeanProcessor;
+use Pars\Model\File\Directory\FileDirectoryBeanFinder;
+use Pars\Model\File\Directory\FileDirectoryBeanProcessor;
 use Pars\Model\Form\Field\FormFieldBeanFinder;
 use Pars\Model\Form\Field\FormFieldBeanProcessor;
 use Pars\Model\Form\FormBeanFinder;
 use Pars\Model\Form\FormBeanProcessor;
 use Pars\Model\Picture\PictureBeanFinder;
-use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
-use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
+use Pars\Model\Picture\PictureBeanProcessor;
 use Pars\Pattern\Exception\CoreException;
 
 /**
@@ -482,6 +483,52 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
         return 0;
     }
 
+
+
+    public function updateImagesFileDirectory()
+    {
+        $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $finder->filterValue('FileDirectory_Code', 'images');
+        if ($finder->count() == 0) {
+            $factory = $finder->getBeanFactory();
+            $bean = $factory->getEmptyBean([]);
+            $bean->FileDirectory_Code = 'images';
+            $bean->FileDirectory_Active = true;
+            $bean->FileDirectory_Name = 'images';
+            $beanList = $factory->getEmptyBeanList();
+            $beanList->push($bean);
+
+            $processor = new FileDirectoryBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+            $processor->setBeanList($beanList);
+            $processor->save();
+        }
+    }
+
+    public function updateStartpagePicture()
+    {
+        $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $finder->filterValue('FileDirectory_Code', 'images');
+        if ($finder->count() == 1) {
+            $fileDirectory_ID = $finder->getBean()->FileDirectory_ID;
+            $finder = new PictureBeanFinder($this->getParsContainer()->getDatabaseAdapter());
+            $finder->filterValue('File_Code', 'startpage');
+            if ($finder->count() == 0) {
+                $factory = $finder->getBeanFactory();
+                $bean = $factory->getEmptyBean([]);
+                $bean->FileDirectory_ID = $fileDirectory_ID;
+                $bean->File_Code = 'startpage';
+                $bean->File_Name = 'startpage';
+                $bean->FileType_Code = 'jpg';
+                $beanList = $factory->getEmptyBeanList();
+                $beanList->push($bean);
+                $processor = new PictureBeanProcessor($this->getParsContainer());
+                $processor->addOption(PictureBeanProcessor::OPTION_IGNORE_VALIDATION);
+                $processor->setBeanList($beanList);
+                $processor->save();
+            }
+        }
+    }
+
     public function updateStartpage()
     {
         $finder = new CmsPageBeanFinder($this->getParsContainer()->getDatabaseAdapter());
@@ -502,10 +549,13 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             $beanList->push($bean);
             $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
             $processor->setBeanList($beanList);
-            return $processor->save();
+            $processor->save();
         }
         return null;
     }
+
+
+
 
     /*  public function updateBenchmarkBackend()
       {

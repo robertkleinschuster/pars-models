@@ -8,6 +8,12 @@ use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\File\FileBeanFinder;
 
+/**
+ * Class PictureBeanFinder
+ * @package Pars\Model\Picture
+ *
+ * @method PictureBeanFactory getBeanFactory()
+ */
 class PictureBeanFinder extends FileBeanFinder
 {
     protected function createBeanFactory(): BeanFactoryInterface
