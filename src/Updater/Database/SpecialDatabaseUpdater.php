@@ -27,6 +27,8 @@ use Pars\Model\Form\FormBeanFinder;
 use Pars\Model\Form\FormBeanProcessor;
 use Pars\Model\Picture\PictureBeanFinder;
 use Pars\Model\Picture\PictureBeanProcessor;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
+use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
 use Pars\Pattern\Exception\CoreException;
 
 /**
@@ -557,7 +559,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
 
 
 
-    /*  public function updateBenchmarkBackend()
+    /*public function updateBenchmarkBackend()
       {
           ini_set('max_execution_time', 300);
           $finder = new TranslationBeanFinder($this->adapter);
