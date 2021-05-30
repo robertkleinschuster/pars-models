@@ -544,7 +544,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             'ArticleTranslation_Name' => 'Home',
             'ArticleTranslation_Title' => 'Home',
             'ArticleTranslation_Heading' => 'Home',
-            'ArticleTranslation_Text' => '{picture:startpage:banner}',
+            'ArticleTranslation_Text' => '{picture:startpage:inline}{form:contact}',
             'Locale_Code' => $this->getLocaleDefault(),
         ];
         return $this->saveBeanData($finder, $processor, 'Article_Code', $data);
