@@ -26,6 +26,11 @@ class FileBean extends AbstractBaseBean
     public ?int $Person_ID_Create = null;
     public ?int $Person_ID_Edit = null;
 
+    public function code()
+    {
+        return $this->File_Code;
+    }
+
     public function src()
     {
         return urlencode($this->FileDirectory_Code) . '/' . urlencode($this->File_Code) . '.' . $this->FileType_Code;
