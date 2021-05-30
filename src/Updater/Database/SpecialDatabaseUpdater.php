@@ -9,7 +9,10 @@ use Laminas\Db\Sql\Delete;
 use Laminas\Db\Sql\Insert;
 use Laminas\Db\Sql\Select;
 use Laminas\Db\Sql\Sql;
+use Pars\Bean\Finder\BeanFinderInterface;
+use Pars\Bean\Processor\BeanProcessorInterface;
 use Pars\Core\Database\Updater\AbstractDatabaseUpdater;
+use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
 use Pars\Model\Authorization\Permission\PermissionBeanFinder;
@@ -27,8 +30,6 @@ use Pars\Model\Form\FormBeanFinder;
 use Pars\Model\Form\FormBeanProcessor;
 use Pars\Model\Picture\PictureBeanFinder;
 use Pars\Model\Picture\PictureBeanProcessor;
-use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
-use Pars\Model\Translation\TranslationLoader\TranslationBeanProcessor;
 use Pars\Pattern\Exception\CoreException;
 
 /**
@@ -486,7 +487,6 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
     }
 
 
-
     public function updateImagesFileDirectory()
     {
         $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
@@ -534,29 +534,60 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
     public function updateStartpage()
     {
         $finder = new CmsPageBeanFinder($this->getParsContainer()->getDatabaseAdapter());
-        $finder->filterValue('Article_Code', 'startpage');
-        if ($finder->count() == 0 && $this->isExecute()) {
-            $factory = $finder->getBeanFactory();
-            $bean = $factory->getEmptyBean([]);
-            $bean->CmsPageType_Code = 'default';
-            $bean->CmsPageLayout_Code = 'default';
-            $bean->CmsPageState_Code = 'active';
-            $bean->Article_Code = 'startpage';
-            $bean->ArticleTranslation_Code = '/';
-            $bean->ArticleTranslation_Name = 'Home';
-            $bean->ArticleTranslation_Title = 'Home';
-            $bean->ArticleTranslation_Heading = 'Home';
-            $bean->Locale_Code = $this->getParsContainer()->getConfig()->get('locale.default');
-            $beanList = $factory->getEmptyBeanList();
-            $beanList->push($bean);
-            $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
-            $processor->setBeanList($beanList);
-            $processor->save();
-        }
-        return null;
+        $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $data = [
+            'CmsPageType_Code' => 'default',
+            'CmsPageLayout_Code' => 'default',
+            'CmsPageState_Code' => 'active',
+            'Article_Code' => 'startpage',
+            'ArticleTranslation_Code' => '/',
+            'ArticleTranslation_Name' => 'Home',
+            'ArticleTranslation_Title' => 'Home',
+            'ArticleTranslation_Heading' => 'Home',
+            'ArticleTranslation_Text' => '{picture:startpage}',
+            'Locale_Code' => $this->getLocaleDefault(),
+        ];
+        return $this->saveBeanData($finder, $processor, 'Article_Code', $data);
     }
 
 
+
+    public function updateDataPrivacy()
+    {
+        $finder = new CmsPageBeanFinder($this->getParsContainer()->getDatabaseAdapter());
+        $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $data = [
+            'CmsPageType_Code' => 'default',
+            'CmsPageLayout_Code' => 'default',
+            'CmsPageState_Code' => 'active',
+            'Article_Code' => 'data-privacy',
+            'ArticleTranslation_Code' => 'data-privacy',
+            'ArticleTranslation_Name' => 'data-privacy',
+            'ArticleTranslation_Title' => 'data-privacy',
+            'ArticleTranslation_Heading' => 'data-privacy',
+            'Locale_Code' => $this->getLocaleDefault(),
+        ];
+
+        $page = json_decode(file_get_contents(__DIR__ . '/page_data-privacy.json'), true);
+
+        if (isset($page[$data['Locale_Code']])) {
+            $data['ArticleTranslation_Text'] = $page[$data['Locale_Code']]['ArticleTranslation_Text'];
+            $data['ArticleTranslation_Title'] = $page[$data['Locale_Code']]['ArticleTranslation_Title'];
+            $data['ArticleTranslation_Name'] = $page[$data['Locale_Code']]['ArticleTranslation_Name'];
+            $data['ArticleTranslation_Heading'] = $page[$data['Locale_Code']]['ArticleTranslation_Heading'];
+            $data['ArticleTranslation_Code'] = $page[$data['Locale_Code']]['ArticleTranslation_Code'];
+
+            if (is_array($page[$data['Locale_Code']]['CmsBlock_BeanList'])) {
+                foreach ($page[$data['Locale_Code']]['CmsBlock_BeanList'] as $paragraph) {
+                    if (is_array($paragraph)) {
+                        $data['ArticleTranslation_Text'] .= "<h4>{$paragraph['ArticleTranslation_Heading']}</h4>";
+                        $data['ArticleTranslation_Text'] .= $paragraph['ArticleTranslation_Text'];
+                    }
+                }
+            }
+        }
+        return $this->saveBeanData($finder, $processor, 'Article_Code', $data);
+    }
 
 
     /*public function updateBenchmarkBackend()

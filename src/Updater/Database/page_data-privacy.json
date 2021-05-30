@@ -1,0 +1,2088 @@
+{
+  "de_AT": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "de_AT",
+    "ArticleTranslation_Code": "datenschutz",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Title": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Keywords": "Datenschutzerkl\u00e4rung, Datenschutz",
+    "ArticleTranslation_Heading": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "<h4><strong>Grundlegendes<\/strong><\/h4><p>Diese Datenschutzerkl\u00e4rung soll die Nutzer dieser Website \u00fcber die Art, den Umfang und den Zweck der Erhebung und Verwendung personenbezogener Daten durch den Websitebetreiber, <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a>, informieren.<\/p><p>Der Websitebetreiber nimmt Ihren Datenschutz sehr ernst und behandelt Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Vorschriften. Da durch neue Technologien und die st\u00e4ndige Weiterentwicklung dieser Webseite \u00c4nderungen an dieser Datenschutzerkl\u00e4rung vorgenommen werden k\u00f6nnen, empfehlen wir Ihnen sich die Datenschutzerkl\u00e4rung in regelm\u00e4\u00dfigen Abst\u00e4nden wieder durchzulesen.<\/p><p>Definitionen der verwendeten Begriffe (z.B. \u201cpersonenbezogene Daten\u201d oder \u201cVerarbeitung\u201d) finden Sie in Art. 4 DSGVO.<\/p>",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_AT",
+        "ArticleTranslation_Code": "zugriffsdaten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Zugriffsdaten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "Zugriffsdaten",
+        "ArticleTranslation_Heading": "Zugriffsdaten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Wir, der Websitebetreiber bzw. Seitenprovider, erheben aufgrund unseres berechtigten Interesses (s. Art. 6 Abs. 1 lit. f. DSGVO) Daten \u00fcber Zugriffe auf die Website und speichern diese als \u201cServer-Logfiles\u201d auf dem Server der Website ab. Folgende Daten werden so protokolliert:<\/p><ul><li>Besuchte Website<\/li><li>Uhrzeit zum Zeitpunkt des Zugriffes<\/li><li>Menge der gesendeten Daten in Byte<\/li><li>Quelle\/Verweis, von welchem Sie auf die Seite gelangten<\/li><li>Verwendeter Browser<\/li><li>Verwendetes Betriebssystem<\/li><li>Verwendete IP-Adresse<\/li><\/ul><p>Die Server-Logfiles werden f\u00fcr maximal 7 Tage gespeichert und anschlie\u00dfend gel\u00f6scht. Die Speicherung der Daten erfolgt aus Sicherheitsgr\u00fcnden, um z. B. Missbrauchsf\u00e4lle aufkl\u00e4ren zu k\u00f6nnen. M\u00fcssen Daten aus Beweisgr\u00fcnden aufgehoben werden, sind sie solange von der L\u00f6schung ausgenommen bis der Vorfall endg\u00fcltig gekl\u00e4rt ist.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_AT",
+        "ArticleTranslation_Code": "erfassung-und-verarbeitung-personenbezogener-daten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Der Websitebetreiber erhebt, nutzt und gibt Ihre personenbezogenen Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder Sie in die Datenerhebung einwilligen.<\/p><p>Als personenbezogene Daten gelten s\u00e4mtliche Informationen, welche dazu dienen, Ihre Person zu bestimmen und welche zu Ihnen zur\u00fcckverfolgt werden k\u00f6nnen \u2013 also beispielsweise Ihr Name, Ihre E-Mail-Adresse und Telefonnummer.<\/p><p>Diese Website k\u00f6nnen Sie auch besuchen, ohne Angaben zu Ihrer Person zu machen. Zur Verbesserung unseres Online-Angebotes speichern wir jedoch (ohne Personenbezug) Ihre Zugriffsdaten auf diese Website. Zu diesen Zugriffsdaten geh\u00f6ren z. B. die von Ihnen angeforderte Datei oder der Name Ihres Internet-Providers. Durch die Anonymisierung der Daten sind R\u00fcckschl\u00fcsse auf Ihre Person nicht m\u00f6glich.<\/p><p>Ihre Inhaltsangaben aus dem Kontaktformular (Name und E-Mail Adresse) werden verarbeitet und auf dem Server gespeichert um Ihnen auf Ihre Anfrage antworten zu k\u00f6nnen.<\/p><p><br><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_AT",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Diese Website verwendet Session-Cookies zur wiedererkennung eines Nutzers, die entweder von unserem Server oder dem Server Dritter an den Browser des Nutzers \u00fcbertragen werden. Bei Cookies handelt es sich um kleine Dateien, welche auf Ihrem Endger\u00e4t gespeichert werden. Ihr Browser greift auf diese Dateien zu. Durch den Einsatz von Cookies erh\u00f6ht sich die Benutzerfreundlichkeit und Sicherheit dieser Website.<\/p><p>G\u00e4ngige Browser bieten die Einstellungsoption, Cookies nicht zuzulassen. Hinweis: Es ist nicht gew\u00e4hrleistet, dass Sie auf alle Funktionen dieser Website ohne Einschr\u00e4nkungen zugreifen k\u00f6nnen, wenn Sie entsprechende Einstellungen vornehmen.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_AT",
+        "ArticleTranslation_Code": "umgang-mit-kommentaren-und-beitraegen",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Hinterlassen Sie auf dieser Website einen Beitrag oder Kommentar, wird Ihre IP-Adresse gespeichert. Dies erfolgt aufgrund unserer berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f. DSGVO und dient der Sicherheit von uns als Websitebetreiber: Denn sollte Ihr Kommentar gegen geltendes Recht versto\u00dfen, k\u00f6nnen wir daf\u00fcr belangt werden, weshalb wir ein Interesse an der Identit\u00e4t des Kommentar- bzw. Beitragsautors haben.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_AT",
+        "ArticleTranslation_Code": "rechte-des-nutzers",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Rechte des Nutzers",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Rechte des Nutzers",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Sie haben als Nutzer das Recht, auf Antrag eine kostenlose Auskunft dar\u00fcber zu erhalten, welche personenbezogenen Daten \u00fcber Sie gespeichert wurden. Sie haben au\u00dferdem das Recht auf Berichtigung falscher Daten und auf die Verarbeitungseinschr\u00e4nkung oder L\u00f6schung Ihrer personenbezogenen Daten. Falls zutreffend, k\u00f6nnen Sie auch Ihr Recht auf Datenportabilit\u00e4t geltend machen. Sollten Sie annehmen, dass Ihre Daten unrechtm\u00e4\u00dfig verarbeitet wurden, k\u00f6nnen Sie eine Beschwerde bei der zust\u00e4ndigen Aufsichtsbeh\u00f6rde einreichen.<\/p><h6><strong>L\u00f6schung von Daten<\/strong><\/h6><p>Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur Aufbewahrung von Daten (z. B. Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf L\u00f6schung Ihrer Daten. Von uns gespeicherte Daten werden, sollten sie f\u00fcr ihre Zweckbestimmung nicht mehr vonn\u00f6ten sein und es keine gesetzlichen Aufbewahrungsfristen geben, gel\u00f6scht. Falls eine L\u00f6schung nicht durchgef\u00fchrt werden kann, da die Daten f\u00fcr zul\u00e4ssige gesetzliche Zwecke erforderlich sind, erfolgt eine Einschr\u00e4nkung der Datenverarbeitung. In diesem Fall werden die Daten gesperrt und nicht f\u00fcr andere Zwecke verarbeitet.<\/p><h6><strong>Widerspruchsrecht<\/strong><\/h6><p>Nutzer dieser Webseite k\u00f6nnen von ihrem Widerspruchsrecht Gebrauch machen und der Verarbeitung ihrer personenbezogenen Daten zu jeder Zeit widersprechen.<\/p><p>Wenn Sie eine Berichtigung, Sperrung, L\u00f6schung oder Auskunft \u00fcber die zu Ihrer Person gespeicherten personenbezogenen Daten w\u00fcnschen oder Fragen bzgl. der Erhebung, Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte Einwilligungen widerrufen m\u00f6chten, wenden Sie sich bitte an folgende E-Mail-Adresse: <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  },
+  "en_US": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "en_US",
+    "ArticleTranslation_Code": "data-protection",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Privacy Policy",
+    "ArticleTranslation_Title": "Privacy Policy",
+    "ArticleTranslation_Keywords": "privacy policy, privacy protection",
+    "ArticleTranslation_Heading": "Privacy Policy",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "The basic privacy statement is intended to inform the users of this website about the nature, scope and purpose of collecting and using personal data by the website operator, .The website operator takes their privacy very seriously and treats their personal data confidentially and in accordance with the legal regulations. because new technologies and the continuous development of this website can make changes to this privacy policy, we recommend that you read the privacy statement in regular intervals.Definitions of the used conceptual (e.g. \u201cpersonal data\u201d or \u201cprocessing\u201d) can be found in art. 4 dsgvo.",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "en_US",
+        "ArticleTranslation_Code": "access-data",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "access data",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "access data",
+        "ArticleTranslation_Heading": "access data",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "we, the website operator or page provider, collect data about access to the website on the basis of our legitimate interest (see art. 6 abs. 1 lit. f. dsgvo) and store it as \u201cserver logfiles\u201d on the website server. the following data is logged:Visit website clock time at the time of the access quantity of the transmitted data in ByteSource\/Verweis, from which they are stored on the user-used browser-used operating system-used IP address The server logfiles are stored for a maximum of 7 days and then deleted. the data is stored for safety reasons, in order to be able to clarify, for example, abuse cases. must be deleted for evidence, they are exempted from the deletion until the incident has been finally resolved.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "en_US",
+        "ArticleTranslation_Code": "archiving-and-processing-personal-data",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "collection and processing of personal data",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "collection and processing of personal data",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "the website operator collects, uses and passes on their personal data only if this is permitted in the legal framework or if they consent to the data collection. As personal data, all information is valid which serves to determine their person and which can be traced to them \u2013 for example their name, their email address and telephone number. to improve our online offer, however, we store your access data on this website (without personal reference). These access data include e.g. b. the data requested by them or the name of their Internet provider. the anonymization of the data does not allow conclusions about their person.Your content information from the contact form (name and email address) will be processed and stored on the server in order to be able to reply to their request.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "en_US",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "this website uses session cookies to retrieve a user that are either transferred from our server or server third to the user's browser. cookies are small files that are stored on their end device. her browser accesses these files. the use of cookies increases the user-friendliness and security of this website.Current browsers offer the setting option not to allow cookies. Note: it is not guaranteed that they can access all the functions of this website without restrictions when they make appropriate settings.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "en_US",
+        "ArticleTranslation_Code": "circumstantial-comtaren-and-beat",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "tour with comments and contributions",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "tour with comments and contributions",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "on this website, they leave a contribution or comment, their IP address is stored. this is done due to our legitimate interests in the sense of art. 6 abs. 1 lit. f. dsgvo and serves the security of us as a website operator: for if your commentary should violate the applicable right, we can be concerned for this, which is why we have an interest in the identity of the commentary or contributor.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "en_US",
+        "ArticleTranslation_Code": "right-of-user",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "right of the user",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "right of the user",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "as a user, they have the right to receive a free request about which personal data has been stored about them. they also have the right to correct incorrect data and to restrict or eradicate their personal data. if applicable, they may also assert their right to data portability. should they assume that their data have been processed unlawfully, they may submit a complaint to the competent supervisory authority.Deleting data insofar as their request does not conflict with a statutory obligation to store data (e.g. stock data storage), they have a right to erasure their data. if a deletion cannot be carried out, since the data are required for permissible legal purposes, data processing is restricted. in this case, the data is blocked and not processed for other purposes.Responding rights Users of this web page may use their right to object and object to the processing of their personal data at any time.If they wish or ask for a correction, blocking, erasure or future information about the personal data stored in their person. the collection, processing or use of your personal data, or if you wish to revoke consents, please contact the following e-mail address: {translation:data-privacy-email}",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  },
+  "de_DE": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "de_DE",
+    "ArticleTranslation_Code": "datenschutz",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Title": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Keywords": "Datenschutzerkl\u00e4rung, Datenschutz",
+    "ArticleTranslation_Heading": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "<h4><strong>Grundlegendes<\/strong><\/h4><p>Diese Datenschutzerkl\u00e4rung soll die Nutzer dieser Website \u00fcber die Art, den Umfang und den Zweck der Erhebung und Verwendung personenbezogener Daten durch den Websitebetreiber, <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a>, informieren.<\/p><p>Der Websitebetreiber nimmt Ihren Datenschutz sehr ernst und behandelt Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Vorschriften. Da durch neue Technologien und die st\u00e4ndige Weiterentwicklung dieser Webseite \u00c4nderungen an dieser Datenschutzerkl\u00e4rung vorgenommen werden k\u00f6nnen, empfehlen wir Ihnen sich die Datenschutzerkl\u00e4rung in regelm\u00e4\u00dfigen Abst\u00e4nden wieder durchzulesen.<\/p><p>Definitionen der verwendeten Begriffe (z.B. \u201cpersonenbezogene Daten\u201d oder \u201cVerarbeitung\u201d) finden Sie in Art. 4 DSGVO.<\/p>",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_DE",
+        "ArticleTranslation_Code": "zugriffsdaten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Zugriffsdaten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "Zugriffsdaten",
+        "ArticleTranslation_Heading": "Zugriffsdaten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Wir, der Websitebetreiber bzw. Seitenprovider, erheben aufgrund unseres berechtigten Interesses (s. Art. 6 Abs. 1 lit. f. DSGVO) Daten \u00fcber Zugriffe auf die Website und speichern diese als \u201cServer-Logfiles\u201d auf dem Server der Website ab. Folgende Daten werden so protokolliert:<\/p><ul><li>Besuchte Website<\/li><li>Uhrzeit zum Zeitpunkt des Zugriffes<\/li><li>Menge der gesendeten Daten in Byte<\/li><li>Quelle\/Verweis, von welchem Sie auf die Seite gelangten<\/li><li>Verwendeter Browser<\/li><li>Verwendetes Betriebssystem<\/li><li>Verwendete IP-Adresse<\/li><\/ul><p>Die Server-Logfiles werden f\u00fcr maximal 7 Tage gespeichert und anschlie\u00dfend gel\u00f6scht. Die Speicherung der Daten erfolgt aus Sicherheitsgr\u00fcnden, um z. B. Missbrauchsf\u00e4lle aufkl\u00e4ren zu k\u00f6nnen. M\u00fcssen Daten aus Beweisgr\u00fcnden aufgehoben werden, sind sie solange von der L\u00f6schung ausgenommen bis der Vorfall endg\u00fcltig gekl\u00e4rt ist.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_DE",
+        "ArticleTranslation_Code": "erfassung-und-verarbeitung-personenbezogener-daten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Der Websitebetreiber erhebt, nutzt und gibt Ihre personenbezogenen Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder Sie in die Datenerhebung einwilligen.<\/p><p>Als personenbezogene Daten gelten s\u00e4mtliche Informationen, welche dazu dienen, Ihre Person zu bestimmen und welche zu Ihnen zur\u00fcckverfolgt werden k\u00f6nnen \u2013 also beispielsweise Ihr Name, Ihre E-Mail-Adresse und Telefonnummer.<\/p><p>Diese Website k\u00f6nnen Sie auch besuchen, ohne Angaben zu Ihrer Person zu machen. Zur Verbesserung unseres Online-Angebotes speichern wir jedoch (ohne Personenbezug) Ihre Zugriffsdaten auf diese Website. Zu diesen Zugriffsdaten geh\u00f6ren z. B. die von Ihnen angeforderte Datei oder der Name Ihres Internet-Providers. Durch die Anonymisierung der Daten sind R\u00fcckschl\u00fcsse auf Ihre Person nicht m\u00f6glich.<\/p><p>Ihre Inhaltsangaben aus dem Kontaktformular (Name und E-Mail Adresse) werden verarbeitet und auf dem Server gespeichert um Ihnen auf Ihre Anfrage antworten zu k\u00f6nnen.<\/p><p><br><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_DE",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Diese Website verwendet Session-Cookies zur wiedererkennung eines Nutzers, die entweder von unserem Server oder dem Server Dritter an den Browser des Nutzers \u00fcbertragen werden. Bei Cookies handelt es sich um kleine Dateien, welche auf Ihrem Endger\u00e4t gespeichert werden. Ihr Browser greift auf diese Dateien zu. Durch den Einsatz von Cookies erh\u00f6ht sich die Benutzerfreundlichkeit und Sicherheit dieser Website.<\/p><p>G\u00e4ngige Browser bieten die Einstellungsoption, Cookies nicht zuzulassen. Hinweis: Es ist nicht gew\u00e4hrleistet, dass Sie auf alle Funktionen dieser Website ohne Einschr\u00e4nkungen zugreifen k\u00f6nnen, wenn Sie entsprechende Einstellungen vornehmen.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_DE",
+        "ArticleTranslation_Code": "umgang-mit-kommentaren-und-beitraegen",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Hinterlassen Sie auf dieser Website einen Beitrag oder Kommentar, wird Ihre IP-Adresse gespeichert. Dies erfolgt aufgrund unserer berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f. DSGVO und dient der Sicherheit von uns als Websitebetreiber: Denn sollte Ihr Kommentar gegen geltendes Recht versto\u00dfen, k\u00f6nnen wir daf\u00fcr belangt werden, weshalb wir ein Interesse an der Identit\u00e4t des Kommentar- bzw. Beitragsautors haben.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "de_DE",
+        "ArticleTranslation_Code": "rechte-des-nutzers",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Rechte des Nutzers",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Rechte des Nutzers",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Sie haben als Nutzer das Recht, auf Antrag eine kostenlose Auskunft dar\u00fcber zu erhalten, welche personenbezogenen Daten \u00fcber Sie gespeichert wurden. Sie haben au\u00dferdem das Recht auf Berichtigung falscher Daten und auf die Verarbeitungseinschr\u00e4nkung oder L\u00f6schung Ihrer personenbezogenen Daten. Falls zutreffend, k\u00f6nnen Sie auch Ihr Recht auf Datenportabilit\u00e4t geltend machen. Sollten Sie annehmen, dass Ihre Daten unrechtm\u00e4\u00dfig verarbeitet wurden, k\u00f6nnen Sie eine Beschwerde bei der zust\u00e4ndigen Aufsichtsbeh\u00f6rde einreichen.<\/p><h6><strong>L\u00f6schung von Daten<\/strong><\/h6><p>Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur Aufbewahrung von Daten (z. B. Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf L\u00f6schung Ihrer Daten. Von uns gespeicherte Daten werden, sollten sie f\u00fcr ihre Zweckbestimmung nicht mehr vonn\u00f6ten sein und es keine gesetzlichen Aufbewahrungsfristen geben, gel\u00f6scht. Falls eine L\u00f6schung nicht durchgef\u00fchrt werden kann, da die Daten f\u00fcr zul\u00e4ssige gesetzliche Zwecke erforderlich sind, erfolgt eine Einschr\u00e4nkung der Datenverarbeitung. In diesem Fall werden die Daten gesperrt und nicht f\u00fcr andere Zwecke verarbeitet.<\/p><h6><strong>Widerspruchsrecht<\/strong><\/h6><p>Nutzer dieser Webseite k\u00f6nnen von ihrem Widerspruchsrecht Gebrauch machen und der Verarbeitung ihrer personenbezogenen Daten zu jeder Zeit widersprechen.<\/p><p>Wenn Sie eine Berichtigung, Sperrung, L\u00f6schung oder Auskunft \u00fcber die zu Ihrer Person gespeicherten personenbezogenen Daten w\u00fcnschen oder Fragen bzgl. der Erhebung, Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte Einwilligungen widerrufen m\u00f6chten, wenden Sie sich bitte an folgende E-Mail-Adresse: <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  },
+  "nl_NL": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "nl_NL",
+    "ArticleTranslation_Code": "datenschutz",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Title": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Keywords": "Datenschutzerkl\u00e4rung, Datenschutz",
+    "ArticleTranslation_Heading": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "<h4><strong>Grundlegendes<\/strong><\/h4><p>Diese Datenschutzerkl\u00e4rung soll die Nutzer dieser Website \u00fcber die Art, den Umfang und den Zweck der Erhebung und Verwendung personenbezogener Daten durch den Websitebetreiber, <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a>, informieren.<\/p><p>Der Websitebetreiber nimmt Ihren Datenschutz sehr ernst und behandelt Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Vorschriften. Da durch neue Technologien und die st\u00e4ndige Weiterentwicklung dieser Webseite \u00c4nderungen an dieser Datenschutzerkl\u00e4rung vorgenommen werden k\u00f6nnen, empfehlen wir Ihnen sich die Datenschutzerkl\u00e4rung in regelm\u00e4\u00dfigen Abst\u00e4nden wieder durchzulesen.<\/p><p>Definitionen der verwendeten Begriffe (z.B. \u201cpersonenbezogene Daten\u201d oder \u201cVerarbeitung\u201d) finden Sie in Art. 4 DSGVO.<\/p>",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "nl_NL",
+        "ArticleTranslation_Code": "zugriffsdaten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Zugriffsdaten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "Zugriffsdaten",
+        "ArticleTranslation_Heading": "Zugriffsdaten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Wir, der Websitebetreiber bzw. Seitenprovider, erheben aufgrund unseres berechtigten Interesses (s. Art. 6 Abs. 1 lit. f. DSGVO) Daten \u00fcber Zugriffe auf die Website und speichern diese als \u201cServer-Logfiles\u201d auf dem Server der Website ab. Folgende Daten werden so protokolliert:<\/p><ul><li>Besuchte Website<\/li><li>Uhrzeit zum Zeitpunkt des Zugriffes<\/li><li>Menge der gesendeten Daten in Byte<\/li><li>Quelle\/Verweis, von welchem Sie auf die Seite gelangten<\/li><li>Verwendeter Browser<\/li><li>Verwendetes Betriebssystem<\/li><li>Verwendete IP-Adresse<\/li><\/ul><p>Die Server-Logfiles werden f\u00fcr maximal 7 Tage gespeichert und anschlie\u00dfend gel\u00f6scht. Die Speicherung der Daten erfolgt aus Sicherheitsgr\u00fcnden, um z. B. Missbrauchsf\u00e4lle aufkl\u00e4ren zu k\u00f6nnen. M\u00fcssen Daten aus Beweisgr\u00fcnden aufgehoben werden, sind sie solange von der L\u00f6schung ausgenommen bis der Vorfall endg\u00fcltig gekl\u00e4rt ist.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "nl_NL",
+        "ArticleTranslation_Code": "erfassung-und-verarbeitung-personenbezogener-daten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Der Websitebetreiber erhebt, nutzt und gibt Ihre personenbezogenen Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder Sie in die Datenerhebung einwilligen.<\/p><p>Als personenbezogene Daten gelten s\u00e4mtliche Informationen, welche dazu dienen, Ihre Person zu bestimmen und welche zu Ihnen zur\u00fcckverfolgt werden k\u00f6nnen \u2013 also beispielsweise Ihr Name, Ihre E-Mail-Adresse und Telefonnummer.<\/p><p>Diese Website k\u00f6nnen Sie auch besuchen, ohne Angaben zu Ihrer Person zu machen. Zur Verbesserung unseres Online-Angebotes speichern wir jedoch (ohne Personenbezug) Ihre Zugriffsdaten auf diese Website. Zu diesen Zugriffsdaten geh\u00f6ren z. B. die von Ihnen angeforderte Datei oder der Name Ihres Internet-Providers. Durch die Anonymisierung der Daten sind R\u00fcckschl\u00fcsse auf Ihre Person nicht m\u00f6glich.<\/p><p>Ihre Inhaltsangaben aus dem Kontaktformular (Name und E-Mail Adresse) werden verarbeitet und auf dem Server gespeichert um Ihnen auf Ihre Anfrage antworten zu k\u00f6nnen.<\/p><p><br><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "nl_NL",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Diese Website verwendet Session-Cookies zur wiedererkennung eines Nutzers, die entweder von unserem Server oder dem Server Dritter an den Browser des Nutzers \u00fcbertragen werden. Bei Cookies handelt es sich um kleine Dateien, welche auf Ihrem Endger\u00e4t gespeichert werden. Ihr Browser greift auf diese Dateien zu. Durch den Einsatz von Cookies erh\u00f6ht sich die Benutzerfreundlichkeit und Sicherheit dieser Website.<\/p><p>G\u00e4ngige Browser bieten die Einstellungsoption, Cookies nicht zuzulassen. Hinweis: Es ist nicht gew\u00e4hrleistet, dass Sie auf alle Funktionen dieser Website ohne Einschr\u00e4nkungen zugreifen k\u00f6nnen, wenn Sie entsprechende Einstellungen vornehmen.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "nl_NL",
+        "ArticleTranslation_Code": "umgang-mit-kommentaren-und-beitraegen",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Hinterlassen Sie auf dieser Website einen Beitrag oder Kommentar, wird Ihre IP-Adresse gespeichert. Dies erfolgt aufgrund unserer berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f. DSGVO und dient der Sicherheit von uns als Websitebetreiber: Denn sollte Ihr Kommentar gegen geltendes Recht versto\u00dfen, k\u00f6nnen wir daf\u00fcr belangt werden, weshalb wir ein Interesse an der Identit\u00e4t des Kommentar- bzw. Beitragsautors haben.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "nl_NL",
+        "ArticleTranslation_Code": "rechte-des-nutzers",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Rechte des Nutzers",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Rechte des Nutzers",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Sie haben als Nutzer das Recht, auf Antrag eine kostenlose Auskunft dar\u00fcber zu erhalten, welche personenbezogenen Daten \u00fcber Sie gespeichert wurden. Sie haben au\u00dferdem das Recht auf Berichtigung falscher Daten und auf die Verarbeitungseinschr\u00e4nkung oder L\u00f6schung Ihrer personenbezogenen Daten. Falls zutreffend, k\u00f6nnen Sie auch Ihr Recht auf Datenportabilit\u00e4t geltend machen. Sollten Sie annehmen, dass Ihre Daten unrechtm\u00e4\u00dfig verarbeitet wurden, k\u00f6nnen Sie eine Beschwerde bei der zust\u00e4ndigen Aufsichtsbeh\u00f6rde einreichen.<\/p><h6><strong>L\u00f6schung von Daten<\/strong><\/h6><p>Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur Aufbewahrung von Daten (z. B. Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf L\u00f6schung Ihrer Daten. Von uns gespeicherte Daten werden, sollten sie f\u00fcr ihre Zweckbestimmung nicht mehr vonn\u00f6ten sein und es keine gesetzlichen Aufbewahrungsfristen geben, gel\u00f6scht. Falls eine L\u00f6schung nicht durchgef\u00fchrt werden kann, da die Daten f\u00fcr zul\u00e4ssige gesetzliche Zwecke erforderlich sind, erfolgt eine Einschr\u00e4nkung der Datenverarbeitung. In diesem Fall werden die Daten gesperrt und nicht f\u00fcr andere Zwecke verarbeitet.<\/p><h6><strong>Widerspruchsrecht<\/strong><\/h6><p>Nutzer dieser Webseite k\u00f6nnen von ihrem Widerspruchsrecht Gebrauch machen und der Verarbeitung ihrer personenbezogenen Daten zu jeder Zeit widersprechen.<\/p><p>Wenn Sie eine Berichtigung, Sperrung, L\u00f6schung oder Auskunft \u00fcber die zu Ihrer Person gespeicherten personenbezogenen Daten w\u00fcnschen oder Fragen bzgl. der Erhebung, Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte Einwilligungen widerrufen m\u00f6chten, wenden Sie sich bitte an folgende E-Mail-Adresse: <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  },
+  "hu_HU": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "hu_HU",
+    "ArticleTranslation_Code": "datenschutz",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Title": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_Keywords": "Datenschutzerkl\u00e4rung, Datenschutz",
+    "ArticleTranslation_Heading": "Datenschutzerkl\u00e4rung",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "<h4><strong>Grundlegendes<\/strong><\/h4><p>Diese Datenschutzerkl\u00e4rung soll die Nutzer dieser Website \u00fcber die Art, den Umfang und den Zweck der Erhebung und Verwendung personenbezogener Daten durch den Websitebetreiber, <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a>, informieren.<\/p><p>Der Websitebetreiber nimmt Ihren Datenschutz sehr ernst und behandelt Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Vorschriften. Da durch neue Technologien und die st\u00e4ndige Weiterentwicklung dieser Webseite \u00c4nderungen an dieser Datenschutzerkl\u00e4rung vorgenommen werden k\u00f6nnen, empfehlen wir Ihnen sich die Datenschutzerkl\u00e4rung in regelm\u00e4\u00dfigen Abst\u00e4nden wieder durchzulesen.<\/p><p>Definitionen der verwendeten Begriffe (z.B. \u201cpersonenbezogene Daten\u201d oder \u201cVerarbeitung\u201d) finden Sie in Art. 4 DSGVO.<\/p>",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "hu_HU",
+        "ArticleTranslation_Code": "zugriffsdaten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Zugriffsdaten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "Zugriffsdaten",
+        "ArticleTranslation_Heading": "Zugriffsdaten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Wir, der Websitebetreiber bzw. Seitenprovider, erheben aufgrund unseres berechtigten Interesses (s. Art. 6 Abs. 1 lit. f. DSGVO) Daten \u00fcber Zugriffe auf die Website und speichern diese als \u201cServer-Logfiles\u201d auf dem Server der Website ab. Folgende Daten werden so protokolliert:<\/p><ul><li>Besuchte Website<\/li><li>Uhrzeit zum Zeitpunkt des Zugriffes<\/li><li>Menge der gesendeten Daten in Byte<\/li><li>Quelle\/Verweis, von welchem Sie auf die Seite gelangten<\/li><li>Verwendeter Browser<\/li><li>Verwendetes Betriebssystem<\/li><li>Verwendete IP-Adresse<\/li><\/ul><p>Die Server-Logfiles werden f\u00fcr maximal 7 Tage gespeichert und anschlie\u00dfend gel\u00f6scht. Die Speicherung der Daten erfolgt aus Sicherheitsgr\u00fcnden, um z. B. Missbrauchsf\u00e4lle aufkl\u00e4ren zu k\u00f6nnen. M\u00fcssen Daten aus Beweisgr\u00fcnden aufgehoben werden, sind sie solange von der L\u00f6schung ausgenommen bis der Vorfall endg\u00fcltig gekl\u00e4rt ist.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "hu_HU",
+        "ArticleTranslation_Code": "erfassung-und-verarbeitung-personenbezogener-daten",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Erfassung und Verarbeitung personenbezogener Daten",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Der Websitebetreiber erhebt, nutzt und gibt Ihre personenbezogenen Daten nur dann weiter, wenn dies im gesetzlichen Rahmen erlaubt ist oder Sie in die Datenerhebung einwilligen.<\/p><p>Als personenbezogene Daten gelten s\u00e4mtliche Informationen, welche dazu dienen, Ihre Person zu bestimmen und welche zu Ihnen zur\u00fcckverfolgt werden k\u00f6nnen \u2013 also beispielsweise Ihr Name, Ihre E-Mail-Adresse und Telefonnummer.<\/p><p>Diese Website k\u00f6nnen Sie auch besuchen, ohne Angaben zu Ihrer Person zu machen. Zur Verbesserung unseres Online-Angebotes speichern wir jedoch (ohne Personenbezug) Ihre Zugriffsdaten auf diese Website. Zu diesen Zugriffsdaten geh\u00f6ren z. B. die von Ihnen angeforderte Datei oder der Name Ihres Internet-Providers. Durch die Anonymisierung der Daten sind R\u00fcckschl\u00fcsse auf Ihre Person nicht m\u00f6glich.<\/p><p>Ihre Inhaltsangaben aus dem Kontaktformular (Name und E-Mail Adresse) werden verarbeitet und auf dem Server gespeichert um Ihnen auf Ihre Anfrage antworten zu k\u00f6nnen.<\/p><p><br><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "hu_HU",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Diese Website verwendet Session-Cookies zur wiedererkennung eines Nutzers, die entweder von unserem Server oder dem Server Dritter an den Browser des Nutzers \u00fcbertragen werden. Bei Cookies handelt es sich um kleine Dateien, welche auf Ihrem Endger\u00e4t gespeichert werden. Ihr Browser greift auf diese Dateien zu. Durch den Einsatz von Cookies erh\u00f6ht sich die Benutzerfreundlichkeit und Sicherheit dieser Website.<\/p><p>G\u00e4ngige Browser bieten die Einstellungsoption, Cookies nicht zuzulassen. Hinweis: Es ist nicht gew\u00e4hrleistet, dass Sie auf alle Funktionen dieser Website ohne Einschr\u00e4nkungen zugreifen k\u00f6nnen, wenn Sie entsprechende Einstellungen vornehmen.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "hu_HU",
+        "ArticleTranslation_Code": "umgang-mit-kommentaren-und-beitraegen",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Umgang mit Kommentaren und Beitr\u00e4gen",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Hinterlassen Sie auf dieser Website einen Beitrag oder Kommentar, wird Ihre IP-Adresse gespeichert. Dies erfolgt aufgrund unserer berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f. DSGVO und dient der Sicherheit von uns als Websitebetreiber: Denn sollte Ihr Kommentar gegen geltendes Recht versto\u00dfen, k\u00f6nnen wir daf\u00fcr belangt werden, weshalb wir ein Interesse an der Identit\u00e4t des Kommentar- bzw. Beitragsautors haben.<\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "hu_HU",
+        "ArticleTranslation_Code": "rechte-des-nutzers",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Rechte des Nutzers",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Rechte des Nutzers",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "<p>Sie haben als Nutzer das Recht, auf Antrag eine kostenlose Auskunft dar\u00fcber zu erhalten, welche personenbezogenen Daten \u00fcber Sie gespeichert wurden. Sie haben au\u00dferdem das Recht auf Berichtigung falscher Daten und auf die Verarbeitungseinschr\u00e4nkung oder L\u00f6schung Ihrer personenbezogenen Daten. Falls zutreffend, k\u00f6nnen Sie auch Ihr Recht auf Datenportabilit\u00e4t geltend machen. Sollten Sie annehmen, dass Ihre Daten unrechtm\u00e4\u00dfig verarbeitet wurden, k\u00f6nnen Sie eine Beschwerde bei der zust\u00e4ndigen Aufsichtsbeh\u00f6rde einreichen.<\/p><h6><strong>L\u00f6schung von Daten<\/strong><\/h6><p>Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur Aufbewahrung von Daten (z. B. Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf L\u00f6schung Ihrer Daten. Von uns gespeicherte Daten werden, sollten sie f\u00fcr ihre Zweckbestimmung nicht mehr vonn\u00f6ten sein und es keine gesetzlichen Aufbewahrungsfristen geben, gel\u00f6scht. Falls eine L\u00f6schung nicht durchgef\u00fchrt werden kann, da die Daten f\u00fcr zul\u00e4ssige gesetzliche Zwecke erforderlich sind, erfolgt eine Einschr\u00e4nkung der Datenverarbeitung. In diesem Fall werden die Daten gesperrt und nicht f\u00fcr andere Zwecke verarbeitet.<\/p><h6><strong>Widerspruchsrecht<\/strong><\/h6><p>Nutzer dieser Webseite k\u00f6nnen von ihrem Widerspruchsrecht Gebrauch machen und der Verarbeitung ihrer personenbezogenen Daten zu jeder Zeit widersprechen.<\/p><p>Wenn Sie eine Berichtigung, Sperrung, L\u00f6schung oder Auskunft \u00fcber die zu Ihrer Person gespeicherten personenbezogenen Daten w\u00fcnschen oder Fragen bzgl. der Erhebung, Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte Einwilligungen widerrufen m\u00f6chten, wenden Sie sich bitte an folgende E-Mail-Adresse: <a href=\"mailto:{translation:data-privacy-email}\" rel=\"noopener noreferrer\" target=\"_blank\">{translation:data-privacy-email}<\/a><\/p>",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  },
+  "es_ES": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "es_ES",
+    "ArticleTranslation_Code": "proteccion-de-datos",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Pol\u00edtica de privacidad",
+    "ArticleTranslation_Title": "Pol\u00edtica de privacidad",
+    "ArticleTranslation_Keywords": "Pol\u00edtica de privacidad, protecci\u00f3n de privacidad",
+    "ArticleTranslation_Heading": "Pol\u00edtica de privacidad",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "La declaraci\u00f3n b\u00e1sica de privacidad tiene por objeto informar a los usuarios de este sitio web sobre la naturaleza, el alcance y el prop\u00f3sito de recopilar y utilizar datos personales por parte del operador del sitio web, .El operador del sitio web toma su privacidad muy en serio y trata sus datos personales de forma confidencial y de acuerdo con las normas legales. porque las nuevas tecnolog\u00edas y el desarrollo continuo de este sitio web pueden hacer cambios en esta pol\u00edtica de privacidad, recomendamos que lea la declaraci\u00f3n de privacidad en intervalos regulares. Las definiciones del concepto utilizado (por ejemplo, \u201cdatos personales\u201d o \u201cprocesamiento\u201d) se pueden encontrar en el arte. 4 dsgvo.",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "es_ES",
+        "ArticleTranslation_Code": "acceso-a-datos",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "acceso a datos",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "acceso a datos",
+        "ArticleTranslation_Heading": "acceso a datos",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "nosotros, el operador del sitio web o el proveedor de p\u00e1ginas, recopilamos datos sobre el acceso al sitio web sobre la base de nuestro inter\u00e9s leg\u00edtimo (v\u00e9ase el art. 6 abs. 1 lit. f. dsgvo) y lo almacenamos como \u201cservidor logfiles\u201d en el servidor del sitio web. los siguientes datos se registran: Visite la hora del reloj del sitio web en el momento de la cantidad de acceso de los datos transmitidos en ByteSource\/Verweis, de los cuales se almacenan en la direcci\u00f3n IP utilizada por el navegador utilizado por el sistema operativo Los archivos de registro del servidor se almacenan por un m\u00e1ximo de 7 d\u00edas y luego se eliminan. los datos se almacenan por razones de seguridad, para poder aclarar, por ejemplo, casos de abuso. deben ser eliminados para pruebas, est\u00e1n exentos de la eliminaci\u00f3n hasta que el incidente haya sido finalmente resuelto.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "es_ES",
+        "ArticleTranslation_Code": "archivo-y-procesamiento-de-datos-personales",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "recopilaci\u00f3n y procesamiento de datos personales",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "recopilaci\u00f3n y procesamiento de datos personales",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "el operador del sitio web recopila, utiliza y transfiere sus datos personales solamente si esto est\u00e1 permitido en el marco legal o si consiente en la recopilaci\u00f3n de datos. Como datos personales, toda la informaci\u00f3n es v\u00e1lida que sirve para determinar a su persona y que puede ser rastreada a ellos, por ejemplo su nombre, su direcci\u00f3n de correo electr\u00f3nico y el n\u00famero de tel\u00e9fono. para mejorar nuestra oferta online, sin embargo, almacenamos sus datos de acceso en este sitio web (sin referencia personal). Estos datos de acceso incluyen, por ejemplo, b. los datos solicitados por ellos o el nombre de su proveedor de Internet. la anonimato de los datos no permite conclusiones sobre su persona. Su informaci\u00f3n de contenido del formulario de contacto (nombre y direcci\u00f3n de correo electr\u00f3nico) ser\u00e1 procesada y almacenada en el servidor para poder responder a su solicitud.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "es_ES",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "Cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "Cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "Este sitio web utiliza cookies de sesi\u00f3n para recuperar un usuario que sea transferido desde nuestro servidor o servidor tercero al navegador del usuario. Las cookies son peque\u00f1os archivos que se almacenan en su dispositivo final. su navegador accede a estos archivos. el uso de cookies aumenta la facilidad de uso y la seguridad de este sitio web. Los navegadores actuales ofrecen la opci\u00f3n de configuraci\u00f3n para no permitir las cookies. Nota: no est\u00e1 garantizado que puedan acceder a todas las funciones de este sitio web sin restricciones cuando hagan ajustes apropiados.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "es_ES",
+        "ArticleTranslation_Code": "circunstancial-comtaren-and-beat",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "tour con comentarios y contribuciones",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "tour con comentarios y contribuciones",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "en este sitio web, dejan una contribuci\u00f3n o comentario, se almacena su direcci\u00f3n IP. Esto se hace debido a nuestros intereses leg\u00edtimos en el sentido del arte. 6 abdominales 1 litro. f. dsgvo y sirve a la seguridad de nosotros como operador del sitio web: porque si su comentario debe violar el derecho aplicable, podemos estar preocupados por ello, por lo que tenemos inter\u00e9s en la identidad del comentario o contribuyente.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "es_ES",
+        "ArticleTranslation_Code": "derecho-de-uso",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "derecho del usuario",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "derecho del usuario",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "como usuario, tienen derecho a recibir una solicitud gratuita sobre los datos personales almacenados sobre ellos. Tambi\u00e9n tienen derecho a corregir datos incorrectos y a restringir o erradicar sus datos personales. si es aplicable, tambi\u00e9n pueden hacer valer su derecho a la portabilidad de datos. Si suponen que sus datos han sido procesados ilegalmente, pueden presentar una denuncia ante la autoridad de supervisi\u00f3n competente. La eliminaci\u00f3n de datos en la medida en que su solicitud no contradice la obligaci\u00f3n legal de almacenar datos (por ejemplo, almacenamiento de datos de existencias), tienen derecho a borrar sus datos. si no se puede realizar una supresi\u00f3n, ya que los datos son necesarios para fines legales admisibles, se restringe el procesamiento de datos. en este caso, los datos se bloquean y no se procesan para otros fines. Derechos de respuesta Los usuarios de esta p\u00e1gina web pueden utilizar su derecho a oponerse y oponerse al tratamiento de sus datos personales en cualquier momento. Si desean o piden una correcci\u00f3n, bloqueo, borrado o informaci\u00f3n futura sobre los datos personales almacenados en su persona. la recopilaci\u00f3n, procesamiento o uso de sus datos personales, o si desea revocar los consentimientos, por favor contacte a la siguiente direcci\u00f3n de correo electr\u00f3nico: {translation:data-privacy-email}",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  },
+  "fr_FR": {
+    "CmsPage_ID": 9,
+    "CmsPage_ID_Redirect": null,
+    "CmsPageType_Code": "faq",
+    "CmsPageLayout_Code": "default",
+    "CmsPageType_Template": "cmspage::faq",
+    "CmsPageLayout_Template": "layout::default",
+    "CmsPageState_Code": "active",
+    "Locale_Code": "fr_FR",
+    "ArticleTranslation_Code": "protection-des-donnees",
+    "ArticleTranslation_Host": null,
+    "ArticleTranslation_Active": true,
+    "ArticleTranslation_Name": "Privacy Policy",
+    "ArticleTranslation_Title": "Privacy Policy",
+    "ArticleTranslation_Keywords": "politique de confidentialit\u00e9, protection de la vie priv\u00e9e",
+    "ArticleTranslation_Heading": "Privacy Policy",
+    "ArticleTranslation_SubHeading": null,
+    "ArticleTranslation_Path": null,
+    "ArticleTranslation_Teaser": null,
+    "ArticleTranslation_Text": "L'\u00e9nonc\u00e9 de confidentialit\u00e9 de base vise \u00e0 informer les utilisateurs de ce site Web de la nature, de la port\u00e9e et du but de la collecte et de l'utilisation de donn\u00e9es personnelles par l'op\u00e9rateur du site Web.L'op\u00e9rateur du site prend tr\u00e8s au s\u00e9rieux leur vie priv\u00e9e et traite leurs donn\u00e9es personnelles de mani\u00e8re confidentielle et conform\u00e9ment aux r\u00e8glements juridiques. parce que les nouvelles technologies et le d\u00e9veloppement continu de ce site Web peuvent apporter des changements \u00e0 cette politique de confidentialit\u00e9, nous vous recommandons de lire la d\u00e9claration de confidentialit\u00e9 dans des intervalles r\u00e9guliers. Les d\u00e9finitions du concept utilis\u00e9 (p. ex. \u201cdonn\u00e9es personnelles\u201d ou \u201cprocessing\u201d) se trouvent dans l\u2019art. 4 dsgvo.",
+    "ArticleTranslation_Footer": null,
+    "File_ID": null,
+    "File_BeanList": {
+      "__class": "Pars\\Model\\File\\FileBeanList"
+    },
+    "Article_ID": 35,
+    "Article_Code": "data-privacy",
+    "Article_Data": {
+      "vote_once": null,
+      "contact_email": "",
+      "author": null,
+      "editor": "Robert K.",
+      "__class": "Pars\\Model\\Article\\DataBean"
+    },
+    "Timestamp_Create": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:08:23.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Timestamp_Edit": {
+      "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-05-30 01:59:02.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+    },
+    "Person_ID_Create": 1,
+    "Person_ID_Edit": 1,
+    "ArticleData_BeanList": {
+      "__class": "Pars\\Model\\Article\\Data\\ArticleDataBeanList"
+    },
+    "CmsBlock_BeanList": {
+      "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBeanList",
+      "0": {
+        "CmsBlock_ID": 27,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 2,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "fr_FR",
+        "ArticleTranslation_Code": "donnees-d-apos-acces",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "donn\u00e9es d &apos; acc\u00e8s",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": "donn\u00e9es d &apos; acc\u00e8s",
+        "ArticleTranslation_Heading": "donn\u00e9es d &apos; acc\u00e8s",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "nous, l\u2019op\u00e9rateur du site ou le fournisseur de pages, collectons des donn\u00e9es sur l\u2019acc\u00e8s au site Web sur la base de notre int\u00e9r\u00eat l\u00e9gitime (voir art. 6 ab. 1 lit. f. dsgvo) et les stockons comme \u00abserver logfiles\u00bb sur le serveur du site. les donn\u00e9es suivantes sont enregistr\u00e9es: Visitez le site web Heure d'horloge au moment de la quantit\u00e9 d'acc\u00e8s des donn\u00e9es transmises dans ByteSource\/Verweis, \u00e0 partir de laquelle elles sont stock\u00e9es sur l'adresse IP utilis\u00e9e par le navigateur utilisateur Les fichiers d'enregistrement du serveur sont stock\u00e9s pour un maximum de 7 jours et supprim\u00e9s. les donn\u00e9es sont stock\u00e9es pour des raisons de s\u00e9curit\u00e9, afin de pouvoir clarifier, par exemple, les cas de maltraitance. doivent \u00eatre supprim\u00e9s pour la preuve, ils sont exempt\u00e9s de la suppression jusqu'\u00e0 ce que l'incident soit finalement r\u00e9gl\u00e9.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 36,
+        "Article_Code": "data-privacy-1",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:09:31.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "1": {
+        "CmsBlock_ID": 28,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 3,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "fr_FR",
+        "ArticleTranslation_Code": "archivage-et-traitement-des-donnees-personnelles",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "collecte et traitement des donn\u00e9es personnelles",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "collecte et traitement des donn\u00e9es personnelles",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "l'op\u00e9rateur de site Web recueille, utilise et passe sur leurs donn\u00e9es personnelles seulement si cela est permis dans le cadre juridique ou s'ils consentent \u00e0 la collecte de donn\u00e9es. En tant que donn\u00e9es personnelles, toutes les informations sont valides qui servent \u00e0 d\u00e9terminer leur personne et qui peuvent \u00eatre trac\u00e9es \u00e0 eux \u2013 par exemple leur nom, leur adresse e-mail et leur num\u00e9ro de t\u00e9l\u00e9phone. pour am\u00e9liorer notre offre en ligne, cependant, nous stockons vos donn\u00e9es d'acc\u00e8s sur ce site (sans r\u00e9f\u00e9rence personnelle). Ces donn\u00e9es d'acc\u00e8s comprennent par exemple b. les donn\u00e9es demand\u00e9es par eux ou le nom de leur fournisseur d'Internet. l'anonymisation des donn\u00e9es ne permet pas de conclusions sur leur personne. Vos informations de contenu \u00e0 partir du formulaire de contact (nom et adresse e-mail) seront trait\u00e9es et stock\u00e9es sur le serveur afin de pouvoir r\u00e9pondre \u00e0 leur demande.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 37,
+        "Article_Code": "data-privacy-2",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:15:13.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "2": {
+        "CmsBlock_ID": 31,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 4,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "fr_FR",
+        "ArticleTranslation_Code": "cookies",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "cookies",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "cookies",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "ce site utilise des cookies de session pour r\u00e9cup\u00e9rer un utilisateur qui est soit transf\u00e9r\u00e9 de notre serveur ou serveur tiers au navigateur de l'utilisateur. Les cookies sont de petits fichiers qui sont stock\u00e9s sur leur terminal. son navigateur acc\u00e8de \u00e0 ces fichiers. l'utilisation de cookies augmente la convivialit\u00e9 et la s\u00e9curit\u00e9 de ce site Web. Les navigateurs actuels offrent l'option de r\u00e9glage ne permettant pas les cookies. Remarque : il n'est pas garanti qu'ils puissent acc\u00e9der \u00e0 toutes les fonctions de ce site sans restrictions lorsqu'ils font des r\u00e9glages appropri\u00e9s.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 40,
+        "Article_Code": "data-privacy-5",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:35:32.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "3": {
+        "CmsBlock_ID": 29,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 5,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "fr_FR",
+        "ArticleTranslation_Code": "circumstantial-comtaren-and-beat",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "visite avec commentaires et contributions",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "visite avec commentaires et contributions",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "sur ce site Web, ils laissent une contribution ou un commentaire, leur adresse IP est stock\u00e9e. cela est fait en raison de nos int\u00e9r\u00eats l\u00e9gitimes dans le sens de l'art. 6 ab. 1 lit. f. dsgvo et sert la s\u00e9curit\u00e9 de nous en tant qu'op\u00e9rateur de site Web: car si votre commentaire devrait violer le droit applicable, nous pouvons \u00eatre pr\u00e9occup\u00e9s pour cela, c'est pourquoi nous avons un int\u00e9r\u00eat pour l'identit\u00e9 du commentaire ou du contributeur.",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 38,
+        "Article_Code": "data-privacy-3",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:23:46.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      },
+      "4": {
+        "CmsBlock_ID": 30,
+        "CmsBlock_ID_Parent": null,
+        "CmsBlock_Order": null,
+        "CmsBlockType_Code": "text",
+        "CmsBlockType_Template": "cmsblock::text",
+        "CmsBlockState_Code": "active",
+        "CmsPage_ID": 9,
+        "CmsPage_CmsBlock_Order": 6,
+        "CmsBlock_BeanList": {
+          "__class": "Pars\\Model\\Cms\\Block\\CmsBlockBeanList"
+        },
+        "Locale_Code": "fr_FR",
+        "ArticleTranslation_Code": "droit-de-l-apos-utilisateur",
+        "ArticleTranslation_Host": null,
+        "ArticleTranslation_Active": true,
+        "ArticleTranslation_Name": "droit de l &apos; utilisateur",
+        "ArticleTranslation_Title": null,
+        "ArticleTranslation_Keywords": null,
+        "ArticleTranslation_Heading": "droit de l &apos; utilisateur",
+        "ArticleTranslation_SubHeading": null,
+        "ArticleTranslation_Path": null,
+        "ArticleTranslation_Teaser": null,
+        "ArticleTranslation_Text": "en tant qu'utilisateur, ils ont le droit de recevoir une demande gratuite sur laquelle les donn\u00e9es personnelles ont \u00e9t\u00e9 stock\u00e9es \u00e0 leur sujet. ils ont \u00e9galement le droit de corriger des donn\u00e9es incorrectes et de restreindre ou d'\u00e9radiquer leurs donn\u00e9es personnelles. s &apos; il y a lieu, ils peuvent \u00e9galement faire valoir leur droit \u00e0 la portabilit\u00e9 des donn\u00e9es. s'ils supposent que leurs donn\u00e9es ont \u00e9t\u00e9 trait\u00e9es ill\u00e9galement, ils peuvent d\u00e9poser une plainte aupr\u00e8s de l'autorit\u00e9 de surveillance comp\u00e9tente. La suppression des donn\u00e9es dans la mesure o\u00f9 leur demande ne contrevient pas \u00e0 une obligation l\u00e9gale de stocker des donn\u00e9es (p. ex. stockage des donn\u00e9es de stock), elles ont le droit d'effacer leurs donn\u00e9es. si une suppression ne peut \u00eatre effectu\u00e9e, puisque les donn\u00e9es sont requises \u00e0 des fins l\u00e9gales admissibles, le traitement des donn\u00e9es est limit\u00e9. dans ce cas, les donn\u00e9es sont bloqu\u00e9es et ne sont pas trait\u00e9es \u00e0 d'autres fins. Droits de r\u00e9ponse Les utilisateurs de cette page Web peuvent utiliser leur droit d'opposition et d'opposition au traitement de leurs donn\u00e9es personnelles \u00e0 tout moment. S'ils souhaitent ou demandent une correction, un blocage, une effacement ou des renseignements futurs sur les donn\u00e9es personnelles stock\u00e9es dans leur personne. la collecte, le traitement ou l'utilisation de vos donn\u00e9es personnelles, ou si vous souhaitez r\u00e9voquer les consentements, veuillez contacter l'adresse e-mail suivante : {translation:data-privacy-email}",
+        "ArticleTranslation_Footer": null,
+        "File_ID": null,
+        "File_BeanList": {
+          "__class": "Pars\\Model\\File\\FileBeanList"
+        },
+        "Article_ID": 39,
+        "Article_Code": "data-privacy-4",
+        "Article_Data": {
+          "vote_once": null,
+          "contact_email": "",
+          "author": null,
+          "editor": "Robert K.",
+          "__class": "Pars\\Model\\Article\\DataBean"
+        },
+        "Timestamp_Create": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-01-10 22:29:07.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Timestamp_Edit": {
+          "__serialize": "O:8:\"DateTime\":3:{s:4:\"date\";s:26:\"2021-03-02 18:48:21.000000\";s:13:\"timezone_type\";i:3;s:8:\"timezone\";s:3:\"UTC\";}"
+        },
+        "Person_ID_Create": 1,
+        "Person_ID_Edit": 1,
+        "ArticleData_BeanList": null,
+        "__class": "Pars\\Model\\Cms\\PageBlock\\CmsPageBlockBean"
+      }
+    },
+    "CmsPost_BeanList": {
+      "__class": "Pars\\Model\\Cms\\Post\\CmsPostBeanList"
+    },
+    "__class": "Pars\\Model\\Cms\\Page\\CmsPageBean"
+  }
+}
