@@ -11,5 +11,5 @@ class FormDataBean extends AbstractBaseBean
     public ?int $FormData_ID = null;
     public ?int $Form_ID = null;
     public array $FormData_Data = [];
-    public ?bool $FormData_Read = null;
+    public bool $FormData_Read = false;
 }
