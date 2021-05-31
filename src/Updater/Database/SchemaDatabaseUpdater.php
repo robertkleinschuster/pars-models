@@ -2,18 +2,16 @@
 
 namespace Pars\Model\Updater\Database;
 
-use Laminas\Db\Sql\Ddl\Column\AbstractLengthColumn;
 use Laminas\Db\Sql\Ddl\Column\Boolean;
-use Laminas\Db\Sql\Ddl\Column\Column;
 use Laminas\Db\Sql\Ddl\Column\Integer;
 use Laminas\Db\Sql\Ddl\Column\Text;
 use Laminas\Db\Sql\Ddl\Column\Timestamp;
 use Laminas\Db\Sql\Ddl\Column\Varchar;
-use Laminas\Db\Sql\Ddl\Constraint\AbstractConstraint;
 use Laminas\Db\Sql\Ddl\Constraint\ForeignKey;
 use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
 use Laminas\Db\Sql\Ddl\Constraint\UniqueKey;
 use Laminas\Db\Sql\Ddl\Index\Index;
+use Laminas\Db\Sql\Sql;
 use Pars\Core\Database\Updater\AbstractDatabaseUpdater;
 
 /**
@@ -35,8 +33,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $personId = new Integer('Person_ID');
         $personId->setOption('AUTO_INCREMENT', true);
         $this->addColumnToTable($table, $personId);
-        $this->addColumnToTable($table, new Varchar('Person_Firstname', 255));
-        $this->addColumnToTable($table, new Varchar('Person_Lastname', 255));
+        $this->addColumnToTable($table, new Varchar('Person_Firstname', 255, true));
+        $this->addColumnToTable($table, new Varchar('Person_Lastname', 255, true));
         $this->addConstraintToTable($table, new PrimaryKey('Person_ID'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);
@@ -1352,5 +1350,63 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         return $this->query($table);
     }
 
+    public function updateTableFrontendUser()
+    {
+        $table = $this->getTableStatement('FrontendUser');
+        $this->addColumnToTable($table, new Integer('Person_ID'));
+        $this->addColumnToTable($table, new Varchar('FrontendUser_Username', 255));
+        $this->addColumnToTable($table, new Varchar('FrontendUser_Password', 255));
+        $this->addConstraintToTable($table, new PrimaryKey('Person_ID'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFrontendUser_DropConstraints()
+    {
+        $table = $this->getTableStatement('FrontendUser', true);
+        $this->dropConstraintFromTable($table, new ForeignKey(null, 'Person_ID', 'Person', 'Person_ID', 'CASCADE'));
+        $this->dropConstraintFromTable($table, new UniqueKey('FrontendUser_Username'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFrontendUser_AddConstraints()
+    {
+        $table = $this->getTableStatement('FrontendUser', true);
+        $this->addConstraintToTable($table, new ForeignKey(null, 'Person_ID', 'Person', 'Person_ID', 'CASCADE'));
+        $this->addConstraintToTable($table, new UniqueKey('FrontendUser_Username'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFrontendStatistic()
+    {
+        $table = $this->getTableStatement('FrontendStatistic');
+        $this->addColumnToTable($table, new Integer('FrontendStatistic_ID'))
+            ->setOption('AUTO_INCREMENT', true);
+        $this->addColumnToTable($table, new Varchar('FrontendStatistic_Group', 255));
+        $this->addColumnToTable($table, new Varchar('FrontendStatistic_Reference', 255));
+        $this->addConstraintToTable($table, new PrimaryKey('FrontendStatistic_ID'));
+        $this->addDefaultColumnsToTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFrontendStatistic_DropConstraints()
+    {
+        $table = $this->getTableStatement('FrontendStatistic', true);
+        $this->dropConstraintFromTable($table, new Index('FrontendStatistic_Group'));
+        $this->dropConstraintFromTable($table, new Index('FrontendStatistic_Reference'));
+        $this->dropDefaultConstraintsFromTable($table);
+        return $this->query($table);
+    }
+
+    public function updateTableFrontendStatistic_AddConstraints()
+    {
+        $table = $this->getTableStatement('FrontendStatistic', true);
+        $this->addConstraintToTable($table, new Index('FrontendStatistic_Group'));
+        $this->addConstraintToTable($table, new Index('FrontendStatistic_Reference'));
+        $this->addDefaultConstraintsToTable($table);
+        return $this->query($table);
+    }
 
 }
