@@ -5,6 +5,7 @@ namespace Pars\Model\Picture;
 
 
 use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Bean\Finder\FinderBeanListDecorator;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\File\FileBeanFinder;
 
