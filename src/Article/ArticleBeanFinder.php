@@ -3,6 +3,8 @@
 namespace Pars\Model\Article;
 
 use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Sql\Predicate\Expression;
+use Laminas\Db\Sql\Select;
 use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Loader\BeanLoaderInterface;
@@ -32,6 +34,18 @@ class ArticleBeanFinder extends AbstractBeanFinder
         if ($initLinked) {
             $this->addLinkedFinder(new ArticleDataBeanFinder($adapter), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
             $this->addLinkedFinder(new ArticlePictureBeanFinder($adapter), 'ArticlePicture_BeanList', 'Article_ID', 'Article_ID');
+        }
+    }
+
+    public function loadStatistic(string $group, string $alias)
+    {
+        $loader = $this->getBeanLoader();
+        if ($loader instanceof DatabaseBeanLoader) {
+            $select = new Select('FrontendStatistic');
+            $select->where(new Expression('FrontendStatistic.FrontendStatistic_Reference = Article.Article_Code'));
+            $select->where(new Expression("FrontendStatistic.FrontendStatistic_Group = '$group'"));
+            $select->columns(['FrontendStatistic_Count' => new Expression('COUNT(FrontendStatistic.FrontendStatistic_ID)')]);
+            $loader->addCustomColumn($select, $alias);
         }
     }
 
