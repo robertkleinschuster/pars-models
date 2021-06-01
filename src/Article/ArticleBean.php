@@ -21,7 +21,8 @@ class ArticleBean extends AbstractBaseBean
     public ?int $Person_ID_Edit = null;
     public ?BeanListInterface $ArticleData_BeanList = null;
     public ?BeanListInterface $ArticlePicture_BeanList = null;
-
+    public ?int $Article_View = null;
+    public ?int $Article_Read = null;
     /**
      * @return DataBean
      */
