@@ -13,6 +13,7 @@ class FrontendStatisticProcessor extends AbstractDatabaseBeanProcessor
         $saver->addField('FrontendStatistic.FrontendStatistic_ID')->setKey(true);
         $saver->addField('FrontendStatistic.FrontendStatistic_Group');
         $saver->addField('FrontendStatistic.FrontendStatistic_Reference');
+        $saver->addField('FrontendStatistic.FrontendStatistic_Locale');
         $saver->addField('FrontendStatistic.FrontendStatistic_Data');
     }
 

@@ -18,6 +18,7 @@ class FrontendStatisticFinder extends AbstractDatabaseBeanFinder
         $loader->addField('FrontendStatistic.FrontendStatistic_ID')->setKey(true);
         $loader->addField('FrontendStatistic.FrontendStatistic_Group');
         $loader->addField('FrontendStatistic.FrontendStatistic_Reference');
+        $loader->addField('FrontendStatistic.FrontendStatistic_Locale');
         $loader->addField('FrontendStatistic.FrontendStatistic_Data');
     }
 
