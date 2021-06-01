@@ -1386,6 +1386,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             ->setOption('AUTO_INCREMENT', true);
         $this->addColumnToTable($table, new Varchar('FrontendStatistic_Group', 255));
         $this->addColumnToTable($table, new Varchar('FrontendStatistic_Reference', 255));
+        $this->addColumnToTable($table, new Varchar('FrontendStatistic_Data', 65535));
         $this->addConstraintToTable($table, new PrimaryKey('FrontendStatistic_ID'));
         $this->addDefaultColumnsToTable($table);
         return $this->query($table);

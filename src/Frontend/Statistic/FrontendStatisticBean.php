@@ -8,5 +8,6 @@ class FrontendStatisticBean extends AbstractBaseBean
 {
     public ?int $FrontendStatistic_ID = null;
     public ?string $FrontendStatistic_Group = null;
+    public ?string $FrontendStatistic_Data = null;
     public ?string $FrontendStatistic_Reference = null;
 }
