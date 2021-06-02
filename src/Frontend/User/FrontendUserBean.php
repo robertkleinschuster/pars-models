@@ -15,4 +15,23 @@ class FrontendUserBean extends AbstractBaseBean
     public ?string $FrontendUser_Username = null;
     public ?string $FrontendUser_Password = null;
 
+    public function username()
+    {
+        return $this->FrontendUser_Username;
+    }
+
+    public function password()
+    {
+        return $this->FrontendUser_Password;
+    }
+
+    public function firstname()
+    {
+        return $this->Person_Firstname;
+    }
+
+    public function lastname()
+    {
+        return $this->Person_Lastname;
+    }
 }
