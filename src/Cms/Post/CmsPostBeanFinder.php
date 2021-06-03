@@ -7,6 +7,7 @@ use Laminas\Db\Sql\Predicate\Predicate;
 use Pars\Core\Database\DatabaseBeanConverter;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
+use Pars\Model\Cms\Page\CmsPageBeanFinder;
 
 
 /**
@@ -35,6 +36,7 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
                 ->setAdditionalTableList(['Article', 'ArticleTranslation']);
         }
         $this->order(['CmsPost_PublishTimestamp' => self::ORDER_MODE_DESC]);
+        $this->addLinkedFinder(new CmsPageBeanFinder($adapter, false), 'CmsPage_BeanList', 'CmsPage_ID', 'CmsPage_ID');
     }
 
 
