@@ -3,6 +3,7 @@
 namespace Pars\Model\Authentication;
 
 use Laminas\Db\Adapter\AdapterInterface;
+use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Model\Authentication\User\UserBeanFinder;
 use Psr\Container\ContainerInterface;
 
@@ -18,6 +19,6 @@ class UserRepositoryFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        return new UserBeanFinder($container->get(AdapterInterface::class));
+        return new UserBeanFinder($container->get(ParsDatabaseAdapter::class));
     }
 }

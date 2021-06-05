@@ -7,7 +7,9 @@ use Laminas\I18n\Translator\TranslatorAwareInterface;
 use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
@@ -20,7 +22,7 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
  * @method UserBean getBean(bool $fetchAllData = false)
  * @method UserBeanList getBeanList(bool $fetchAllData = false)
  */
-class UserBeanFinder extends AbstractBeanFinder implements
+class UserBeanFinder extends AbstractDatabaseBeanFinder implements
     UserRepositoryInterface,
     ValidationHelperAwareInterface,
     TranslatorAwareInterface
@@ -28,20 +30,13 @@ class UserBeanFinder extends AbstractBeanFinder implements
     use ValidationHelperAwareTrait;
     use TranslatorAwareTrait;
 
-
-    /**
-     * @var Adapter
-     */
-    private Adapter $adapter;
-
-    /**
-     * UserBeanFinder constructor.
-     * @param Adapter $adapter
-     */
-    public function __construct(Adapter $adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $this->adapter = $adapter;
-        $loader = new DatabaseBeanLoader($adapter);
+        return new UserBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('Person_ID', 'Person_ID', 'Person', 'Person_ID', true, null, ['User']);
         $loader->addColumn('Person_Firstname', 'Person_Firstname', 'Person', 'Person_ID');
         $loader->addColumn('Person_Lastname', 'Person_Lastname', 'Person', 'Person_ID');
@@ -56,12 +51,13 @@ class UserBeanFinder extends AbstractBeanFinder implements
         $loader->addColumn('Locale_Name', 'Locale_Name', 'Locale', 'Locale_Code', false, null, [], 'User');
         $loader->addColumn('UserState_Code', 'UserState_Code', 'User', 'Person_ID');
         $loader->addField('User_LastLogin')->setTable('User');
-        parent::__construct($loader, new UserBeanFactory());
-        $userRoleFinder = new UserRoleBeanFinder($adapter);
+        $userRoleFinder = new UserRoleBeanFinder($this->getDatabaseAdapter());
         $userRoleFinder->setUserRole_Active(true);
         $this->addLinkedFinder($userRoleFinder, 'UserRole_BeanList', 'Person_ID', 'Person_ID');
-        $this->addLinkedFinder(new LocaleBeanFinder($adapter), 'Locale_BeanList', 'Locale_Code', 'Locale_Code');
+        $this->addLinkedFinder(new LocaleBeanFinder($this->getDatabaseAdapter()), 'Locale_BeanList', 'Locale_Code', 'Locale_Code');
+
     }
+
 
     /**
      * @param string $credential
@@ -75,7 +71,7 @@ class UserBeanFinder extends AbstractBeanFinder implements
         if ($this->count() === 1) {
             $bean = $this->getBean(true);
             if (password_verify($password, $bean->get('User_Password'))) {
-                $processor = new UserBeanProcessor($this->adapter);
+                $processor = new UserBeanProcessor($this->getDatabaseAdapter());
                 $bean->User_LastLogin = new \DateTime();
                 $list = $this->getBeanFactory()->getEmptyBeanList();
                 $list->push($bean);

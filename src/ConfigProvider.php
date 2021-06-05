@@ -10,9 +10,12 @@ use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 use Pars\Core\Config\ConfigFinderInterface;
 use Pars\Core\Config\ConfigProcessorInterface;
+use Pars\Core\Container\ParsContainer;
+use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Core\Deployment\UpdaterInterface;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Core\Translation\MissingTranslationSaverInterface;
+use Pars\Core\Translation\ParsTranslator;
 use Pars\Model\Authentication\User\UserBeanFactory;
 use Pars\Model\Authentication\UserRepositoryFactory;
 use Pars\Model\Config\ConfigBeanFinder;
@@ -20,6 +23,7 @@ use Pars\Model\Config\ConfigBeanProcessor;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
 use Pars\Model\Translation\MissingTranslationSaver;
 use Pars\Model\Translation\TranslationLoader\TranslationBeanFinder;
+use Pars\Model\Updater\ParsUpdaterFactory;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -54,23 +58,23 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories' => [
-                UpdaterInterface::class => \Pars\Model\Updater\ParsUpdaterFactory::class,
+                UpdaterInterface::class => ParsUpdaterFactory::class,
                 UserRepositoryInterface::class => UserRepositoryFactory::class,
                 UserInterface::class => UserBeanFactory::class,
                 LocaleFinderInterface::class => function (ContainerInterface $container) {
-                    return new LocaleBeanFinder($container->get(AdapterInterface::class));
+                    return new LocaleBeanFinder($container->get(ParsDatabaseAdapter::class));
                 },
                 TranslationBeanFinder::class => function (ContainerInterface $container) {
-                    return new TranslationBeanFinder($container->get(AdapterInterface::class));
+                    return new TranslationBeanFinder($container->get(ParsDatabaseAdapter::class));
                 },
                 ConfigFinderInterface::class => function (ContainerInterface $container) {
-                    return new ConfigBeanFinder($container->get(AdapterInterface::class));
+                    return new ConfigBeanFinder($container->get(ParsDatabaseAdapter::class));
                 },
                 ConfigProcessorInterface::class => function (ContainerInterface $container) {
-                    return new ConfigBeanProcessor($container->get(AdapterInterface::class));
+                    return new ConfigBeanProcessor($container->get(ParsDatabaseAdapter::class));
                 },
                 MissingTranslationSaverInterface::class => function (ContainerInterface $container) {
-                    return new MissingTranslationSaver($container->get(AdapterInterface::class));
+                    return new MissingTranslationSaver($container->get(ParsDatabaseAdapter::class));
                 },
             ],
             'delegators' => [

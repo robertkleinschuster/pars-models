@@ -8,6 +8,7 @@ use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
@@ -16,17 +17,13 @@ use Pars\Helper\Validation\ValidationHelperAwareTrait;
  * Class TranslationBeanProcessor
  * @package Pars\Model\Translation\TranslationLoader
  */
-class TranslationBeanProcessor extends AbstractBeanProcessor implements ValidationHelperAwareInterface, TranslatorAwareInterface
+class TranslationBeanProcessor extends AbstractDatabaseBeanProcessor implements ValidationHelperAwareInterface, TranslatorAwareInterface
 {
     use ValidationHelperAwareTrait;
     use TranslatorAwareTrait;
 
-    protected $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('Translation_ID', 'Translation_ID', 'Translation', 'Translation_ID', true);
         $saver->addColumn('Translation_Code', 'Translation_Code', 'Translation', 'Translation_ID');
         $saver->addColumn('Translation_Namespace', 'Translation_Namespace', 'Translation', 'Translation_ID');
@@ -36,10 +33,13 @@ class TranslationBeanProcessor extends AbstractBeanProcessor implements Validati
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Translation', 'Translation_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Translation', 'Translation_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Translation', 'Translation_ID');
-
-        parent::__construct($saver);
-        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
+
+    protected function initValidator()
+    {
+
+    }
+
 
     protected function beforeSave(BeanInterface $bean)
     {
@@ -73,7 +73,7 @@ class TranslationBeanProcessor extends AbstractBeanProcessor implements Validati
             $this->getValidationHelper()->addError('Translation_Code', $this->translate('translation.code.empty'));
         }
         if (!$bean->empty('Locale_Code') && !$bean->empty('Translation_Code') && !$bean->empty('Translation_Namespace')) {
-            $finder = new TranslationBeanFinder($this->adapter);
+            $finder = new TranslationBeanFinder($this->getDatabaseAdapter());
             $finder->filterLocale_Code($bean->get('Locale_Code'));
             $finder->filterTranslation_Code($bean->get('Translation_Code'));
             $finder->filterTranslation_Namespace($bean->get('Translation_Namespace'));

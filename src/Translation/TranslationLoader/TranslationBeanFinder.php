@@ -5,9 +5,11 @@ namespace Pars\Model\Translation\TranslationLoader;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Cache\ParsCache;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
 
@@ -18,18 +20,19 @@ use Pars\Core\Localization\LocaleAwareFinderInterface;
  * @method TranslationBeanList getBeanList(bool $fetchAllData = false)
  * @method TranslationBeanFactory getBeanFactory()
  */
-class TranslationBeanFinder extends AbstractBeanFinder implements LocaleAwareFinderInterface, RemoteLoaderInterface
+class TranslationBeanFinder extends AbstractDatabaseBeanFinder implements LocaleAwareFinderInterface, RemoteLoaderInterface
 {
 
     public bool $escapePlaceholder = false;
 
-    /**
-     * TranslationBeanFinder constructor.
-     * @param Adapter $adapter
-     */
-    public function __construct(Adapter $adapter)
+
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        return new TranslationBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('Translation_ID', 'Translation_ID', 'Translation', 'Translation_ID', true);
         $loader->addColumn('Translation_Code', 'Translation_Code', 'Translation', 'Translation_ID');
         $loader->addColumn('Translation_Namespace', 'Translation_Namespace', 'Translation', 'Translation_ID');
@@ -40,8 +43,9 @@ class TranslationBeanFinder extends AbstractBeanFinder implements LocaleAwareFin
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Translation', 'Translation_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Translation', 'Translation_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Translation', 'Translation_ID');
-        parent::__construct($loader, new TranslationBeanFactory());
+
     }
+
 
     /**
      * @return bool

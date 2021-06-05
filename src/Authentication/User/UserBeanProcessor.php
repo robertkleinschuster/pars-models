@@ -2,45 +2,27 @@
 
 namespace Pars\Model\Authentication\User;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Core\Translation\ParsTranslatorAwareInterface;
-use Pars\Core\Translation\ParsTranslatorAwareTrait;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
 /**
  * Class UserBeanProcessor
  * @package Pars\Model\Authentication\User
  */
-class UserBeanProcessor extends AbstractBeanProcessor implements
-    ValidationHelperAwareInterface,
-    ParsTranslatorAwareInterface
+class UserBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use ParsTranslatorAwareTrait;
-
-    /**
-     * @var Adapter
-     */
-    private Adapter $adapter;
-
     /**
      * @var UserBean
      */
     private UserBean $currentUserBean;
 
     /**
-     * UserBeanProcessor constructor.
-     * @param Adapter $adapter
+     * @param DatabaseBeanSaver $saver
+     * @return mixed|void
      */
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('Person_ID', 'Person_ID', 'Person', 'Person_ID', true, null, ['User']);
         $saver->addColumn('Person_Firstname', 'Person_Firstname', 'Person', 'Person_ID');
         $saver->addColumn('Person_Lastname', 'Person_Lastname', 'Person', 'Person_ID');
@@ -54,9 +36,13 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'User', 'Person_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'User', 'Person_ID');
         $saver->addField('User_LastLogin')->setTable('User');
-        parent::__construct($saver);
-        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
+
+    protected function initValidator()
+    {
+
+    }
+
 
     /**
      * @param BeanInterface $bean
@@ -65,7 +51,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
     protected function validateForSave(BeanInterface $bean): bool
     {
         if (!$bean->empty('User_Username')) {
-            $finder = new UserBeanFinder($this->adapter);
+            $finder = new UserBeanFinder($this->getDatabaseAdapter());
             $finder->setUser_Username($bean->get('User_Username'));
             if (!$bean->empty('Person_ID')) {
                 $finder->setPerson_ID($bean->get('Person_ID'), true);
@@ -112,7 +98,7 @@ class UserBeanProcessor extends AbstractBeanProcessor implements
      */
     protected function validateForDelete(BeanInterface $bean): bool
     {
-        $finder = new UserBeanFinder($this->adapter);
+        $finder = new UserBeanFinder($this->getDatabaseAdapter());
         if ($finder->count() == 1) {
             return false;
         }

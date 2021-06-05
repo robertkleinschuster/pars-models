@@ -3,9 +3,13 @@
 namespace Pars\Model\Config;
 
 use Laminas\Db\Adapter\Adapter;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Config\ConfigFinderInterface;
+use Pars\Core\Container\ParsContainer;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Model\Config\Type\ConfigTypeBeanFinder;
 
 /**
@@ -15,14 +19,15 @@ use Pars\Model\Config\Type\ConfigTypeBeanFinder;
  * @method ConfigBeanList getBeanList(bool $fetchAllData = false)
  * @method ConfigBeanFactory getBeanFactory()
  */
-class ConfigBeanFinder extends AbstractBeanFinder implements ConfigFinderInterface
+class ConfigBeanFinder extends AbstractDatabaseBeanFinder implements ConfigFinderInterface
 {
-    protected $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $this->adapter = $adapter;
-        $loader = new DatabaseBeanLoader($adapter);
+        return new ConfigBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('Config_Code', 'Config_Code', 'Config', 'Config_Code', true);
         $loader->addColumn('Config_Value', 'Config_Value', 'Config', 'Config_Code');
         $loader->addColumn('Config_Description', 'Config_Description', 'Config', 'Config_Code');
@@ -31,9 +36,8 @@ class ConfigBeanFinder extends AbstractBeanFinder implements ConfigFinderInterfa
         $loader->addField('ConfigType_Code')->setTable('Config')->setKey(true);
         $loader->addField('ConfigType_Code_Parent')->setTable('ConfigType')->setJoinField('ConfigType_Code');
         $loader->addDefaultFields('Config');
-        parent::__construct($loader, new ConfigBeanFactory());
-        #$this->getBeanLoader()->order(['Config_Code' => self::ORDER_MODE_ASC]);
     }
+
 
     /**
      * @param string|string[] $config
@@ -77,7 +81,7 @@ class ConfigBeanFinder extends AbstractBeanFinder implements ConfigFinderInterfa
      */
     public function getConfigTypeBeanList()
     {
-        $finder = new ConfigTypeBeanFinder($this->adapter);
+        $finder = new ConfigTypeBeanFinder($this->getParsContainer());
         try {
             return $finder->getBeanList();
         } catch (\Throwable $exception) {

@@ -3,7 +3,9 @@
 namespace Pars\Model\Authorization\RolePermission;
 
 use Laminas\Db\Adapter\Adapter;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,19 +14,21 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method RolePermissionBean getBean(bool $fetchAllData = false)
  * @method RolePermissionBeanList getBeanList(bool $fetchAllData = false)
  */
-class RolePermissionBeanFinder extends AbstractBeanFinder
+class RolePermissionBeanFinder extends AbstractDatabaseBeanFinder
 {
-
-    public function __construct(Adapter $adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+       return new RolePermissionBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('UserPermission_Code', 'UserPermission_Code', 'UserRole_UserPermission', 'UserPermission_Code', true);
         $loader->addColumn('UserRole_ID', 'UserRole_ID', 'UserRole_UserPermission', 'UserPermission_Code', true);
         $loader->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
         $loader->addColumn('UserPermission_Active', 'UserPermission_Active', 'UserPermission', 'UserPermission_Code');
-        $factory = new RolePermissionBeanFactory();
-        parent::__construct($loader, $factory);
     }
+
 
     /**
      * @param string $userPermission_code

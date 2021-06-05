@@ -3,7 +3,9 @@
 namespace Pars\Model\Config\Type;
 
 use Laminas\Db\Adapter\AdapterInterface;
+use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -13,19 +15,17 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method ConfigTypeBeanList getBeanList(bool $fetchAllData = false)
  * @method ConfigTypeBeanFactory getBeanFactory()
  */
-class ConfigTypeBeanFinder extends AbstractBeanFinder
+class ConfigTypeBeanFinder extends AbstractDatabaseBeanFinder
 {
-    /**
-     * ConfigTypeBeanFinder constructor.
-     * @param AdapterInterface $adapter
-     */
-    public function __construct(AdapterInterface $adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        return new ConfigTypeBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addField('ConfigType_Code')->setTable('ConfigType')->setKey(true);
         $loader->addField('ConfigType_Active')->setTable('ConfigType');
         $loader->addField('ConfigType_Code_Parent')->setTable('ConfigType');
-        parent::__construct($loader, new ConfigTypeBeanFactory());
     }
-
 }
