@@ -4,8 +4,7 @@
 namespace Pars\Model\Authentication\ApiKey;
 
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -13,15 +12,11 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @package Pars\Model\Authentication\ApiKey
  * @method ApiKeyBean getBean(bool $fetchAllData = false)
  */
-class ApiKeyBeanFinder extends AbstractBeanFinder
+class ApiKeyBeanFinder extends AbstractDatabaseBeanFinder
 {
-    /**
-     * ApiKeyBeanFinder constructor.
-     * @param Adapter $adapter
-     */
-    public function __construct(Adapter $adapter)
+
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addField('ApiKey_ID')->setTable('ApiKey')->setKey(true);
         $loader->addField('ApiKey_Name')->setTable('ApiKey');
         $loader->addField('ApiKey_Key')->setTable('ApiKey');
@@ -31,8 +26,8 @@ class ApiKeyBeanFinder extends AbstractBeanFinder
         $loader->addField('Person_ID_Edit')->setTable('ApiKey');
         $loader->addField('Timestamp_Create')->setTable('ApiKey');
         $loader->addField('Timestamp_Edit')->setTable('ApiKey');
-        parent::__construct($loader, new ApiKeyBeanFactory());
     }
+
 
     /**
      * @param int $id

@@ -2,38 +2,26 @@
 
 namespace Pars\Model\File\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
  * Class FileTypeBeanProcessor
  * @package Pars\Model\File\Type
  */
-class FileTypeBeanProcessor extends AbstractBeanProcessor
+class FileTypeBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-
-    /**
-     * ArticleStateBeanProcessor constructor.
-     */
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('FileType_Code', 'FileType_Code', 'FileType', 'FileType_Code', true);
         $saver->addColumn('FileType_Name', 'FileType_Name', 'FileType', 'FileType_Code');
         $saver->addColumn('FileType_Mime', 'FileType_Mime', 'FileType', 'FileType_Code');
         $saver->addColumn('FileType_Active', 'FileType_Active', 'FileType', 'FileType_Code');
-        parent::__construct($saver);
     }
 
-    protected function validateForSave(BeanInterface $bean): bool
+    protected function initValidator()
     {
-        return true;
     }
 
-    protected function validateForDelete(BeanInterface $bean): bool
-    {
-        return true;
-    }
+
 }

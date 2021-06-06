@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Page\Layout;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,15 +12,16 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method CmsPageLayoutBean getBean(bool $fetchAllData = false)
  * @method CmsPageLayoutBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPageLayoutBeanFinder extends AbstractBeanFinder
+class CmsPageLayoutBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsPageLayout_Code', 'CmsPageLayout_Code', 'CmsPageLayout', 'CmsPageLayout_Code', true);
         $loader->addColumn('CmsPageLayout_Active', 'CmsPageLayout_Active', 'CmsPageLayout', 'CmsPageLayout_Code');
-        parent::__construct($loader, new CmsPageLayoutBeanFactory());
     }
+
 
     public function setCmsPageLayout_Active(bool $active): self
     {

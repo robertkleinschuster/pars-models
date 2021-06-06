@@ -42,7 +42,7 @@ class ConfigBeanProcessor extends AbstractDatabaseBeanProcessor implements Confi
 
     public function saveValue(string $key, string $value, string $type)
     {
-        $finder = new ConfigBeanFinder($this->getParsContainer());
+        $finder = new ConfigBeanFinder($this->getDatabaseAdapter());
         $finder->setConfig_Code($key);
         $finder->setConfigType_Code($type);
         $list = $finder->getBeanFactory()->getEmptyBeanList();

@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Pars\Model;
 
-use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 use Pars\Core\Config\ConfigFinderInterface;
 use Pars\Core\Config\ConfigProcessorInterface;
-use Pars\Core\Container\ParsContainer;
 use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Core\Deployment\UpdaterInterface;
 use Pars\Core\Localization\LocaleFinderInterface;

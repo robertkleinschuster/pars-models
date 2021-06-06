@@ -2,7 +2,6 @@
 
 namespace Pars\Model\Authentication;
 
-use Laminas\Db\Adapter\AdapterInterface;
 use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Model\Authentication\User\UserBeanFinder;
 use Psr\Container\ContainerInterface;

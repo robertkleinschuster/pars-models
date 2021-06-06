@@ -2,27 +2,27 @@
 
 namespace Pars\Model\Config\Type;
 
-use Laminas\Db\Adapter\AdapterInterface;
-use Pars\Bean\Processor\AbstractBeanProcessor;
+
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
  * Class ConfigTypeBeanProcessor
  * @package Pars\Model\Config\Type
  */
-class ConfigTypeBeanProcessor extends AbstractBeanProcessor
+class ConfigTypeBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    /**
-     * ConfigTypeBeanProcessor constructor.
-     * @param AdapterInterface $adapter
-     */
-    public function __construct(AdapterInterface $adapter)
+
+
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addField('ConfigType_Code')->setTable('ConfigType')->setKey(true);
         $saver->addField('ConfigType_Active')->setTable('ConfigType');
         $saver->addField('ConfigType_Code_Parent')->setTable('ConfigType');
-        parent::__construct($saver);
+    }
+
+    protected function initValidator()
+    {
     }
 
 

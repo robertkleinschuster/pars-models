@@ -2,35 +2,21 @@
 
 namespace Pars\Model\Article;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\String\StringHelper;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
 
 /**
  * Class ArticleBeanProcessor
  * @package Pars\Model\Article
  */
-class ArticleBeanProcessor extends AbstractBeanProcessor implements
-    ValidationHelperAwareInterface,
-    TranslatorAwareInterface
-{
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
+class ArticleBeanProcessor extends AbstractDatabaseBeanProcessor {
 
-    protected $adapter;
 
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);
         $saver->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID');
         $saver->addColumn('Article_Data', 'Article_Data', 'Article', 'Article_ID');
@@ -38,17 +24,20 @@ class ArticleBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Article', 'Article_ID');
-
-        parent::__construct($saver);
-        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
 
-    protected function translate(string $name): string
+    protected function initValidator()
+    {
+
+    }
+
+
+    public function translate(string $code, array $vars = [], ?string $namespace = null): string
     {
         if ($this->hasTranslator()) {
-            return $this->getTranslator()->translate($name, 'validation');
+            return $this->translateValidation($code);
         }
-        return $name;
+        return $code;
     }
 
     protected function beforeSave(BeanInterface $bean)
@@ -65,7 +54,7 @@ class ArticleBeanProcessor extends AbstractBeanProcessor implements
         if ($bean->empty('Article_Code')) {
             $this->getValidationHelper()->addError('Article_Code', $this->translate('article.code.empty'));
         } else {
-            $articleFinder = new ArticleBeanFinder($this->adapter);
+            $articleFinder = new ArticleBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('Article_ID')) {
                 $articleFinder->setArticle_ID($bean->get('Article_ID'), true);
             }

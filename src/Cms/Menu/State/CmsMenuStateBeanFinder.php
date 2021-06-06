@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Menu\State;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,15 +12,17 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method CmsMenuStateBean getBean(bool $fetchAllData = false)
  * @method CmsMenuStateBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsMenuStateBeanFinder extends AbstractBeanFinder
+class CmsMenuStateBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenuState', 'CmsMenuState_Code', true);
         $loader->addColumn('CmsMenuState_Active', 'CmsMenuState_Active', 'CmsMenuState', 'CmsMenuState_Code');
-        parent::__construct($loader, new CmsMenuStateBeanFactory());
+        // TODO: Implement initLoader() method.
     }
+
 
     public function setCmsMenuState_Active(bool $active): self
     {

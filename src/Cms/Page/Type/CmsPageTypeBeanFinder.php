@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Page\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,16 +12,21 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method CmsPageTypeBean getBean(bool $fetchAllData = false)
  * @method CmsPageTypeBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPageTypeBeanFinder extends AbstractBeanFinder
+class CmsPageTypeBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        return new CmsPageTypeBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPageType', 'CmsPageType_Code', true);
         $loader->addColumn('CmsPageType_Active', 'CmsPageType_Active', 'CmsPageType', 'CmsPageType_Code');
         $loader->addColumn('CmsPageType_Order', 'CmsPageType_Order', 'CmsPageType', 'CmsPageType_Code');
-        parent::__construct($loader, new CmsPageTypeBeanFactory());
     }
+
 
     public function orderByOrderField()
     {

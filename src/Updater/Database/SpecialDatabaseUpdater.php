@@ -2,17 +2,7 @@
 
 namespace Pars\Model\Updater\Database;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Ddl\Constraint\PrimaryKey;
-use Laminas\Db\Sql\Ddl\DropTable;
-use Laminas\Db\Sql\Delete;
-use Laminas\Db\Sql\Insert;
-use Laminas\Db\Sql\Select;
-use Laminas\Db\Sql\Sql;
-use Pars\Bean\Finder\BeanFinderInterface;
-use Pars\Bean\Processor\BeanProcessorInterface;
 use Pars\Core\Database\Updater\AbstractDatabaseUpdater;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
 use Pars\Model\Authorization\Permission\PermissionBeanFinder;
@@ -219,10 +209,10 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
      */
     protected function role(string $code, string $name, bool $active)
     {
-        $roleFinder = new RoleBeanFinder($this->adapter);
+        $roleFinder = new RoleBeanFinder($this->getDatabaseAdapter());
         $roleFinder->setUserRole_Code($code);
         if ($roleFinder->count() === 0) {
-            $roleProcessor = new RoleBeanProcessor($this->adapter);
+            $roleProcessor = new RoleBeanProcessor($this->getDatabaseAdapter());
             $roleBean = $roleFinder->getBeanFactory()->getEmptyBean([]);
             $roleBeanList = $roleFinder->getBeanFactory()->getEmptyBeanList();
             $roleBean->set('UserRole_Code', $code);
@@ -246,13 +236,13 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
      */
     protected function rolePermissions(string $roleCode, array $permissions)
     {
-        $roleFinder = new RoleBeanFinder($this->adapter);
+        $roleFinder = new RoleBeanFinder($this->getDatabaseAdapter());
         $roleFinder->setUserRole_Code($roleCode);
         if ($roleFinder->count() == 1) {
             $role = $roleFinder->getBean();
-            $permissionFinder = new PermissionBeanFinder($this->adapter);
+            $permissionFinder = new PermissionBeanFinder($this->getDatabaseAdapter());
             $permissionBeanList = $permissionFinder->getBeanList();
-            $rolePermissionFinder = new RolePermissionBeanFinder($this->adapter);
+            $rolePermissionFinder = new RolePermissionBeanFinder($this->getDatabaseAdapter());
             $rolePermissionFinder->setUserRole_ID($role->get('UserRole_ID'));
             $rolePermissionBeanList = $rolePermissionFinder->getBeanFactory()->getEmptyBeanList();
             $rolePermissionBeanListDelete = $rolePermissionFinder->getBeanFactory()->getEmptyBeanList();
@@ -274,12 +264,12 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
                     $rolePermissionBeanListDelete->push($rolePermission);
                 }
             }
-            $rolePermissionProcessor = new RolePermissionBeanProcessor($this->adapter);
+            $rolePermissionProcessor = new RolePermissionBeanProcessor($this->getDatabaseAdapter());
             $rolePermissionProcessor->setBeanList($rolePermissionBeanList);
             if ($this->getMode() == self::MODE_EXECUTE) {
                 $rolePermissionProcessor->save();
             }
-            $rolePermissionProcessor = new RolePermissionBeanProcessor($this->adapter);
+            $rolePermissionProcessor = new RolePermissionBeanProcessor($this->getDatabaseAdapter());
             $rolePermissionProcessor->setBeanList($rolePermissionBeanListDelete);
             if ($this->getMode() == self::MODE_EXECUTE) {
                 $rolePermissionProcessor->delete();
@@ -290,120 +280,9 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
         return '';
     }
 
-    public function updateTransferParagraphToBlock()
-    {
-        if (in_array('CmsParagraph', $this->existingTableList)) {
-            $select = new Select('CmsParagraph');
-            $sql = new Sql($this->adapter);
-            $query = $sql->buildSqlString($select, $this->adapter);
-            $selectResult = $this->adapter->query($query, Adapter::QUERY_MODE_EXECUTE);
-            if (is_iterable($selectResult)) {
-                foreach ($selectResult as $item) {
-                    $datum = [];
-                    foreach ($item as $key => $value) {
-                        $datum[str_replace('Paragraph', 'Block', $key)] = $value;
-                    }
-                    $select = new Select('CmsBlock');
-                    $select->where($datum);
-                    $sql = new Sql($this->adapter);
-                    $query = $sql->buildSqlString($select, $this->adapter);
-                    $countResult = $this->adapter->query($query, Adapter::QUERY_MODE_EXECUTE);
-                    if (!$countResult->count()) {
-                        $insert = new Insert('CmsBlock');
-                        $insert->values($datum);
-                        $this->query($insert);
-                    }
-                }
-            }
-            $drop = new DropTable('CmsParagraph');
-            return $this->query($drop);
-        }
-        return '';
-    }
-
-    public function updateTransferPageParagraphToPageBlock()
-    {
-        if (in_array('CmsPage_CmsParagraph', $this->existingTableList)) {
-            $select = new Select('CmsPage_CmsParagraph');
-            $sql = new Sql($this->adapter);
-            $query = $sql->buildSqlString($select, $this->adapter);
-            $selectResult = $this->adapter->query($query, Adapter::QUERY_MODE_EXECUTE);
-            if (is_iterable($selectResult)) {
-                foreach ($selectResult as $item) {
-                    $datum = [];
-                    foreach ($item as $key => $value) {
-                        $datum[str_replace('Paragraph', 'Block', $key)] = $value;
-                    }
-                    $select = new Select('CmsPage_CmsBlock');
-                    $select->where($datum);
-                    $sql = new Sql($this->adapter);
-                    $query = $sql->buildSqlString($select, $this->adapter);
-                    $countResult = $this->adapter->query($query, Adapter::QUERY_MODE_EXECUTE);
-                    if (!$countResult->count()) {
-                        $insert = new Insert('CmsPage_CmsBlock');
-                        $insert->values($datum);
-                        $this->query($insert);
-                    }
-                }
-            }
-            $drop = new DropTable('CmsPage_CmsParagraph');
-            return $this->query($drop);
-        }
-        return '';
-    }
-
-    public function updateDropCmsPagragraphType()
-    {
-        if (in_array('CmsParagraphType', $this->existingTableList)) {
-            $drop = new DropTable('CmsParagraphType');
-            return $this->query($drop);
-        }
-        return '';
-    }
-
-    public function updateDropCmsPagragraphState()
-    {
-        if (in_array('CmsParagraphState', $this->existingTableList)) {
-            $drop = new DropTable('CmsParagraphState');
-            return $this->query($drop);
-        }
-        return '';
-    }
-
-    public function updateConfigPK_Drop()
-    {
-        $keys = $this->metadata->getConstraintKeys('PRIMARY', 'Config', $this->adapter->getCurrentSchema());
-        $key_List = [];
-        foreach ($keys as $key) {
-            $key_List[] = $key->getColumnName();
-        }
-        if (!in_array('ConfigType_Code', $key_List)) {
-            $table = $this->getTableStatement('Config');
-            $table->dropConstraint('PRIMARY');
-            return $this->query($table);
-        }
-        return false;
-    }
-
-    public function updateConfigPK_Add()
-    {
-        $keys = $this->metadata->getConstraintKeys('PRIMARY', 'Config', $this->adapter->getCurrentSchema());
-        $key_List = [];
-        foreach ($keys as $key) {
-            $key_List[] = $key->getColumnName();
-        }
-        if (!in_array('ConfigType_Code', $key_List)) {
-            $table = $this->getTableStatement('Config');
-            $constraint = new PrimaryKey(['Config_Code', 'ConfigType_Code']);
-            $table->addConstraint($constraint);
-            return $this->query($table);
-        }
-        return false;
-    }
-
     public function updateDeleteArticleTranslationFile()
     {
-        $finder = new ArticleTranslationBeanFinder($this->adapter, null, false);
+        $finder = new ArticleTranslationBeanFinder($this->getDatabaseAdapter(), false);
         $beanListToSave = $finder->getBeanFactory()->getEmptyBeanList();
         foreach ($finder->getBeanListDecorator() as $bean) {
             if ($bean->isset('File_ID')) {
@@ -411,7 +290,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
                 $beanListToSave->push($bean);
             }
         }
-        $processor = new ArticleTranslationBeanProcessor($this->adapter);
+        $processor = new ArticleTranslationBeanProcessor($this->getDatabaseAdapter());
         $processor->setBeanList($beanListToSave);
         if ($this->getMode() == self::MODE_EXECUTE) {
             $processor->save();
@@ -420,13 +299,6 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             throw new CoreException($processor->getValidationHelper()->getSummary());
         }
         return $beanListToSave->count();
-    }
-
-    public function updatePageBlock()
-    {
-        $delete = new Delete('CmsPage_CmsBlock');
-        $delete->where('1 = 1');
-        return $this->query($delete);
     }
 
     public function updateContactForm()
@@ -440,11 +312,11 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             $bean->FormType_Code = 'default';
             $bean->Form_IndexInfo = true;
             $beanList->push($bean);
-            $processor = new FormBeanProcessor($this->getParsContainer());
+            $processor = new FormBeanProcessor($this->getParsContainer()->getDatabaseAdapter());
             $processor->setBeanList($beanList);
             $processor->save();
 
-            $formFieldFinder = new FormFieldBeanFinder($this->adapter);
+            $formFieldFinder = new FormFieldBeanFinder($this->getParsContainer()->getDatabaseAdapter());
             $fieldBeanList = $formFieldFinder->getBeanFactory()->getEmptyBeanList();
             $fieldBean = $formFieldFinder->getBeanFactory()->getEmptyBean([]);
             $fieldBean->Form_ID = $bean->Form_ID;
@@ -479,7 +351,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             $fieldBean->FormFieldType_Code = 'checkbox';
             $fieldBeanList->push($fieldBean);
 
-            $fieldProcessor = new FormFieldBeanProcessor($this->getParsContainer());
+            $fieldProcessor = new FormFieldBeanProcessor($this->getParsContainer()->getDatabaseAdapter());
             $fieldProcessor->setBeanList($fieldBeanList);
             return $fieldProcessor->save();
         }
@@ -489,7 +361,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateImagesFileDirectory()
     {
-        $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter());
         $finder->filterValue('FileDirectory_Code', 'images');
         if ($finder->count() == 0) {
             $factory = $finder->getBeanFactory();
@@ -500,7 +372,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
             $beanList = $factory->getEmptyBeanList();
             $beanList->push($bean);
 
-            $processor = new FileDirectoryBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+            $processor = new FileDirectoryBeanProcessor($this->getParsContainer()->getDatabaseAdapter());
             $processor->setBeanList($beanList);
             $processor->save();
         }
@@ -508,7 +380,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateStartpagePicture()
     {
-        $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $finder = new FileDirectoryBeanFinder($this->getParsContainer()->getDatabaseAdapter());
         $finder->filterValue('FileDirectory_Code', 'images');
         if ($finder->count() == 1) {
             $fileDirectory_ID = $finder->getBean()->FileDirectory_ID;
@@ -523,7 +395,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
                 $bean->FileType_Code = 'jpg';
                 $beanList = $factory->getEmptyBeanList();
                 $beanList->push($bean);
-                $processor = new PictureBeanProcessor($this->getParsContainer());
+                $processor = new PictureBeanProcessor($this->getParsContainer()->getDatabaseAdapter());
                 $processor->addOption(PictureBeanProcessor::OPTION_IGNORE_VALIDATION);
                 $processor->setBeanList($beanList);
                 $processor->save();
@@ -534,7 +406,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
     public function updateStartpage()
     {
         $finder = new CmsPageBeanFinder($this->getParsContainer()->getDatabaseAdapter());
-        $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter());
         $data = [
             'CmsPageType_Code' => 'default',
             'CmsPageLayout_Code' => 'default',
@@ -555,7 +427,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
     public function updateDataPrivacy()
     {
         $finder = new CmsPageBeanFinder($this->getParsContainer()->getDatabaseAdapter());
-        $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter()->getDbAdapter());
+        $processor = new CmsPageBeanProcessor($this->getParsContainer()->getDatabaseAdapter());
         $data = [
             'CmsPageType_Code' => 'default',
             'CmsPageLayout_Code' => 'default',

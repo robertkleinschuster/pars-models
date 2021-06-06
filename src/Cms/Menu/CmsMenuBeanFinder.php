@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Menu;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Join;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 
 /**
@@ -14,11 +14,14 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
  */
 class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
 {
-
-    public function __construct($adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        parent::__construct($adapter, new CmsMenuBeanFactory());
-        $loader = $this->getBeanLoader();
+        return new CmsMenuBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
+        parent::initLoader($loader);
         $loader->resetDbInfo();
         $loader->addColumn('CmsMenu_ID', 'CmsMenu_ID', 'CmsMenu', 'CmsMenu_ID', true);
         $loader->addColumn('CmsMenu_ID_Parent', 'CmsMenu_ID_Parent', 'CmsMenu', 'CmsMenu_ID');
@@ -27,10 +30,10 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->addColumn('CmsMenu_Name', 'CmsMenu_Name', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('CmsMenuType_Template', 'CmsMenuType_Template', 'CmsMenuType', 'CmsMenuType_Code');
-        $loader->addJoinInfo('CmsMenuType', Join::JOIN_LEFT, 'CmsMenu.CmsMenuType_Code = CmsMenuType.CmsMenuType_Code');
-        $loader->addJoinInfo('CmsPage', Join::JOIN_LEFT, 'CmsMenu.CmsPage_ID = CmsPage.CmsPage_ID');
-        $loader->addJoinInfo('Article', Join::JOIN_LEFT, 'CmsPage.Article_ID = Article.Article_ID');
-        $loader->addJoinInfo('ArticleTranslation', Join::JOIN_LEFT, 'ArticleTranslation.Article_ID = Article.Article_ID');
+        $loader->addJoinInfo('CmsMenuType', 'left', 'CmsMenu.CmsMenuType_Code = CmsMenuType.CmsMenuType_Code');
+        $loader->addJoinInfo('CmsPage', 'left', 'CmsMenu.CmsPage_ID = CmsPage.CmsPage_ID');
+        $loader->addJoinInfo('Article', 'left', 'CmsPage.Article_ID = Article.Article_ID');
+        $loader->addJoinInfo('ArticleTranslation', 'left', 'ArticleTranslation.Article_ID = Article.Article_ID');
         $loader->addColumn('CmsMenuState_Code', 'CmsMenuState_Code', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'CmsMenu', 'CmsMenu_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'CmsMenu', 'CmsMenu_ID');
@@ -48,6 +51,7 @@ class CmsMenuBeanFinder extends ArticleTranslationBeanFinder
         $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
         $loader->addOrder('CmsMenu_Order');
     }
+
 
     public function setCmsMenu_Order(int $order): self
     {

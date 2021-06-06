@@ -2,15 +2,10 @@
 
 namespace Pars\Model\Article\Translation;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Join;
-use Laminas\Db\Sql\Predicate\Expression;
 use Pars\Bean\Factory\BeanFactoryInterface;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
-use Pars\Helper\Debug\DebugHelper;
 use Pars\Model\Article\ArticleBeanFinder;
-use Pars\Model\File\FileBeanFinder;
 use Pars\Model\Localization\Locale\LocaleBeanFinder;
 
 /**
@@ -22,55 +17,51 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
  */
 class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAwareFinderInterface
 {
-
-    protected $adapter;
-
-    /**
-     * ArticleTranslationBeanFinder constructor.
-     * @param Adapter $adapter
-     * @param BeanFactoryInterface|null $beanFactory
-     */
-    public function __construct($adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $this->adapter = $adapter;
-        parent::__construct($adapter, $beanFactory ?? new ArticleTranslationBeanFactory(), $initLinked);
-        $loader = $this->getBeanLoader();
-        if ($loader instanceof DatabaseBeanLoader) {
-            $loader->addColumn('Article_ID', 'Article_ID', 'ArticleTranslation', 'Article_ID', true);
-            $loader->addColumn('Locale_Code', 'Locale_Code', 'ArticleTranslation', 'Article_ID', true);
-            $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Title', 'ArticleTranslation_Title', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Keywords', 'ArticleTranslation_Keywords', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Heading', 'ArticleTranslation_Heading', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_SubHeading', 'ArticleTranslation_SubHeading', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Path', 'ArticleTranslation_Path', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Teaser', 'ArticleTranslation_Teaser', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Text', 'ArticleTranslation_Text', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('ArticleTranslation_Footer', 'ArticleTranslation_Footer', 'ArticleTranslation', 'Article_ID');
-            $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
-        }
+        return new ArticleTranslationBeanFactory();
     }
 
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
+        parent::initLoader($loader);
+        $loader->addColumn('Article_ID', 'Article_ID', 'ArticleTranslation', 'Article_ID', true);
+        $loader->addColumn('Locale_Code', 'Locale_Code', 'ArticleTranslation', 'Article_ID', true);
+        $loader->addColumn('ArticleTranslation_Code', 'ArticleTranslation_Code', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Host', 'ArticleTranslation_Host', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Active', 'ArticleTranslation_Active', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Name', 'ArticleTranslation_Name', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Title', 'ArticleTranslation_Title', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Keywords', 'ArticleTranslation_Keywords', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Heading', 'ArticleTranslation_Heading', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_SubHeading', 'ArticleTranslation_SubHeading', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Path', 'ArticleTranslation_Path', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Teaser', 'ArticleTranslation_Teaser', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Text', 'ArticleTranslation_Text', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('ArticleTranslation_Footer', 'ArticleTranslation_Footer', 'ArticleTranslation', 'Article_ID');
+        $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
+
+    }
+
+
     /**
-     * @param string $locale
+     * @param string $code
      * @param bool $leftJoin
      * @return $this
+     * @throws \Exception
      */
-    public function filterLocale_Code(string $locale, bool $leftJoin = true): self
+    public function filterLocale_Code(string $code, bool $leftJoin = true): self
     {
         if ($leftJoin) {
-            $expression = new Expression("Article.Article_ID = ArticleTranslation.Article_ID AND ArticleTranslation.Locale_Code = ?", $locale);
-            $this->getBeanLoader()->addJoinInfo('ArticleTranslation', Join::JOIN_LEFT, $expression);
+            $this->getBeanLoader()->addJoinInfo('ArticleTranslation', 'left', ['Locale_Code' => $code]);
         } else {
-            $this->getBeanLoader()->filterValue('Locale_Code', $locale);
+            $this->getBeanLoader()->filterValue('Locale_Code', $code);
         }
         foreach ($this->getLinkedFinderList() as $finderLink) {
             $linkedFinder = $finderLink->getBeanFinder();
             if ($linkedFinder instanceof LocaleAwareFinderInterface) {
-                $linkedFinder->filterLocale_Code($locale, $leftJoin);
+                $linkedFinder->filterLocale_Code($code, $leftJoin);
             }
         }
         return $this;
@@ -149,7 +140,7 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAw
      */
     public function findLocaleListByLanguage($language)
     {
-        $localeFinder = new LocaleBeanFinder($this->adapter);
+        $localeFinder = new LocaleBeanFinder($this->getDatabaseAdapter());
         return $localeFinder->findLocaleListByLanguage($language);
     }
 }

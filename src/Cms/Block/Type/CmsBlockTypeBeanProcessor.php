@@ -2,32 +2,21 @@
 
 namespace Pars\Model\Cms\Block\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Type\Base\BeanInterface;
+
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
-class CmsBlockTypeBeanProcessor extends AbstractBeanProcessor
+class CmsBlockTypeBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-
-    /**
-     * CmsBlockStateBeanProcessor constructor.
-     */
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlockType', 'CmsBlockType_Code', true);
         $saver->addColumn('CmsBlockType_Active', 'CmsBlockType_Active', 'CmsBlockType', 'CmsBlockType_Code');
-        parent::__construct($saver);
     }
 
-    protected function validateForSave(BeanInterface $bean): bool
+    protected function initValidator()
     {
-        return true;
     }
 
-    protected function validateForDelete(BeanInterface $bean): bool
-    {
-        return true;
-    }
+
 }

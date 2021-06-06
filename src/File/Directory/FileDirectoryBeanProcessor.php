@@ -2,37 +2,21 @@
 
 namespace Pars\Model\File\Directory;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\String\StringHelper;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\File\FileBeanFinder;
 
 /**
  * Class FileDirectoryBeanProcessor
  * @package Pars\Model\File\Directory
  */
-class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
-    ValidationHelperAwareInterface,
-    TranslatorAwareInterface
+class FileDirectoryBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
 
-    protected $adapter;
-
-    /**
-     * FileDirectoryBeanProcessor constructor.
-     */
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('FileDirectory_ID', 'FileDirectory_ID', 'FileDirectory', 'FileDirectory_ID', true);
         $saver->addColumn('FileDirectory_Code', 'FileDirectory_Code', 'FileDirectory', 'FileDirectory_ID');
         $saver->addColumn('FileDirectory_Name', 'FileDirectory_Name', 'FileDirectory', 'FileDirectory_ID');
@@ -42,12 +26,17 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'FileDirectory', 'FileDirectory_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'FileDirectory', 'FileDirectory_ID');
 
-        parent::__construct($saver);
     }
+
+    protected function initValidator()
+    {
+
+    }
+
 
     protected function translate(string $name): string
     {
-        return $this->getTranslator()->translate($name, 'validation');
+        return $this->translateValidation($name);
     }
 
     protected function beforeSave(BeanInterface $bean)
@@ -63,7 +52,7 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
         if ($bean->empty('FileDirectory_Name')) {
             $this->getValidationHelper()->addError('FileDirectory_Name', $this->translate('filedirectory.name.empty'));
         } else {
-            $finder = new FileDirectoryBeanFinder($this->adapter);
+            $finder = new FileDirectoryBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('FileDirectory_ID')) {
                 $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'), true);
             }
@@ -77,7 +66,7 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
         if ($bean->empty('FileDirectory_Code')) {
             $this->getValidationHelper()->addError('FileDirectory_Code', $this->translate('filedirectory.code.empty'));
         } else {
-            $finder = new FileDirectoryBeanFinder($this->adapter);
+            $finder = new FileDirectoryBeanFinder($this->getDatabaseAdapter());
             if (!$bean->empty('FileDirectory_ID')) {
                 $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'), true);
             }
@@ -93,7 +82,7 @@ class FileDirectoryBeanProcessor extends AbstractBeanProcessor implements
 
     protected function validateForDelete(BeanInterface $bean): bool
     {
-        $finder = new FileBeanFinder($this->adapter);
+        $finder = new FileBeanFinder($this->getDatabaseAdapter());
         $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'));
         if ($finder->count()) {
             $this->getValidationHelper()->addError('General', $this->translate('filedirectory.not_empty'));

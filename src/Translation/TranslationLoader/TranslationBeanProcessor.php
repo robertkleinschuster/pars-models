@@ -2,25 +2,17 @@
 
 namespace Pars\Model\Translation\TranslationLoader;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Processor\TimestampMetaFieldHandler;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
+
 
 /**
  * Class TranslationBeanProcessor
  * @package Pars\Model\Translation\TranslationLoader
  */
-class TranslationBeanProcessor extends AbstractDatabaseBeanProcessor implements ValidationHelperAwareInterface, TranslatorAwareInterface
+class TranslationBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
 
     protected function initSaver(DatabaseBeanSaver $saver)
     {
@@ -58,14 +50,11 @@ class TranslationBeanProcessor extends AbstractDatabaseBeanProcessor implements 
         }
     }
 
-    protected function translate(string $code)
+    public function translate(string $code, array $vars = [], ?string $namespace = null): string
     {
-        if ($this->hasTranslator()) {
-            return $this->getTranslator()->translate($code, 'validation');
-        } else {
-            return $code;
-        }
+        return $this->translateValidation($code, $vars);
     }
+
 
     protected function validateForSave(BeanInterface $bean): bool
     {

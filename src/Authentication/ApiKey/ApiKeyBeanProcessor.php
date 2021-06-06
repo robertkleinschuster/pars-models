@@ -3,17 +3,13 @@
 
 namespace Pars\Model\Authentication\ApiKey;
 
-
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Processor\TimestampMetaFieldHandler;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
-class ApiKeyBeanProcessor extends AbstractBeanProcessor
+class ApiKeyBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addField('ApiKey_ID')->setTable('ApiKey')->setKey(true);
         $saver->addField('ApiKey_Name')->setTable('ApiKey');
         $saver->addField('ApiKey_Key')->setTable('ApiKey');
@@ -23,8 +19,11 @@ class ApiKeyBeanProcessor extends AbstractBeanProcessor
         $saver->addField('Person_ID_Edit')->setTable('ApiKey');
         $saver->addField('Timestamp_Create')->setTable('ApiKey');
         $saver->addField('Timestamp_Edit')->setTable('ApiKey');
-        parent::__construct($saver);
-        $this->addMetaFieldHandler(new TimestampMetaFieldHandler('Timestamp_Edit', 'Timestamp_Create'));
     }
+
+    protected function initValidator()
+    {
+    }
+
 
 }

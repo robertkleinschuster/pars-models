@@ -2,8 +2,8 @@
 
 namespace Pars\Model\File\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,16 +12,19 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method FileTypeBean getBean(bool $fetchAllData = false)
  * @method FileTypeBeanList getBeanList(bool $fetchAllData = false)
  */
-class FileTypeBeanFinder extends AbstractBeanFinder
+class FileTypeBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        return new FileTypeBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('FileType_Code', 'FileType_Code', 'FileType', 'FileType_Code', true);
         $loader->addColumn('FileType_Name', 'FileType_Name', 'FileType', 'FileType_Code');
         $loader->addColumn('FileType_Mime', 'FileType_Mime', 'FileType', 'FileType_Code');
         $loader->addColumn('FileType_Active', 'FileType_Active', 'FileType', 'FileType_Code');
-        parent::__construct($loader, new FileTypeBeanFactory());
     }
 
     public function setFileType_Active(bool $active): self

@@ -2,7 +2,6 @@
 
 namespace Pars\Model\Cms\Page;
 
-use Laminas\Db\Adapter\Adapter;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
@@ -14,19 +13,17 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
 class CmsPageBeanProcessor extends ArticleTranslationBeanProcessor
 {
 
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        parent::__construct($adapter);
-        $saver = $this->getBeanSaver();
-        if ($saver instanceof DatabaseBeanSaver) {
-            $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'CmsPage_ID', true, null, ['ArticleTranslation', 'CmsPage']);
-            $saver->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage', 'CmsPage_ID', true);
-            $saver->addColumn('CmsPage_ID_Redirect', 'CmsPage_ID_Redirect', 'CmsPage', 'CmsPage_ID');
-            $saver->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPage', 'CmsPage_ID');
-            $saver->addColumn('CmsPageLayout_Code', 'CmsPageLayout_Code', 'CmsPage', 'CmsPage_ID');
-            $saver->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
-        }
+        parent::initSaver($saver);
+        $saver->addColumn('Article_ID', 'Article_ID', 'Article', 'CmsPage_ID', true, null, ['ArticleTranslation', 'CmsPage']);
+        $saver->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage', 'CmsPage_ID', true);
+        $saver->addColumn('CmsPage_ID_Redirect', 'CmsPage_ID_Redirect', 'CmsPage', 'CmsPage_ID');
+        $saver->addColumn('CmsPageType_Code', 'CmsPageType_Code', 'CmsPage', 'CmsPage_ID');
+        $saver->addColumn('CmsPageLayout_Code', 'CmsPageLayout_Code', 'CmsPage', 'CmsPage_ID');
+        $saver->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPage', 'CmsPage_ID');
     }
+
 
     protected function validateForSave(BeanInterface $bean): bool
     {

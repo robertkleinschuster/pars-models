@@ -2,14 +2,10 @@
 
 namespace Pars\Model\Config;
 
-use Laminas\Db\Adapter\Adapter;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Config\ConfigFinderInterface;
-use Pars\Core\Container\ParsContainer;
 use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
-use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Model\Config\Type\ConfigTypeBeanFinder;
 
 /**
@@ -81,7 +77,7 @@ class ConfigBeanFinder extends AbstractDatabaseBeanFinder implements ConfigFinde
      */
     public function getConfigTypeBeanList()
     {
-        $finder = new ConfigTypeBeanFinder($this->getParsContainer());
+        $finder = new ConfigTypeBeanFinder($this->getDatabaseAdapter());
         try {
             return $finder->getBeanList();
         } catch (\Throwable $exception) {

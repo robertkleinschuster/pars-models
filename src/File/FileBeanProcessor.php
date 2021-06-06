@@ -105,7 +105,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
     protected function loadFileDirectory_Code(FileBean $bean)
     {
         if (!$bean->empty('FileDirectory_ID') && $bean->empty('FileDirectory_Code')) {
-            $finder = new FileDirectoryBeanFinder($this->getDatabaseAdapter()->getDbAdapter());
+            $finder = new FileDirectoryBeanFinder($this->getDatabaseAdapter());
             $finder->setFileDirectory_ID($bean->get('FileDirectory_ID'));
             if ($finder->count() === 1) {
                 $directory = $finder->getBean();
@@ -234,7 +234,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
         if ($bean->empty('FileType_Code')) {
             $this->getValidationHelper()->addError('FileType_Code', $this->translateValidation('filetype.code.empty'));
         } else {
-            $finder = new FileTypeBeanFinder($this->getDatabaseAdapter()->getDbAdapter());
+            $finder = new FileTypeBeanFinder($this->getDatabaseAdapter());
             $finder->setFileType_Code($bean->get('FileType_Code'));
             $finder->setFileType_Active(true);
             if ($finder->count() !== 1) {

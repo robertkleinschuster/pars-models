@@ -2,8 +2,8 @@
 
 namespace Pars\Model\File\Directory;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\File\FileBeanFinder;
 
@@ -14,11 +14,23 @@ use Pars\Model\File\FileBeanFinder;
  * @method FileDirectoryBeanList getBeanList(bool $fetchAllData = false)
  * @method FileDirectoryBeanFactory getBeanFactory()
  */
-class FileDirectoryBeanFinder extends AbstractBeanFinder
+class FileDirectoryBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        return new FileDirectoryBeanFactory();
+    }
+
+    protected function initLinkedFinder()
+    {
+        parent::initLinkedFinder();
+        $this->addLinkedFinder(new FileBeanFinder($this->getDatabaseAdapter()), 'File_BeanList', 'FileDirectory_ID', 'FileDirectory_ID');
+    }
+
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('FileDirectory_ID', 'FileDirectory_ID', 'FileDirectory', 'FileDirectory_ID', true);
         $loader->addColumn('FileDirectory_Code', 'FileDirectory_Code', 'FileDirectory', 'FileDirectory_ID');
         $loader->addColumn('FileDirectory_Name', 'FileDirectory_Name', 'FileDirectory', 'FileDirectory_ID');
@@ -28,9 +40,8 @@ class FileDirectoryBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'FileDirectory', 'FileDirectory_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'FileDirectory', 'FileDirectory_ID');
 
-        parent::__construct($loader, new FileDirectoryBeanFactory());
-        $this->addLinkedFinder(new FileBeanFinder($adapter), 'File_BeanList', 'FileDirectory_ID', 'FileDirectory_ID');
     }
+
 
     public function setFileDirectory_Active(bool $active): self
     {

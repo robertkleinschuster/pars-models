@@ -2,15 +2,13 @@
 
 namespace Pars\Model\Authentication\User;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authentication\UserRepositoryInterface;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
+use Pars\Core\Translation\ParsTranslatorAwareInterface;
+use Pars\Core\Translation\ParsTranslatorAwareTrait;
 use Pars\Helper\Validation\ValidationHelperAwareInterface;
 use Pars\Helper\Validation\ValidationHelperAwareTrait;
 use Pars\Model\Authorization\UserRole\UserRoleBeanFinder;
@@ -25,10 +23,10 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
 class UserBeanFinder extends AbstractDatabaseBeanFinder implements
     UserRepositoryInterface,
     ValidationHelperAwareInterface,
-    TranslatorAwareInterface
+    ParsTranslatorAwareInterface
 {
     use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
+    use ParsTranslatorAwareTrait;
 
     protected function createBeanFactory(): BeanFactoryInterface
     {
@@ -87,17 +85,11 @@ class UserBeanFinder extends AbstractDatabaseBeanFinder implements
         return null;
     }
 
-    /**
-     * @param string $message
-     * @return string
-     */
-    protected function translate(string $message)
+    public function translate(string $code, array $vars = [], ?string $namespace = null): string
     {
-        if ($this->hasTranslator()) {
-            return $this->getTranslator()->translate($message, 'validation');
-        }
-        return $message;
+        return $this->translateValidation($code, $vars);
     }
+
 
     /**
      * @param int $person_id

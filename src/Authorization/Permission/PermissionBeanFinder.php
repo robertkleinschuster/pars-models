@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Authorization\Permission;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,16 +12,15 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method PermissionBean getBean(bool $fetchAllData = false)
  * @method PermissionBeanList getBeanList(bool $fetchAllData = false)
  */
-class PermissionBeanFinder extends AbstractBeanFinder
+class PermissionBeanFinder extends AbstractDatabaseBeanFinder
 {
 
-    public function __construct(Adapter $adapter)
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('UserPermission_Code', 'UserPermission_Code', 'UserPermission', 'UserPermission_Code', true);
         $loader->addColumn('UserPermission_Active', 'UserPermission_Active', 'UserPermission', 'UserPermission_Code');
-        parent::__construct($loader, new PermissionBeanFactory());
     }
+
 
     /**
      * @param string $userPermission_code

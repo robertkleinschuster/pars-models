@@ -2,8 +2,7 @@
 
 namespace Pars\Model\Cms\Page\State;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,15 +11,16 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method CmsPageStateBean getBean(bool $fetchAllData = false)
  * @method CmsPageStateBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPageStateBeanFinder extends AbstractBeanFinder
+class CmsPageStateBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsPageState_Code', 'CmsPageState_Code', 'CmsPageState', 'CmsPageState_Code', true);
         $loader->addColumn('CmsPageState_Active', 'CmsPageState_Active', 'CmsPageState', 'CmsPageState_Code');
-        parent::__construct($loader, new CmsPageStateBeanFactory());
     }
+
 
     public function setCmsPageState_Active(bool $active): self
     {

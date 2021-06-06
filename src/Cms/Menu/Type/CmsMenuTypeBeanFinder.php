@@ -2,8 +2,7 @@
 
 namespace Pars\Model\Cms\Menu\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,15 +11,15 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method CmsMenuTypeBean getBean(bool $fetchAllData = false)
  * @method CmsMenuTypeBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsMenuTypeBeanFinder extends AbstractBeanFinder
+class CmsMenuTypeBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsMenuType_Code', 'CmsMenuType_Code', 'CmsMenuType', 'CmsMenuType_Code', true);
         $loader->addColumn('CmsMenuType_Active', 'CmsMenuType_Active', 'CmsMenuType', 'CmsMenuType_Code');
-        parent::__construct($loader, new CmsMenuTypeBeanFactory());
     }
+
 
     public function setCmsMenuType_Active(bool $active): self
     {

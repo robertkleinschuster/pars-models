@@ -2,8 +2,7 @@
 
 namespace Pars\Model\Authorization\Role;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
 
@@ -13,15 +12,11 @@ use Pars\Model\Authorization\RolePermission\RolePermissionBeanFinder;
  * @method RoleBean getBean(bool $fetchAllData = false)
  * @method RoleBeanList getBeanList(bool $fetchAllData = false)
  */
-class RoleBeanFinder extends AbstractBeanFinder
+class RoleBeanFinder extends AbstractDatabaseBeanFinder
 {
 
-    private $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $this->adapter = $adapter;
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('UserRole_ID', 'UserRole_ID', 'UserRole', 'UserRole_ID', true);
         $loader->addColumn('UserRole_Code', 'UserRole_Code', 'UserRole', 'UserRole_ID');
         $loader->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
@@ -30,11 +25,15 @@ class RoleBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'UserRole', 'UserRole_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'UserRole', 'UserRole_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'UserRole', 'UserRole_ID');
-        parent::__construct($loader, new RoleBeanFactory());
-        $rolePermissionFinder = new RolePermissionBeanFinder($adapter);
+    }
+
+    protected function initLinkedFinder()
+    {
+        $rolePermissionFinder = new RolePermissionBeanFinder($this->getDatabaseAdapter());
         $rolePermissionFinder->setUserPermission_Active(true);
         $this->addLinkedFinder($rolePermissionFinder, 'UserPermission_BeanList', 'UserRole_ID', 'UserRole_ID');
     }
+
 
     /**
      * @param int $userRole_id

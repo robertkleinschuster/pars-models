@@ -2,25 +2,16 @@
 
 namespace Pars\Model\Article\Data;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
+
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
 
-class ArticleDataBeanProcessor extends AbstractBeanProcessor implements ValidationHelperAwareInterface
+
+class ArticleDataBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-
-    /**
-     * ArticleDataBeanProcessor constructor.
-     * @param Adapter $adapter
-     */
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('ArticleData_ID', 'ArticleData_ID', 'ArticleData', 'ArticleData_ID', true);
         $saver->addColumn('Article_ID', 'Article_ID', 'ArticleData', 'ArticleData_ID');
         $saver->addColumn('ArticleData_Data', 'ArticleData_Data', 'ArticleData', 'ArticleData_ID');
@@ -29,9 +20,14 @@ class ArticleDataBeanProcessor extends AbstractBeanProcessor implements Validati
         $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'ArticleData', 'Article_ID');
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'ArticleData', 'Article_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'ArticleData', 'Article_ID');
-        $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'ArticleData', 'Article_ID');
-        parent::__construct($saver);
+        $saver->addColumn('Timestamp_Edit',
+            'Timestamp_Edit', 'ArticleData', 'Article_ID');
     }
+
+    protected function initValidator()
+    {
+    }
+
 
     protected function beforeSave(BeanInterface $bean)
     {

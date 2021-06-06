@@ -2,34 +2,23 @@
 
 namespace Pars\Model\Cms\Menu;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Pars\Bean\Processor\AbstractBeanProcessor;
+
 use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
+
 
 
 /**
  * Class CmsMenuBeanProcessor
  * @package Pars\Model\Cms\Menu
  */
-class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
-    ValidationHelperAwareInterface,
-    TranslatorAwareInterface
+class CmsMenuBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
 
-    private $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('CmsMenu_ID', 'CmsMenu_ID', 'CmsMenu', 'CmsMenu_ID', true);
         $saver->addColumn('CmsMenu_ID_Parent', 'CmsMenu_ID_Parent', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsMenu', 'CmsMenu_ID');
@@ -43,15 +32,25 @@ class CmsMenuBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'CmsMenu', 'CmsMenu_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'CmsMenu', 'CmsMenu_ID');
-        parent::__construct($saver);
-        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsMenuBeanFinder($adapter), 'CmsMenu_Order', 'CmsMenu_ID_Parent'));
+
     }
 
-
-    protected function translate(string $name): string
+    protected function initMetaFieldHandler()
     {
-        return $this->getTranslator()->translate($name, 'validation');
+        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsMenuBeanFinder($this->getDatabaseAdapter()), 'CmsMenu_Order', 'CmsMenu_ID_Parent'));
     }
+
+
+    protected function initValidator()
+    {
+
+    }
+
+    public function translate(string $code, array $vars = [], ?string $namespace = null): string
+    {
+       return $this->translateValidation($code, $vars);
+    }
+
 
     protected function validateForSave(BeanInterface $bean): bool
     {

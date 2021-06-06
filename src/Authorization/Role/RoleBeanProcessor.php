@@ -2,34 +2,21 @@
 
 namespace Pars\Model\Authorization\Role;
 
-use Cocur\Slugify\Slugify;
-use Laminas\Db\Adapter\Adapter;
-use Laminas\I18n\Translator\TranslatorAwareInterface;
-use Laminas\I18n\Translator\TranslatorAwareTrait;
-use Pars\Bean\Processor\AbstractBeanProcessor;
 use Pars\Bean\Type\Base\BeanInterface;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Helper\String\StringHelper;
-use Pars\Helper\Validation\ValidationHelperAwareInterface;
-use Pars\Helper\Validation\ValidationHelperAwareTrait;
+
 
 /**
  * Class RoleBeanProcessor
  * @package Pars\Model\Authorization\Role
  */
-class RoleBeanProcessor extends AbstractBeanProcessor implements
-    ValidationHelperAwareInterface,
-    TranslatorAwareInterface
+class RoleBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    use ValidationHelperAwareTrait;
-    use TranslatorAwareTrait;
 
-    private $adapter;
-
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $this->adapter = $adapter;
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('UserRole_ID', 'UserRole_ID', 'UserRole', 'UserRole_ID', true);
         $saver->addColumn('UserRole_Code', 'UserRole_Code', 'UserRole', 'UserRole_ID');
         $saver->addColumn('UserRole_Name', 'UserRole_Name', 'UserRole', 'UserRole_ID');
@@ -38,9 +25,12 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'UserRole', 'UserRole_ID');
         $saver->addColumn('Timestamp_Create', 'Timestamp_Create', 'UserRole', 'UserRole_ID');
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'UserRole', 'UserRole_ID');
-
-        parent::__construct($saver);
     }
+
+    protected function initValidator()
+    {
+    }
+
 
     protected function beforeSave(BeanInterface $bean)
     {
@@ -50,25 +40,18 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
         parent::beforeSave($bean);
     }
 
-
-    /**
-     * @param string $code
-     * @return string
-     */
-    protected function translate(string $code)
+    public function translate(string $code, array $vars = [], ?string $namespace = null): string
     {
-        if ($this->hasTranslator()) {
-            return $this->getTranslator()->translate($code, 'validation');
-        }
-        return $code;
+        return $this->translateValidation($code, $vars);
     }
+
 
     protected function validateForSave(BeanInterface $bean): bool
     {
         if ($bean->empty('UserRole_Code')) {
             $this->getValidationHelper()->addError('UserRole_Code', $this->translate('userrole.code.empty'));
         } else {
-            $finder = new RoleBeanFinder($this->adapter);
+            $finder = new RoleBeanFinder($this->getDatabaseAdapter());
             $finder->setUserRole_Code($bean->get('UserRole_Code'));
             if (!$bean->empty('UserRole_ID')) {
                 $finder->setUserRole_ID($bean->get('UserRole_ID'), true);
@@ -83,8 +66,4 @@ class RoleBeanProcessor extends AbstractBeanProcessor implements
         return !$this->getValidationHelper()->hasError();
     }
 
-    protected function validateForDelete(BeanInterface $bean): bool
-    {
-        return true;
-    }
 }

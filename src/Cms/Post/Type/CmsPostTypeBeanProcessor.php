@@ -2,37 +2,28 @@
 
 namespace Pars\Model\Cms\Post\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
-use Pars\Bean\Type\Base\BeanInterface;
+
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
  * Class CmsPostTypeBeanProcessor
  * @package Pars\Model\Cms\Post\Type
  */
-class CmsPostTypeBeanProcessor extends AbstractBeanProcessor
+class CmsPostTypeBeanProcessor extends AbstractDatabaseBeanProcessor
 {
 
-    /**
-     * CmsPostStateBeanProcessor constructor.
-     */
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('CmsPostType_Code', 'CmsPostType_Code', 'CmsPostType', 'CmsPostType_Code', true);
         $saver->addColumn('CmsPostType_Template', 'CmsPostType_Template', 'CmsPostType', 'CmsPostType_Code', true);
         $saver->addColumn('CmsPostType_Active', 'CmsPostType_Active', 'CmsPostType', 'CmsPostType_Code');
-        parent::__construct($saver);
+
     }
 
-    protected function validateForSave(BeanInterface $bean): bool
+    protected function initValidator()
     {
-        return true;
     }
 
-    protected function validateForDelete(BeanInterface $bean): bool
-    {
-        return true;
-    }
+
 }

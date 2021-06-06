@@ -2,12 +2,8 @@
 
 namespace Pars\Model\Article;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Predicate\Expression;
-use Laminas\Db\Sql\Select;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Bean\Finder\AbstractBeanFinder;
-use Pars\Bean\Loader\BeanLoaderInterface;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Data\ArticleDataBeanFinder;
 use Pars\Model\Article\Picture\ArticlePictureBeanFinder;
@@ -18,11 +14,22 @@ use Pars\Model\Article\Picture\ArticlePictureBeanFinder;
  * @method ArticleBean getBean(bool $fetchAllData = false)
  * @method ArticleBeanList getBeanList(bool $fetchAllData = false)
  */
-class ArticleBeanFinder extends AbstractBeanFinder
+class ArticleBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct($adapter, BeanFactoryInterface $beanFactory = null, bool $initLinked = true)
+    protected function initLinkedFinder()
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        $this->addLinkedFinder(new ArticleDataBeanFinder($this->getDatabaseAdapter()), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
+        $this->addLinkedFinder(new ArticlePictureBeanFinder($this->getDatabaseAdapter()), 'ArticlePicture_BeanList', 'Article_ID', 'Article_ID');
+    }
+
+
+    protected function createBeanFactory(): BeanFactoryInterface
+    {
+        return new ArticleBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('Article_ID', 'Article_ID', 'Article', 'Article_ID', true);
         $loader->addColumn('Article_Code', 'Article_Code', 'Article', 'Article_ID');
         $loader->addColumn('Article_Data', 'Article_Data', 'Article', 'Article_ID');
@@ -30,22 +37,19 @@ class ArticleBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Article', 'Article_ID');
-        parent::__construct($loader, $beanFactory ?? new ArticleBeanFactory());
-        if ($initLinked) {
-            $this->addLinkedFinder(new ArticleDataBeanFinder($adapter), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
-            $this->addLinkedFinder(new ArticlePictureBeanFinder($adapter), 'ArticlePicture_BeanList', 'Article_ID', 'Article_ID');
-        }
     }
+
 
     public function loadStatistic(string $group, string $alias)
     {
         $loader = $this->getBeanLoader();
         if ($loader instanceof DatabaseBeanLoader) {
-            $select = new Select('FrontendStatistic');
-            $select->where(new Expression('FrontendStatistic.FrontendStatistic_Reference = Article.Article_Code'));
-            $select->where(new Expression("FrontendStatistic.FrontendStatistic_Group = '$group'"));
-            $select->columns(['FrontendStatistic_Count' => new Expression('COUNT(FrontendStatistic.FrontendStatistic_ID)')]);
-            $loader->addCustomColumn($select, $alias);
+            $loader->addCustomColumn("
+SELECT COUNT(*) AS FrontendStatistic_Count
+FROM FrontendStatistic 
+WHERE FrontendStatistic.FrontendStatistic_Reference = Article.Article_Code 
+  AND  FrontendStatistic.FrontendStatistic_Group = '$group'
+", $alias);
         }
     }
 

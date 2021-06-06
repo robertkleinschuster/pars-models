@@ -2,9 +2,9 @@
 
 namespace Pars\Model\Cms\Post;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Predicate\Predicate;
-use Pars\Core\Database\DatabaseBeanConverter;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Bean\Finder\FilterExpression;
+use Pars\Bean\Finder\FilterIdentifier;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
 
@@ -18,23 +18,25 @@ use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
  */
 class CmsPostBeanFinder extends ArticleTranslationBeanFinder
 {
-    public function __construct($adapter)
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        parent::__construct($adapter, new CmsPostBeanFactory());
-        $loader = $this->getBeanLoader();
-        if ($loader instanceof DatabaseBeanLoader) {
-            $loader->addColumn('CmsPost_ID', 'CmsPost_ID', 'CmsPost', 'CmsPost_ID', true);
-            $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPost', 'CmsPost_ID');
-            $loader->addColumn('CmsPost_PublishTimestamp', 'CmsPost_PublishTimestamp', 'CmsPost', 'CmsPost_ID');
-            $loader->addColumn('CmsPostType_Code', 'CmsPostType_Code', 'CmsPost', 'CmsPost_ID');
-            $loader->addColumn('CmsPostType_Template', 'CmsPostType_Template', 'CmsPostType', 'CmsPostType_Code');
-            $loader->addColumn('CmsPostState_Code', 'CmsPostState_Code', 'CmsPost', 'CmsPost_ID');
-            $loader->addColumn('Article_ID')
-                ->setTable('CmsPost')
-                ->setJoinField('CmsPost_ID')
-                ->setAdditionalTableList(['Article', 'ArticleTranslation']);
-        }
-        $this->order(['CmsPost_PublishTimestamp' => self::ORDER_MODE_DESC]);
+        parent::initLoader($loader);
+        $loader->addColumn('CmsPost_ID', 'CmsPost_ID', 'CmsPost', 'CmsPost_ID', true);
+        $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPost', 'CmsPost_ID');
+        $loader->addColumn('CmsPost_PublishTimestamp', 'CmsPost_PublishTimestamp', 'CmsPost', 'CmsPost_ID');
+        $loader->addColumn('CmsPostType_Code', 'CmsPostType_Code', 'CmsPost', 'CmsPost_ID');
+        $loader->addColumn('CmsPostType_Template', 'CmsPostType_Template', 'CmsPostType', 'CmsPostType_Code');
+        $loader->addColumn('CmsPostState_Code', 'CmsPostState_Code', 'CmsPost', 'CmsPost_ID');
+        $loader->addColumn('Article_ID')
+            ->setTable('CmsPost')
+            ->setJoinField('CmsPost_ID')
+            ->setAdditionalTableList(['Article', 'ArticleTranslation']);
+        $loader->order(['CmsPost_PublishTimestamp' => self::ORDER_MODE_DESC]);
+    }
+
+    protected function createBeanFactory(): BeanFactoryInterface
+    {
+        return new CmsPostBeanFactory();
     }
 
 
@@ -79,8 +81,9 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
         if ($timezone) {
             $timezone = new \DateTimeZone($timezone);
         }
-        $this->getBeanLoader()->filterValue((new Predicate())->lessThanOrEqualTo('CmsPost_PublishTimestamp', (new \DateTime('now', $timezone))->format(DatabaseBeanConverter::DATE_FORMAT)));
+        $this->filterExpression(FilterExpression::lessThanOrEqual(
+            FilterIdentifier::create('CmsPost_PublishTimestamp'),
+            new \DateTime('now', $timezone)
+        ));
     }
-
-
 }

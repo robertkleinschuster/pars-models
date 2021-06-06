@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Article\Data;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -14,19 +14,10 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method ArticleDataBeanList getBeanList(bool $fetchAllData = false)
  *
  */
-class ArticleDataBeanFinder extends AbstractBeanFinder
+class ArticleDataBeanFinder extends AbstractDatabaseBeanFinder
 {
-
-    protected $adapter;
-
-    /**
-     * ArticleDataBeanFinder constructor.
-     * @param $adapter
-     */
-    public function __construct($adapter)
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $this->adapter = $adapter;
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('ArticleData_ID', 'ArticleData_ID', 'ArticleData', 'ArticleData_ID', true);
         $loader->addColumn('Article_ID', 'Article_ID', 'ArticleData', 'ArticleData_ID');
         $loader->addColumn('ArticleData_Data', 'ArticleData_Data', 'ArticleData', 'ArticleData_ID');
@@ -36,8 +27,7 @@ class ArticleDataBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Article', 'Article_ID');
         $loader->addColumn('Timestamp_Create', 'Timestamp_Create', 'Article', 'Article_ID');
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Article', 'Article_ID');
-        parent::__construct($loader, new ArticleDataBeanFactory());
-        $this->order(['ArticleData_Timestamp' => self::ORDER_MODE_DESC]);
+        $loader->order(['ArticleData_Timestamp' => self::ORDER_MODE_DESC]);
     }
 
     /**

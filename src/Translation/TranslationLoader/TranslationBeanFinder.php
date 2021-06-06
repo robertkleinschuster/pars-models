@@ -2,11 +2,9 @@
 
 namespace Pars\Model\Translation\TranslationLoader;
 
-use Laminas\Db\Adapter\Adapter;
 use Laminas\I18n\Translator\Loader\RemoteLoaderInterface;
 use Laminas\I18n\Translator\TextDomain;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Cache\ParsCache;
 use Pars\Core\Database\AbstractDatabaseBeanFinder;
@@ -148,12 +146,12 @@ class TranslationBeanFinder extends AbstractDatabaseBeanFinder implements Locale
     }
 
     /**
-     * @param string $locale
+     * @param string $code
      * @return $this
      */
-    public function filterLocale_Code(string $locale): self
+    public function filterLocale_Code(string $code, bool $leftJoin = false): self
     {
-        $this->getBeanLoader()->filterValue('Locale_Code', $locale);
+        $this->getBeanLoader()->filterValue('Locale_Code', $code);
         return $this;
     }
 

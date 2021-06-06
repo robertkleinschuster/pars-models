@@ -44,7 +44,7 @@ class AutoTranslateTask extends AbstractTask
                             $this->logger->error($exception->getMessage(), ['exception' => $exception]);
                         }
                     }
-                    $articleProcessor = new ArticleTranslationBeanProcessor($this->getDatabaseAdapter()->getDbAdapter());
+                    $articleProcessor = new ArticleTranslationBeanProcessor($this->getDatabaseAdapter());
                     $articleProcessor->setTranslator($this->getTranslator()->getTranslator());
                     $articleProcessor->setBeanList($beanList);
                     $this->logger->info('Translated ' . $finderClass . ': ' . $articleProcessor->save());
@@ -136,7 +136,7 @@ class AutoTranslateTask extends AbstractTask
 
     protected function getArticle(string $finderClass, int $article_Id, string $locale_Code)
     {
-        $articleFinder = new $finderClass($this->getDatabaseAdapter()->getDbAdapter(), false);
+        $articleFinder = new $finderClass($this->getDatabaseAdapter(), false);
         $articleFinder->filterLocale_Code($locale_Code);
         $articleFinder->setArticle_ID($article_Id);
         return $articleFinder->getBean();
@@ -145,7 +145,7 @@ class AutoTranslateTask extends AbstractTask
 
     protected function getArticleList(string $finderClass, string $locale_Code)
     {
-        $articleFinder = new $finderClass($this->getDatabaseAdapter()->getDbAdapter(), false);
+        $articleFinder = new $finderClass($this->getDatabaseAdapter(), false);
         $articleFinder->filterLocale_Code($locale_Code);
         return $articleFinder->getBeanList();
     }

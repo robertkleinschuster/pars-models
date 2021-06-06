@@ -2,16 +2,12 @@
 
 namespace Pars\Model\Localization\Locale;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Predicate\Predicate;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Finder\BeanFinderInterface;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Cache\ParsCache;
-use Pars\Core\Config\ParsConfig;
 use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
-use Pars\Core\Database\ParsDatabaseAdapter;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
 use Pars\Core\Localization\LocaleFinderInterface;
 use Pars\Core\Localization\LocaleInterface;
@@ -102,7 +98,7 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
 
     public function filterLocale_Language(string $language, bool $or = false): self
     {
-        $this->getBeanLoader()->addLike("$language%", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
+        $this->getBeanLoader()->addLike("$language%", 'Locale_Code', $or ? BeanFinderInterface::FILTER_MODE_OR : BeanFinderInterface::FILTER_MODE_AND);
         return $this;
     }
 
@@ -112,7 +108,7 @@ class LocaleBeanFinder extends AbstractDatabaseBeanFinder implements LocaleFinde
      */
     public function filterLocale_Region(string $region, bool $or = false): self
     {
-        $this->getBeanLoader()->addLike("%$region", 'Locale_Code', $or ? Predicate::OP_OR : Predicate::OP_AND);
+        $this->getBeanLoader()->addLike("%$region", 'Locale_Code', $or ? BeanFinderInterface::FILTER_MODE_OR : BeanFinderInterface::FILTER_MODE_AND);
         return $this;
     }
 

@@ -2,8 +2,7 @@
 
 namespace Pars\Model\Cms\Post\State;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Cms\Post\CmsPostBeanList;
 
@@ -13,15 +12,15 @@ use Pars\Model\Cms\Post\CmsPostBeanList;
  * @method CmsPostStateBean getBean(bool $fetchAllData = false)
  * @method CmsPostBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPostStateBeanFinder extends AbstractBeanFinder
+class CmsPostStateBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsPostState_Code', 'CmsPostState_Code', 'CmsPostState', 'CmsPostState_Code', true);
         $loader->addColumn('CmsPostState_Active', 'CmsPostState_Active', 'CmsPostState', 'CmsPostState_Code');
-        parent::__construct($loader, new CmsPostStateBeanFactory());
     }
+
 
     public function setCmsPostState_Active(bool $active): self
     {

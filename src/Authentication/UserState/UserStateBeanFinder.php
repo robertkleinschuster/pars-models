@@ -2,8 +2,7 @@
 
 namespace Pars\Model\Authentication\UserState;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -12,24 +11,14 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method UserStateBean getBean(bool $fetchAllData = false)
  * @method UserStateBeanList getBeanList(bool $fetchAllData = false)
  */
-class UserStateBeanFinder extends AbstractBeanFinder
+class UserStateBeanFinder extends AbstractDatabaseBeanFinder
 {
 
-    /**
-     * @var Adapter
-     */
-    private $adapter;
-
-    /**
-     * UserBeanFinder constructor.
-     * @param Adapter $adapter
-     */
-    public function __construct(Adapter $adapter)
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $this->adapter = $adapter;
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('UserState_Code', 'UserState_Code', 'UserState', 'UserState_Code', true);
         $loader->addColumn('UserState_Active', 'UserState_Active', 'UserState', 'UserState_Code');
-        parent::__construct($loader, new UserStateBeanFactory());
     }
+
+
 }

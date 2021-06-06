@@ -2,8 +2,8 @@
 
 namespace Pars\Model\Cms\Block\Type;
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Cms\Block\CmsBlockBean;
 use Pars\Model\Cms\Block\CmsBlockBeanList;
@@ -14,16 +14,15 @@ use Pars\Model\Cms\Block\CmsBlockBeanList;
  * @method CmsBlockBean getBean(bool $fetchAllData = false)
  * @method CmsBlockBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsBlockTypeBeanFinder extends AbstractBeanFinder
+class CmsBlockTypeBeanFinder extends AbstractDatabaseBeanFinder
 {
-    public function __construct(Adapter $adapter)
+    protected function initLoader(DatabaseBeanLoader $loader)
     {
-        $loader = new DatabaseBeanLoader($adapter);
         $loader->addColumn('CmsBlockType_Code', 'CmsBlockType_Code', 'CmsBlockType', 'CmsBlockType_Code', true);
         $loader->addColumn('CmsBlockType_Active', 'CmsBlockType_Active', 'CmsBlockType', 'CmsBlockType_Code');
         $loader->addColumn('CmsBlockType_Order', 'CmsBlockType_Order', 'CmsBlockType', 'CmsBlockType_Code');
-        parent::__construct($loader, new CmsBlockTypeBeanFactory());
     }
+
 
     public function setCmsBlockType_Active(bool $active): self
     {

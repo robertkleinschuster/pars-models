@@ -2,9 +2,7 @@
 
 namespace Pars\Model\Authorization\RolePermission;
 
-use Laminas\Db\Adapter\Adapter;
 use Pars\Bean\Factory\BeanFactoryInterface;
-use Pars\Bean\Finder\AbstractBeanFinder;
 use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 

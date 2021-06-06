@@ -2,10 +2,7 @@
 
 namespace Pars\Model\Cms\PageBlock;
 
-use Laminas\Db\Adapter\Adapter;
-use Laminas\Db\Sql\Join;
-use Laminas\Db\Sql\Predicate\Expression;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Core\Localization\LocaleAwareFinderInterface;
 use Pars\Model\Cms\Block\CmsBlockBeanFinder;
@@ -17,11 +14,24 @@ use Pars\Model\File\FileBeanFinder;
  * @method CmsPageBlockBean getBean(bool $fetchAllData = false)
  * @method CmsPageBlockBeanList getBeanList(bool $fetchAllData = false)
  */
-class CmsPageBlockBeanFinder extends AbstractBeanFinder implements LocaleAwareFinderInterface
+class CmsPageBlockBeanFinder extends AbstractDatabaseBeanFinder implements LocaleAwareFinderInterface
 {
-    public function __construct($adapter)
+    protected function initLinkedFinder()
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        $this->addLinkedFinder(new FileBeanFinder($this->getDatabaseAdapter()), 'File_BeanList', 'File_ID', 'File_ID');
+        $subBlockFinder = new CmsBlockBeanFinder($this->getDatabaseAdapter());
+        $subBlockFinder->order(['CmsBlock_Order']);
+        $this->addLinkedFinder(
+            $subBlockFinder,
+            'CmsBlock_BeanList',
+            'CmsBlock_ID',
+            'CmsBlock_ID_Parent'
+        );
+    }
+
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
         $loader->addColumn('CmsPage_ID', 'CmsPage_ID', 'CmsPage_CmsBlock', 'CmsPage_ID', true);
         $loader->addColumn('CmsBlock_ID', 'CmsBlock_ID', 'CmsPage_CmsBlock', 'CmsBlock_ID', true);
         $loader->addColumn('CmsBlockState_Code', 'CmsBlockState_Code', 'CmsBlock', 'CmsBlock_ID');
@@ -116,16 +126,7 @@ class CmsPageBlockBeanFinder extends AbstractBeanFinder implements LocaleAwareFi
             ->setJoinField('Article_ID')
             ->setJoinTableSelf('Article');
         $loader->addOrder('CmsPage_CmsBlock_Order');
-        $this->addLinkedFinder(new FileBeanFinder($adapter), 'File_BeanList', 'File_ID', 'File_ID');
-        $subBlockFinder = new CmsBlockBeanFinder($adapter);
-        $subBlockFinder->order(['CmsBlock_Order']);
-        $this->addLinkedFinder(
-            $subBlockFinder,
-            'CmsBlock_BeanList',
-            'CmsBlock_ID',
-            'CmsBlock_ID_Parent'
-        );
-        parent::__construct($loader, new CmsPageBlockBeanFactory());
+
     }
 
     /**
@@ -164,17 +165,16 @@ class CmsPageBlockBeanFinder extends AbstractBeanFinder implements LocaleAwareFi
     }
 
     /**
-     * @param string $locale
+     * @param string $code
      * @param bool $leftJoin
      * @return $this
      */
-    public function filterLocale_Code(string $locale, bool $leftJoin = true): self
+    public function filterLocale_Code(string $code, bool $leftJoin = true): self
     {
         if ($leftJoin) {
-            $expression = new Expression("Article.Article_ID = ArticleTranslation.Article_ID AND ArticleTranslation.Locale_Code = ?", $locale);
-            $this->getBeanLoader()->addJoinInfo('ArticleTranslation', Join::JOIN_LEFT, $expression);
+            $this->getBeanLoader()->addJoinInfo('ArticleTranslation', 'left', ['Locale_Code' => $code]);
         } else {
-            $this->getBeanLoader()->filterValue('Locale_Code', $locale);
+            $this->getBeanLoader()->filterValue('Locale_Code', $code);
         }
         return $this;
     }

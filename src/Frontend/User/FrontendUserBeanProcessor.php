@@ -26,7 +26,7 @@ class FrontendUserBeanProcessor extends AbstractDatabaseBeanProcessor
     protected function validateFrontendUser_Username(FrontendUserBean $bean)
     {
         $result = false;
-        $finder = new FrontendUserBeanFinder($this->getParsContainer()->getDatabaseAdapter());
+        $finder = new FrontendUserBeanFinder($this->getDatabaseAdapter());
         $finder->filterValue('FrontendUser_Username', $bean->FrontendUser_Username);
         if ($bean->Person_ID) {
             $finder->excludeValue('Person_ID', $bean->Person_ID);

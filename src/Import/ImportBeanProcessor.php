@@ -1,22 +1,18 @@
 <?php
 
-
 namespace Pars\Model\Import;
 
-
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Processor\AbstractBeanProcessor;
+use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
 /**
  * Class ImportBeanProcessor
  * @package Pars\Model\Import
  */
-class ImportBeanProcessor extends AbstractBeanProcessor
+class ImportBeanProcessor extends AbstractDatabaseBeanProcessor
 {
-    public function __construct(Adapter $adapter)
+    protected function initSaver(DatabaseBeanSaver $saver)
     {
-        $saver = new DatabaseBeanSaver($adapter);
         $saver->addColumn('Import_ID', 'Import_ID', 'Import', 'Import_ID', true);
         $saver->addColumn('Article_ID', 'Article_ID', 'Import', 'Import_ID');
         $saver->addColumn('Import_Name', 'Import_Name', 'Import', 'Import_ID');
@@ -30,7 +26,10 @@ class ImportBeanProcessor extends AbstractBeanProcessor
         $saver->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Import', 'Import_ID');
         $saver->addColumn('Person_ID_Create', 'Person_ID_Create', 'Import', 'Import_ID');
         $saver->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Import', 'Import_ID');
-        parent::__construct($saver);
+    }
+
+    protected function initValidator()
+    {
     }
 
 }

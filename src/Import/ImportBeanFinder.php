@@ -4,8 +4,8 @@
 namespace Pars\Model\Import;
 
 
-use Laminas\Db\Adapter\Adapter;
-use Pars\Bean\Finder\AbstractBeanFinder;
+use Pars\Bean\Factory\BeanFactoryInterface;
+use Pars\Core\Database\AbstractDatabaseBeanFinder;
 use Pars\Core\Database\DatabaseBeanLoader;
 
 /**
@@ -14,15 +14,17 @@ use Pars\Core\Database\DatabaseBeanLoader;
  * @method ImportBean getBean(bool $fetchAllData = false)
  * @method ImportBeanList getBeanList(bool $fetchAllData = false)
  */
-class ImportBeanFinder extends AbstractBeanFinder
+class ImportBeanFinder extends AbstractDatabaseBeanFinder
 {
-    /**
-     * ImportBeanFinder constructor.
-     * @param Adapter $adapter
-     */
-    public function __construct(Adapter $adapter)
+
+    protected function createBeanFactory(): BeanFactoryInterface
     {
-        $loader = new DatabaseBeanLoader($adapter);
+        return new ImportBeanFactory();
+    }
+
+    protected function initLoader(DatabaseBeanLoader $loader)
+    {
+
         $loader->addColumn('Import_ID', 'Import_ID', 'Import', 'Import_ID', true);
         $loader->addColumn('Article_ID', 'Article_ID', 'Import', 'Import_ID');
         $loader->addColumn('Import_Name', 'Import_Name', 'Import', 'Import_ID');
@@ -36,7 +38,6 @@ class ImportBeanFinder extends AbstractBeanFinder
         $loader->addColumn('Timestamp_Edit', 'Timestamp_Edit', 'Import', 'Import_ID');
         $loader->addColumn('Person_ID_Create', 'Person_ID_Create', 'Import', 'Import_ID');
         $loader->addColumn('Person_ID_Edit', 'Person_ID_Edit', 'Import', 'Import_ID');
-        parent::__construct($loader, new ImportBeanFactory());
     }
 
     /**
