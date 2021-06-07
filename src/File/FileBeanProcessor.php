@@ -9,6 +9,7 @@ use Pars\Helper\Filesystem\FilesystemHelper;
 use Pars\Helper\String\StringHelper;
 use Pars\Model\File\Directory\FileDirectoryBeanFinder;
 use Pars\Model\File\Type\FileTypeBeanFinder;
+use Pars\Pattern\Exception\CoreException;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
@@ -17,6 +18,8 @@ use Psr\Http\Message\UploadedFileInterface;
  */
 class FileBeanProcessor extends AbstractDatabaseBeanProcessor
 {
+    protected ?string $basePath = null;
+
     protected function initSaver(DatabaseBeanSaver $saver)
     {
         $saver->addField('File.File_ID')->setKey(true);
@@ -65,7 +68,9 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
         if (count($exp) == 2) {
             $code = array_shift($exp);
         }
-        $bean->set('File_Code', StringHelper::slugify($code));
+        if ($code) {
+            $bean->set('File_Code', StringHelper::slugify($code));
+        }
     }
 
     /**
@@ -75,7 +80,7 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
      */
     protected function getFilePath(FileBean $bean)
     {
-        $basePath = $this->getParsContainer()->getConfig()->get('image.source');
+        $basePath = $this->getBasePath();
         return "public/$basePath/" . $bean->path();
     }
 
@@ -255,6 +260,36 @@ class FileBeanProcessor extends AbstractDatabaseBeanProcessor
             $result = true;
         }
         return $result;
+    }
+
+    /**
+    * @return string
+    */
+    public function getBasePath(): string
+    {
+        if (!$this->hasBasePath()) {
+            throw new CoreException('Base path not set in file bean processor.');
+        }
+        return $this->basePath;
+    }
+
+    /**
+    * @param string $basePath
+    *
+    * @return $this
+    */
+    public function setBasePath(string $basePath): self
+    {
+        $this->basePath = $basePath;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasBasePath(): bool
+    {
+        return isset($this->basePath);
     }
 
 }

@@ -35,12 +35,12 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
 
     public function updateAdminPermissions()
     {
-        $roleFinder = new RoleBeanFinder($this->adapter);
+        $roleFinder = new RoleBeanFinder($this->getDatabaseAdapter());
         $roleFinder->setUserRole_Code('admin');
         $role = $roleFinder->getBean();
-        $permissionFinder = new PermissionBeanFinder($this->adapter);
+        $permissionFinder = new PermissionBeanFinder($this->getDatabaseAdapter());
         $permissionBeanList = $permissionFinder->getBeanList();
-        $rolePermissionFinder = new RolePermissionBeanFinder($this->adapter);
+        $rolePermissionFinder = new RolePermissionBeanFinder($this->getDatabaseAdapter());
         $rolePermissionFinder->setUserRole_ID($role->get('UserRole_ID'));
         $rolePermissionBeanList = $rolePermissionFinder->getBeanFactory()->getEmptyBeanList();
         $existingRolerPermissionBeanList = $rolePermissionFinder->getBeanList();
@@ -53,7 +53,7 @@ class SpecialDatabaseUpdater extends AbstractDatabaseUpdater
                 $rolePermissionBeanList->push($rolePermission);
             }
         }
-        $rolePermissionProcessor = new RolePermissionBeanProcessor($this->adapter);
+        $rolePermissionProcessor = new RolePermissionBeanProcessor($this->getDatabaseAdapter());
         $rolePermissionProcessor->setBeanList($rolePermissionBeanList);
         if ($this->isExecute()) {
             $rolePermissionProcessor->save();

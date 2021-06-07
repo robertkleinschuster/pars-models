@@ -2,10 +2,7 @@
 
 namespace Pars\Model\Updater\Database;
 
-use Doctrine\DBAL\Schema\SchemaException;
-use Doctrine\DBAL\Schema\Table;
 use Pars\Core\Database\Updater\AbstractDatabaseUpdater;
-use Pars\Helper\String\StringHelper;
 
 /**
  * Class SchemaUpdater
@@ -14,232 +11,9 @@ use Pars\Helper\String\StringHelper;
 class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 {
 
-    protected const TYPE_VARCHAR = 'string';
-    protected const TYPE_BOOLEAN = 'boolean';
-    protected const TYPE_INTEGER = 'integer';
-    protected const TYPE_TEXT = 'text';
-    protected const TYPE_JSON = 'json';
-    protected const TYPE_TIMESTAMP = 'timestamp';
-
     public function getCode(): string
     {
         return 'schema';
-    }
-
-    public function getSchemaManager()
-    {
-        return $this->getDatabaseAdapter()->getSchemaManager();
-    }
-
-    protected function getSchema()
-    {
-        static $schema = null;
-        if (null === $schema) {
-            $schema = clone $this->getSchemaManager()->createSchema();
-        }
-        return $schema;
-    }
-
-    protected function getCurrentSchema(bool $update = false)
-    {
-        static $schema = null;
-        if (null === $schema) {
-            $schema = $this->getSchemaManager()->createSchema();
-        }
-
-        $result = clone $schema;
-        if ($update) {
-            $schema = $this->getSchemaManager()->createSchema();
-        }
-        return $result;
-    }
-
-    protected function getPlatform()
-    {
-        return $this->getDatabaseAdapter()->getConnection()->getDatabasePlatform();
-    }
-
-    protected function getTableStatement(string $tableName)
-    {
-        if ($this->getSchema()->hasTable($tableName)) {
-            $table = $this->getSchema()->getTable($tableName);
-        } else {
-            $table = $this->getSchema()->createTable($tableName);
-        }
-        return $table;
-    }
-
-
-    protected function initAsTypeTable(Table $table)
-    {
-        $tableName = $table->getName();
-        $this->addColumnToTable($table, "{$tableName}_Code");
-        $this->addColumnToTable($table, "{$tableName}_Template");
-        $this->addColumnToTable($table, "{$tableName}_Active");
-        $this->addColumnToTable($table, "{$tableName}_Order");
-        $this->addPrimaryKeyToTable($table, "{$tableName}_Code");
-        $this->addDefaultColumnsToTable($table);
-    }
-
-    protected function initAsStateTable(Table $table)
-    {
-        $tableName = $table->getName();
-        $this->addColumnToTable($table, "{$tableName}_Code");
-        $this->addColumnToTable($table, "{$tableName}_Active");
-        $this->addColumnToTable($table, "{$tableName}_Order");
-        $this->addPrimaryKeyToTable($table, "{$tableName}_Code");
-        $this->addDefaultColumnsToTable($table);
-    }
-
-    protected function addColumnToTable(Table $table, string $name, string $type = null, bool $nullable = null, bool $deleteCascade = false)
-    {
-        $default = 0;
-
-        if (null === $type) {
-            if (StringHelper::endsWith($name, '_Order')) {
-                $type = self::TYPE_INTEGER;
-                $default = 0;
-            }
-            if (StringHelper::endsWith($name, '_Name')) {
-                $type = self::TYPE_VARCHAR;
-            }
-
-            if (StringHelper::endsWith($name, '_Template')) {
-                $type = self::TYPE_VARCHAR;
-            }
-            if (StringHelper::endsWith($name, '_Active')) {
-                $type = self::TYPE_BOOLEAN;
-                $default = 1;
-            }
-            if (StringHelper::endsWith($name, '_Code')) {
-                $type = self::TYPE_VARCHAR;
-                $exp = explode('_', $name);
-                $foreignTable = reset($exp);
-                if ($table->getName() !== $foreignTable) {
-                    $this->addForeignKeyToTable($table, $foreignTable, $name, null, $deleteCascade);
-                }
-            }
-
-            if (StringHelper::endsWith($name, '_Data')) {
-                $type = self::TYPE_JSON;
-                if (null === $nullable) {
-                    $nullable = true;
-                }
-            }
-            if (StringHelper::endsWith($name, '_Text')) {
-                $type = self::TYPE_TEXT;
-                if (null === $nullable) {
-                    $nullable = true;
-                }
-            }
-            if (StringHelper::endsWith($name, '_ID')) {
-                $type = self::TYPE_INTEGER;
-                $exp = explode('_', $name);
-                $foreignTable = reset($exp);
-                if ($table->getName() !== $foreignTable) {
-                    $this->addForeignKeyToTable($table, $foreignTable, $name, null, $deleteCascade);
-                }
-            }
-        }
-
-        if ($table->hasColumn($name)) {
-            $column = $table->getColumn($name);
-        } else {
-            $column = $table->addColumn($name, $type);
-        }
-        if (in_array($type, ['text', 'json'])) {
-            $column->setLength(65535);
-        }
-        if (in_array($type, ['varchar'])) {
-            $column->setLength(255);
-        }
-        if (in_array($type, ['boolean'])) {
-            $column->setDefault($default);
-        }
-        if (in_array($type, ['timestamp'])) {
-            $column->setDefault('CURRENT_TIMESTAMP');
-        }
-        if (StringHelper::endsWith($name, '_Order')) {
-            $column->setDefault(0);
-        }
-        $column->setNotnull(!$nullable);
-
-        if ($name === $table->getName() . '_ID') {
-            $column->setAutoincrement(true);
-            $this->addPrimaryKeyToTable($table, $name);
-        }
-        return $column;
-    }
-
-    protected function addPrimaryKeyToTable(Table $table, $key)
-    {
-        if (!is_array($key)) {
-            $key = [$key];
-        }
-        if (!$table->hasPrimaryKey()) {
-            $table->setPrimaryKey($key);
-        }
-    }
-
-    protected function addUniqueKeyToTable(Table $table, $key)
-    {
-        if (!is_array($key)) {
-            $key = [$key];
-        }
-        $table->addUniqueConstraint($key);
-    }
-
-    protected function addIndexToTable(Table $table, $key)
-    {
-        if (!is_array($key)) {
-            $key = [$key];
-        }
-        try {
-            $table->addIndex($key);
-        } catch (SchemaException $schemaException) {
-
-        }
-    }
-
-    protected function addDefaultColumnsToTable(Table $table)
-    {
-        $this->addColumnToTable($table, 'Timestamp_Create', 'timestamp')
-            ->setNotnull(false)->setDefault('CURRENT_TIMESTAMP');
-        $this->addColumnToTable($table, 'Person_ID_Create', 'integer')
-            ->setNotnull(false);
-        $this->addColumnToTable($table, 'Timestamp_Edit', 'timestamp')
-            ->setNotnull(false)->setDefault('CURRENT_TIMESTAMP');
-        $this->addColumnToTable($table, 'Person_ID_Edit', 'integer')
-            ->setNotnull(false);
-        $this->addForeignKeyToTable($table, 'Person', 'Person_ID_Create', 'Person_ID');
-        $this->addForeignKeyToTable($table, 'Person', 'Person_ID_Edit', 'Person_ID');
-    }
-
-    protected function addForeignKeyToTable(Table $table, string $foreignTable, string $localColumn, string $foreignColumn = null, bool $deleteCascade = false)
-    {
-        if (null === $foreignColumn) {
-            $foreignColumn = $localColumn;
-        }
-        $options = [];
-        if ($deleteCascade) {
-            $options['onDelete'] = 'CASCADE';
-        }
-        $table->addForeignKeyConstraint($foreignTable, [$localColumn], [$foreignColumn], $options);
-    }
-
-
-    public function updateTablePerson()
-    {
-        $table = $this->getTableStatement('Person');
-        $this->addColumnToTable($table, 'Person_ID', 'integer')
-            ->setAutoincrement(true);
-        $this->addColumnToTable($table, 'Person_Firstname', 'varchar')
-            ->setLength(255)->setNotnull(false);
-        $this->addColumnToTable($table, 'Person_Lastname', 'varchar')
-            ->setLength(255)->setNotnull(false);
-        $this->addPrimaryKeyToTable($table, 'Person_ID');
-        $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
     }
 
     public function updateTableTaskLog()
@@ -255,7 +29,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             ->setLength('65535')->setNotnull(false);
         $this->addDefaultColumnsToTable($table);
         $this->addPrimaryKeyToTable($table, 'TaskLog_ID');
-        return $this->updateSchema();
+
     }
 
 
@@ -273,7 +47,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'ConfigType_Code');
         $this->addForeignKeyToTable($table, 'ConfigType', 'ConfigType_Code_Parent', 'ConfigType_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableConfig()
@@ -315,7 +89,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, ['Config_Code', 'ConfigType_Code']);
         $this->addForeignKeyToTable($table, 'ConfigType', 'ConfigType_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -348,7 +122,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'FileType_Code');
         #$this->addUniqueKeyToTable($table, 'FileType_Mime');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableFileDirectory()
@@ -375,7 +149,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'FileDirectory_ID');
         $this->addUniqueKeyToTable($table, 'FileDirectory_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableFile()
@@ -407,7 +181,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'FileType', 'FileType_Code');
         $this->addUniqueKeyToTable($table, ['File_Code', 'FileDirectory_ID']);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTablePicture()
@@ -424,7 +198,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'Picture_ID');
         $this->addForeignKeyToTable($table, 'File', 'File_ID', null, true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -458,7 +232,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addIndexToTable($table, 'Locale_Domain');
         $this->addIndexToTable($table, 'Locale_Active');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableUserState()
@@ -473,7 +247,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'boolean')->setDefault(0);
         $this->addPrimaryKeyToTable($table, 'UserState_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableUser()
@@ -497,7 +271,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'varchar')->setLength(255);
         $this->addColumnToTable($table,
             'User_LastLogin',
-            'timestamp',
+            self::TYPE_TIMESTAMP,
             true);
         $this->addColumnToTable($table,
             'Locale_Code',
@@ -509,7 +283,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'Locale', 'Locale_Code');
         $this->addUniqueKeyToTable($table, 'User_Username');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -535,7 +309,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'UserRole_ID');
         $this->addUniqueKeyToTable($table, 'UserRole_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableUser_UserRole()
@@ -551,7 +325,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'Person', 'Person_ID', null, true);
         $this->addForeignKeyToTable($table, 'UserRole', 'UserRole_ID', null, true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -570,7 +344,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'UserPermission_Code');
         $this->addPrimaryKeyToTable($table, 'UserPermission_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -588,7 +362,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'UserRole', 'UserRole_ID', null, true);
         $this->addForeignKeyToTable($table, 'UserPermission', 'UserPermission_Code', null, true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -618,7 +392,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'Locale', 'Locale_Code');
         $this->addUniqueKeyToTable($table, ['Translation_Code', 'Locale_Code', 'Translation_Namespace']);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableArticle()
@@ -637,7 +411,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'Article_ID');
         $this->addUniqueKeyToTable($table, 'Article_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -658,7 +432,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'json', true)->setLength(65535);
         $this->addPrimaryKeyToTable($table, 'ArticleOption_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -678,7 +452,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'Article', 'Article_ID', null, true);
         $this->addForeignKeyToTable($table, 'ArticleOption', 'ArticleOption_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableArticleData()
@@ -698,11 +472,11 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'boolean');
         $this->addColumnToTable($table,
             'ArticleData_Timestamp',
-            'timestamp', true);
+            self::TYPE_TIMESTAMP, true);
         $this->addPrimaryKeyToTable($table, 'ArticleData_ID');
         $this->addForeignKeyToTable($table, 'Article', 'Article_ID', null, true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableArticleTranslation()
@@ -734,7 +508,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addIndexToTable($table, 'ArticleTranslation_Host');
         $this->addIndexToTable($table, 'ArticleTranslation_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableArticle_Picture()
@@ -751,35 +525,35 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'Article', 'Article_ID');
         $this->addForeignKeyToTable($table, 'Picture', 'Picture_ID', null, true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsMenuState()
     {
         $table = $this->getTableStatement('CmsMenuState');
         $this->initAsStateTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsMenuType()
     {
         $table = $this->getTableStatement('CmsMenuType');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsPageState()
     {
         $table = $this->getTableStatement('CmsPageState');
         $this->initAsStateTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsPageType()
     {
         $table = $this->getTableStatement('CmsPageType');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -787,7 +561,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsPageLayout');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -795,7 +569,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsBlockState');
         $this->initAsStateTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -803,7 +577,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsBlockType');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -811,14 +585,14 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('CmsPostState');
         $this->initAsStateTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsPostType()
     {
         $table = $this->getTableStatement('CmsPostType');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsPage()
@@ -833,7 +607,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'CmsPage_ID');
         $this->addForeignKeyToTable($table, 'CmsPage', 'CmsPage_ID_Redirect', 'CmsPage_ID');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -848,7 +622,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'CmsBlockType_Code');
         $this->addForeignKeyToTable($table, 'CmsBlock', 'CmsBlock_ID_Parent', 'CmsBlock_ID', true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsPage_CmsBlock()
@@ -859,7 +633,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'CmsPage_CmsBlock_Order');
         $this->addPrimaryKeyToTable($table, ['CmsPage_ID', 'CmsBlock_ID']);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableCmsPost()
@@ -872,7 +646,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'CmsPostState_Code');
         $this->addColumnToTable($table, 'CmsPostType_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -892,7 +666,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addForeignKeyToTable($table, 'CmsPage', 'CmsPage_ID_Parent', 'CmsPage_ID', true);
         $this->addForeignKeyToTable($table, 'CmsMenu', 'CmsMenu_ID_Parent', 'CmsMenu_ID', true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableImportType()
@@ -900,7 +674,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('ImportType');
         $this->initAsTypeTable($table);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
     public function updateTableImport()
@@ -916,7 +690,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'Import_Hour', self::TYPE_INTEGER, true);
         $this->addColumnToTable($table, 'Import_Minute', self::TYPE_INTEGER, true);
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -930,7 +704,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'ApiKey_Active');
         $this->addIndexToTable($table, 'ApiKey_Host');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -938,7 +712,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('FormType');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -952,7 +726,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'Form_IndexInfo', self::TYPE_BOOLEAN);
         $this->addUniqueKeyToTable($table, 'Form_Code');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -964,7 +738,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'FormData_Read', self::TYPE_BOOLEAN);
         $this->addColumnToTable($table, 'FormData_Data');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+
     }
 
 
@@ -972,7 +746,6 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('FormFieldType');
         $this->initAsTypeTable($table);
-        return $this->updateSchema();
     }
 
     public function updateTableFormField()
@@ -985,7 +758,6 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'FormField_Code');
         $this->addColumnToTable($table, 'FormField_Order');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
     }
 
 
@@ -998,7 +770,6 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addPrimaryKeyToTable($table, 'Person_ID');
         $this->addUniqueKeyToTable($table, 'FrontendUser_Username');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
     }
 
     public function updateTableFrontendStatistic()
@@ -1013,6 +784,13 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addIndexToTable($table, 'FrontendStatistic_Reference');
         $this->addIndexToTable($table, 'FrontendStatistic_Locale');
         $this->addDefaultColumnsToTable($table);
-        return $this->updateSchema();
+    }
+
+
+    protected function updateSchema()
+    {
+        $sql = $this->getSchema()->getMigrateFromSql($this->getCurrentSchema(true), $this->getPlatform());
+        $result = $this->query($sql);
+        return $result;
     }
 }

@@ -46,7 +46,7 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
     public function updateDataConfig()
     {
         $imageOptions = [];
-        $fileFinder = new FileBeanFinder($this->adapter);
+        $fileFinder = new FileBeanFinder($this->getDatabaseAdapter());
         foreach ($fileFinder->getBeanList() as $bean) {
             $filename = $bean->get('FileDirectory_Code') . '/' . $bean->get('File_Code') . '.' . $bean->get('FileType_Code');
             $imageOptions[] = $filename;

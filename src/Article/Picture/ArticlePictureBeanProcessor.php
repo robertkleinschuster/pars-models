@@ -6,11 +6,10 @@ namespace Pars\Model\Article\Picture;
 
 use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Pars\Bean\Validator\FieldNotEmptyBeanValidator;
-use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
-use Pars\Model\Cms\PageBlock\CmsPageBlockBeanFinder;
+use Pars\Model\Picture\PictureBeanProcessor;
 
-class ArticlePictureBeanProcessor extends AbstractDatabaseBeanProcessor
+class ArticlePictureBeanProcessor extends PictureBeanProcessor
 {
     protected function initValidator()
     {
