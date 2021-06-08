@@ -7,6 +7,7 @@ use Pars\Bean\Finder\FilterExpression;
 use Pars\Bean\Finder\FilterIdentifier;
 use Pars\Core\Database\DatabaseBeanLoader;
 use Pars\Model\Article\Translation\ArticleTranslationBeanFinder;
+use Pars\Model\Cms\Page\CmsPageBeanFinder;
 
 
 /**
@@ -39,6 +40,11 @@ class CmsPostBeanFinder extends ArticleTranslationBeanFinder
         return new CmsPostBeanFactory();
     }
 
+    public function initLinkedFinder()
+    {
+        parent::initLinkedFinder();
+        $this->addLinkedFinder(new CmsPageBeanFinder($this->getDatabaseAdapter(), false), 'CmsPage_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+    }
 
     /**
      * @param string $code

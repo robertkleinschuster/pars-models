@@ -4,6 +4,7 @@
 namespace Pars\Model\Frontend\User;
 
 
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\AbstractDatabaseBeanProcessor;
 use Pars\Core\Database\DatabaseBeanSaver;
 
@@ -40,6 +41,20 @@ class FrontendUserBeanProcessor extends AbstractDatabaseBeanProcessor
             $result = true;
         }
         return $result;
+    }
+
+    /**
+     * @param BeanInterface $bean
+     */
+    public function beforeSave(BeanInterface $bean)
+    {
+        if (!$bean->empty('FrontendUser_Password')) {
+            $password = $bean->get('FrontendUser_Password');
+            $info = password_get_info($password);
+            if ($info['algo'] !== PASSWORD_BCRYPT) {
+                $bean->set('FrontendUser_Password', password_hash($password, PASSWORD_BCRYPT));
+            }
+        }
     }
 
 }

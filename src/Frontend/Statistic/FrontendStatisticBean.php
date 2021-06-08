@@ -11,4 +11,5 @@ class FrontendStatisticBean extends AbstractBaseBean
     public ?string $FrontendStatistic_Reference = null;
     public ?string $FrontendStatistic_Locale = null;
     public ?array $FrontendStatistic_Data = null;
+
 }
