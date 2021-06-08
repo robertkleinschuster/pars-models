@@ -18,7 +18,6 @@ class CmsPageBlockBeanFinder extends AbstractDatabaseBeanFinder implements Local
 {
     protected function initLinkedFinder()
     {
-        $this->addLinkedFinder(new FileBeanFinder($this->getDatabaseAdapter()), 'File_BeanList', 'File_ID', 'File_ID');
         $subBlockFinder = new CmsBlockBeanFinder($this->getDatabaseAdapter());
         $subBlockFinder->order(['CmsBlock_Order']);
         $this->addLinkedFinder(
@@ -118,10 +117,6 @@ class CmsPageBlockBeanFinder extends AbstractDatabaseBeanFinder implements Local
             ->setJoinField('Article_ID')
             ->setJoinTableSelf('Article');
         $loader->addColumn('Locale_Code')
-            ->setTable('ArticleTranslation')
-            ->setJoinField('Article_ID')
-            ->setJoinTableSelf('Article');
-        $loader->addColumn('File_ID')
             ->setTable('ArticleTranslation')
             ->setJoinField('Article_ID')
             ->setJoinTableSelf('Article');

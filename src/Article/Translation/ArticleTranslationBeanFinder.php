@@ -40,8 +40,6 @@ class ArticleTranslationBeanFinder extends ArticleBeanFinder implements LocaleAw
         $loader->addColumn('ArticleTranslation_Teaser', 'ArticleTranslation_Teaser', 'ArticleTranslation', 'Article_ID');
         $loader->addColumn('ArticleTranslation_Text', 'ArticleTranslation_Text', 'ArticleTranslation', 'Article_ID');
         $loader->addColumn('ArticleTranslation_Footer', 'ArticleTranslation_Footer', 'ArticleTranslation', 'Article_ID');
-        $loader->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'Article_ID');
-
     }
 
 

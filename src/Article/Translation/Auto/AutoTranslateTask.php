@@ -45,7 +45,7 @@ class AutoTranslateTask extends AbstractTask
                         }
                     }
                     $articleProcessor = new ArticleTranslationBeanProcessor($this->getDatabaseAdapter());
-                    $articleProcessor->setTranslator($this->getTranslator()->getTranslator());
+                    $articleProcessor->setTranslator($this->getTranslator());
                     $articleProcessor->setBeanList($beanList);
                     $this->logger->info('Translated ' . $finderClass . ': ' . $articleProcessor->save());
                 } catch (\Throwable $exception) {

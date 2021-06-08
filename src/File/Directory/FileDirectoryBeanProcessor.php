@@ -34,9 +34,11 @@ class FileDirectoryBeanProcessor extends AbstractDatabaseBeanProcessor
     }
 
 
-    protected function translate(string $name): string
+
+
+    public function translate(string $code, array $vars = [], ?string $namespace = null): string
     {
-        return $this->translateValidation($name);
+        return $this->translateValidation($code);
     }
 
     protected function beforeSave(BeanInterface $bean)

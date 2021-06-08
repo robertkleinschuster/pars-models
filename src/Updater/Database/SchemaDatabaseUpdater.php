@@ -21,7 +21,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('TaskLog');
         $this->addColumnToTable($table, 'TaskLog_ID', 'integer')
             ->setAutoincrement(true);
-        $this->addColumnToTable($table, 'TaskLog_Message', 'varchar')
+        $this->addColumnToTable($table, 'TaskLog_Message', self::TYPE_STRING)
             ->setLength('255')->setNotnull(false);
         $this->addColumnToTable($table, 'TaskLog_Text', 'text')
             ->setLength(65535)->setNotnull(false);
@@ -36,9 +36,9 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     public function updateTableConfigType()
     {
         $table = $this->getTableStatement('ConfigType');
-        $this->addColumnToTable($table, 'ConfigType_Code', 'varchar')
+        $this->addColumnToTable($table, 'ConfigType_Code', self::TYPE_STRING)
             ->setLength(255);
-        $this->addColumnToTable($table, 'ConfigType_Code_Parent', 'varchar', true)
+        $this->addColumnToTable($table, 'ConfigType_Code_Parent', self::TYPE_STRING, true)
             ->setLength(255);
         $this->addColumnToTable($table, 'ConfigType_Active', 'boolean')
             ->setDefault(0);
@@ -55,15 +55,15 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('Config');
         $this->addColumnToTable($table,
             'Config_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'Config_Value',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
 
         $this->addColumnToTable($table,
             'Config_Description',
-            'varchar',
+            self::TYPE_STRING,
             true
         )->setLength(255);
 
@@ -84,7 +84,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 
         $this->addColumnToTable($table,
             'ConfigType_Code',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
         $this->addPrimaryKeyToTable($table, ['Config_Code', 'ConfigType_Code']);
         $this->addForeignKeyToTable($table, 'ConfigType', 'ConfigType_Code');
@@ -98,16 +98,16 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('FileType');
         $this->addColumnToTable($table,
             'FileType_Code',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
         $this->addColumnToTable($table,
             'FileType_Mime',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
 
         $this->addColumnToTable($table,
             'FileType_Name',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
 
         $this->addColumnToTable($table,
@@ -135,12 +135,12 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 
         $this->addColumnToTable($table,
             'FileDirectory_Code',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
 
         $this->addColumnToTable($table,
             'FileDirectory_Name',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
         $this->addColumnToTable($table,
             'FileDirectory_Active',
@@ -162,7 +162,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 
         $this->addColumnToTable($table,
             'FileType_Code',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
 
         $this->addColumnToTable($table,
@@ -170,11 +170,11 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'integer', true);
         $this->addColumnToTable($table,
             'File_Name',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
         $this->addColumnToTable($table,
             'File_Code',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
         $this->addPrimaryKeyToTable($table, 'File_ID');
         $this->addForeignKeyToTable($table, 'FileDirectory', 'FileDirectory_ID', null, true);
@@ -207,20 +207,20 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('Locale');
         $this->addColumnToTable($table,
             'Locale_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
 
         $this->addColumnToTable($table,
             'Locale_UrlCode',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
 
         $this->addColumnToTable($table,
             'Locale_Domain',
-            'varchar', true)
+            self::TYPE_STRING, true)
             ->setLength(255);
         $this->addColumnToTable($table,
             'Locale_Name',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'Locale_Active',
             'boolean')->setDefault(0);
@@ -240,7 +240,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('UserState');
         $this->addColumnToTable($table,
             'UserState_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
 
         $this->addColumnToTable($table,
             'UserState_Active',
@@ -258,24 +258,24 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'integer');
         $this->addColumnToTable($table,
             'UserState_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
 
         $this->addColumnToTable($table,
             'User_Username',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'User_Displayname',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'User_Password',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'User_LastLogin',
-            self::TYPE_TIMESTAMP,
+            self::TYPE_DATETIME,
             true);
         $this->addColumnToTable($table,
             'Locale_Code',
-            'varchar')
+            self::TYPE_STRING)
             ->setLength(255);
         $this->addPrimaryKeyToTable($table, 'Person_ID');
         $this->addForeignKeyToTable($table, 'Person', 'Person_ID', null, true);
@@ -296,10 +296,10 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             ->setAutoincrement(true);
         $this->addColumnToTable($table,
             'UserRole_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'UserRole_Name',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'UserRole_Active',
             'boolean')->setDefault(1);
@@ -334,7 +334,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('UserPermission');
         $this->addColumnToTable($table,
             'UserPermission_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'UserPermission_Active',
             'boolean')->setDefault(1);
@@ -357,7 +357,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 
         $this->addColumnToTable($table,
             'UserPermission_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addPrimaryKeyToTable($table, ['UserRole_ID', 'UserPermission_Code']);
         $this->addForeignKeyToTable($table, 'UserRole', 'UserRole_ID', null, true);
         $this->addForeignKeyToTable($table, 'UserPermission', 'UserPermission_Code', null, true);
@@ -375,16 +375,16 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 
         $this->addColumnToTable($table,
             'Translation_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
 
 
         $this->addColumnToTable($table,
             'Locale_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
 
         $this->addColumnToTable($table,
             'Translation_Namespace',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'Translation_Text',
             'text', true)->setLength(65535);
@@ -404,7 +404,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
 
         $this->addColumnToTable($table,
             'Article_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'Article_Data',
             'json', true)->setLength(65535);
@@ -420,7 +420,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('ArticleOption');
         $this->addColumnToTable($table,
             'ArticleOption_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'ArticleOption_Active',
             'boolean')->setDefault(1);
@@ -443,7 +443,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'Article_ID', 'integer');
         $this->addColumnToTable($table,
             'ArticleOption_Code',
-            'varchar')->setLength(255);
+            self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'Article_ArticleOption_Data',
             'json', true)->setLength(65535);
@@ -472,7 +472,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             'boolean');
         $this->addColumnToTable($table,
             'ArticleData_Timestamp',
-            self::TYPE_TIMESTAMP, true);
+            self::TYPE_DATETIME, true);
         $this->addPrimaryKeyToTable($table, 'ArticleData_ID');
         $this->addForeignKeyToTable($table, 'Article', 'Article_ID', null, true);
         $this->addDefaultColumnsToTable($table);
@@ -485,20 +485,20 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table,
             'Article_ID', 'integer');
         $this->addColumnToTable($table,
-            'Locale_Code', self::TYPE_VARCHAR);
+            'Locale_Code', self::TYPE_STRING);
         $this->addColumnToTable($table,
-            'ArticleTranslation_Code', self::TYPE_VARCHAR);
+            'ArticleTranslation_Code', self::TYPE_STRING);
         $this->addColumnToTable($table,
-            'ArticleTranslation_Host', self::TYPE_VARCHAR, true);
+            'ArticleTranslation_Host', self::TYPE_STRING, true);
         $this->addColumnToTable($table,
             'ArticleTranslation_Active', self::TYPE_BOOLEAN)->setDefault(1);
         $this->addColumnToTable($table,
-            'ArticleTranslation_Name', self::TYPE_VARCHAR);
-        $this->addColumnToTable($table, 'ArticleTranslation_Title', self::TYPE_VARCHAR, true);
-        $this->addColumnToTable($table, 'ArticleTranslation_Keywords', self::TYPE_VARCHAR, true);
-        $this->addColumnToTable($table, 'ArticleTranslation_Heading', self::TYPE_VARCHAR, true);
-        $this->addColumnToTable($table, 'ArticleTranslation_SubHeading', self::TYPE_VARCHAR, true);
-        $this->addColumnToTable($table, 'ArticleTranslation_Path', self::TYPE_VARCHAR, true);
+            'ArticleTranslation_Name', self::TYPE_STRING);
+        $this->addColumnToTable($table, 'ArticleTranslation_Title', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ArticleTranslation_Keywords', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ArticleTranslation_Heading', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ArticleTranslation_SubHeading', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ArticleTranslation_Path', self::TYPE_STRING, true);
         $this->addColumnToTable($table, 'ArticleTranslation_Teaser', self::TYPE_TEXT, true);
         $this->addColumnToTable($table, 'ArticleTranslation_Text', self::TYPE_TEXT, true);
         $this->addColumnToTable($table, 'ArticleTranslation_Footer', self::TYPE_TEXT, true);
@@ -642,7 +642,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'CmsPost_ID');
         $this->addColumnToTable($table, 'CmsPage_ID', null, null, true);
         $this->addColumnToTable($table, 'Article_ID', null, null, true);
-        $this->addColumnToTable($table, 'CmsPost_PublishTimestamp', self::TYPE_TIMESTAMP);
+        $this->addColumnToTable($table, 'CmsPost_PublishTimestamp', self::TYPE_DATETIME);
         $this->addColumnToTable($table, 'CmsPostState_Code');
         $this->addColumnToTable($table, 'CmsPostType_Code');
         $this->addDefaultColumnsToTable($table);
@@ -699,8 +699,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $table = $this->getTableStatement('ApiKey');
         $this->addColumnToTable($table, 'ApiKey_ID');
         $this->addColumnToTable($table, 'ApiKey_Name', null, true);
-        $this->addColumnToTable($table, 'ApiKey_Key', self::TYPE_VARCHAR, true);
-        $this->addColumnToTable($table, 'ApiKey_Host', self::TYPE_VARCHAR, true);
+        $this->addColumnToTable($table, 'ApiKey_Key', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ApiKey_Host', self::TYPE_STRING, true);
         $this->addColumnToTable($table, 'ApiKey_Active');
         $this->addIndexToTable($table, 'ApiKey_Host');
         $this->addDefaultColumnsToTable($table);
@@ -765,8 +765,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('FrontendUser');
         $this->addColumnToTable($table, 'Person_ID');
-        $this->addColumnToTable($table, 'FrontendUser_Username', self::TYPE_VARCHAR);
-        $this->addColumnToTable($table, 'FrontendUser_Password', self::TYPE_VARCHAR);
+        $this->addColumnToTable($table, 'FrontendUser_Username', self::TYPE_STRING);
+        $this->addColumnToTable($table, 'FrontendUser_Password', self::TYPE_STRING);
         $this->addPrimaryKeyToTable($table, 'Person_ID');
         $this->addUniqueKeyToTable($table, 'FrontendUser_Username');
         $this->addDefaultColumnsToTable($table);
@@ -776,9 +776,9 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('FrontendStatistic');
         $this->addColumnToTable($table, 'FrontendStatistic_ID');
-        $this->addColumnToTable($table, 'FrontendStatistic_Group', self::TYPE_VARCHAR);
-        $this->addColumnToTable($table, 'FrontendStatistic_Reference', self::TYPE_VARCHAR);
-        $this->addColumnToTable($table, 'FrontendStatistic_Locale', self::TYPE_VARCHAR);
+        $this->addColumnToTable($table, 'FrontendStatistic_Group', self::TYPE_STRING);
+        $this->addColumnToTable($table, 'FrontendStatistic_Reference', self::TYPE_STRING);
+        $this->addColumnToTable($table, 'FrontendStatistic_Locale', self::TYPE_STRING);
         $this->addColumnToTable($table, 'FrontendStatistic_Data');
         $this->addIndexToTable($table, 'FrontendStatistic_Group');
         $this->addIndexToTable($table, 'FrontendStatistic_Reference');

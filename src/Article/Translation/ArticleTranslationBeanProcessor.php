@@ -28,7 +28,6 @@ class ArticleTranslationBeanProcessor extends ArticleBeanProcessor
         $saver->addColumn('ArticleTranslation_Teaser', 'ArticleTranslation_Teaser', 'ArticleTranslation', 'Article_ID');
         $saver->addColumn('ArticleTranslation_Text', 'ArticleTranslation_Text', 'ArticleTranslation', 'Article_ID');
         $saver->addColumn('ArticleTranslation_Footer', 'ArticleTranslation_Footer', 'ArticleTranslation', 'Article_ID');
-        $saver->addColumn('File_ID', 'File_ID', 'ArticleTranslation', 'File_ID', false, null, ['File'], 'ArticleTranslation');
 
     }
 
