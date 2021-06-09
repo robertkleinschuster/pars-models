@@ -27,7 +27,7 @@ class ImportBean extends AbstractBaseBean
 
     public function code()
     {
-        return $this->Import_Name;
+        return $this->Import_Code;
     }
 
     public function template()
