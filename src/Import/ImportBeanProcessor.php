@@ -14,7 +14,7 @@ class ImportBeanProcessor extends AbstractDatabaseBeanProcessor
     protected function initSaver(DatabaseBeanSaver $saver)
     {
         $saver->addColumn('Import_ID', 'Import_ID', 'Import', 'Import_ID', true);
-        $saver->addColumn('Article_ID', 'Article_ID', 'Import', 'Import_ID');
+        $saver->addField('Import.Import_Code');
         $saver->addColumn('Import_Name', 'Import_Name', 'Import', 'Import_ID');
         $saver->addColumn('ImportType_Code', 'ImportType_Code', 'Import', 'Import_ID');
         $saver->addColumn('Import_Data', 'Import_Data', 'Import', 'Import_ID');

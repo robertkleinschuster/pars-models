@@ -681,7 +681,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     {
         $table = $this->getTableStatement('Import');
         $this->addColumnToTable($table, 'Import_ID');
-        $this->addColumnToTable($table, 'Article_ID', null, true);
+        $this->addColumnToTable($table, 'Import_Code', null, true);
         $this->addColumnToTable($table, 'ImportType_Code');
         $this->addColumnToTable($table, 'Import_Name');
         $this->addColumnToTable($table, 'Import_Data');
@@ -689,8 +689,8 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
         $this->addColumnToTable($table, 'Import_Day', self::TYPE_INTEGER, true);
         $this->addColumnToTable($table, 'Import_Hour', self::TYPE_INTEGER, true);
         $this->addColumnToTable($table, 'Import_Minute', self::TYPE_INTEGER, true);
+        $this->addUniqueKeyToTable($table, 'Import_Code');
         $this->addDefaultColumnsToTable($table);
-
     }
 
 
