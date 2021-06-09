@@ -24,4 +24,19 @@ class ImportBean extends AbstractBaseBean
     public ?DateTime $Timestamp_Edit = null;
     public ?int $Person_ID_Create = null;
     public ?int $Person_ID_Edit = null;
+
+    public function code()
+    {
+        return $this->Import_Name;
+    }
+
+    public function template()
+    {
+        return 'import::tesla';
+    }
+
+    public function data()
+    {
+        return $this->Import_Data;
+    }
 }
