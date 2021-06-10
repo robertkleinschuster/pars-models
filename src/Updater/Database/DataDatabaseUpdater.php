@@ -166,6 +166,8 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
                 'light',
                 'darkblue',
                 'lightblue',
+                'darkindigo',
+                'lightindigo',
                 'darkgreen',
                 'lightgreen',
                 'darkred',
@@ -682,6 +684,19 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
             'CmsBlockType_Active' => 1,
             'CmsBlockType_Order' => $i++,
         ];
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'tiles',
+            'CmsBlockType_Template' => 'cmsblock::tiles',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
+
+        $data_Map[] = [
+            'CmsBlockType_Code' => 'card',
+            'CmsBlockType_Template' => 'cmsblock::card',
+            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Order' => $i++,
+        ];
 
         $data_Map[] = [
             'CmsBlockType_Code' => 'banner',
@@ -691,8 +706,8 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         ];
 
         $data_Map[] = [
-            'CmsBlockType_Code' => 'tiles',
-            'CmsBlockType_Template' => 'cmsblock::tiles',
+            'CmsBlockType_Code' => 'gallery',
+            'CmsBlockType_Template' => 'cmsblock::gallery',
             'CmsBlockType_Active' => 1,
             'CmsBlockType_Order' => $i++,
         ];
@@ -700,21 +715,21 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         $data_Map[] = [
             'CmsBlockType_Code' => 'picture',
             'CmsBlockType_Template' => 'cmsblock::picture',
-            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Active' => 0,
             'CmsBlockType_Order' => $i++,
         ];
 
         $data_Map[] = [
             'CmsBlockType_Code' => 'video',
             'CmsBlockType_Template' => 'cmsblock::video',
-            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Active' => 0,
             'CmsBlockType_Order' => $i++,
         ];
 
         $data_Map[] = [
             'CmsBlockType_Code' => 'link',
             'CmsBlockType_Template' => 'cmsblock::link',
-            'CmsBlockType_Active' => 1,
+            'CmsBlockType_Active' => 0,
             'CmsBlockType_Order' => $i++,
         ];
 

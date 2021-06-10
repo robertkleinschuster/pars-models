@@ -5,8 +5,10 @@ namespace Pars\Model\Article\Picture;
 
 
 use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
+use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Bean\Validator\FieldNotEmptyBeanValidator;
 use Pars\Core\Database\DatabaseBeanSaver;
+use Pars\Model\File\FileBean;
 use Pars\Model\Picture\PictureBeanProcessor;
 
 class ArticlePictureBeanProcessor extends PictureBeanProcessor
@@ -30,6 +32,11 @@ class ArticlePictureBeanProcessor extends PictureBeanProcessor
     {
         parent::initMetaFieldHandler();
         $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new ArticlePictureBeanFinder($this->getDatabaseAdapter()), 'Article_Picture_Order', 'Article_ID'));
+    }
+
+    protected function deleteFile(FileBean $bean)
+    {
+        // do not delete
     }
 
 
