@@ -2,6 +2,7 @@
 
 namespace Pars\Model\Cms\Block;
 
+use Pars\Bean\Processor\OrderMetaFieldHandlerInterface;
 use Pars\Bean\Type\Base\BeanInterface;
 use Pars\Core\Database\DatabaseBeanSaver;
 use Pars\Model\Article\Translation\ArticleTranslationBeanProcessor;
@@ -19,6 +20,10 @@ class CmsBlockBeanProcessor extends ArticleTranslationBeanProcessor
         $saver->addColumn('CmsBlockState_Code', 'CmsBlockState_Code', 'CmsBlock', 'CmsBlock_ID');
     }
 
+    protected function initMetaFieldHandler()
+    {
+        $this->addMetaFieldHandler(new OrderMetaFieldHandlerInterface(new CmsBlockBeanFinder($this->getDatabaseAdapter()), 'CmsBlock_Order', 'CmsBlock_ID_Parent'));
+    }
 
     protected function validateForSave(BeanInterface $bean): bool
     {
