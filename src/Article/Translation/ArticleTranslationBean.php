@@ -114,4 +114,12 @@ class ArticleTranslationBean extends ArticleBean
     {
         return $this->image();
     }
+
+    public function images()
+    {
+        if ($this->ArticlePicture_BeanList) {
+            return $this->ArticlePicture_BeanList;
+        }
+        return [];
+    }
 }
