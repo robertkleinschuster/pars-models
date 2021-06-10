@@ -577,39 +577,39 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         $data_Map[] = [
             'CmsPageType_Code' => 'tiles',
             'CmsPageType_Template' => 'cmspage::tiles',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Active' => 0,
             'CmsPageType_Order' => $i++,
         ];
         $data_Map[] = [
             'CmsPageType_Code' => 'columns',
             'CmsPageType_Template' => 'cmspage::columns',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Active' => 0,
             'CmsPageType_Order' => $i++,
         ];
 
         $data_Map[] = [
             'CmsPageType_Code' => 'about',
             'CmsPageType_Template' => 'cmspage::about',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Active' => 0,
             'CmsPageType_Order' => $i++,
         ];
 
         $data_Map[] = [
             'CmsPageType_Code' => 'faq',
             'CmsPageType_Template' => 'cmspage::faq',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Active' => 0,
             'CmsPageType_Order' => $i++,
         ];
         $data_Map[] = [
             'CmsPageType_Code' => 'gallery',
             'CmsPageType_Template' => 'cmspage::gallery',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Active' => 0,
             'CmsPageType_Order' => $i++,
         ];
         $data_Map[] = [
             'CmsPageType_Code' => 'tesla',
             'CmsPageType_Template' => 'cmspage::tesla',
-            'CmsPageType_Active' => 1,
+            'CmsPageType_Active' => 0,
             'CmsPageType_Order' => $i++,
         ];
 
