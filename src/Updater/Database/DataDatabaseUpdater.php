@@ -701,7 +701,7 @@ class DataDatabaseUpdater extends AbstractDatabaseUpdater
         $data_Map[] = [
             'CmsBlockType_Code' => 'banner',
             'CmsBlockType_Template' => 'cmsblock::banner',
-            'CmsBlockType_Active' => 0,
+            'CmsBlockType_Active' => 1,
             'CmsBlockType_Order' => $i++,
         ];
 
