@@ -4,12 +4,13 @@ namespace Pars\Model\Import;
 
 use DateTime;
 use Pars\Bean\Type\Base\AbstractBaseBean;
+use Pars\Core\Template\TemplateRenderableBeanInterface;
 
 /**
  * Class ImportBean
  * @package Pars\Model\Import
  */
-class ImportBean extends AbstractBaseBean
+class ImportBean extends AbstractBaseBean implements TemplateRenderableBeanInterface
 {
     public ?int $Import_ID = null;
     public ?string $Import_Name = null;

@@ -3,13 +3,14 @@
 namespace Pars\Model\File;
 
 use Pars\Bean\Type\Base\AbstractBaseBean;
+use Pars\Core\Template\TemplateRenderableBeanInterface;
 use Psr\Http\Message\UploadedFileInterface;
 
 /**
  * Class FileBean
  * @package Pars\Model\File
  */
-class FileBean extends AbstractBaseBean
+class FileBean extends AbstractBaseBean implements TemplateRenderableBeanInterface
 {
     public ?int $File_ID = null;
     public ?string $File_Code = null;
@@ -45,4 +46,11 @@ class FileBean extends AbstractBaseBean
     {
         return $this->FileDirectory_Code . '/' . $this->File_Code . '.' . $this->FileType_Code;
     }
+
+    public function template()
+    {
+        return $this->src();
+    }
+
+
 }
