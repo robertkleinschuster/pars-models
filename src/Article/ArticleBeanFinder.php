@@ -18,7 +18,7 @@ class ArticleBeanFinder extends AbstractDatabaseBeanFinder
 {
     protected function initLinkedFinder()
     {
-        $this->addLinkedFinder(new ArticleDataBeanFinder($this->getDatabaseAdapter()), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
+        #$this->addLinkedFinder(new ArticleDataBeanFinder($this->getDatabaseAdapter()), 'ArticleData_BeanList', 'Article_ID', 'Article_ID');
         $this->addLinkedFinder(new ArticlePictureBeanFinder($this->getDatabaseAdapter()), 'ArticlePicture_BeanList', 'Article_ID', 'Article_ID');
     }
 

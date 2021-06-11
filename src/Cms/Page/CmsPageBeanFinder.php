@@ -45,7 +45,7 @@ class CmsPageBeanFinder extends ArticleTranslationBeanFinder
         $pageBlockFinder = new CmsPageBlockBeanFinder($this->getDatabaseAdapter());
         $pageBlockFinder->setArticleTranslation_Active(true);
         $pageBlockFinder->setCmsBlockState_Code('active');
-        $this->addLinkedFinder($pageBlockFinder, 'CmsBlock_BeanList', 'CmsPage_ID', 'CmsPage_ID');
+        #$this->addLinkedFinder($pageBlockFinder, 'CmsBlock_BeanList', 'CmsPage_ID', 'CmsPage_ID');
         $postFinder = new CmsPostBeanFinder($this->getDatabaseAdapter());
         $postFinder->setArticleTranslation_Active(true);
         $postFinder->setCmsPostState_Code('active');
