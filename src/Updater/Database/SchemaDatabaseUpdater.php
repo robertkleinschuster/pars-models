@@ -694,6 +694,21 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
     }
 
 
+    public function updateTableImportData()
+    {
+        $table = $this->getTableStatement('ImportData');
+        $this->addColumnToTable($table, 'ImportData_ID');
+        $this->addColumnToTable($table, 'Import_ID');
+        $this->addColumnToTable($table, 'ImportData_Data');
+        $this->addColumnToTable($table, 'ImportData_IntValue1', self::TYPE_INTEGER, true);
+        $this->addColumnToTable($table, 'ImportData_IntValue2', self::TYPE_INTEGER, true);
+        $this->addColumnToTable($table, 'ImportData_IntValue3', self::TYPE_INTEGER, true);
+        $this->addColumnToTable($table, 'ImportData_StringValue1', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ImportData_StringValue2', self::TYPE_STRING, true);
+        $this->addColumnToTable($table, 'ImportData_StringValue3', self::TYPE_STRING, true);
+        $this->addDefaultColumnsToTable($table);
+    }
+
     public function updateTableApiKey()
     {
         $table = $this->getTableStatement('ApiKey');
