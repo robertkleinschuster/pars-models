@@ -3,13 +3,14 @@
 namespace Pars\Model\Article\Translation;
 
 use Pars\Bean\Type\Base\BeanListInterface;
+use Pars\Core\Template\TemplateRenderableBeanInterface;
 use Pars\Model\Article\ArticleBean;
 
 /**
  * Class ArticleTranslationBean
  * @package Pars\Model\Article\Translation
  */
-class ArticleTranslationBean extends ArticleBean
+class ArticleTranslationBean extends ArticleBean implements TemplateRenderableBeanInterface
 {
     public ?string $Locale_Code = null;
     public ?string $ArticleTranslation_Code = null;

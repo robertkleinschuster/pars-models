@@ -5,9 +5,10 @@ namespace Pars\Model\Form;
 use Pars\Bean\Type\Base\AbstractBaseBean;
 use Pars\Bean\Type\Base\BeanListInterface;
 use Pars\Core\Database\DefaultBeanFieldTrait;
+use Pars\Core\Template\TemplateRenderableBeanInterface;
 use Pars\Model\Form\Field\FormFieldBeanList;
 
-class FormBean extends AbstractBaseBean
+class FormBean extends AbstractBaseBean implements TemplateRenderableBeanInterface
 {
     use DefaultBeanFieldTrait;
     public ?int $Form_ID = null;
