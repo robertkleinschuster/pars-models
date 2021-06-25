@@ -25,6 +25,12 @@ class ImportBean extends AbstractBaseBean implements TemplateRenderableBeanInter
     public ?DateTime $Timestamp_Edit = null;
     public ?int $Person_ID_Create = null;
     public ?int $Person_ID_Edit = null;
+    public ?int $ImportData_IntValue1_AVG = null;
+    public ?int $ImportData_IntValue2_AVG = null;
+    public ?int $ImportData_IntValue3_AVG = null;
+    public ?string $ImportData_StringValue1_List = null;
+    public ?string $ImportData_StringValue2_List = null;
+    public ?string $ImportData_StringValue3_List = null;
 
     public function code()
     {

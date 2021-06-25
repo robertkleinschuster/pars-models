@@ -60,4 +60,21 @@ class ImportBeanFinder extends AbstractDatabaseBeanFinder
         $this->filter(['Article_ID' => $id]);
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function enhanceWithAvgs(): self
+    {
+        $avgField_List = ['ImportData_IntValue1', 'ImportData_IntValue2', 'ImportData_IntValue3'];
+        foreach ($avgField_List as $item) {
+            $this->getBeanLoader()->addCustomColumn(
+                "SELECT AVG(ImportData.{$item})
+            FROM ImportData
+            WHERE ImportData.Import_ID = Import.Import_ID",
+                "{$item}_AVG"
+            );
+        }
+        return $this;
+    }
 }

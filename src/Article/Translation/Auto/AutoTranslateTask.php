@@ -17,6 +17,11 @@ use Pars\Model\Localization\Locale\LocaleBeanFinder;
 
 class AutoTranslateTask extends AbstractTask
 {
+    public function initAll()
+    {
+
+    }
+
     public function execute(): void
     {
         $this->translateByFinder(CmsPageBeanFinder::class);
