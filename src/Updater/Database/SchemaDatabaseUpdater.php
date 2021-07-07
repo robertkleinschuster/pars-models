@@ -58,7 +58,7 @@ class SchemaDatabaseUpdater extends AbstractDatabaseUpdater
             self::TYPE_STRING)->setLength(255);
         $this->addColumnToTable($table,
             'Config_Value',
-            self::TYPE_STRING)
+            self::TYPE_STRING, true)
             ->setLength(255);
 
         $this->addColumnToTable($table,
